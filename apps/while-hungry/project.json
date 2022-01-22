@@ -1,0 +1,97 @@
+{
+  "projectType": "application",
+  "root": "apps/while-hungry",
+  "sourceRoot": "apps/while-hungry/src",
+  "prefix": "wh",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/while-hungry",
+        "index": "apps/while-hungry/src/index.html",
+        "main": "apps/while-hungry/src/main.ts",
+        "polyfills": "apps/while-hungry/src/polyfills.ts",
+        "tsConfig": "apps/while-hungry/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/while-hungry/src/favicon.ico",
+          "apps/while-hungry/src/assets"
+        ],
+        "styles": ["apps/while-hungry/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/while-hungry/src/environments/environment.ts",
+              "with": "apps/while-hungry/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "while-hungry:build:production"
+        },
+        "development": {
+          "browserTarget": "while-hungry:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/while-hungry/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "while-hungry:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/while-hungry/src/**/*.ts",
+          "apps/while-hungry/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/while-hungry"],
+      "options": {
+        "jestConfig": "apps/while-hungry/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

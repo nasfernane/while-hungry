@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "core-data": "libs/core-data",
+    "core-state": "libs/core-state",
+    "material": "libs/material",
+    "while-hungry": "apps/while-hungry",
+    "while-hungry-e2e": "apps/while-hungry-e2e"
+  }
+}
