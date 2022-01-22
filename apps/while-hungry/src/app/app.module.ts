@@ -1,17 +1,25 @@
+// angular modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// dependancies modules
+import { StoreModule } from '@ngrx/store';
+
+// wh libs & modumes
 import { MaterialModule } from '@wh/material';
 import { CoreDataModule } from '@wh/core-data';
 import { CoreStateModule } from '@wh/core-state';
-import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 
+// wh components
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
+
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent],
   imports: [
     BrowserModule, 
     HttpClientModule, 
