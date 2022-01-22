@@ -16,10 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@wh/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@wh/core-data": ["libs/core-data/src/index.ts"],
       "@wh/core-state": ["libs/core-state/src/index.ts"],
-      "@wh/material": ["libs/material/src/index.ts"]
+      "@wh/material": ["libs/material/src/index.ts"],
+      "@wh/prisma-client": ["libs/prisma-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

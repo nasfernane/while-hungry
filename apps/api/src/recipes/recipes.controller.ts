@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RecipesService } from './recipes.service';
-import { CreateRecipeDto } from './dto/create-recipe.dto';
-import { UpdateRecipeDto } from './dto/update-recipe.dto';
-import { Recipe } from '@wh/api-interfaces';
+// import { CreateRecipeDto } from './dto/create-recipe.dto';
+// import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Recipe } from '@prisma/client';
 
 @Controller('recipes')
 export class RecipesController {
@@ -24,8 +24,8 @@ export class RecipesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecipeDto: UpdateRecipeDto) {
-    return this.recipesService.update(+id, updateRecipeDto);
+  update(@Param('id') id: string, @Body() recipe: Recipe) {
+    return this.recipesService.update(+id, recipe);
   }
 
   @Delete(':id')

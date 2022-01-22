@@ -1,0 +1,74 @@
+.recipe {
+  width: 50vw;
+  max-width: 700px;
+  margin-bottom: 20px;
+
+  mat-card-header, mat-card-content, mat-card-footer, mat-divider {
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  &__header {
+    &__name {
+      cursor: pointer;
+    }
+
+    &__tags {
+      span {
+        border: 1px dashed grey;
+        padding: 0 5px;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+    }
+
+    &__infos {
+      width: 100%;
+
+      span {
+        font-size: 18px;
+        
+        mat-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    mat-card-title, mat-card-subtitle {
+      text-align: center;
+      display: block;
+    }
+  }
+
+  &__content {
+    p {
+      text-align: center;
+    }
+
+    &__instruction {
+      &__index {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &__footer {
+    &__likes {
+      mat-icon {
+        cursor: pointer;
+      }
+      
+      span {
+        margin-left: 5px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  mat-divider {
+    // margin: 5px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-width: 2px;
+  }
+}

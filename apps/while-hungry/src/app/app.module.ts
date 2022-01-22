@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // dependancies modules
 import { StoreModule } from '@ngrx/store';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // wh libs & modumes
 import { MaterialModule } from '@wh/material';
@@ -17,9 +18,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
+import { RecipesOverviewItemComponent } from './components/recipes/recipes-overview/recipes-overview-item/recipes-overview-item.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent],
+  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent, RecipesOverviewItemComponent],
   imports: [
     BrowserModule, 
     HttpClientModule, 
@@ -29,6 +31,7 @@ import { RecipesOverviewComponent } from './components/recipes/recipes-overview/
     MaterialModule,
     CoreDataModule,
     CoreStateModule,
+    FlexLayoutModule
   ],
     
   providers: [],

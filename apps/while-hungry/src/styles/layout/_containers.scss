@@ -1,0 +1,11 @@
+.globalContainer {
+  width: $container-width;
+  min-height: $container-min-height;
+  margin: 0 auto;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  &--breadcrumb {
+    min-height: calc(#{$container-min-height} - 30px);
+  }
+}

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '@wh/api-interfaces';
 
 @Component({
   selector: 'wh-root',
