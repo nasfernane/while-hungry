@@ -15,7 +15,6 @@ export class RecipesController {
 
   @Get()
   findAll() {
-    console.log('test')
     return this.recipesService.findAll();
   }
 

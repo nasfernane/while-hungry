@@ -9,6 +9,8 @@
     "serve:api": "nx run api:serve",
     "serve:web": "ng serve",
     "serve:all": "concurrently \" npm run serve:api \" \" npm run serve:web \"",
+    "seed": "npx node --loader ts-node/esm prisma/seed.ts",
+    "reset": "prisma migrate reset --force && npm run seed",
     "build": "nx build",
     "test": "nx test"
   },
@@ -31,10 +33,13 @@
     "@nestjs/swagger": "^4.8.2",
     "@ngrx/store": "^13.0.2",
     "@nrwl/angular": "13.4.6",
+    "@prisma/client": "^3.8.1",
     "concurrently": "^7.0.0",
+    "prisma": "^3.8.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.4.0",
     "swagger-ui-express": "^4.3.0",
+    "ts-node": "^10.4.0",
     "tslib": "^2.0.0",
     "uuid": "^8.3.2",
     "zone.js": "~0.11.4"
