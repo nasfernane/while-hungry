@@ -1,0 +1,13 @@
+@import './../../../styles/main.scss';
+
+.headerWrapper {
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px solid $grey-dark;
+
+  .header {
+    margin: 0 auto;
+    height: 100%;
+    width: 70%;
+  }
+}

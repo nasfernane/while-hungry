@@ -1,0 +1,26 @@
+<div class="navWrapper" fxLayout="row" fxLayoutAlign="space-between center">
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="eatMenu" routerLinkActive="active">Eat</button>
+  <mat-menu #eatMenu="matMenu" xPosition="after">
+    <button mat-menu-item routerLink="/recipes">Recipes</button>
+    <button mat-menu-item routerLink="/favorites">Favorites</button>
+    <button mat-menu-item routerLink="/batch-cooking">Batch cooking</button>
+  </mat-menu>
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="learnMenu">Read</button>
+  <mat-menu #learnMenu="matMenu" xPosition="after">
+    <button mat-menu-item routerLink="/blog">Blog</button>
+    <button mat-menu-item routerLink="/tutorials">Tutorials</button>
+  </mat-menu>
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="shareMenu">Share</button>
+  <mat-menu #shareMenu="matMenu" xPosition="after">
+    <button mat-menu-item routerLink="/chat">Live chat</button>
+    <button mat-menu-item routerLink="/api">API</button>
+  </mat-menu>
+  <!-- <button *ngIf="!appService.userLogged" class="navWrapper__button" mat-button routerLink="/login">Login</button> -->
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu" >{{ "Nassim" }}</button>
+  <!-- <button *ngIf="appService.userLogged" class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu" >{{ appService.getUserNickname() }}</button> -->
+  <mat-menu #userMenu="matMenu" xPosition="after">
+    <button mat-menu-item routerLink="/profile">Profile</button>
+    <button mat-menu-item routerLink="/list">Shopping list</button>
+    <button mat-menu-item (click)="logout()">Disconnect</button>
+  </mat-menu>
+</div>

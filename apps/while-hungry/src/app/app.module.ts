@@ -19,9 +19,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
 import { RecipesOverviewItemComponent } from './components/recipes/recipes-overview/recipes-overview-item/recipes-overview-item.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HeaderLogoComponent } from './components/header/header-logo/header-logo.component';
+import { HeaderNavComponent } from './components/header/header-nav/header-nav.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent, RecipesOverviewItemComponent],
+  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent, RecipesOverviewItemComponent, HeaderComponent, HeaderLogoComponent, HeaderNavComponent],
   imports: [
     BrowserModule, 
     HttpClientModule, 
