@@ -22,9 +22,23 @@ import { RecipesOverviewItemComponent } from './components/recipes/recipes-overv
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderLogoComponent } from './components/header/header-logo/header-logo.component';
 import { HeaderNavComponent } from './components/header/header-nav/header-nav.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
+import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RecipesOverviewComponent, RecipesOverviewItemComponent, HeaderComponent, HeaderLogoComponent, HeaderNavComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent, 
+    RecipesOverviewComponent, 
+    RecipesOverviewItemComponent, 
+    HeaderComponent, 
+    HeaderLogoComponent, 
+    HeaderNavComponent, 
+    BlogComponent, 
+    BlogNewPostComponent, 
+    BlogPostComponent
+  ],
   imports: [
     BrowserModule, 
     HttpClientModule, 

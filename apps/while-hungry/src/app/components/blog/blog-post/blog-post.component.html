@@ -1,0 +1,21 @@
+<div class="blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
+  <div *ngIf="post.content" class="blogWrapper__post" fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="blogWrapper__post__header" fxFlex="30"></div>
+    <div class="blogWrapper__post__content">
+      <h1>{{ post.title }}</h1>
+      <mat-divider></mat-divider>
+      <div class="blogWrapper__post__content__info" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="blogWrapper__post__content__info--date" fxLayout="row" fxLayoutAlign="flex-start center"> 
+          <mat-icon>calendar_month</mat-icon>
+          <span>{{ post.updatedAt }}</span>
+        </div>
+        <div class="blogWrapper__post__content__info--comments" fxLayout="row" fxLayoutAlign="flex-end center">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <span>no comment</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <p>{{ post.content }}</p>
+    </div>
+  </div>
+</div>

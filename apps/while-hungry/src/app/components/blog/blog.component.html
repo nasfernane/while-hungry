@@ -1,0 +1,26 @@
+<div class="blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
+  <button *ngIf="appService.isAdmin()" mat-raised-button class="blogWrapper__newPostBtn" [routerLink]="['/blog/post/new']">Add a new post</button>
+  <h1>Blog</h1>
+
+  <ng-template ngFor let-post [ngForOf]="posts">
+    <div class="blogWrapper__post blogWrapper__post--overview" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="['/blog/post/', post.id]">
+      <!-- <div class="blogWrapper__post__header" fxFlex="30"></div> -->
+      <div class="blogWrapper__post__content">
+        <h1>{{ post.title }}</h1>
+        <mat-divider></mat-divider>
+        <div class="blogWrapper__post__content__info" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="blogWrapper__post__content__info--date" fxLayout="row" fxLayoutAlign="flex-start center"> 
+            <mat-icon>calendar_month</mat-icon>
+            <span>{{ post.updatedAt }}</span>
+          </div>
+          <div class="blogWrapper__post__content__info--comments" fxLayout="row" fxLayoutAlign="flex-end center">
+            <mat-icon>chat_bubble_outline</mat-icon>
+            <span>no comment</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <p>{{ post.content }}</p>
+      </div>
+    </div>
+  </ng-template>
+</div>

@@ -3,11 +3,21 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
 import { HomeComponent } from './components/home/home.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
+import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'recipes', children: [
-    { path: '', component: RecipesOverviewComponent },
+      { path: '', component: RecipesOverviewComponent },
+    ] 
+  },
+  { path: 'blog', children: [
+    { path: '', component: BlogComponent },
+    { path: 'post/new', component: BlogNewPostComponent }, 
+    // { path: 'post/new', component: BlogNewPostComponent, canActivate: [AuthGuard, AdminGuard] }, 
+    { path: 'post/:id', component: BlogPostComponent }
   ] 
 },
 ]
