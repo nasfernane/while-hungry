@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Observable } from 'rxjs';
 import { RecipeService } from '@wh/core-data';
+import { AppService } from '@wh/core-data';
 import { Recipe } from '@prisma/client';
 
 @Component({
@@ -20,13 +21,14 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
     this.getData();
-    // this.appService.breadcrumb = ['While Hungry', 'Recipes', 'Overview']
+    this.appService.breadcrumb = ['While Hungry', 'Recipes', 'Overview']
   }
 
   ngOnDestroy() {
@@ -47,5 +49,4 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
   favoriteEvent(event: boolean) {
     if (event) this.getData();
   }
-
 }
