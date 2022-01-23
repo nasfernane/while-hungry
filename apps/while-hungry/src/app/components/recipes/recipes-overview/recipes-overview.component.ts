@@ -14,7 +14,7 @@ import { Recipe } from '@prisma/client';
   styleUrls: ['./recipes-overview.component.scss']
 })
 export class RecipesOverviewComponent implements OnInit, OnDestroy {
-  $recipes: Observable<any[]>;
+  recipes$: Observable<any[]>;
   @ViewChild(MatPaginator) 'paginator': MatPaginator;
   dataSource: MatTableDataSource<Recipe> = new MatTableDataSource<Recipe>();
 
@@ -39,8 +39,8 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
     this.recipeService.all().subscribe((recipes: Recipe[]) => {
       this.dataSource = new MatTableDataSource<Recipe>(recipes);
       this.dataSource.paginator = this.paginator;
-      this.$recipes = this.dataSource.connect();
-      console.log(this.$recipes);
+      this.recipes$ = this.dataSource.connect();
+      console.log(this.recipes$);
     })
   }
 
