@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from '@wh/core-data';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 import { Post } from '@prisma/client';
 
@@ -14,10 +15,9 @@ import { Post } from '@prisma/client';
 })
 export class BlogPostComponent implements OnInit {
   post: Post;
-  id: string;
 
   constructor(
-    // public blogService: BlogService,
+    public blogService: BlogService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
@@ -26,14 +26,14 @@ export class BlogPostComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id')
 
     if (id) {
-      // this.blogService.getArticle(id).subscribe((post: any) => {
-      //   if (post.data) {
-      //     post.updatedAt = moment(post.updatedAt).format('MMM Do YYYY');
-      //     this.post = post.data;
-      //   } else {
-      //     this.router.navigate(['/blog']);
-      //   }
-      // })
+      this.blogService.find(id).subscribe((post: Post) => {
+        if (post) {
+          this.post = post;
+          console.log(this.post);
+        } else {
+          this.router.navigate(['/blog']);
+        }
+      })
     }
   }
 

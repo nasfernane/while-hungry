@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-// import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from '@wh/core-data';
 import { AppService } from '@wh/core-data';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 import { Post } from '@prisma/client';
 
@@ -11,23 +12,15 @@ import { Post } from '@prisma/client';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  posts: Array<Post> = [];
+  posts$: Observable<Post[]>;
 
   constructor(
-    // public blogService: BlogService,
+    public blogService: BlogService,
     public appService: AppService,
   ) { }
 
   ngOnInit(): void {
-    console.log('blog !');
-    // this.blogService.getArticles().subscribe((posts: any) => {
-    //   if (posts) {
-    //     for (let post of posts.data) {
-    //       post.updatedAt = moment(post.updatedAt).format('MMM Do YYYY');
-    //     }
-    //     this.posts = posts.data;
-    //   }
-    // })
+    this.posts$ = this.blogService.all();
   }
 
 }

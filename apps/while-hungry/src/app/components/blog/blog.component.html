@@ -1,8 +1,7 @@
 <div class="blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
   <button *ngIf="appService.isAdmin()" mat-raised-button class="blogWrapper__newPostBtn" [routerLink]="['/blog/post/new']">Add a new post</button>
   <h1>Blog</h1>
-
-  <ng-template ngFor let-post [ngForOf]="posts">
+  <ng-template ngFor let-post [ngForOf]="posts$ | async">
     <div class="blogWrapper__post blogWrapper__post--overview" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="['/blog/post/', post.id]">
       <!-- <div class="blogWrapper__post__header" fxFlex="30"></div> -->
       <div class="blogWrapper__post__content">

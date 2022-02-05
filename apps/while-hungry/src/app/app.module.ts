@@ -1,8 +1,20 @@
 // angular modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from "@angular/material/icon";
+import { MatIconRegistry } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card'; 
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RouterModule } from '@angular/router';
 
 // dependancies modules
 import { StoreModule } from '@ngrx/store';
@@ -12,7 +24,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@wh/material';
 import { CoreDataModule } from '@wh/core-data';
 import { CoreStateModule } from '@wh/core-state';
-import { AppRoutingModule } from './app-routing.module';
 
 // wh components
 import { AppComponent } from './app.component';
@@ -25,6 +36,8 @@ import { HeaderNavComponent } from './components/header/header-nav/header-nav.co
 import { BlogComponent } from './components/blog/blog.component';
 import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +50,7 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
     HeaderNavComponent, 
     BlogComponent, 
     BlogNewPostComponent, 
-    BlogPostComponent
+    BlogPostComponent, LoginComponent, RegisterComponent
   ],
   imports: [
     BrowserModule, 
@@ -48,10 +61,26 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
     MaterialModule,
     CoreDataModule,
     CoreStateModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatListModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatInputModule,
+    MatPaginatorModule,
+    RouterModule
   ],
     
-  providers: [],
+  providers: [
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'auto'}},
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(
+    private iconRegistry: MatIconRegistry,
+  ) {}
+}
