@@ -24,7 +24,6 @@ export class BlogPostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
     const id = this.route.snapshot.paramMap.get('id')
 
     if (id) {
@@ -36,6 +35,8 @@ export class BlogPostComponent implements OnInit {
           this.router.navigate(['/blog']);
         }
       })
+    } else {
+      this.router.navigate(['/blog']);
     }
   }
 
