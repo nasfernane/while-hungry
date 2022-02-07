@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from '@wh/core-data';
+import { AppService, BlogService } from '@wh/core-data';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -17,19 +17,21 @@ export class BlogPostComponent implements OnInit {
   post: Post;
 
   constructor(
+    public appService: AppService,
     public blogService: BlogService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
+    
     const id = this.route.snapshot.paramMap.get('id')
 
     if (id) {
       this.blogService.find(id).subscribe((post: Post) => {
         if (post) {
           this.post = post;
-          console.log(this.post);
+          this.appService.breadcrumb = ['While Hungry', 'Blog', this.post.title]
         } else {
           this.router.navigate(['/blog']);
         }

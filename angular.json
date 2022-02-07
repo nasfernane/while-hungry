@@ -1,10 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "api": "apps/api",
     "core-data": "libs/core-data",
     "core-state": "libs/core-state",
-    "jwt": "libs/jwt",
     "material": "libs/material",
     "prisma-client": "libs/prisma-client",
     "while-hungry": "apps/while-hungry",

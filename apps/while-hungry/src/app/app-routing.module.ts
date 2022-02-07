@@ -8,6 +8,7 @@ import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-p
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'recipes', children: [
       { path: '', component: RecipesOverviewComponent },
+      { path: ':id', component: RecipeComponent },
     ] 
   },
   { path: 'blog', children: [

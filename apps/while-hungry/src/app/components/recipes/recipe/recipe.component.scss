@@ -1,0 +1,10 @@
+@import './../../../../styles/main.scss';
+
+.recipeContainer {
+  .recipe {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    background-color: $grey-light;
+  }
+}

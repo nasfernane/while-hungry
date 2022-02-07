@@ -24,6 +24,7 @@ export class AppService {
      * @param user 
      */
     public setUserData(user: any) {
+      console.log(user);
       if (user) {
         this.setUser(user)
         this.setUserToLocalStorage(JSON.stringify(this.getUser()))
@@ -37,6 +38,7 @@ export class AppService {
     public setUser(user: any) {
       this.currentUser = user;
       this.userLogged = true;
+      console.log('coucou');
     }
   
     /**

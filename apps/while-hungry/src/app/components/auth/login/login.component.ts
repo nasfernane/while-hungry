@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private appService: AppService,
   ) {
     this.loginForm = formBuilder.group({
-      email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)]),
       password: new FormControl('', Validators.required),
     });
    }
@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls['password'].value
     
     this.authService.login(email, password).subscribe((user: any) => {
-      if (user && user.status === true) {
-        this.appService.setUserData(user.data);
+      if (user && user.accessToken) {
+        this.appService.setUserData(user);
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
@@ -49,5 +49,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
 }

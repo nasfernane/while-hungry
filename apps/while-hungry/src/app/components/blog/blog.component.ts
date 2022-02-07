@@ -20,6 +20,7 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.appService.breadcrumb = ['While Hungry', 'Blog', 'Overview']
     this.posts$ = this.blogService.all();
   }
 

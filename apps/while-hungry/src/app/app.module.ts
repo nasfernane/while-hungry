@@ -38,6 +38,8 @@ import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-p
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { RecipeComponent } from './components/recipes/recipe/recipe.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,7 @@ import { RegisterComponent } from './components/auth/register/register.component
     HeaderNavComponent, 
     BlogComponent, 
     BlogNewPostComponent, 
-    BlogPostComponent, LoginComponent, RegisterComponent
+    BlogPostComponent, LoginComponent, RegisterComponent, RecipeComponent, BreadcrumbComponent
   ],
   imports: [
     BrowserModule, 

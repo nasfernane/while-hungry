@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { AppService } from '@wh/core-data';
+import { AppService } from './../app/app.service';
 
 const ENDPOINT = environment.API_URL + '/auth'
 

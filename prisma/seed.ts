@@ -6,12 +6,6 @@ import { recipeInstructionCategories } from './seeds/recipeInstructionCategories
 import { recipeTags } from './seeds/recipeTags';
 import { ingredients } from './seeds/ingredients';
 import { ustensils } from './seeds/ustensils';
-// const { users } = require('./seeds/users')
-// const { recipes } = require('./seeds/recipes')
-// const { RecipeInstructionCategories } = require('./seeds/recipeInstructionCategories')
-// const { recipeTagList } = require('./seeds/recipeTags')
-// const { ingredients } = require('./seeds/ingredients')
-// const { ustensils } = require('./seeds/ustensils')
 
 const prisma = new PrismaClient();
 

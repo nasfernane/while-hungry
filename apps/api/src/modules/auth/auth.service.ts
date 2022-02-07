@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { prisma  } from '@wh/prisma-client';
-import { createError }  from 'http-errors';
-import { bcrypt } from 'bcrypt';
-
+import  createError   from 'http-errors';
+import * as bcrypt from 'bcrypt';
+import { Jwt } from './../../utils/jwt';
 
 @Injectable()
 export class AuthService {
@@ -19,17 +19,16 @@ export class AuthService {
     })
 
     if (!user) {
-      throw createError.NotFound('User not registered !');
+      throw new createError.NotFound('User not registered !');
     }
 
     const checkPassword = bcrypt.compareSync(password, user.password) 
 
-    if (!checkPassword) throw createError.Unauthorized('Email address or password invalid');
+    if (!checkPassword) throw new createError.Unauthorized('Email address or password invalid');
     delete user.password;
+    const accessToken = await Jwt.signAccessToken(user)
 
-    return { ...user };
+    return { ...user, accessToken };
 
-    // const accessToken = await jwt.signAccessToken(user)
-    // const accessToken = await jwt.signAccessToken(user);
   }
 }
