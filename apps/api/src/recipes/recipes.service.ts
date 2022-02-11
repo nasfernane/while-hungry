@@ -35,6 +35,20 @@ export class RecipesService {
     return prisma.recipe.findUnique({
       where: {
         id: id
+      }, 
+      include: {
+        author: true,
+        recipeInstructions: true,
+        requiredIngredients: true,
+        requiredUstensils: true,
+        recipeTags: {
+          include: {
+            tag: true,
+          }
+        },
+        recipeComments: true,
+        recipeReviews: true,
+        recipeFavorites: true,
       }
     })
   }

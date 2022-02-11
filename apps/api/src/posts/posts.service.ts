@@ -7,8 +7,14 @@ import  { prisma } from '@wh/prisma-client';
 @Injectable()
 export class PostsService {
   create(post: Post) {
-    console.log(post);
-    return 'This action adds a new post';
+    prisma.post.create({
+      data: {
+        title: post.title,
+        content: post.content,
+        published: false,
+        authorId: post.authorId
+      }
+    })
   }
 
   findAll(): Promise<Post[]> {
@@ -23,6 +29,9 @@ export class PostsService {
     return prisma.post.findUnique({
       where: {
         id: id
+      },
+      include: {
+        author: true,
       }
     })
   }

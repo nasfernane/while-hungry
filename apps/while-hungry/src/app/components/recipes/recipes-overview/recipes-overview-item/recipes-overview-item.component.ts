@@ -8,6 +8,7 @@ import moment from 'moment';
 import { Recipe } from '@prisma/client';
 import { RecipeReview } from '@prisma/client';
 import { RecipeFavorite } from '@prisma/client';
+import { AppService } from '@wh/core-data';
 
 @Component({
   selector: 'wh-recipes-overview-item',
@@ -20,7 +21,7 @@ export class RecipesOverviewItemComponent {
 
   constructor(
     private recipeService: RecipeService,
-    // private appService: AppService,
+    private appService: AppService,
   ) { }
 
   getAvgReview(reviews: RecipeReview[]) {

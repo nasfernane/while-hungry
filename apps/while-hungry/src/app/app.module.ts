@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-// wh libs & modumes
+// wh libs & modules
 import { MaterialModule } from '@wh/material';
 import { CoreDataModule } from '@wh/core-data';
 import { CoreStateModule } from '@wh/core-state';
@@ -73,7 +73,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     MatCardModule,
     MatInputModule,
     MatPaginatorModule,
-    RouterModule
+    RouterModule,
   ],
     
   providers: [

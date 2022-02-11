@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+
+
 import { RecipesOverviewComponent } from './recipes-overview.component';
 
 describe('RecipesOverviewComponent', () => {
@@ -8,7 +12,8 @@ describe('RecipesOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecipesOverviewComponent ]
+      declarations: [ RecipesOverviewComponent ],
+      imports: [RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   });
