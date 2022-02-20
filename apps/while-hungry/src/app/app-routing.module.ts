@@ -9,6 +9,7 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,8 +22,7 @@ const routes: Routes = [
   },
   { path: 'blog', children: [
     { path: '', component: BlogComponent },
-    { path: 'post/new', component: BlogNewPostComponent }, 
-    // { path: 'post/new', component: BlogNewPostComponent, canActivate: [AuthGuard, AdminGuard] }, 
+    { path: 'post/new', component: BlogNewPostComponent, canActivate: [ AdminGuard ] }, 
     { path: 'post/:id', component: BlogPostComponent }
   ] 
 },
