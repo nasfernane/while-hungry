@@ -1,10 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppService } from '@wh/core-data';
 
-@Injectable()
-export class AdminGuard implements CanActivate {
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
   constructor(
     public appService: AppService,
     public router: Router,
@@ -14,11 +16,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-    context: ExecutionContext
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    console.log('context')
-    console.log(context)
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.appService.userLogged) {
       return true;
     } else {
@@ -26,5 +24,5 @@ export class AdminGuard implements CanActivate {
       return false;
     }
   }
+  
 }
-

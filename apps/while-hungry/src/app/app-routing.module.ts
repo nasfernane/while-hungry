@@ -9,7 +9,9 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
-import { AdminGuard } from '../guards/admin.guard';
+
+import { AdminGuard  } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
