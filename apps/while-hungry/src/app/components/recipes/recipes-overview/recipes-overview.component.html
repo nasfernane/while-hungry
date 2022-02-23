@@ -1,5 +1,7 @@
 <!-- <wh-breadcrumb></wh-breadcrumb> -->
 <div class="recipeOverviewContainer globalContainer globalContainer--breadcrumb"  fxLayout="column" fxLayoutAlign="start center">
-  <wh-recipes-overview-item *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
-  <mat-paginator [pageSizeOptions]="[1, 2, 3]"></mat-paginator>
+  <div class="recipeOverviewContainer__recipes" fxLayout="row wrap" fxLayoutGap="grid">
+    <wh-recipes-overview-item fxFlex="50%" *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
+  </div>
+  <mat-paginator [pageSizeOptions]="[2, 3]"></mat-paginator>
 </div>
