@@ -69,4 +69,26 @@ export class RecipesService {
       },
     })
   }
+
+  addFavorite(recipeId: number, userId: number) {
+    const fav = prisma.recipeFavorite.create({
+      data: {
+        recipeId,
+        userId,
+      }
+    })
+
+    return fav;
+  }
+
+  removeFavorite(recipeId: number, userId: number) {
+    const fav = prisma.recipeFavorite.deleteMany({
+      where: {
+        userId: userId,
+        recipeId: recipeId,
+      }
+    })
+
+    return fav;
+  }
 }

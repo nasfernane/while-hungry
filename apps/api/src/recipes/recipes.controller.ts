@@ -32,4 +32,14 @@ export class RecipesController {
   remove(@Param('id') id: string) {
     return this.recipesService.remove(+id);
   }
+
+  @Post('favorite/add')
+  addFavorite(@Body('recipeId') recipeId: number, @Body('userId') userId: number ) {
+    return this.recipesService.addFavorite(recipeId, userId)
+  }
+
+  @Post('favorite/remove')
+  removeFavorite(@Body('recipeId') recipeId: number, @Body('userId') userId: number ) {
+    return this.recipesService.removeFavorite(recipeId, userId)
+  }
 }

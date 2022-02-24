@@ -44,7 +44,7 @@
       <span>{{ formatDate(recipe.createdAt) }}</span>
     </div>
     <div class="recipe__footer__likes" fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-icon (click)="addOrRemoveFavorite(recipe.recipeFavorites)">favorite_border</mat-icon>
+      <mat-icon (click)="addOrRemoveFavorite()">favorite_border</mat-icon>
       <span>{{ recipe.recipeFavorites.length }}</span>
     </div>
   </mat-card-footer>

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';
 import { RecipeService } from '@wh/core-data';
 // import { RecipeService } from 'src/app/services/recipe.service';
@@ -15,41 +15,50 @@ import { AppService } from '@wh/core-data';
   templateUrl: './recipes-overview-item.component.html',
   styleUrls: ['./recipes-overview-item.component.scss']
 })
-export class RecipesOverviewItemComponent {
+export class RecipesOverviewItemComponent implements OnInit {
   @Input() recipe: any;
   @Output() favoriteEvent = new EventEmitter<boolean>();
+
+  recipeId: number;
+  userId: number;
+  recipeInFavorites = false;
 
   constructor(
     private recipeService: RecipeService,
     private appService: AppService,
   ) { }
 
+  ngOnInit() {
+    this.recipeId = this.recipe.id;
+
+    if (this.appService.userLogged) {
+      this.userId = this.appService.getUserId();
+
+      if (this.recipe.recipeFavorites.length > 0) {
+        for (const element of this.recipe.recipeFavorites) {
+          if (element.userId === this.userId) {
+            this.recipeInFavorites = true;
+            break;
+          }
+        }
+      }
+    }
+  }
+
   getAvgReview(reviews: RecipeReview[]) {
     return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
   }
 
-  async addOrRemoveFavorite(recipeFavorites: RecipeFavorite[]) {
-    // if (this.appService.userLogged) {
-      let recipeInFavorites = false;
-      // const userId = this.appService.getUserId();
-      const userId = 3;
-      let recipeId;
+  
 
-      if (userId && recipeFavorites.length > 0) {
-        recipeId = recipeFavorites[0].recipeId;
+  async addOrRemoveFavorite() {
+    if (this.appService.userLogged) {
+      this.recipeService.addOrRemoveFavorite(this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
+        if (res) this.favoriteEvent.emit(true);
+      });
 
-        for (const element of recipeFavorites) {
-          if (element.userId === userId) {
-            recipeInFavorites = true;
-            break;
-          }
-        }
-
-        this.recipeService.addOrRemoveFavorite(recipeId, userId, !recipeInFavorites).subscribe(res => {
-          if (res) this.favoriteEvent.emit(true);
-        });
-      }
-    // }
+      this.recipeInFavorites = !this.recipeInFavorites;
+    }
   }
 
   formatDate(date: string) {
