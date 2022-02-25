@@ -6,6 +6,7 @@
     "core-state": "libs/core-state",
     "material": "libs/material",
     "prisma-client": "libs/prisma-client",
+    "ui": "libs/ui",
     "while-hungry": "apps/while-hungry",
     "while-hungry-e2e": "apps/while-hungry-e2e"
   }

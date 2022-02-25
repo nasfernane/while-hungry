@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-data';
-
-import { User } from '@prisma/client';
 
 @Component({
   selector: 'wh-login',
@@ -15,6 +13,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   hidePassword = true;
+  hideRegisterPassword = true;
+  hideRegisterPasswordConfirm = true;
 
   constructor(
     private formBuilder: FormBuilder,
