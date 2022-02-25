@@ -1,12 +1,12 @@
-// style both login and signup forms
 .loginContainer {
   width: 100%;
-  height: calc(90vh - 2px);
+  height: 100%;
   margin: 0 auto;
+  border: 1px solid black;
   
   form {
-    width: 60vw;
-    max-width: 250px;
+    border: 1px solid red;
+    width: 100%;
 
     section, section mat-form-field, section mat-form-field input {
       width: 100%;

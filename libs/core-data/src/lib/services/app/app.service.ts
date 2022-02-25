@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
+  constructor(
+    private matDialog: MatDialog,
+  ) {}
+
   public currentUser: any = {};
   public userLogged = false;
 
@@ -117,4 +123,5 @@ export class AppService {
     set breadcrumb(v: Array<string>) {
       setTimeout(() => (this._breadcrumb = v.map(v2 => "<span class='breadcrumb__chunk'>&nbsp;"+v2+"&nbsp;</span>").join("<span class='breadcrumb__divider'>&nbsp»&nbsp</span>")));
     }
+
 }

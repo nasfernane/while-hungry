@@ -37,7 +37,6 @@ import { BlogComponent } from './components/blog/blog.component';
 import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
@@ -52,7 +51,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     HeaderNavComponent, 
     BlogComponent, 
     BlogNewPostComponent, 
-    BlogPostComponent, LoginComponent, RegisterComponent, RecipeComponent, BreadcrumbComponent
+    BlogPostComponent, LoginComponent, RecipeComponent, BreadcrumbComponent
   ],
   imports: [
     BrowserModule, 

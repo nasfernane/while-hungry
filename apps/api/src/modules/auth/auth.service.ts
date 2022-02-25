@@ -6,8 +6,25 @@ import { Jwt } from './../../utils/jwt';
 
 @Injectable()
 export class AuthService {
-  register(param) {
-    console.log(param);
+  async register(param) {
+    const { email, nickname, passwordConfirm } = param;
+    let { password } = param;
+    
+    if (password === passwordConfirm) {
+      password = bcrypt.hashSync(password, 8)
+      const user = await prisma.user.create({
+        data: { email, nickname, password }
+      })
+
+      const accessToken = await Jwt.signAccessToken(user)
+
+      return { ...user, accessToken };
+
+    } else {
+      throw new createError.NotFound('Password and confirmation are not identical');
+    }
+
+    
   }
 
   async login(param) {

@@ -1,47 +1,95 @@
 <div class="loginContainer" fxLayout="column" fxLayoutAlign="center center">
-  <h1>Login</h1>
-  <mat-card-content>
-    <form [formGroup]="loginForm" novalidate fxLayout="column" fxLayoutAlign="space-between end">
-      <section>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="loginForm.controls.email.hasError('required')">
-            Incorrect email adress
-          </mat-error>
-          <mat-error *ngIf="loginForm.controls.email.hasError('pattern')">
-            Incorrect email adress
-          </mat-error>
-        </mat-form-field>
-      </section>
+  <mat-tab-group>
+    <mat-tab label="Login"  fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-content>
+        <form [formGroup]="loginForm" novalidate fxLayout="column" fxLayoutAlign="space-between end">
+          <section>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+                Incorrect email adress
+              </mat-error>
+              <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
+                Incorrect email adress
+              </mat-error>
+            </mat-form-field>
+          </section>
 
-      <!-- <section>
-        <mat-form-field>
-          <mat-label>Nickname</mat-label>
-          <input matInput type="text" (keyup.enter)="loginForm.valid?login():null"
-            placeholder="Nickname" [(ngModel)]="model.nickname"
-            formControlName="nickname">
-          <mat-error translate>
-            Nickname is mandatory
-          </mat-error>
-        </mat-form-field>
-      </section> -->
+          <section>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hidePassword?'password':'text'" (keyup.enter)="loginForm.valid?login():null"
+                placeholder="Password" formControlName="password">
+              <mat-icon style="cursor: pointer" matSuffix (click)="hidePassword=!hidePassword">{{hidePassword ?
+                'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-error translate>
+                Password is mandatory
+              </mat-error>
+            </mat-form-field>
+          </section>
+          <button mat-raised-button (click)="login()" [disabled]="!loginForm.valid">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab label="Register">
+      <form [formGroup]="registerForm" novalidate fxLayout="column" fxLayoutAlign="space-between end">
+        <section>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+              Incorrect email adress
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
+              Incorrect email adress
+            </mat-error>
+          </mat-form-field>
+        </section>
 
-      <section>
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword?'password':'text'" (keyup.enter)="loginForm.valid?login():null"
-            placeholder="Password" formControlName="password">
-          <mat-icon style="cursor: pointer" matSuffix (click)="hidePassword=!hidePassword">{{hidePassword ?
-            'visibility_off' : 'visibility'}}</mat-icon>
-          <mat-error translate>
-            Password is mandatory
-          </mat-error>
-        </mat-form-field>
-      </section>
-      <button mat-raised-button (click)="login()" [disabled]="!loginForm.valid">Login</button>
-    </form>
-  </mat-card-content>
+        <section>
+          <mat-form-field>
+            <mat-label>Nickname</mat-label>
+            <input matInput 
+              type="text" 
+              (keyup.enter)="registerForm.valid?login():null"
+              placeholder="Nickname"
+              formControlName="nickname">
+            <mat-error translate>
+              Nickname is mandatory
+            </mat-error>
+          </mat-form-field>
+        </section>
 
+        <section>
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword?'password':'text'" (keyup.enter)="registerForm.valid?login():null"
+              placeholder="Password" formControlName="password">
+            <mat-icon style="cursor: pointer" matSuffix (click)="hidePassword=!hidePassword">{{hidePassword ?
+              'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error translate>
+              Password is mandatory
+            </mat-error>
+          </mat-form-field>
+        </section>
+
+        <section>
+          <mat-form-field>
+            <mat-label>Password confirm</mat-label>
+            <input matInput [type]="hidePassword?'password':'text'" (keyup.enter)="registerForm.valid?login():null"
+              placeholder="Password" formControlName="passwordConfirm">
+            <mat-icon style="cursor: pointer" matSuffix (click)="hidePassword=!hidePassword">{{hidePassword ?
+              'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error translate>
+              Password is mandatory
+            </mat-error>
+          </mat-form-field>
+        </section>
+
+        <button mat-raised-button (click)="register()" [disabled]="!registerForm.valid">Register</button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
 </div>
 

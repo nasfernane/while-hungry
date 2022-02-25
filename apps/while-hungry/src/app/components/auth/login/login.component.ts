@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-data';
 
+import { User } from '@prisma/client';
 
 @Component({
   selector: 'wh-login',
@@ -11,7 +12,8 @@ import { AppService } from '@wh/core-data';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm: any;
+  loginForm: FormGroup;
+  registerForm: FormGroup;
   hidePassword = true;
 
   constructor(
@@ -24,6 +26,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)]),
       password: new FormControl('', Validators.required),
+    });
+
+    this.registerForm = formBuilder.group({
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)]),
+      nickname: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      passwordConfirm: new FormControl('', Validators.required),
     });
    }
 
@@ -42,6 +51,25 @@ export class LoginComponent implements OnInit {
         this.appService.setUserData(user);
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
+          this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
+        } else {
+          this.router.navigate(['']);
+        }
+      }
+    });
+  }
+
+  register() {
+    const email = this.registerForm.controls['email'].value
+    const nickname = this.registerForm.controls['nickname'].value
+    const password = this.registerForm.controls['password'].value
+    const passwordConfirm = this.registerForm.controls['passwordConfirm'].value
+
+    this.authService.register(email, nickname, password, passwordConfirm).subscribe((user: any) => {
+      if (user && user.accessToken) {
+        this.appService.setUserData(user);
+
+        if (this.route.snapshot.queryParams['returnUrl']) { // if user signup for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
         } else {
           this.router.navigate(['']);
