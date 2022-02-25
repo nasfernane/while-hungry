@@ -27,6 +27,7 @@ import { CoreStateModule } from '@wh/core-state';
 
 // wh ui components
 import { LoginComponent } from './login/login.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { LoginComponent } from './login/login.component';
     RouterModule,
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    AlertComponent
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'auto'}},

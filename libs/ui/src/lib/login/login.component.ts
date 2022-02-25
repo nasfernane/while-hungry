@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
         this.appService.closeLogin();
+        this.appService.openAlert('Login successful');
+
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
@@ -70,6 +72,7 @@ export class LoginComponent implements OnInit {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
         this.appService.closeLogin();
+        this.appService.openAlert('Register successful');
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user signup for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);

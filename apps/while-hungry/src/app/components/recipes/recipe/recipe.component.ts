@@ -25,7 +25,6 @@ export class RecipeComponent implements OnInit {
     if (id) {
       this.recipeService.find(id).subscribe((recipe: Recipe) => {
         if (recipe) {
-          console.log(recipe);
           this.recipe = recipe;
           this.appService.breadcrumb = ['While Hungry', 'Recipe', this.recipe.name]
         } else {
