@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe((user: any) => {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
+        this.appService.closeLogin();
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
@@ -68,6 +69,7 @@ export class LoginComponent implements OnInit {
     this.authService.register(email, nickname, password, passwordConfirm).subscribe((user: any) => {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
+        this.appService.closeLogin();
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user signup for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);

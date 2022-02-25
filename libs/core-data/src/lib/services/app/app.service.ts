@@ -7,6 +7,7 @@ import { LoginComponent } from '@wh/ui';
   providedIn: 'root'
 })
 export class AppService {
+  loginDialogRef: any;
   constructor(
     private matDialog: MatDialog,
   ) {}
@@ -126,9 +127,12 @@ export class AppService {
     }
 
     public openLogin() {
-      this.matDialog.open(LoginComponent, {
+      this.loginDialogRef = this.matDialog.open(LoginComponent, {
         panelClass: 'form80',
       })
     }
 
+    public closeLogin() {
+      this.loginDialogRef.close();
+    }
 }

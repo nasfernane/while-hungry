@@ -6,5 +6,6 @@ export const coreDataRoutes: Route[] = [];
 
 @NgModule({
   imports: [CommonModule, RouterModule],
+  
 })
 export class CoreDataModule {}
