@@ -17,7 +17,11 @@ export class RecipesService {
       include: {
         author: true,
         recipeInstructions: true,
-        requiredIngredients: true,
+        requiredIngredients: {
+          include: {
+            Ingredient: true,
+          }
+        },
         requiredUstensils: true,
         recipeTags: {
           include: {
@@ -39,7 +43,11 @@ export class RecipesService {
       include: {
         author: true,
         recipeInstructions: true,
-        requiredIngredients: true,
+        requiredIngredients: {
+          include: {
+            Ingredient: true,
+          }
+        },
         requiredUstensils: true,
         recipeTags: {
           include: {

@@ -1,31 +1,39 @@
-<div class="recipeContainer globalContainer">
-  <mat-card class="recipe" *ngIf="recipe">
-    <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between center">
-      <mat-card-title class="recipe__header__name">
+<div class="recipeContainer globalContainer" fxLayout="row" fxLayoutAlign="space-between start">
+  <mat-card class="recipe noBox" *ngIf="recipe" fxFlex="60">
+    <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between start">
+      <h1 class="recipe__header__name">
         {{recipe.name}}
-      </mat-card-title>
-      <mat-card-subtitle class="recipe__header__tags" fxLayout="row" fxLayoutAlign="space-around center">
-        <span *ngFor="let tag of recipe.recipeTags">{{ tag.tag.name }}</span>
-      </mat-card-subtitle>
-      <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags">{{ tag.tag.name }}</span>
+      </h1>
+      <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <mat-icon>star</mat-icon>
+        <span>{{ recipe.recipeReviews.length }} REVIEWS</span>
+        <span> &nbsp; / &nbsp;</span>
+        <span fxLayout="row" fxLayoutAlign="start center">
+          {{ getAvgReview(recipe.recipeReviews) }} AVERAGE
+        </span>
+
         <span fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>schedule</mat-icon>
           {{ recipe.cookTime }}
         </span>
+
         <span fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>restaurant_menu</mat-icon>
           Serves {{ recipe.serves }}
         </span>
+
         <span fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>outdoor_grill</mat-icon>
           {{recipe.difficulty }}
         </span>
-        <span fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>star_outline
-          </mat-icon>
-          {{ getAvgReview(recipe.recipeReviews) }}/5
-        </span>
       </div>
+      <p class="recipe__header__description">{{ recipe.description }}</p>
+      <img class=" recipe__header__img" src="./../../../../assets/img/tartare.jpeg" alt="{{recipe.name}}">
     </mat-card-header>
     <mat-divider [inset]="true"></mat-divider>
     <mat-card-content class="recipe__content">
@@ -33,7 +41,7 @@
         <span *ngIf="recipe.recipeInstructions.length > 1" class="recipe__content__instruction__index">{{ i + 1 }}.</span>
         <p>{{ instruction.instruction }} </p>
       </div> -->
-      <p>{{ recipe.description }}</p>
+      
     </mat-card-content>
     <mat-divider [inset]="true"></mat-divider>
     <mat-card-footer class="recipe__footer" fxLayout="row" fxLayoutAlign="space-between center">
@@ -49,5 +57,10 @@
         <span>{{ recipe.recipeFavorites.length }}</span>
       </div>
     </mat-card-footer>
+  </mat-card>
+
+  <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
+    <wh-recipe-ingredients [ingredients]="recipe.requiredIngredients"></wh-recipe-ingredients>
+    <wh-recipe-about></wh-recipe-about>
   </mat-card>
 </div>

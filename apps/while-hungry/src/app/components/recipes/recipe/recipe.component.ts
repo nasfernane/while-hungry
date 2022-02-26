@@ -6,6 +6,8 @@ import { AppService } from '@wh/core-utils';
 import { Recipe } from '@prisma/client';
 import { RecipeReview } from '@prisma/client';
 
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'wh-recipe',
   templateUrl: './recipe.component.html',
@@ -27,26 +29,13 @@ export class RecipeComponent implements OnInit {
   async ngOnInit() {
     this.recipeId = this.recipe ? this.recipe.id : this.route.snapshot.paramMap.get('id');
 
-    if (this.recipeId) {
-      this.getData(this.recipeId);
-    } else {
-      this.router.navigate(['/recipes']);
+    if (!this.recipe) {
+      if (this.recipeId) {
+        this.getData(this.recipeId);
+      } else {
+        this.router.navigate(['/recipes']);
+      }
     }
-
-    // if (this.appService.userLogged) {
-    //   this.userId = this.appService.getUserId();
-
-    //   if (this.recipe.recipeFavorites.length > 0) {
-    //     for (const element of this.recipe.recipeFavorites) {
-    //       if (element.userId === this.userId) {
-    //         this.recipeInFavorites = true;
-    //         break;
-    //       }
-    //     }
-    //   }
-    // }
-
-
   }
 
   async getData(id: string) {
@@ -54,6 +43,7 @@ export class RecipeComponent implements OnInit {
       if (recipe) {
         this.appService.breadcrumb = ['While Hungry', 'Recipe', recipe.name]
         this.recipe = recipe;
+        this.checkFavorite();
       } else {
         this.router.navigate(['/recipes']);
       }
@@ -74,5 +64,19 @@ export class RecipeComponent implements OnInit {
     return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
   }
 
+  checkFavorite() {
+    if (this.appService.userLogged) {
+      this.userId = this.appService.getUserId();
+
+      if (this.recipe.recipeFavorites.length > 0) {
+        for (const element of this.recipe.recipeFavorites) {
+          if (element.userId === this.userId) {
+            this.recipeInFavorites = true;
+            break;
+          }
+        }
+      }
+    }
+  }
 
 }
