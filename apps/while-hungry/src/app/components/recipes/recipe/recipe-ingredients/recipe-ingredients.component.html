@@ -1,5 +1,47 @@
 <div class="ingredientsContainer" *ngIf="ingredients.length > 0">
-  <div *ngFor="let ingredient of ingredients">
-    
+  <div class="ingredientsContainer__header" fxLayout="column" fxLayoutAlign="space-around stretch">
+    <section class="ingredientsContainer__header__info"  fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>schedule</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--label">
+          total time
+        </span>
+      </div>
+      <span class="ingredientsContainer__header__info--data">
+        {{ recipe.cookTime }}
+      </span>
+    </section>
+    <mat-divider [inset]="true"></mat-divider>
+    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>restaurant_menu</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--label">yield</span>
+      </div>
+      <span class="ingredientsContainer__header__info--data">
+        {{ recipe.serves }} servings
+      </span>
+    </section>
+    <mat-divider [inset]="true"></mat-divider>
+    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon>outdoor_grill</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--label">difficulty &nbsp;</span>
+      </div>
+      <span class="ingredientsContainer__header__info--data">
+        {{ recipe.difficulty }}
+      </span>
+    </section>
   </div>
+  <div class="ingredientsContainer__ingredients">
+    <h3 class="ingredientsContainer__ingredients--title">INGREDIENTS</h3>
+    <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
+      <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
+      <span class="ingredientsContainer__ingredients--quantity">{{ ingredient.quantity }} {{ ingredient.unit }}&nbsp;</span>
+      <span class="ingredientsContainer__ingredients--name" matTooltip="{{ ingredient.Ingredient.description }}">{{ ingredient.Ingredient.name }}</span>
+    </div>
+  </div>
+  
 </div>

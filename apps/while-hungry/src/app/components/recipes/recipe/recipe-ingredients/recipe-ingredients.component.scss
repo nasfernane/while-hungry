@@ -1,0 +1,75 @@
+@import './../../../../../styles/base/colors';
+
+.ingredientsContainer {
+  border: 5px solid $primary-light;
+  background-color: white;
+
+  &__header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: $primary-light;
+    border: 3px solid $primary-light;
+
+    &__info {
+      width: 70%;
+      margin: 0 auto;
+      color: white;
+
+      mat-icon {
+        color: $grey-light;
+        font-size: 24px;
+      }
+
+      &--label {
+        font-variant: small-caps;
+        font-weight: bold;
+        color: $grey-dark;
+        font-size: 16px;
+      }
+
+      &--data {
+        font-size: 16px;
+        color: $grey-light;
+      }
+    }
+    
+    span mat-icon {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+
+    mat-divider {
+      border-top: 1px solid $grey-dark;
+      margin: 0 auto;
+      width: 70%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__ingredients {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &--title {
+      font-weight: bold;
+      color: $primary;
+    }
+
+    &--dot {
+      color: $primary-dark;
+      margin-right: 10px;
+    }
+
+    &--quantity, &--name {
+      font-size: 16px;
+    }
+
+    &--name {
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

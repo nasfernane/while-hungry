@@ -3,7 +3,7 @@
     <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between start">
       <h1 class="recipe__header__name">
         {{recipe.name}}
-        <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags">{{ tag.tag.name }}</span>
+        <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>
       </h1>
       <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>star</mat-icon>
@@ -17,20 +17,7 @@
           {{ getAvgReview(recipe.recipeReviews) }} AVERAGE
         </span>
 
-        <span fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>schedule</mat-icon>
-          {{ recipe.cookTime }}
-        </span>
-
-        <span fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>restaurant_menu</mat-icon>
-          Serves {{ recipe.serves }}
-        </span>
-
-        <span fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>outdoor_grill</mat-icon>
-          {{recipe.difficulty }}
-        </span>
+      
       </div>
       <p class="recipe__header__description">{{ recipe.description }}</p>
       <img class=" recipe__header__img" src="./../../../../assets/img/tartare.jpeg" alt="{{recipe.name}}">
@@ -60,7 +47,7 @@
   </mat-card>
 
   <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
-    <wh-recipe-ingredients [ingredients]="recipe.requiredIngredients"></wh-recipe-ingredients>
+    <wh-recipe-ingredients [recipe]="recipe"></wh-recipe-ingredients>
     <wh-recipe-about></wh-recipe-about>
   </mat-card>
 </div>

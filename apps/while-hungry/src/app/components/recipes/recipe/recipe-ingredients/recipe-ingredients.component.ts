@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Ingredient } from '@prisma/client';
+
 
 @Component({
   selector: 'wh-recipe-ingredients',
@@ -7,9 +7,11 @@ import { Ingredient } from '@prisma/client';
   styleUrls: ['./recipe-ingredients.component.scss']
 })
 export class RecipeIngredientsComponent implements OnInit {
-  @Input() ingredients: Ingredient[];
+  @Input() recipe: any;
+  ingredients: any[];
 
   ngOnInit() {
+    this.ingredients = this.recipe.requiredIngredients;
     console.log(this.ingredients);
   }
 }

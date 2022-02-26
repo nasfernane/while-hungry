@@ -1,3 +1,5 @@
+@import './../../../../styles/base/colors';
+
 .recipeContainer {
   mat-card {
     margin: 0 !important;
@@ -20,10 +22,17 @@
   
       &__tags {
         font-size: 16px;
-        border: 1px dashed grey;
+        border: 1px dashed $primary;
         padding: 0 5px;
         margin: 0 10px;
         cursor: pointer;
+        transition: 0.3s ease;
+
+        &:hover {
+          color: #fff;
+          background-color: $primary;
+          border: 1px dashed #fff;
+        }
       }
   
       &__infos {
@@ -82,6 +91,6 @@
   }
 
   .about {
-    border: 1px solid black;
+    background-color: #fefffd;
   }
 }
