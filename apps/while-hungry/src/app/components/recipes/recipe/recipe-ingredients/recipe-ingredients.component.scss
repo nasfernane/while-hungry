@@ -72,4 +72,20 @@
       cursor: pointer;
     }
   }
+
+  &__shoppingBtn {
+    width: 90%;
+    padding: 10px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    background-color: $primary-light;
+    border: none;
+    color: $grey-light !important;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-<div class="ingredientsContainer" *ngIf="ingredients.length > 0">
+<div class="ingredientsContainer" *ngIf="ingredients.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
   <div class="ingredientsContainer__header" fxLayout="column" fxLayoutAlign="space-around stretch">
     <section class="ingredientsContainer__header__info"  fxLayout="row" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -20,7 +20,7 @@
         <span class="ingredientsContainer__header__info--label">yield</span>
       </div>
       <span class="ingredientsContainer__header__info--data">
-        {{ recipe.serves }} servings
+        {{ recipe.serves }} Servings
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>
@@ -43,5 +43,6 @@
       <span class="ingredientsContainer__ingredients--name" matTooltip="{{ ingredient.Ingredient.description }}">{{ ingredient.Ingredient.name }}</span>
     </div>
   </div>
+  <button class="ingredientsContainer__shoppingBtn">Add to your shopping list</button>
   
 </div>

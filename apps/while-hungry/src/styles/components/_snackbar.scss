@@ -1,10 +1,16 @@
+@import './../base/colors';
+
 .mat-snack-bar-container {
   text-align: center;
   background-color: $primary;
+  color: $grey-light !important;
 }
 
 .mat-simple-snackbar {
   display: inline-block !important;
   font-size: 18px;
-  color: $grey-light;
+
+  span {
+    color: white;
+  }
 }
