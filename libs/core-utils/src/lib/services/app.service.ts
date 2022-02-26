@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // libraries
-import moment from 'moment';
+import moment, { relativeTimeRounding } from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -118,9 +118,48 @@ export class AppService {
     setTimeout(() => (this._breadcrumb = v.map(v2 => "<span class='breadcrumb__chunk' routerLink='v2'>&nbsp;"+v2+"&nbsp;</span>").join("<span class='breadcrumb__divider'>&nbsp»&nbsp</span>")));
   }
 
-  
-
   public formatDate(date: string) {
     return moment(date).format('MMMM Do YYYY');
+  }
+
+  public convertUnitLabel(convertToUnit: string, unit: string){
+  
+    const unitMapping = new Map<string, string>([
+      ['grams', 'ounces'],
+    ])
+
+    if (convertToUnit === 'us') {
+      if (unitMapping.get(unit)) {
+        return unitMapping.get(unit)
+      } else {
+        return unit;
+      }
+    } else if (convertToUnit === 'metrics') {
+      for (const [key, value] of unitMapping.entries()) {
+        if (value === unit)
+          return key;
+      }
+      return unit;
+    }
+
+    return unit;
+  }
+
+  public convertUnitAmount(unit: string) {
+    const unitMapping = {
+      'grams': 0.035,
+    }
+
+    for (const [key, value] of Object.entries(unitMapping)) {
+      if (key === unit) {
+        return value;
+      }
+    }
+    
+    return 1;
+  }
+
+  public round(value: number) {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
   }
 }

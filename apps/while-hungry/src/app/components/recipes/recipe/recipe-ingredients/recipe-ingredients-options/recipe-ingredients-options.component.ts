@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'wh-recipe-ingredients-options',
@@ -7,15 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RecipeIngredientsOptionsComponent {
   @Input() units: string;
+  @Output() unitsEvent = new EventEmitter<string>();
+  @Output() scaleEvent = new EventEmitter<number>();
   scale = 1;
 
   switchUnits(value: string) {
-    this.units = value;
+    if (this.units !== value) {
+      this.units = value;
+      this.unitsEvent.emit(value)
+    }
   }
 
   switchScale(value: number) {
-    this.scale = value;
-    console.log(value);
+    if (this.scale !== value) {
+      this.scale = value;
+      this.scaleEvent.emit(value);
+    }
   }
 
 }

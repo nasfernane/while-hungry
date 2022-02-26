@@ -38,11 +38,22 @@
   <div class="ingredientsContainer__ingredients">
     <div class="ingredientsContainer__ingredients__header" fxLayout="row" fxLayoutAlign="space-between center">
       <span class="ingredientsContainer__ingredients__header--title">INGREDIENTS</span>
-      <wh-recipe-ingredients-options></wh-recipe-ingredients-options>
+      <wh-recipe-ingredients-options [units]="recipe.unit" (unitsEvent)="unitEvent($event)" (scaleEvent)="scaleEvent($event)"></wh-recipe-ingredients-options>
     </div>
     <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
       <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
-      <span class="ingredientsContainer__ingredients--quantity">{{ ingredient.quantity }} {{ ingredient.unit }}&nbsp;</span>
+      <span class="ingredientsContainer__ingredients--quantity">
+        {{ appService.round(ingredient.quantity * scale * 
+          (recipe.unit !== recipeUnit 
+            ? +appService.convertUnitAmount(ingredient.unit) 
+            : 1))
+          }} 
+        {{ recipe.unit === recipeUnit 
+          ? ingredient.unit
+          : appService.convertUnitLabel(recipeUnit, ingredient.unit)
+        }}
+        &nbsp;
+      </span>
       <span class="ingredientsContainer__ingredients--name" matTooltip="{{ ingredient.Ingredient.description }}">{{ ingredient.Ingredient.name }}</span>
     </div>
   </div>

@@ -46,8 +46,9 @@ model Recipe {
   picture    String?
   difficulty Difficulty
   cookTime   Int
-  serves Int
+  serves     Int
   description String
+  unit       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

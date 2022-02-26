@@ -8,6 +8,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         serves: 4,
         description: "Simple salmon tartare with a hint of dill.",
         difficulty: "Hard",
+        unit: 'metrics',
         recipeInstructions: {
             create: [
                 {
@@ -29,8 +30,8 @@ export const recipes: Prisma.RecipeCreateInput[] = [
                 },
                 {
                     Ingredient: { connect: { id: 6 } },
-                    quantity: 1,
-                    unit: "teaspoon"
+                    quantity: 50,
+                    unit: "grams"
                 },
                 {
                     Ingredient: { connect: { id: 7 } },
@@ -107,6 +108,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         serves: 2,
         description: "Simple thuna tartare with a hint of tarragon.",
         difficulty: "Medium",
+        unit: 'metrics',
         recipeInstructions: {
             create: [
                 {
@@ -206,6 +208,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         serves: 1,
         description: "Simple swordfish tartare with a hint of coriander.",
         difficulty: "Easy",
+        unit: 'us',
         recipeInstructions: {
             create: [
                 {

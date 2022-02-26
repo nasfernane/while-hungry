@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppService } from '@wh/core-utils';
 
 
 @Component({
@@ -9,9 +10,27 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RecipeIngredientsComponent implements OnInit {
   @Input() recipe: any;
   ingredients: any[];
+  recipeUnit: string;
+  scale = 1;
+
+  constructor(
+    public appService: AppService,
+  ) {}
 
   ngOnInit() {
     this.ingredients = this.recipe.requiredIngredients;
-    console.log(this.ingredients);
+    this.recipeUnit = this.recipe.unit;
+  }
+
+  unitEvent(event: string) {
+    if (this.recipeUnit !== event) {
+      this.recipeUnit = event;
+    }
+  }
+
+  scaleEvent(event: number) {
+    if (this.scale !== event) {
+      this.scale = event;
+    }
   }
 }

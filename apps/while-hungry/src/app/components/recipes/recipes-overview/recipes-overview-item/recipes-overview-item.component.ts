@@ -47,8 +47,6 @@ export class RecipesOverviewItemComponent implements OnInit {
     return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
   }
 
-  
-
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
       this.recipeService.addOrRemoveFavorite(this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
