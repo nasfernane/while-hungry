@@ -53,9 +53,13 @@
     margin-top: 20px;
     margin-bottom: 20px;
 
-    &--title {
-      font-weight: bold;
-      color: $primary;
+    &__header {
+      margin-bottom: 20px;
+      
+      &--title {
+        font-weight: bold;
+        color: $primary;
+      }
     }
 
     &--dot {

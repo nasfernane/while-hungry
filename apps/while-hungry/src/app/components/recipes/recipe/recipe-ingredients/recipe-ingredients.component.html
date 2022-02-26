@@ -36,7 +36,10 @@
     </section>
   </div>
   <div class="ingredientsContainer__ingredients">
-    <h3 class="ingredientsContainer__ingredients--title">INGREDIENTS</h3>
+    <div class="ingredientsContainer__ingredients__header" fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="ingredientsContainer__ingredients__header--title">INGREDIENTS</span>
+      <wh-recipe-ingredients-options></wh-recipe-ingredients-options>
+    </div>
     <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
       <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
       <span class="ingredientsContainer__ingredients--quantity">{{ ingredient.quantity }} {{ ingredient.unit }}&nbsp;</span>

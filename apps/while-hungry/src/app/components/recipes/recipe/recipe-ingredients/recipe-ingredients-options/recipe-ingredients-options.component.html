@@ -1,0 +1,12 @@
+<div class="optionsContainer" fxLayout="row" fxLayoutAlign="start center">
+  <div class="optionsContainer__units">
+    <button matTooltip="Units: Metrics" [ngClass]="{'active': units === 'metrics'}" (click)="switchUnits('metrics')">M</button>
+    <button matTooltip="Units: US" [ngClass]="{'active': units === 'us'}" (click)="switchUnits('us')">US</button>
+  </div>
+  &nbsp;
+  <div class="optionsContainer__scales">
+    <button matTooltip="Scale this recipe to x1" [ngClass]="{'active': scale === 1}" (click)="switchScale(1)">x1</button>
+    <button matTooltip="Scale this recipe to x2" [ngClass]="{'active': scale === 2}" (click)="switchScale(2)">x2</button>
+    <button matTooltip="Scale this recipe to x3" [ngClass]="{'active': scale === 3}" (click)="switchScale(3)">x3</button>
+  </div>
+</div>

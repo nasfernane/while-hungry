@@ -2,64 +2,64 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-    provider          = "mysql"
-    url               = env("DATABASE_URL")
-    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    email     String   @unique @db.VarChar(60)
-    password  String   @db.VarChar(60)
-    nickname  String   @unique @db.VarChar(30)
-    role      Role     @default(User)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(60)
+  password  String   @db.VarChar(60)
+  nickname  String   @unique @db.VarChar(30)
+  role      Role     @default(User)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    profile         Profile?
-    recipies        Recipe[]
-    posts           Post[]
-    postComments    PostComment[]
-    recipeComments  RecipeComment[]
-    recipeReviews   RecipeReview[]
-    recipeFavorites RecipeFavorite[]
+  profile         Profile?
+  recipies        Recipe[]
+  posts           Post[]
+  postComments    PostComment[]
+  recipeComments  RecipeComment[]
+  recipeReviews   RecipeReview[]
+  recipeFavorites RecipeFavorite[]
 }
 
 model Profile {
-    id        Int      @id @default(autoincrement())
-    userId    Int      @unique
-    bio       String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Recipe {
-    id         Int      @id @default(autoincrement())
-    authorId   Int
-    name       String   @db.VarChar(60)
-    picture    String?
-    difficulty Difficulty
-    cookTime   Int
-    serves Int
-    description String
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  authorId   Int
+  name       String   @db.VarChar(60)
+  picture    String?
+  difficulty Difficulty
+  cookTime   Int
+  serves Int
+  description String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-    recipeInstructions  RecipeInstruction[]
-    requiredIngredients RequiredIngredient[]
-    requiredUstensils   RequiredUstensil[]
-    recipeComments      RecipeComment[]
-    recipeReviews      RecipeReview[]
-    recipeTags          RecipeTag[]
-    recipeFavorites      RecipeFavorite[]
+  recipeInstructions  RecipeInstruction[]
+  requiredIngredients RequiredIngredient[]
+  requiredUstensils   RequiredUstensil[]
+  recipeComments      RecipeComment[]
+  recipeReviews      RecipeReview[]
+  recipeTags          RecipeTag[]
+  recipeFavorites      RecipeFavorite[]
 
-    author User @relation(fields: [authorId], references: [id])
+  author User @relation(fields: [authorId], references: [id])
 }
 
 model RecipeInstruction {
