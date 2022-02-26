@@ -4,6 +4,7 @@
     "api": "apps/api",
     "core-data": "libs/core-data",
     "core-state": "libs/core-state",
+    "core-utils": "libs/core-utils",
     "material": "libs/material",
     "prisma-client": "libs/prisma-client",
     "ui": "libs/ui",

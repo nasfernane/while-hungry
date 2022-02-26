@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { AppService } from './../app/app.service';
 
-import { User } from '@prisma/client';
 
 const ENDPOINT = environment.API_URL + '/auth'
 
@@ -14,7 +12,6 @@ export class AuthentificationService {
 
   constructor(
     public http: HttpClient,
-    public _appService: AppService,
   ) { }
 
   public login(email: string, password: string) {

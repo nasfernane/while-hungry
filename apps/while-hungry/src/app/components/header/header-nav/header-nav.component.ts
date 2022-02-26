@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui';
 
 @Component({
   selector: 'wh-header-nav',
@@ -13,6 +14,7 @@ export class HeaderNavComponent {
   constructor(
     private router: Router,
     public appService: AppService,
+    public uiService: UiService,
   ) { }
 
     /**

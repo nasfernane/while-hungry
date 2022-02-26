@@ -1,14 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
 import { RecipeService } from '@wh/core-data';
-// import { RecipeService } from 'src/app/services/recipe.service';
-// import { AppService } from 'src/app/services/app.service';
+
 import moment from 'moment';
 
 import { Recipe } from '@prisma/client';
 import { RecipeReview } from '@prisma/client';
 import { RecipeFavorite } from '@prisma/client';
-import { AppService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
 
 @Component({
   selector: 'wh-recipes-overview-item',

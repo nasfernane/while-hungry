@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppService, RecipeService } from '@wh/core-data';
+import { RecipeService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
 
 import { Recipe } from '@prisma/client';
+import { RecipeReview } from '@prisma/client';
 
 @Component({
   selector: 'wh-recipe',
@@ -10,7 +12,10 @@ import { Recipe } from '@prisma/client';
   styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit {
-  recipe: Recipe;
+  @Input() recipe: any;
+  recipeId: string;
+  userId: number;
+  recipeInFavorites = false;
 
   constructor(
     public appService: AppService,
@@ -19,19 +24,55 @@ export class RecipeComponent implements OnInit {
     public recipeService: RecipeService,
     ) { }
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+  async ngOnInit() {
+    this.recipeId = this.recipe ? this.recipe.id : this.route.snapshot.paramMap.get('id');
 
-    if (id) {
-      this.recipeService.find(id).subscribe((recipe: Recipe) => {
-        if (recipe) {
-          this.recipe = recipe;
-          this.appService.breadcrumb = ['While Hungry', 'Recipe', this.recipe.name]
-        } else {
-          this.router.navigate(['/blog']);
-        }
-      })
+    if (this.recipeId) {
+      this.getData(this.recipeId);
+    } else {
+      this.router.navigate(['/recipes']);
+    }
+
+    // if (this.appService.userLogged) {
+    //   this.userId = this.appService.getUserId();
+
+    //   if (this.recipe.recipeFavorites.length > 0) {
+    //     for (const element of this.recipe.recipeFavorites) {
+    //       if (element.userId === this.userId) {
+    //         this.recipeInFavorites = true;
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
+
+
+  }
+
+  async getData(id: string) {
+    this.recipeService.find(id).subscribe((recipe: Recipe) => {
+      if (recipe) {
+        this.appService.breadcrumb = ['While Hungry', 'Recipe', recipe.name]
+        this.recipe = recipe;
+      } else {
+        this.router.navigate(['/recipes']);
+      }
+    })
+  }
+
+  async addOrRemoveFavorite() {
+    if (this.appService.userLogged) {
+      this.recipeService.addOrRemoveFavorite(+this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
+        if (res) this.getData(this.recipeId);
+      });
+
+      this.recipeInFavorites = !this.recipeInFavorites;
     }
   }
+
+  getAvgReview(reviews: RecipeReview[]) {
+    return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
+  }
+
 
 }

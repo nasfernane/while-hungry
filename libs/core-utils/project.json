@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/core-utils",
+  "sourceRoot": "libs/core-utils/src",
+  "prefix": "wh",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/core-utils"],
+      "options": {
+        "jestConfig": "libs/core-utils/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/core-utils/src/**/*.ts",
+          "libs/core-utils/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

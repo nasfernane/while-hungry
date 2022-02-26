@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
 
 @Component({
   selector: 'wh-root',

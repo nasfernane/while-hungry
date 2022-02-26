@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Observable } from 'rxjs';
 import { RecipeService } from '@wh/core-data';
-import { AppService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
 import { Recipe } from '@prisma/client';
 
 @Component({

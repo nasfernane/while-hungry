@@ -1,22 +1,14 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '@wh/ui';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
+// libraries
+import moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  loginDialogRef: any;
-  constructor(
-    private matDialog: MatDialog,
-    public _alert: MatSnackBar,
-  ) {}
-
   public currentUser: any = {};
   public userLogged = false;
-
   private _breadcrumb = "";
 
 
@@ -123,21 +115,12 @@ export class AppService {
   }
 
   set breadcrumb(v: Array<string>) {
-    setTimeout(() => (this._breadcrumb = v.map(v2 => "<span class='breadcrumb__chunk'>&nbsp;"+v2+"&nbsp;</span>").join("<span class='breadcrumb__divider'>&nbsp»&nbsp</span>")));
+    setTimeout(() => (this._breadcrumb = v.map(v2 => "<span class='breadcrumb__chunk' routerLink='v2'>&nbsp;"+v2+"&nbsp;</span>").join("<span class='breadcrumb__divider'>&nbsp»&nbsp</span>")));
   }
 
-  public openLogin() {
-    this.loginDialogRef = this.matDialog.open(LoginComponent, {
-      panelClass: 'form80',
-    })
-  }
+  
 
-  public closeLogin() {
-    this.loginDialogRef.close();
-  }
-
-  public openAlert(message: string, seconds?: number) {
-    console.log(seconds ? seconds * 1000 : 'coucou')
-    this._alert.open(message, undefined, { duration: seconds ? seconds * 1000 : 2000, verticalPosition: 'top',  });
+  public formatDate(date: string) {
+    return moment(date).format('MMMM Do YYYY');
   }
 }

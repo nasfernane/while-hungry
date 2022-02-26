@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '@wh/core-data';
-import { AppService } from '@wh/core-data';
-import * as moment from 'moment';
+import { AppService } from '@wh/core-utils';
 import { Observable } from 'rxjs';
 
 import { Post } from '@prisma/client';

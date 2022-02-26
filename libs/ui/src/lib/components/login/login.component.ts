@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '@wh/core-data';
-import { AppService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui'
 
 @Component({
   selector: 'wh-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthentificationService,
     private appService: AppService,
+    private uiService: UiService,
   ) {
     this.loginForm = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.pattern(/^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i)]),
@@ -49,8 +51,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe((user: any) => {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
-        this.appService.closeLogin();
-        this.appService.openAlert('Login successful');
+        this.uiService.closeLogin();
+        this.uiService.openAlert('Login successful');
 
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
@@ -71,8 +73,8 @@ export class LoginComponent implements OnInit {
     this.authService.register(email, nickname, password, passwordConfirm).subscribe((user: any) => {
       if (user && user.accessToken) {
         this.appService.setUserData(user);
-        this.appService.closeLogin();
-        this.appService.openAlert('Register successful');
+        this.uiService.closeLogin();
+        this.uiService.openAlert('Register successful');
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user signup for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);

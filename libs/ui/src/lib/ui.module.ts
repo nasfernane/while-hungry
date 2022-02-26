@@ -22,12 +22,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // wh libs & modules
 import { MaterialModule } from '@wh/material';
-import { CoreDataModule } from '@wh/core-data';
 import { CoreStateModule } from '@wh/core-state';
 
 // wh ui components
-import { LoginComponent } from './login/login.component';
-import { AlertComponent } from './alert/alert.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   imports: [
@@ -38,7 +36,6 @@ import { AlertComponent } from './alert/alert.component';
     HttpClientModule, 
     BrowserAnimationsModule, 
     StoreModule.forRoot({}, {}), 
-    CoreDataModule,
     CoreStateModule,
     FlexLayoutModule,
     MatListModule,
@@ -53,7 +50,6 @@ import { AlertComponent } from './alert/alert.component';
   ],
   declarations: [
     LoginComponent,
-    AlertComponent
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'auto'}},
