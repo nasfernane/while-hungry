@@ -1,13 +1,20 @@
-<mat-card class="recipeAboutContainer noBox" fxLayout="column" fxLayoutAlign="start center">
-  <div class="recipeAboutContainer__avatar">
+<mat-card class="recipeAuthorContainer noBox" fxLayout="column" fxLayoutAlign="start center">
+  <div class="recipeAuthorContainer__avatar">
     <img src="./../../../../../assets/img/avatar.png" alt="Author Avatar">
   </div>
-  <div class="recipeAboutContainer__infos" fxLayout="column" fxLayoutAlign="start start">
+  <div class="recipeAuthorContainer__infos" fxLayout="column" fxLayoutAlign="start start">
     <h2>Author</h2>
-    <span>{{ author.nickname }}</span>
-    <span>{{ author.email }}</span>
-    <span>{{ author.role }}</span>
-    <span>Recipes: {{ authorRecipesCount }}</span>
+    <div class="recipeAuthorContainer__infos__line" fxLayout="row" fxLayoutAlign="space-between center">
+      <span>{{ author.nickname }}</span>
+      <span>{{ author.role }}</span>
+    </div>
+    <div class="recipeAuthorContainer__infos__line" fxLayout="row" fxLayoutAlign="space-between center">
+      <span>Recipes added: {{ authorRecipesCount }}</span>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon class="recipeAuthorContainer__infos__line--icon" >volunteer_activism</mat-icon>
+        <span>3</span>
+      </div>
+    </div>
   </div>
-  
+  <button class="recipeAuthorContainer__infos__clapBtn">Clap this contributor</button>
 </mat-card>
