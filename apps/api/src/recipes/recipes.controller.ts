@@ -42,4 +42,9 @@ export class RecipesController {
   removeFavorite(@Body('recipeId') recipeId: number, @Body('userId') userId: number ) {
     return this.recipesService.removeFavorite(recipeId, userId)
   }
+
+  @Get('authorcount/:id')
+  getAuthorCount(@Param('id') id: number) {
+    return this.recipesService.getAuthorCount(id);
+  }
 }

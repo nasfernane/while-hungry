@@ -1,0 +1,13 @@
+<mat-card class="recipeAboutContainer noBox" fxLayout="column" fxLayoutAlign="start center">
+  <div class="recipeAboutContainer__avatar">
+    <img src="./../../../../../assets/img/avatar.png" alt="Author Avatar">
+  </div>
+  <div class="recipeAboutContainer__infos" fxLayout="column" fxLayoutAlign="start start">
+    <h2>Author</h2>
+    <span>{{ author.nickname }}</span>
+    <span>{{ author.email }}</span>
+    <span>{{ author.role }}</span>
+    <span>Recipes: {{ authorRecipesCount }}</span>
+  </div>
+  
+</mat-card>

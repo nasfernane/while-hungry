@@ -37,4 +37,8 @@ export class RecipeService {
   addOrRemoveFavorite(recipeId: number, userId: number, add: boolean) {
     return this.http.post(ENDPOINT + `/favorite/${add ? 'add' : 'remove'}`, { recipeId: recipeId, userId: userId })
   }
+
+  getAuthorRecipeCount(userId: number) {
+    return this.http.get(ENDPOINT + `/authorcount/${userId}`);
+  }
 }

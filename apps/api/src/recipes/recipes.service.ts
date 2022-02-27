@@ -99,4 +99,14 @@ export class RecipesService {
 
     return fav;
   }
+
+  getAuthorCount(authorId: number) {
+    const count = prisma.recipe.count({
+      where: {
+        authorId: +authorId,
+      }
+    })
+
+    return count;
+  }
 }

@@ -39,7 +39,7 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RecipeIngredientsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients.component';
-import { RecipeAboutComponent } from './components/recipes/recipe/recipe-about/recipe-about.component';
+import { RecipeAuthorComponent } from './components/recipes/recipe/recipe-author/recipe-author.component';
 import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients-options/recipe-ingredients-options.component';
 
 @NgModule({
@@ -57,7 +57,7 @@ import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/r
     RecipeComponent, 
     BreadcrumbComponent, 
     RecipeIngredientsComponent, 
-    RecipeAboutComponent, RecipeIngredientsOptionsComponent
+    RecipeAuthorComponent, RecipeIngredientsOptionsComponent
   ],
   imports: [
     BrowserModule, 
