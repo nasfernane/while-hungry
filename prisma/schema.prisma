@@ -22,28 +22,26 @@ model User {
 
   profile         Profile?
   recipies        Recipe[]
+  claps Clap[] @relation("clapper")
+  clapped Clap[] @relation("clapped")
   posts           Post[]
   postComments    PostComment[]
   recipeComments  RecipeComment[]
   recipeReviews   RecipeReview[]
   recipeFavorites RecipeFavorite[]
 
-  clapping   Clap? @relation("userClapping")
-  clapped   Clap? @relation("userClapped")
 }
-
 
 model Clap {
-  id Int @id @default(autoincrement())
-  userClappingId Int
-  userClappedId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int        @id @default(autoincrement())
+  clapperId   Int
+  clappedId Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  userClapping User @relation("userClapping", fields: [userClappingId], references: [id])
-  userClapped User @relation("userClapped", fields: [userClappedId], references: [id])
+  clapper User @relation("clapper", fields: [clapperId], references: [id])
+  clapped User @relation("clapped", fields: [clappedId], references: [id])
 }
-
 
 model Profile {
   id        Int      @id @default(autoincrement())
@@ -56,25 +54,25 @@ model Profile {
 }
 
 model Recipe {
-  id         Int      @id @default(autoincrement())
-  authorId   Int
-  name       String   @db.VarChar(60)
-  picture    String?
-  difficulty Difficulty
-  cookTime   Int
-  serves     Int
+  id          Int        @id @default(autoincrement())
+  authorId    Int
+  name        String     @db.VarChar(60)
+  picture     String?
+  difficulty  Difficulty
+  cookTime    Int
+  serves      Int
   description String
-  unit       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  unit        String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   recipeInstructions  RecipeInstruction[]
   requiredIngredients RequiredIngredient[]
   requiredUstensils   RequiredUstensil[]
   recipeComments      RecipeComment[]
-  recipeReviews      RecipeReview[]
+  recipeReviews       RecipeReview[]
   recipeTags          RecipeTag[]
-  recipeFavorites      RecipeFavorite[]
+  recipeFavorites     RecipeFavorite[]
 
   author User @relation(fields: [authorId], references: [id])
 }
@@ -231,7 +229,7 @@ enum Role {
 }
 
 enum Difficulty {
-  Easy @map("Easy")
-  Medium @map("Medium")
-  Hard @map("Hard")
+  Easy    @map("Easy")
+  Medium  @map("Medium")
+  Hard    @map("Hard")
 }

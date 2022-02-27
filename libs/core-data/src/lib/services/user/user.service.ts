@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+import { User } from '@prisma/client';
 import { Clap } from '@prisma/client';
 
-const ENDPOINT = environment.API_URL + '/claps';
+const ENDPOINT = environment.API_URL + '/users';
+const CLAP_ENDPOINT = environment.API_URL + '/claps';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +18,28 @@ export class UserService {
   ) { }
 
   all() {
-    return this.http.get<Clap[]>(ENDPOINT);
+    return this.http.get<User[]>(ENDPOINT);
   }
 
   find(id: string) {
-    return this.http.get<Clap>(ENDPOINT + `/${id}`);
+    return this.http.get<User>(ENDPOINT + `/${id}`);
   }
 
-  create(clap: Clap) {
-    return this.http.post(ENDPOINT, clap);
+  create(user: User) {
+    return this.http.post(ENDPOINT, user);
   }
 
-  // checkIfClapped(userClappingId: string, userClappedId: string,) {
-  //   return this.http.post(ENDPOINT, )
-  // }
+  clapUser(clapperId: number, clappedId: number) {
+    return this.http.post<Clap>(
+      CLAP_ENDPOINT, 
+      { clapperId, clappedId }
+    )
+  }
+
+  checkIfClapped(clapperId: number, clappedId: number) {
+    return this.http.post<Clap>(
+      CLAP_ENDPOINT + '/check', 
+      { clapperId, clappedId }
+    )
+  }
 }
