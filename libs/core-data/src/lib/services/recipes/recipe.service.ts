@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Recipe } from '@prisma/client';
 
-const ENDPOINT = environment.API_URL + '/recipes'
+const ENDPOINT = environment.API_URL + '/recipes';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,6 @@ export class RecipeService {
   }
 
   getAuthorRecipeCount(userId: number) {
-    return this.http.get(ENDPOINT + `/authorcount/${userId}`);
+    return this.http.get<number>(ENDPOINT + `/authorcount/${userId}`);
   }
 }
