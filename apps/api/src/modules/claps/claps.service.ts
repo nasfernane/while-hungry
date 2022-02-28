@@ -35,9 +35,9 @@ export class ClapsService {
     return `This action removes a #${id} clap`;
   }
 
-    
-  checkIfClapped(clap: Clap) {
-    const clapExists = prisma.clap.findFirst({
+  async checkIfClapped(clap: Clap) {
+    console.log(clap);
+    const clapExists = await prisma.clap.findFirst({
       where: {
         clapperId: +clap.clapperId,
         clappedId: +clap.clappedId
@@ -49,5 +49,15 @@ export class ClapsService {
     } else {
       false;
     }
+  }
+
+  async getUserClapsCount(id: number) {
+    const count = await prisma.clap.count({
+      where: {
+        clappedId: +id
+      }
+    })
+
+    return count;
   }
 }

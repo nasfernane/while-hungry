@@ -37,4 +37,9 @@ export class ClapsController {
   checkIfClapped(@Body() clap: Clap) {
     return this.clapsService.checkIfClapped(clap);
   }
+
+  @Get('/count/:id')
+  getUserClapsCount(@Param('id') id: number) {
+    return this.clapsService.getUserClapsCount(id);
+  }
 }

@@ -42,4 +42,10 @@ export class UserService {
       { clapperId, clappedId }
     )
   }
+
+  getUserClapsCount(userId: number) {
+    return this.http.get<number>(
+      CLAP_ENDPOINT + '/count/' + userId
+    )
+  }
 }

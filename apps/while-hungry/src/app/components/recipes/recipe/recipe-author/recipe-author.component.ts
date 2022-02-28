@@ -16,7 +16,8 @@ import { Observable } from 'rxjs';
 export class RecipeAuthorComponent implements OnInit {
   @Input() author: any;
   authorRecipesCount: number;
-  clapExists: boolean;
+  authorClaps: number;
+  alreadyClapped: boolean;
 
   constructor(
     private appService: AppService,
@@ -32,20 +33,26 @@ export class RecipeAuthorComponent implements OnInit {
       }
     });
 
-    this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((clapExists: boolean) => {
-      this.clapExists = clapExists;
+    this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((alreadyClapped: boolean) => {
+      this.alreadyClapped = alreadyClapped;
+    });
+
+    this.userService.getUserClapsCount(this.author.id).subscribe((count: number) => {
+      this.authorClaps = count;
     });
   }
 
   clapUser() {
     if (this.appService.userLogged) {
-      if (!this.clapExists) {
+      if (!this.alreadyClapped) {
         this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap) => {
-          console.log('CLAPPING')
-          console.log(clap)
+          if (clap) {
+            this.alreadyClapped = true;
+            this.authorClaps++;
+          } 
         })
       } else {
-        this.uiService.openAlert('You already clapped this mofo')
+        this.uiService.openAlert('You already clapped this contributor')
       }
     } else {
       this.uiService.openLoginAlert("You must be logged in")
