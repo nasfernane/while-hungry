@@ -1,0 +1,6 @@
+<div class="ratingContainer" fxLayout="row" fxLayoutAlign="start center">
+  <mat-icon *ngFor="let fullStar of fullStars">star</mat-icon>
+  <mat-icon *ngIf="hasAnHalfStar">star_half</mat-icon>
+  <mat-icon class="material-icons-outlined" *ngFor="let emptyStar of emptyStars">star_border</mat-icon>
+</div>
+

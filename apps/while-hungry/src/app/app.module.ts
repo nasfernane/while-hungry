@@ -41,6 +41,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { RecipeIngredientsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients.component';
 import { RecipeAuthorComponent } from './components/recipes/recipe/recipe-author/recipe-author.component';
 import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients-options/recipe-ingredients-options.component';
+import { RecipeRatingComponent } from './components/recipes/recipe/recipe-rating/recipe-rating.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/r
     RecipeComponent, 
     BreadcrumbComponent, 
     RecipeIngredientsComponent, 
-    RecipeAuthorComponent, RecipeIngredientsOptionsComponent
+    RecipeAuthorComponent, RecipeIngredientsOptionsComponent, RecipeRatingComponent
   ],
   imports: [
     BrowserModule, 

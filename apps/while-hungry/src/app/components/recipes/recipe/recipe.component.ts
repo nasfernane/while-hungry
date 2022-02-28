@@ -61,7 +61,7 @@ export class RecipeComponent implements OnInit {
   }
 
   getAvgReview(reviews: RecipeReview[]) {
-    return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
+    return Math.round((reviews.reduce((a, { review }) => a + review, 0) / reviews.length) * 10) / 10;
   }
 
   checkFavorite() {
