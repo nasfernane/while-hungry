@@ -7,9 +7,8 @@ import { Clap } from '@prisma/client';
 
 @Injectable()
 export class ClapsService {
+
   create(clap: Clap) {
-    console.log('clap')
-    console.log(clap)
     const newClap = prisma.clap.create({
       data: {
         clapperId: +clap.clapperId,
@@ -34,5 +33,21 @@ export class ClapsService {
 
   remove(id: number) {
     return `This action removes a #${id} clap`;
+  }
+
+    
+  checkIfClapped(clap: Clap) {
+    const clapExists = prisma.clap.findFirst({
+      where: {
+        clapperId: +clap.clapperId,
+        clappedId: +clap.clappedId
+      }
+    })
+
+    if (clapExists) {
+      return true;
+    } else {
+      false;
+    }
   }
 }

@@ -37,7 +37,7 @@ export class UserService {
   }
 
   checkIfClapped(clapperId: number, clappedId: number) {
-    return this.http.post<Clap>(
+    return this.http.post<boolean>(
       CLAP_ENDPOINT + '/check', 
       { clapperId, clappedId }
     )

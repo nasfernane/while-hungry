@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 // wh libraries
 import { RecipeService, UserService } from '@wh/core-data';
+import { UiService } from '@wh/ui';
 import { AppService } from '@wh/core-utils';
 
 // libraries
@@ -15,11 +16,13 @@ import { Observable } from 'rxjs';
 export class RecipeAuthorComponent implements OnInit {
   @Input() author: any;
   authorRecipesCount: number;
+  clapExists: boolean;
 
   constructor(
     private appService: AppService,
     private recipeService: RecipeService,
-    private userService: UserService
+    private userService: UserService,
+    private uiService: UiService,
   ) { }
 
   ngOnInit(): void {
@@ -28,19 +31,23 @@ export class RecipeAuthorComponent implements OnInit {
         this.authorRecipesCount = +count;
       }
     });
+
+    this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((clapExists: boolean) => {
+      this.clapExists = clapExists;
+    });
   }
 
   clapUser() {
     if (this.appService.userLogged) {
-      const clapperId = this.appService.getUserId();
-      const clappedId = this.author.id
-
-      this.userService.clapUser(clapperId, clappedId).subscribe((clap) => {
-        console.log('CLAPPING')
-        console.log(clap)
-      })
+      if (!this.clapExists) {
+        this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap) => {
+          console.log('CLAPPING')
+          console.log(clap)
+        })
+      } else {
+        this.uiService.openAlert('You already clapped this mofo')
+      }
     }
-    
   }
 
 }

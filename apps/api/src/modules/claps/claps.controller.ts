@@ -32,4 +32,9 @@ export class ClapsController {
   remove(@Param('id') id: string) {
     return this.clapsService.remove(+id);
   }
+
+  @Post('/check')
+  checkIfClapped(@Body() clap: Clap) {
+    return this.clapsService.checkIfClapped(clap);
+  }
 }
