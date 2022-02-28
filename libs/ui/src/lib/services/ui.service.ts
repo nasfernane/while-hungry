@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // components
-import { LoginComponent } from '@wh/ui';
+import { LoginComponent } from './../components/login/login.component';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,14 @@ import  createError   from 'http-errors';
 import * as bcrypt from 'bcrypt';
 import { Jwt } from './../../utils/jwt';
 
+import { HttpException } from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
+
+import { UseFilters } from '@nestjs/common';
+import { HttpExceptionFilter } from '../../filters/http-exception.filter';
+
 @Injectable()
+@UseFilters(new HttpExceptionFilter())
 export class AuthService {
   async register(param) {
     const { email, nickname, passwordConfirm } = param;
@@ -23,8 +30,6 @@ export class AuthService {
     } else {
       throw new createError.NotFound('Password and confirmation are not identical');
     }
-
-    
   }
 
   async login(param) {
@@ -35,13 +40,11 @@ export class AuthService {
       }
     })
 
-    if (!user) {
-      throw new createError.NotFound('User not registered !');
+    // if user not found or wront credentials
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      return { status: 404, message: "Bad credentials" }
     }
 
-    const checkPassword = bcrypt.compareSync(password, user.password) 
-
-    if (!checkPassword) throw new createError.Unauthorized('Email address or password invalid');
     delete user.password;
     const accessToken = await Jwt.signAccessToken(user)
 

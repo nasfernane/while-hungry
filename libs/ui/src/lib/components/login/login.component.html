@@ -2,7 +2,7 @@
   <mat-tab-group>
     <mat-tab label="Login"  fxLayout="column" fxLayoutAlign="center center">
       <mat-card-content>
-        <form [formGroup]="loginForm" novalidate fxLayout="column" fxLayoutAlign="space-between end">
+        <form [formGroup]="loginForm" novalidate fxLayout="column" fxLayoutAlign="space-between end" (ngSubmit)="myLoginForm.resetForm()" #myLoginForm="ngForm">
           <section>
             <mat-form-field>
               <mat-label>Email</mat-label>
@@ -28,6 +28,7 @@
               </mat-error>
             </mat-form-field>
           </section>
+          <span class="invalidLogin" *ngIf="invalidLogin">Your credentials are invalid, please try again.</span>
           <button mat-raised-button (click)="login()" [disabled]="!loginForm.valid">Login</button>
         </form>
       </mat-card-content>

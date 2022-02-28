@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
-import { UiService } from '@wh/ui'
+import { UiService } from './../../services/ui.service'
 
 @Component({
   selector: 'wh-login',
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   hidePassword = true;
   hideRegisterPassword = true;
   hideRegisterPasswordConfirm = true;
+  invalidLogin = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,18 +49,18 @@ export class LoginComponent implements OnInit {
     const email = this.loginForm.controls['email'].value
     const password = this.loginForm.controls['password'].value
     
-    this.authService.login(email, password).subscribe((user: any) => {
-      if (user && user.accessToken) {
-        this.appService.setUserData(user);
+    this.authService.login(email, password).subscribe((res: any) => {
+      if (res && res.accessToken) {
+        this.appService.setUserData(res);
         this.uiService.closeLogin();
         this.uiService.openAlert('Login successful');
-
+        this.invalidLogin = false;
 
         if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
-        } else {
-          this.router.navigate(['']);
-        }
+        } 
+      } else {
+        this.invalidLogin = true;
       }
     });
   }
