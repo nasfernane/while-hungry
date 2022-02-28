@@ -1,16 +1,30 @@
 @import './../base/colors';
 
 .mat-snack-bar-container {
-  text-align: center;
   background-color: $primary;
-  color: $grey-light !important;
-}
 
-.mat-simple-snackbar {
-  display: inline-block !important;
-  font-size: 18px;
+  .mat-simple-snackbar-action {
+    span {
+      color: $green-light !important;
+      font-variant: small-caps;
+      font-size: 18px;
+    }
+  }
 
-  span {
-    color: white;
+  .mat-simple-snackbar {
+    font-size: 16px;
+    span {
+      color: white;
+    }
+  }
+
+  // center alerts withouth actions
+  &.centered-snackbar { 
+    text-align: center !important;
+
+    .mat-simple-snackbar {
+      text-align: center !important;
+      display: inline-block !important;
+    }
   }
 }

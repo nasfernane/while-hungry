@@ -27,10 +27,13 @@ export class UiService {
   }
 
   public openAlert(message: string, seconds?: number) {
-    this._alert.open(message, undefined, { duration: seconds ? seconds * 1000 : 2000, verticalPosition: 'top'});
+    this._alert.open(message, undefined, { duration: seconds ? seconds * 1000 : 2000, verticalPosition: 'top', panelClass: 'centered-snackbar'});
   }
 
   public openLoginAlert(message: string) {
-    this._alert.open(message, 'Login', { duration: 3000, verticalPosition: 'top'})
+    const alert = this._alert.open(message, 'login', { duration: 3000, verticalPosition: 'top'})
+    alert.onAction().subscribe(() => {
+      this.openLogin()
+    })
   }
 }

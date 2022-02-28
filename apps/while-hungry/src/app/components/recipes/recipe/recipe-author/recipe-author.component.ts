@@ -47,6 +47,8 @@ export class RecipeAuthorComponent implements OnInit {
       } else {
         this.uiService.openAlert('You already clapped this mofo')
       }
+    } else {
+      this.uiService.openLoginAlert("You must be logged in")
     }
   }
 
