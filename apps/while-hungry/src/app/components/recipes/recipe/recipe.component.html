@@ -10,7 +10,7 @@
           <span>{{ recipe.recipeFavorites.length }}</span>
           <mat-icon 
           (click)="addOrRemoveFavorite()" 
-          matTooltip="{{ (recipeInFavorites ? 'Add this recipe to' : 'Remove this recipe from') + ' your favorites' }}">
+          matTooltip="{{ (recipeInFavorites || !appService.userLogged ? 'Add this recipe to' : 'Remove this recipe from') + ' your favorites' }}">
             {{ recipeInFavorites ? 'favorite' : 'favorite_border'}}
           </mat-icon>
         </div>

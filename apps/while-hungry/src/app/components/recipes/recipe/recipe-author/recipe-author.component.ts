@@ -27,7 +27,6 @@ export class RecipeAuthorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.author)
     this.recipeService.getAuthorRecipeCount(this.author.id).subscribe((count) => {
       if (count && count !== 0) {
         this.authorRecipesCount = +count;

@@ -36,7 +36,6 @@ export class ClapsService {
   }
 
   async checkIfClapped(clap: Clap) {
-    console.log(clap);
     const clapExists = await prisma.clap.findFirst({
       where: {
         clapperId: +clap.clapperId,

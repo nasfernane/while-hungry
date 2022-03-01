@@ -66,6 +66,8 @@ export class RecipeComponent implements OnInit {
           }
         }
       });
+    } else {
+      this.uiService.openLoginAlert('You must log in to continue')
     }
   }
 
