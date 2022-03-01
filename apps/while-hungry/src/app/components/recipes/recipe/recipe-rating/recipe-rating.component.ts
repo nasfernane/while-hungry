@@ -18,7 +18,6 @@ export class RecipeRatingComponent {
   }
 
   get fullStars(): any[] {
-    console.log(this.numberOfFullStars)
     return Array(this.numberOfFullStars);
   }
 

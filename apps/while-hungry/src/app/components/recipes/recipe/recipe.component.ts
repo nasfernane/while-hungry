@@ -60,10 +60,6 @@ export class RecipeComponent implements OnInit {
     }
   }
 
-  getAvgReview(reviews: RecipeReview[]) {
-    return Math.round((reviews.reduce((a, { review }) => a + review, 0) / reviews.length) * 10) / 10;
-  }
-
   checkFavorite() {
     if (this.appService.userLogged) {
       this.userId = this.appService.getUserId();

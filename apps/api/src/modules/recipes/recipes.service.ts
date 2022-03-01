@@ -15,7 +15,11 @@ export class RecipesService {
   findAll(): Promise<Recipe[]> {
     return prisma.recipe.findMany({
       include: {
-        author: true,
+        author: {
+          include: {
+            profile: true,
+          }
+        },
         recipeInstructions: true,
         requiredIngredients: {
           include: {
@@ -41,7 +45,11 @@ export class RecipesService {
         id: id
       }, 
       include: {
-        author: true,
+        author: {
+          include: {
+            profile: true,
+          }
+        },
         recipeInstructions: true,
         requiredIngredients: {
           include: {

@@ -44,6 +44,10 @@ $avatar-size: 120px;
       }
     }
 
+    &__bio {
+      font-style:italic;
+    }
+
     &__clapBtn {
       width: 90%;
       padding: 10px;

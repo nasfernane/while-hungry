@@ -15,6 +15,7 @@
         <span>{{ authorClaps }}</span>
       </div>
     </div>
+    <p *ngIf="author.profile.bio" class="recipeAuthorContainer__infos__bio">{{ author.profile.bio }}</p>
   </div>
   <button class="recipeAuthorContainer__infos__clapBtn" (click)="clapUser()">Clap this contributor</button>
 </mat-card>

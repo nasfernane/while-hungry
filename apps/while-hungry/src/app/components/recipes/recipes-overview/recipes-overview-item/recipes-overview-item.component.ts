@@ -23,7 +23,7 @@ export class RecipesOverviewItemComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
-    private appService: AppService,
+    public appService: AppService,
   ) { }
 
   ngOnInit() {
@@ -41,10 +41,6 @@ export class RecipesOverviewItemComponent implements OnInit {
         }
       }
     }
-  }
-
-  getAvgReview(reviews: RecipeReview[]) {
-    return reviews.reduce((a, { review }) => a + review, 0) / reviews.length;
   }
 
   async addOrRemoveFavorite() {

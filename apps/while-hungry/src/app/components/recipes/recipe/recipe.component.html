@@ -6,11 +6,11 @@
         <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>
       </h1>
       <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start flex-end">
-        <wh-recipe-rating [rating]="getAvgReview(recipe.recipeReviews)"></wh-recipe-rating>
+        <wh-recipe-rating [rating]="appService.getAvgReview(recipe.recipeReviews)"></wh-recipe-rating>
         <span>{{ recipe.recipeReviews.length }} REVIEWS</span>
         <span> &nbsp; / &nbsp;</span>
         <span fxLayout="row" fxLayoutAlign="start center">
-          {{ getAvgReview(recipe.recipeReviews) }} AVERAGE
+          {{ appService.getAvgReview(recipe.recipeReviews) }} AVERAGE
         </span>
 
       
