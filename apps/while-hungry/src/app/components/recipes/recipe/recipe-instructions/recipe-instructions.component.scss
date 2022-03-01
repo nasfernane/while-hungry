@@ -1,0 +1,75 @@
+@import './../../../../../styles/base/colors';
+
+.instructionsContainer {
+  border: 5px solid $primary-light;
+
+  &__header {
+    width: 100%;
+    background-color: $primary-light;
+    height: 50px;
+    margin-bottom: 20px;
+    
+    span {
+      color: $grey-light;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+  }
+
+  &__actions {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    &__action {
+      padding: 10px;
+      text-align: center;
+      width: 45%;
+      background: $grey-light;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+
+      mat-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  &__instructions {
+    width: 90%;
+    margin: 0 auto;
+
+    &__title {
+      font-variant: small-caps;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    &__instruction {
+      width: 100%;
+      margin-bottom: 10px;
+
+      &__number {
+        margin-right: 10px;
+        text-align: center;
+        min-height: 18px !important;
+        min-width : 18px !important;
+        max-height: 18px !important;
+        max-width : 18px !important;
+        font-size: 14px;
+        border-radius: 50%;
+        background-color: $primary;
+        color: $grey-light;
+      }
+
+      &__data {
+        &--label {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

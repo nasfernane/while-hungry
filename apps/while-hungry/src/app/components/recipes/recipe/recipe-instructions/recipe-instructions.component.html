@@ -1,0 +1,31 @@
+<div class="instructionsContainer">
+  <div class="instructionsContainer__header" fxLayout="row" fxLayoutAlign="center center">
+    <span>Salmon tartare</span>
+  </div>
+  <div class="instructionsContainer__actions" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="instructionsContainer__actions__action instructionsContainer__actions__action--print" fxLayout="row" fxLayoutAlign="center center" (click)="printRecipe()">
+      <mat-icon>print</mat-icon>
+      <span>print recipe</span>
+    </div>
+    <div class="instructionsContainer__actions__action instructionsContainer__actions__action--pin" fxLayout="row" fxLayoutAlign="center center" (click)="addOrRemoveFavorite()">
+      <mat-icon>{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
+      <span>{{ recipeInFavorites ? 'remove' : 'add'}} favorite</span>
+    </div>
+  </div>
+  <div class="instructionsContainer__instructions" fxLayout="column" fxLayoutAlign="start flex-start">
+    <h1 class="instructionsContainer__instructions__title">instructions</h1>
+    <div *ngFor="let instruction of instructions; let i = index"class="instructionsContainer__instructions__instruction" fxLayout="row" fxLayoutAlign="start start">
+      <div class="instructionsContainer__instructions__instruction__number" fxLayout="column" fxLayoutAlign="center center">
+        {{ i + 1 }}    
+      </div>
+      <span class="instructionsContainer__instructions__instruction__data">
+        <span class="instructionsContainer__instructions__instruction__data--label">
+          {{ instruction.label }}:
+        </span>
+        <span class="instructionsContainer__instructions__instruction__data--detail">   
+          {{ instruction.instruction }}
+        </span>
+      </span>
+    </div>
+  </div>
+</div>

@@ -81,6 +81,7 @@ model RecipeInstruction {
   id          Int    @id @default(autoincrement())
   recipeId    Int
   categoryId  Int
+  label String?
   instruction String
 
   recipe   Recipe                    @relation(fields: [recipeId], references: [id])

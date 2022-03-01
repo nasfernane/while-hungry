@@ -45,45 +45,11 @@ export class RecipeComponent implements OnInit {
       if (recipe) {
         this.appService.breadcrumb = ['While Hungry', 'Recipe', recipe.name]
         this.recipe = recipe;
-        this.checkFavorite();
       } else {
         this.router.navigate(['/recipes']);
       }
     })
   }
 
-  async addOrRemoveFavorite() {
-    if (this.appService.userLogged) {
-      this.recipeService.addOrRemoveFavorite(+this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
-        if (res) {
-          this.getData(this.recipeId);
-          this.recipeInFavorites = !this.recipeInFavorites;
-
-          if (this.recipeInFavorites) {
-            this.uiService.openAlert('Recipe added to your favorites')
-          } else {
-            this.uiService.openAlert('Recipe removed from your favorites')
-          }
-        }
-      });
-    } else {
-      this.uiService.openLoginAlert('You must log in to continue')
-    }
-  }
-
-  checkFavorite() {
-    if (this.appService.userLogged) {
-      this.userId = this.appService.getUserId();
-
-      if (this.recipe.recipeFavorites.length > 0) {
-        for (const element of this.recipe.recipeFavorites) {
-          if (element.userId === this.userId) {
-            this.recipeInFavorites = true;
-            break;
-          }
-        }
-      }
-    }
-  }
 
 }

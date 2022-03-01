@@ -13,11 +13,18 @@ export const recipes: Prisma.RecipeCreateInput[] = [
             create: [
                 {
                     categoryId: 4, // if
-                    instruction: "Get the fish out of the fridge."
+                    label: "Prepare the fish",
+                    instruction: "Get the fish out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes."
                 },
                 {
                     categoryId: 1,
-                    instruction: "Parer le saumon puis le trancher en petits cubes réguliers. Assaisonner avec des pluches d'aneth et du citron vert."
+                    label: "Prepare the garnish",
+                    instruction: "Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs."
+                },
+                {
+                  categoryId: 2,
+                  label: "Finish and season",
+                  instruction: "Mix the fish and the garnish together, season with a splah of olive oil and a pinch of sea salt."
                 }
             ]
         },
@@ -106,19 +113,26 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         name: "Thuna tartare",
         cookTime: 4,
         serves: 2,
-        description: "Simple thuna tartare with a hint of tarragon.",
+        description: "Simple tuna tartare with a hint of tarragon.",
         difficulty: "Medium",
         unit: 'metrics',
         recipeInstructions: {
             create: [
-                {
-                    categoryId: 4, // if
-                    instruction: "Get the fish out of the fridge."
-                },
-                {
-                    categoryId: 1,
-                    instruction: "Parer le thon puis le trancher en petits cubes réguliers. Assaisonner avec des pluches d'aneth et du citron vert."
-                }
+              {
+                categoryId: 4, // if
+                label: "Prepare the tuna",
+                instruction: "Get the tuna out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes."
+              },
+              {
+                  categoryId: 1,
+                  label: "Prepare the garnish",
+                  instruction: "Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs."
+              },
+              {
+                categoryId: 2,
+                label: "Finish and season",
+                instruction: "Mix the tuna and the garnish together, season with a splah of olive oil and a pinch of sea salt."
+              }
             ]
         },
         requiredIngredients: {
@@ -211,18 +225,21 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         unit: 'us',
         recipeInstructions: {
             create: [
-                {
-                    categoryId: 1, // if
-                    instruction: "Get the fish out of the fridge."
-                },
-                {
-                    categoryId: 1, // if
-                    instruction: "Give Gwen a kiss."
-                },
-                {
-                    categoryId: 1,
-                    instruction: "Parer l'espadon puis le trancher en petits cubes réguliers. Assaisonner avec des pluches d'aneth et du citron vert."
-                }
+              {
+                categoryId: 4, // if
+                label: "Prepare the swordfish",
+                instruction: "Get the swordfish out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes."
+              },
+              {
+                  categoryId: 1,
+                  label: "Prepare the garnish",
+                  instruction: "Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs."
+              },
+              {
+                categoryId: 2,
+                label: "Finish and season",
+                instruction: "Mix the swordfish and the garnish together, season with a splah of olive oil and a pinch of sea salt."
+              }
             ]
         },
         requiredIngredients: {

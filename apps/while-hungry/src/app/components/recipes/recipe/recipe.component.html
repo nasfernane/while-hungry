@@ -6,14 +6,7 @@
           {{recipe.name}}
           <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>
         </span>
-        <div class="recipe__header__likes" fxLayout="row" fxLayoutAlign="space-between center">
-          <span>{{ recipe.recipeFavorites.length }}</span>
-          <mat-icon 
-          (click)="addOrRemoveFavorite()" 
-          matTooltip="{{ (recipeInFavorites || !appService.userLogged ? 'Add this recipe to' : 'Remove this recipe from') + ' your favorites' }}">
-            {{ recipeInFavorites ? 'favorite' : 'favorite_border'}}
-          </mat-icon>
-        </div>
+        
       </div>
       <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start flex-end">
         <wh-recipe-rating [rating]="appService.getAvgReview(recipe.recipeReviews)"></wh-recipe-rating>
@@ -28,6 +21,9 @@
       <p class="recipe__header__description">{{ recipe.description }}</p>
       <img class=" recipe__header__img" src="./../../../../assets/img/tartare.jpeg" alt="{{recipe.name}}">
     </mat-card-header>
+    <mat-card-content>
+      <wh-recipe-instructions [recipe]="recipe"></wh-recipe-instructions>
+    </mat-card-content>
       <!-- <div *ngFor="let instruction of recipe.recipeInstructions; let i = index" class="recipe__content__instruction" fxLayout="row" fxLayoutAlign="start start">
         <span *ngIf="recipe.recipeInstructions.length > 1" class="recipe__content__instruction__index">{{ i + 1 }}.</span>
         <p>{{ instruction.instruction }} </p>
