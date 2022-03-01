@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui';
 
 import { Recipe } from '@prisma/client';
 import { RecipeReview } from '@prisma/client';
@@ -24,6 +25,7 @@ export class RecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public recipeService: RecipeService,
+    private uiService: UiService,
     ) { }
 
   async ngOnInit() {
@@ -53,10 +55,17 @@ export class RecipeComponent implements OnInit {
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
       this.recipeService.addOrRemoveFavorite(+this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
-        if (res) this.getData(this.recipeId);
-      });
+        if (res) {
+          this.getData(this.recipeId);
+          this.recipeInFavorites = !this.recipeInFavorites;
 
-      this.recipeInFavorites = !this.recipeInFavorites;
+          if (this.recipeInFavorites) {
+            this.uiService.openAlert('Recipe added to your favorites')
+          } else {
+            this.uiService.openAlert('Recipe removed from your favorites')
+          }
+        }
+      });
     }
   }
 

@@ -15,15 +15,30 @@
     }
     
     &__header {
+      width: 100%;
+      
       &__name {
         font-size: 36px;
-        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        display: inline-box;
+      }
+
+      &__likes {
+        mat-icon {
+          cursor: pointer;
+        }
+        
+        span {
+          margin-right: 5px;
+          font-size: 24px;
+        }
       }
   
       &__tags {
         font-size: 16px;
         border: 1px dashed $primary;
-        padding: 0 5px;
+        padding: 1px 5px;
         margin: 0 10px;
         cursor: pointer;
         transition: 0.3s ease;
@@ -71,16 +86,7 @@
     }
   
     &__footer {
-      &__likes {
-        mat-icon {
-          cursor: pointer;
-        }
-        
-        span {
-          margin-left: 5px;
-          font-size: 20px;
-        }
-      }
+      
     }
   
     mat-divider {

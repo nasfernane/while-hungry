@@ -1,10 +1,20 @@
 <div class="recipeContainer globalContainer" fxLayout="row" fxLayoutAlign="space-between start">
   <mat-card class="recipe noBox" *ngIf="recipe" fxFlex="60">
     <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between start">
-      <h1 class="recipe__header__name">
-        {{recipe.name}}
-        <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>
-      </h1>
+      <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%; margin-bottom: 20px;">
+        <span class="recipe__header__name" fxLayout="row" fxLayoutAlign="start flex-start">
+          {{recipe.name}}
+          <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>
+        </span>
+        <div class="recipe__header__likes" fxLayout="row" fxLayoutAlign="space-between center">
+          <span>{{ recipe.recipeFavorites.length }}</span>
+          <mat-icon 
+          (click)="addOrRemoveFavorite()" 
+          matTooltip="{{ (recipeInFavorites ? 'Add this recipe to' : 'Remove this recipe from') + ' your favorites' }}">
+            {{ recipeInFavorites ? 'favorite' : 'favorite_border'}}
+          </mat-icon>
+        </div>
+      </div>
       <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start flex-end">
         <wh-recipe-rating [rating]="appService.getAvgReview(recipe.recipeReviews)"></wh-recipe-rating>
         <span>{{ recipe.recipeReviews.length }} REVIEWS</span>
@@ -18,28 +28,10 @@
       <p class="recipe__header__description">{{ recipe.description }}</p>
       <img class=" recipe__header__img" src="./../../../../assets/img/tartare.jpeg" alt="{{recipe.name}}">
     </mat-card-header>
-    <mat-divider [inset]="true"></mat-divider>
-    <mat-card-content class="recipe__content">
       <!-- <div *ngFor="let instruction of recipe.recipeInstructions; let i = index" class="recipe__content__instruction" fxLayout="row" fxLayoutAlign="start start">
         <span *ngIf="recipe.recipeInstructions.length > 1" class="recipe__content__instruction__index">{{ i + 1 }}.</span>
         <p>{{ instruction.instruction }} </p>
       </div> -->
-      
-    </mat-card-content>
-    <mat-divider [inset]="true"></mat-divider>
-    <mat-card-footer class="recipe__footer" fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="recipe__footer__infos" fxLayout="column" fxLayoutAlign="start start">
-        <div class="recipe__footer__infos__user" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>account_circle</mat-icon>
-          <span>{{ recipe.author.nickname }}</span>
-        </div>
-        <span>{{ appService.formatDate(recipe.createdAt) }}</span>
-      </div>
-      <div class="recipe__footer__likes" fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-icon (click)="addOrRemoveFavorite()">{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
-        <span>{{ recipe.recipeFavorites.length }}</span>
-      </div>
-    </mat-card-footer>
   </mat-card>
 
   <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
