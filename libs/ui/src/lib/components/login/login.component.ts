@@ -56,7 +56,8 @@ export class LoginComponent implements OnInit {
         this.uiService.openAlert('Login successful');
         this.invalidLogin = false;
 
-        if (this.route.snapshot.queryParams['returnUrl']) { // if user logged for a specific page
+        if (this.route.snapshot.queryParams['returnUrl']) { 
+          // if user logged for a specific page
           this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
         } 
       } else {

@@ -1,6 +1,6 @@
 <div class="instructionsContainer">
   <div class="instructionsContainer__header" fxLayout="row" fxLayoutAlign="center center">
-    <span>Salmon tartare</span>
+    <span>{{ recipe.name }}</span>
   </div>
   <div class="instructionsContainer__actions" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="instructionsContainer__actions__action instructionsContainer__actions__action--print" fxLayout="row" fxLayoutAlign="center center" (click)="printRecipe()">
@@ -24,6 +24,20 @@
         </span>
         <span class="instructionsContainer__instructions__instruction__data--detail">   
           {{ instruction.instruction }}
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="instructionsContainer__notes" fxLayout="column" fxLayoutAlign="start stretch">
+    <h1 class="instructionsContainer__notes__title">notes</h1>
+    <div class="instructionsContainer__notes__note" *ngFor="let note of notes" fxLayout="row" fxLayoutAlign="start start">
+      <mat-icon  class="instructionsContainer__notes__note__icon">info</mat-icon>
+      <span class="instructionsContainer__notes__note__data">
+        <span class="instructionsContainer__notes__note__data--label">
+          {{ note.label }}:
+        </span>
+        <span class="instructionsContainer__notes__note__data--detail">   
+          {{ note.note }}
         </span>
       </span>
     </div>

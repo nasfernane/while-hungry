@@ -28,6 +28,18 @@ export const recipes: Prisma.RecipeCreateInput[] = [
                 }
             ]
         },
+        recipeNotes: {
+          create: [
+            { 
+              label: "Fish",
+              note: "Dont use defrost salmon for a tartare."
+            },
+            {
+              label: "Seasonning",
+              note: "If you prepare this dish in advance, taste and rectify the seasonning before serving since the fish will be colder."
+            }
+          ]
+        },
         requiredIngredients: {
             create: [
                 {
@@ -110,7 +122,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
     },
     {
         author: { connect: { id: 2 } },
-        name: "Thuna tartare",
+        name: "Tuna tartare",
         cookTime: 4,
         serves: 2,
         description: "Simple tuna tartare with a hint of tarragon.",
@@ -134,6 +146,18 @@ export const recipes: Prisma.RecipeCreateInput[] = [
                 instruction: "Mix the tuna and the garnish together, season with a splah of olive oil and a pinch of sea salt."
               }
             ]
+        },
+        recipeNotes: {
+          create: [
+            { 
+              label: "Fish",
+              note: "Dont use defrost tuna for a tartare."
+            },
+            {
+              label: "Seasonning",
+              note: "If you prepare this dish in advance, taste and rectify the seasonning before serving since the fish will be colder."
+            }
+          ]
         },
         requiredIngredients: {
             create: [
@@ -241,6 +265,18 @@ export const recipes: Prisma.RecipeCreateInput[] = [
                 instruction: "Mix the swordfish and the garnish together, season with a splah of olive oil and a pinch of sea salt."
               }
             ]
+        },
+        recipeNotes: {
+          create: [
+            { 
+              label: "Fish",
+              note: "Dont use defrost swordfish for a tartare."
+            },
+            {
+              label: "Seasonning",
+              note: "If you prepare this dish in advance, taste and rectify the seasonning before serving since the fish will be colder."
+            }
+          ]
         },
         requiredIngredients: {
             create: [

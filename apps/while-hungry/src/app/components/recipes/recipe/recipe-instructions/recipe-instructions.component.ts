@@ -7,6 +7,7 @@ import { UiService } from '@wh/ui';
 
 // prisma schemas
 import { RecipeInstruction } from '@prisma/client';
+import { RecipeNote } from '@prisma/client';
 
 @Component({
   selector: 'wh-recipe-instructions',
@@ -16,6 +17,7 @@ import { RecipeInstruction } from '@prisma/client';
 export class RecipeInstructionsComponent implements OnInit {
   @Input() recipe: any;
   instructions: RecipeInstruction[];
+  notes: RecipeNote[];
   recipeInFavorites: boolean;
 
   constructor(
@@ -26,14 +28,15 @@ export class RecipeInstructionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.instructions = this.recipe.recipeInstructions;
+    this.notes = this.recipe.recipeNotes;
     this.checkFavorite();
+    console.log(this.recipe)
   }
 
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
       this.recipeService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
         if (res) {
-          // this.getData(this.recipeId);
           this.recipeInFavorites = !this.recipeInFavorites;
 
           if (this.recipeInFavorites) {

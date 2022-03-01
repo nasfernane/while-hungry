@@ -21,6 +21,7 @@ export class RecipesService {
           }
         },
         recipeInstructions: true,
+        recipeNotes: true,
         requiredIngredients: {
           include: {
             Ingredient: true,
@@ -51,6 +52,7 @@ export class RecipesService {
           }
         },
         recipeInstructions: true,
+        recipeNotes: true,
         requiredIngredients: {
           include: {
             Ingredient: true,
