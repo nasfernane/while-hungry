@@ -1,0 +1,30 @@
+@import './../../../../../styles/base/colors';
+
+.addRateContainer {
+  margin-top: 30px;
+  width: 100%;
+  background-color: $grey-light;
+
+  &__stars {
+    cursor: pointer;
+  }
+
+  &__message {
+    font-style: italic;
+  }
+
+  &__button {
+    border: 1px solid $primary-light;
+    margin-bottom: 20px;
+    background-color: #fff;
+    text-align: center;
+
+    width: 90%;
+    padding: 10px;
+    text-transform: uppercase;
+    // background-color: $primary-light;
+    border: none;
+    // color: $grey-light !important;
+    cursor: pointer;
+  }
+}

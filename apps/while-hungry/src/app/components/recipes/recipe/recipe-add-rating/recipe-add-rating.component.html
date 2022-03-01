@@ -1,0 +1,11 @@
+<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center">
+  <h1 class="addRateContainer__title">Rate this recipe</h1>
+  <div class="addRateContainer__stars">
+    <mat-icon *ngFor="let n of stars" (click)="setRating(n)">{{ getIcon(n) }}</mat-icon>
+  </div>
+  <p class="addRateContainer__message" *ngIf="message">{{ message }}</p>
+  <button [disabled]="userRating === 1" (click)="addReview()" class="addRateContainer__button">
+    add review
+  </button>
+
+</div>

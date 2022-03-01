@@ -41,4 +41,6 @@ export class RecipeService {
   getAuthorRecipeCount(userId: number) {
     return this.http.get<number>(ENDPOINT + `/authorcount/${userId}`);
   }
+
+  
 }
