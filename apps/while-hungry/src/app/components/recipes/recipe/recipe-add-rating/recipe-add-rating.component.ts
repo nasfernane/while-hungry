@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 // services
-import { RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from '@wh/ui';
+import { ReviewService } from '@wh/core-data';
+import { RecipeReview } from '@prisma/client';
 
 @Component({
   selector: 'wh-recipe-add-rating',
@@ -14,12 +15,13 @@ export class RecipeAddRatingComponent {
   @Input() recipeId: number;
   stars: Array<number>;
   userRating = 0;
-  message = '';
+  message: string;
+  alreadyReviewed = false;
 
   constructor(
-    private recipeService: RecipeService,
     private appService: AppService,
     private uiService: UiService,
+    private reviewService: ReviewService
   ) {
     this.stars = Array(5).fill(1).map((x,i)=>i + 1); // fill the stars array with proper index
    }
@@ -50,12 +52,31 @@ export class RecipeAddRatingComponent {
     }
   }
 
-  addReview() {
+  async addReview() {
     if (this.appService.userLogged) {
-      console.log(this.recipeId)
+      if (!this.alreadyReviewed) {
+        this.reviewService.checkIfReviewed(this.recipeId, this.appService.getUserId()).subscribe((review: RecipeReview) => {
+          this.alreadyReviewed = !!review;
+
+          if (!this.alreadyReviewed) {
+            const newReview = {
+              recipeId: this.recipeId,
+              authorId: this.appService.getUserId(),
+              review: this.userRating,
+            }
+  
+            this.reviewService.create(newReview).subscribe((review: RecipeReview) => {
+              this.uiService.openAlert('Review sent !')
+            })
+          } else {
+            this.uiService.openAlert('You already reviewed this recipe')
+          }
+        })
+      } else {
+        this.uiService.openAlert('You already reviewed this recipe')
+      }
     } else {
       this.uiService.openLoginAlert('This action requires authentification')
     }
   }
-
 }
