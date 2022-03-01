@@ -4,7 +4,7 @@
     <mat-icon *ngFor="let n of stars" (click)="setRating(n)">{{ getIcon(n) }}</mat-icon>
   </div>
   <p class="addRateContainer__message" *ngIf="message">{{ message }}</p>
-  <button [disabled]="userRating === 1" (click)="addReview()" class="addRateContainer__button">
+  <button [disabled]="userRating < 1 || userRating > 5" (click)="addReview()" class="addRateContainer__button">
     add review
   </button>
 
