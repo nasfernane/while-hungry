@@ -32,7 +32,7 @@
 
   <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
     <wh-recipe-ingredients [recipe]="recipe"></wh-recipe-ingredients>
-    <wh-recipe-add-rating [recipeId]="recipe.id"></wh-recipe-add-rating>
+    <wh-recipe-add-rating [recipeId]="recipe.id" (updateEvent)="getData(recipeId)"></wh-recipe-add-rating>
     <wh-recipe-author [author]="recipe.author"></wh-recipe-author>
   </mat-card>
 </div>

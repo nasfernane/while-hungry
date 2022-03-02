@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -13,6 +13,7 @@ import { RecipeReview } from '@prisma/client';
 })
 export class RecipeAddRatingComponent {
   @Input() recipeId: number;
+  @Output() updateEvent = new EventEmitter<boolean>();
   stars: Array<number>;
   userRating = 0;
   message: string;
@@ -66,7 +67,11 @@ export class RecipeAddRatingComponent {
             }
   
             this.reviewService.create(newReview).subscribe((review: RecipeReview) => {
-              this.uiService.openAlert('Review sent !')
+              if (review) {
+                this.uiService.openAlert('Review sent !')
+                this.updateEvent.emit(true);
+
+              }
             })
           } else {
             this.uiService.openAlert('You already reviewed this recipe')

@@ -1,12 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 // wh libraries
 import { RecipeService, UserService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
 import { AppService } from '@wh/core-utils';
 
-// libraries
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wh-recipe-author',
@@ -37,9 +35,7 @@ export class RecipeAuthorComponent implements OnInit {
       this.alreadyClapped = alreadyClapped;
     });
 
-    this.userService.getUserClapsCount(this.author.id).subscribe((count: number) => {
-      this.authorClaps = count;
-    });
+   this.setUserClapsCount();
   }
 
   clapUser() {
@@ -47,8 +43,10 @@ export class RecipeAuthorComponent implements OnInit {
       if (!this.alreadyClapped) {
         this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap) => {
           if (clap) {
+            console.log(clap);
             this.alreadyClapped = true;
-            this.authorClaps++;
+            this.uiService.openAlert(`You clapped ${this.author.nickname}. Good job !`);
+            this.setUserClapsCount();
           } 
         })
       } else {
@@ -57,6 +55,12 @@ export class RecipeAuthorComponent implements OnInit {
     } else {
       this.uiService.openLoginAlert("You must be logged in")
     }
+  }
+
+  setUserClapsCount() {
+    this.userService.getUserClapsCount(this.author.id).subscribe((count: number) => {
+      this.authorClaps = count;
+    });
   }
 
 }
