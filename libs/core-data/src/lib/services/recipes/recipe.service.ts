@@ -18,6 +18,10 @@ export class RecipeService {
     return this.http.get<Recipe[]>(ENDPOINT);
   }
 
+  allWithFilters(filters: object) {
+    return this.http.post<Recipe[]>(ENDPOINT + '/filters', filters);
+  }
+
   find(id: string) {
     return this.http.get<Recipe>(ENDPOINT + `/${id}`);
   }

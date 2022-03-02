@@ -124,7 +124,6 @@ export class AppService {
   }
 
   public formatTimer(timer: number) {
-    console.log('coucou');
     if (timer >= 60) {
       const hours = Math.floor(timer / 60);          
       const mins = timer % 60;

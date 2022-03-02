@@ -18,6 +18,11 @@ export class RecipesController {
     return this.recipesService.findAll();
   }
 
+  @Post('/filters')
+  findAllWithFilters(@Body() filters: object) {
+    return this.recipesService.findAllWithFilters(filters);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.recipesService.findOne(+id);

@@ -37,12 +37,24 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  getData() {
-    this.recipeService.all().subscribe((recipes: Recipe[]) => {
-      this.dataSource = new MatTableDataSource<Recipe>(recipes);
-      this.dataSource.paginator = this.paginator;
-      this.recipes$ = this.dataSource.connect();
-    })
+  getData(filters?: any) {
+    if (filters) {
+      this.recipeService.allWithFilters(filters).subscribe((recipes: Recipe[]) => {
+        if (recipes) this.linkDataSource(recipes);
+        
+      })
+    } else {
+      this.recipeService.all().subscribe((recipes: Recipe[]) => {
+        if (recipes) this.linkDataSource(recipes);
+      })
+    }
+  }
+
+  linkDataSource(recipes: Recipe[]) {
+    this.dataSource = new MatTableDataSource<Recipe>(recipes);
+    this.dataSource.paginator = this.paginator;
+    this.recipes$ = this.dataSource.connect();
+    console.log(recipes)
   }
 
   favoriteEvent(event: boolean) {

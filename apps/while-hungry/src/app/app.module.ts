@@ -45,6 +45,7 @@ import { RecipeRatingComponent } from './components/recipes/recipe/recipe-rating
 import { RecipeInstructionsComponent } from './components/recipes/recipe/recipe-instructions/recipe-instructions.component';
 import { RecipeAddReviewComponent } from './components/recipes/recipe/recipe-add-review/recipe-add-review.component';
 import { RecipeCommentsComponent } from './components/recipes/recipe/recipe-comments/recipe-comments.component';
+import { RecipesOverviewFiltersComponent } from './components/recipes/recipes-overview/recipes-overview-filters/recipes-overview-filters.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { RecipeCommentsComponent } from './components/recipes/recipe/recipe-comm
     RecipeIngredientsOptionsComponent, 
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
-    RecipeAddReviewComponent, RecipeCommentsComponent, 
+    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, 
   ],
   imports: [
     BrowserModule, 

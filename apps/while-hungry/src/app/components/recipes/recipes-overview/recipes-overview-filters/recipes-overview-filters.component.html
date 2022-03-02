@@ -1,0 +1,49 @@
+<div class="recipesFiltersContainer">
+  <form fxLayout="row" fxLayoutAlign="space-between" [formGroup]="filtersForm"  #myFiltersForm="ngForm">
+    <mat-form-field fxFlex="20">
+      <mat-select formControlName="difficulty" placeholder="Filter by difficulty">
+        <!-- <mat-label>Filter by difficulty</mat-label> -->
+        <mat-option value="Easy">Easy</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Hard">Hard</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="20">
+      <mat-select formControlName="rating" placeholder="Filter by rating" #ratingSelect="matSelect">
+        <mat-select-trigger>
+          <wh-recipe-rating [rating]="rating" [small]="true"></wh-recipe-rating>
+        </mat-select-trigger>
+        <mat-option value="1">
+          <wh-recipe-rating [rating]="1"></wh-recipe-rating>
+        </mat-option>
+        <mat-option value="2">
+          <wh-recipe-rating [rating]="2"></wh-recipe-rating>
+        </mat-option>
+        <mat-option value="3">
+          <wh-recipe-rating [rating]="3"></wh-recipe-rating>
+        </mat-option>
+        <mat-option value="4">
+          <wh-recipe-rating [rating]="4"></wh-recipe-rating>
+        </mat-option>
+        <mat-option value="5">
+          <wh-recipe-rating [rating]="5"></wh-recipe-rating>
+        </mat-option>
+       
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="20">
+      <mat-select formControlName="tags" placeholder="Select tags">
+        <mat-option value="Japanese">Japanese</mat-option>
+        <mat-option value="Healthy">Healthy</mat-option>
+        <mat-option value="Italian">Italian</mat-option>
+        <mat-option value="Vegetarian">Vegetarian</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+      <button fxFlex="15" class="filterBtn filterBtn--reset" (click)="myFiltersForm.resetForm()">RESET</button>
+      <button fxFlex="15" class="filterBtn filterBtn--search" (click)="filterData()">SEARCH</button>
+    
+  </form>
+</div>

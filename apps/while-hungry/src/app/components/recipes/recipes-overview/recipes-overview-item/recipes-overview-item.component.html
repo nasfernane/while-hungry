@@ -32,7 +32,7 @@
   </mat-card-header>
   <mat-divider [inset]="true"></mat-divider>
   <mat-card-content class="recipe__content">
-    <p>{{ recipe.description }}</p>
+    <p matTooltip="{{ recipe.description }}">{{ recipe.description }}</p>
   </mat-card-content>
   <mat-divider [inset]="true"></mat-divider>
   <mat-card-footer class="recipe__footer" fxLayout="row" fxLayoutAlign="space-between center">

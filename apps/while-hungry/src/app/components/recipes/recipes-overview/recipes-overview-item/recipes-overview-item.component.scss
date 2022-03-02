@@ -1,11 +1,10 @@
 @import './../../../../../styles/base/colors';
 
 .recipe {
-  margin: 10px;
   border: 3px solid $primary;
   border-radius: 0;
   position: relative;
-
+  
   &__favorite {
     position: absolute;
     top: 7%;
@@ -70,14 +69,14 @@
   }
 
   &__content {
+    width: 100%;
+    
     p {
       text-align: center;
-    }
-
-    &__instruction {
-      &__index {
-        margin-right: 5px;
-      }
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis !important;
     }
   }
 

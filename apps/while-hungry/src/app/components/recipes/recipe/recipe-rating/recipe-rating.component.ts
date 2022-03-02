@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class RecipeRatingComponent {
   @Input() rating = 0;
+  @Input() small = false;
   private readonly maxNumberOfStars = 5;
 
   private get numberOfFullStars(): number {

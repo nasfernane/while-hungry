@@ -1,7 +1,8 @@
 <!-- <wh-breadcrumb></wh-breadcrumb> -->
-<div class="recipeOverviewContainer globalContainer globalContainer--breadcrumb"  fxLayout="column" fxLayoutAlign="start center">
-  <div class="recipeOverviewContainer__recipes" fxLayout="row wrap" fxLayoutGap="grid">
-    <wh-recipes-overview-item fxFlex="33.333%" *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
+<div class="recipeOverviewContainer globalContainer globalContainer--breadcrumb"  fxLayout="column" fxLayoutAlign="start stretch">
+  <wh-recipes-overview-filters (updateEvent)="getData($event)"></wh-recipes-overview-filters>
+  <div class="recipeOverviewContainer__recipes" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
+    <wh-recipes-overview-item fxFlex="32%" *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
   </div>
-  <mat-paginator [pageSizeOptions]="[2, 3]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[3, 9, 18]"></mat-paginator>
 </div>
