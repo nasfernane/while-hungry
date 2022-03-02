@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecipeAddRatingComponent } from './recipe-add-rating.component';
+import { RecipeAddRatingComponent } from './recipe-add-review.component';
 
 describe('RecipeAddRatingComponent', () => {
   let component: RecipeAddRatingComponent;

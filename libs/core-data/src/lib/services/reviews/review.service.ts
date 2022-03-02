@@ -27,6 +27,10 @@ export class ReviewService {
     return this.http.post<RecipeReview>(ENDPOINT, review);
   }
 
+  update(reviewId: number, review: any) {
+    return this.http.patch<RecipeReview>(ENDPOINT + `/${reviewId}`, review);
+  }
+
   checkIfReviewed(recipeId: number, userId: number) {
     return this.http.get<RecipeReview>(ENDPOINT + `/check/${recipeId}/${userId}`)
   }

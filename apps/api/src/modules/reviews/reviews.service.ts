@@ -27,7 +27,14 @@ export class ReviewsService {
   }
 
   update(id: number, review: RecipeReview) {
-    return `This action updates a #${id} review`;
+    return prisma.recipeReview.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...review
+      }
+    })
   }
 
   remove(id: number) {

@@ -5,6 +5,10 @@
   width: 100%;
   background-color: $grey-light;
 
+  &__title {
+    margin-top: 10px;
+  }
+
   &__stars {
     cursor: pointer;
   }

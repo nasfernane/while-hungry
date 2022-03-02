@@ -30,8 +30,8 @@ export class UiService {
     this._alert.open(message, undefined, { duration: seconds ? seconds * 1000 : 2000, verticalPosition: 'top', panelClass: 'centered-snackbar'});
   }
 
-  public openLoginAlert(message: string) {
-    const alert = this._alert.open(message, 'login', { duration: 3000, verticalPosition: 'top'})
+  public openLoginAlert() {
+    const alert = this._alert.open('This action requires authentification', 'login', { duration: 3000, verticalPosition: 'top'})
     alert.onAction().subscribe(() => {
       this.openLogin()
     })
