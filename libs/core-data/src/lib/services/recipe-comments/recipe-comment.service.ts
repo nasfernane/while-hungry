@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+// utils
+import { environment } from '../../environments/environment';
+
+// schemas
+import { RecipeComment } from '@prisma/client';
+
+const ENDPOINT = environment.API_URL + '/recipes-comments';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RecipeCommentService {
+
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  // findAll(id: string) {
+
+  // }
+
+  // getFeatured() {
+
+  // }
+
+  create(comment: any) {
+    return this.http.post<RecipeComment>(ENDPOINT, comment)
+  }
+}

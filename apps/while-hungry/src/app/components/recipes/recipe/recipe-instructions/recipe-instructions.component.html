@@ -45,7 +45,7 @@
   <div class="instructionsContainer__comment" fxLayout="column" fxLayoutAlign="start flex-start">
     <h1 class="instructionsTitle instructionsContainer__comment__title">comment</h1>
     <p class="instructionsContainer__comment__subtitle">
-      You can contribute to this recipe, add remarks or point your appreciations by leaving a comment. It's always appreciated !
+      You can contribute to this recipe, add remarks or share your appreciation by leaving a comment. It's always appreciated !
     </p>
     <form [formGroup]="commentForm" novalidate #myCommentForm="ngForm" 
     fxLayout="column" fxLayoutAlign="start flex-end" class="instructionsContainer__comment__form">
@@ -53,7 +53,7 @@
         <textarea 
           formControlName="comment"
           matInput 
-          placeholder="Write your comment here. Ex: As my grand aunt Joséphine used to say..."
+          placeholder="Write your comment here. ex: As my great aunt Joséphine used to say..."
           cdkTextareaAutosize
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"

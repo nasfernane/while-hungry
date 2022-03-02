@@ -36,7 +36,6 @@ export class RecipeAddReviewComponent implements OnInit {
   initReview() {
     if (this.appService.userLogged) {
       this.reviewService.checkIfReviewed(this.recipeId, this.appService.getUserId()).subscribe((review: RecipeReview) => {
-        console.log(review);
         if (review) {
           this.updating = true;
           this.userRating = review.review;
@@ -75,6 +74,7 @@ export class RecipeAddReviewComponent implements OnInit {
     }
   }
 
+  // add or update review depending if user already posted a review for this recipe
   async addOrUpdateReview() {
     if (this.appService.userLogged) {
       if (!this.updating) { // creating the review
@@ -107,6 +107,7 @@ export class RecipeAddReviewComponent implements OnInit {
     }
   }
 
+  // refresh data after each creation or update
   afterUpdateData(message: string) {
     this.uiService.openAlert(message)
     this.initReview();

@@ -34,7 +34,11 @@ export class RecipesService {
             tag: true,
           }
         },
-        recipeComments: true,
+        recipeComments: {
+          include: {
+            author: true,
+          },
+        },
         recipeReviews: true,
         recipeFavorites: true,
       }
@@ -65,7 +69,14 @@ export class RecipesService {
             tag: true,
           }
         },
-        recipeComments: true,
+        recipeComments: {
+          include: {
+            author: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          }
+        },
         recipeReviews: true,
         recipeFavorites: true,
       }

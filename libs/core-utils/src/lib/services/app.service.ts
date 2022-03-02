@@ -120,7 +120,7 @@ export class AppService {
   }
 
   public formatDate(date: string) {
-    return moment(date).format('MMMM Do YYYY');
+    return moment(date).format('MMMM Do YYYY @ hh:mm A');
   }
 
   public convertUnitLabel(convertToUnit: string, unit: string){

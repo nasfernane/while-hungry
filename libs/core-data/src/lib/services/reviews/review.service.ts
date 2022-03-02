@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 // schemas
-import { Recipe, RecipeReview } from '@prisma/client';
+import { RecipeReview } from '@prisma/client';
 
 
 const ENDPOINT = environment.API_URL + '/reviews';

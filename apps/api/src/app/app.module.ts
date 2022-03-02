@@ -4,6 +4,7 @@ import { PostsModule } from './../modules/posts/posts.module'
 import { AuthModule } from './../modules/auth/auth.module';
 import { ClapsModule } from './../modules/claps/claps.module';
 import { ReviewsModule } from '../modules/reviews/reviews.module';
+import { RecipesCommentsModule } from '../modules/recipes-comments/recipes-comments.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -14,7 +15,8 @@ import { AppService } from './app.service';
     PostsModule, 
     AuthModule, 
     ClapsModule,
-    ReviewsModule
+    ReviewsModule,
+    RecipesCommentsModule
   ],
   controllers: [AppController],
   providers: [AppService],

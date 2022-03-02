@@ -7,15 +7,11 @@ import { RecipeReview } from '@prisma/client';
 @Injectable()
 export class ReviewsService {
   create(review: RecipeReview) {
-    const newReview = prisma.recipeReview.create({
+    return prisma.recipeReview.create({
       data: {
-        recipeId: review.recipeId,
-        authorId: review.authorId,
-        review: review.review,
+        ...review
       }
     })
-
-    return newReview;
   }
 
   findAll() {

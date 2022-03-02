@@ -1,13 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 // services
 import { AppService } from '@wh/core-utils';
 import { RecipeService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
+import { RecipeCommentService } from '@wh/core-data';
 
 // prisma schemas
-import { RecipeInstruction } from '@prisma/client';
+import { RecipeComment, RecipeInstruction } from '@prisma/client';
 import { RecipeNote } from '@prisma/client';
 
 @Component({
@@ -17,6 +18,7 @@ import { RecipeNote } from '@prisma/client';
 })
 export class RecipeInstructionsComponent implements OnInit {
   @Input() recipe: any;
+  @Output() updateEvent = new EventEmitter<boolean>();
   instructions: RecipeInstruction[];
   notes: RecipeNote[];
   recipeInFavorites: boolean;
@@ -26,6 +28,7 @@ export class RecipeInstructionsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private appService: AppService,
     private recipeService: RecipeService,
+    private recipeCommentsService: RecipeCommentService,
     private uiService: UiService,
   ) {
     this.commentForm = formBuilder.group({
@@ -77,7 +80,21 @@ export class RecipeInstructionsComponent implements OnInit {
   }
 
   postComment() {
-    const comment = this.commentForm.controls['comment'].value;
-  }
+    if (this.appService.userLogged) {
+      const comment = this.commentForm.controls['comment'].value;
 
+      if (comment) {
+        this.recipeCommentsService.create({
+          recipeId: this.recipe.id,
+          userId: this.appService.getUserId(),
+          comment: comment
+        }).subscribe((comment: RecipeComment) => {
+          this.uiService.openAlert('Comment posted !')
+          this.updateEvent.emit(true);
+        })
+      }
+    } else {
+      this.uiService.openLoginAlert();
+    }
+  }
 }
