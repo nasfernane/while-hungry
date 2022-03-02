@@ -31,6 +31,7 @@
   </mat-card>
 
   <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
+    <wh-recipe-add-comment></wh-recipe-add-comment>
     <wh-recipe-ingredients [recipe]="recipe"></wh-recipe-ingredients>
     <wh-recipe-add-review [recipeId]="recipe.id" (updateEvent)="getData(recipeId)"></wh-recipe-add-review>
     <wh-recipe-author [author]="recipe.author"></wh-recipe-author>

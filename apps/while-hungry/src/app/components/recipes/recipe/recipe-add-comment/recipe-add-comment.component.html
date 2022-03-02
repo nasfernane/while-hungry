@@ -1,1 +1,13 @@
-<p>recipe-add-comment works!</p>
+<div class="addCommentContainer" fxLayout="column" fxLayoutAlign="start center">
+  <h1 class="addCommentContainer__title">Leave a comment</h1>
+  <mat-form-field>
+    <textarea 
+      matInput 
+      placeholder="Comment"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="1"
+      cdkAutosizeMaxRows="5"
+    ></textarea>
+  </mat-form-field>
+</div>

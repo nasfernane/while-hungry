@@ -3,6 +3,12 @@
 .instructionsContainer {
   border: 5px solid $primary-light;
 
+  .instructionsTitle {
+    font-variant: small-caps;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
   &__header {
     width: 100%;
     background-color: $primary-light;
@@ -104,6 +110,26 @@
           font-weight: 500;
         }
       }
+    }
+  }
+
+  &__comment {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    width: 90%;
+    margin: 0 auto;
+
+    &__form, &__input {
+      width: 100%;
+    }
+
+    &__btn {
+      align-self: end !important;
+    }
+
+    &__subtitle {
+      font-size: 16px;
+      font-style: italic;
     }
   }
 }

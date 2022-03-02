@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+// services
 import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from './../../services/ui.service'
@@ -40,9 +42,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if (this.appService.userLogged) {
-      this.router.navigate(['']);
-    }
+    if (this.appService.userLogged) this.uiService.closeLogin();
   }
 
   async login() {

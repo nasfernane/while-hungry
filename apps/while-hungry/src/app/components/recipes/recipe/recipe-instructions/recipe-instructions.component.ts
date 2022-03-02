@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -19,12 +20,18 @@ export class RecipeInstructionsComponent implements OnInit {
   instructions: RecipeInstruction[];
   notes: RecipeNote[];
   recipeInFavorites: boolean;
+  commentForm: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private appService: AppService,
     private recipeService: RecipeService,
     private uiService: UiService,
-  ) {}
+  ) {
+    this.commentForm = formBuilder.group({
+      comment: new FormControl('')
+    })
+  }
 
   ngOnInit(): void {
     this.instructions = this.recipe.recipeInstructions;
@@ -67,6 +74,10 @@ export class RecipeInstructionsComponent implements OnInit {
 
   printRecipe() {
     this.uiService.openAlert('Feature available soon');
+  }
+
+  postComment() {
+    const comment = this.commentForm.controls['comment'].value;
   }
 
 }

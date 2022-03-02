@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="instructionsContainer__notes" fxLayout="column" fxLayoutAlign="start stretch">
-    <h1 class="instructionsContainer__notes__title">notes</h1>
+    <h1 class="instructionsTitle instructionsContainer__notes__title">notes</h1>
     <div class="instructionsContainer__notes__note" *ngFor="let note of notes" fxLayout="row" fxLayoutAlign="start start">
       <mat-icon  class="instructionsContainer__notes__note__icon">info</mat-icon>
       <span class="instructionsContainer__notes__note__data">
@@ -41,5 +41,29 @@
         </span>
       </span>
     </div>
+  </div>
+  <div class="instructionsContainer__comment" fxLayout="column" fxLayoutAlign="start flex-start">
+    <h1 class="instructionsTitle instructionsContainer__comment__title">comment</h1>
+    <p class="instructionsContainer__comment__subtitle">
+      You can contribute to this recipe, add remarks or point your appreciations by leaving a comment. It's always appreciated !
+    </p>
+    <form [formGroup]="commentForm" novalidate #myCommentForm="ngForm" 
+    fxLayout="column" fxLayoutAlign="start flex-end" class="instructionsContainer__comment__form">
+      <mat-form-field class="instructionsContainer__comment__input">
+        <textarea 
+          formControlName="comment"
+          matInput 
+          placeholder="Write your comment here. Ex: As my grand aunt Joséphine used to say..."
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
+      </mat-form-field>
+      <div class="instructionsContainer__comment__btn instructionsContainer__actions__action instructionsContainer__actions__action--comment" fxLayout="row" fxLayoutAlign="center center" (click)="postComment(); myCommentForm.resetForm()">
+        <mat-icon class="material-icons-outlined">insert_comment</mat-icon>
+        <span>post comment</span>
+      </div>
+    </form>
   </div>
 </div>

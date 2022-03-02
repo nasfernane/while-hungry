@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class RecipeIngredientsComponent implements OnInit {
 
   constructor(
     public appService: AppService,
+    private uiService: UiService,
   ) {}
 
   ngOnInit() {
@@ -32,5 +34,9 @@ export class RecipeIngredientsComponent implements OnInit {
     if (this.scale !== event) {
       this.scale = event;
     }
+  }
+
+  addShoppingList() {
+    this.uiService.openAlert('Feature available soon !')
   }
 }
