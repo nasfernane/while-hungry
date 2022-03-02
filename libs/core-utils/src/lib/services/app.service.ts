@@ -120,11 +120,22 @@ export class AppService {
   }
 
   public formatDate(date: string) {
-    return moment(date).format('MMMM Do YYYY @ hh:mm A');
+    return moment(date).format('MM/DD/YYYY @ hh:mm A');
+  }
+
+  public formatTimer(timer: number) {
+    console.log('coucou');
+    if (timer >= 60) {
+      const hours = Math.floor(timer / 60);          
+      const mins = timer % 60;
+
+      return `${hours} H ${mins !== 0 ? mins + ' mins.' : ''}`;
+    } else {
+      return `${timer} mins`;
+    }
   }
 
   public convertUnitLabel(convertToUnit: string, unit: string){
-  
     const unitMapping = new Map<string, string>([
       ['grams', 'ounces'],
     ])

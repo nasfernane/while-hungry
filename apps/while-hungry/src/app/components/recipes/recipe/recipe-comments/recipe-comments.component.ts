@@ -7,8 +7,6 @@ import { AppService } from '@wh/core-utils';
 // schemas
 import { RecipeComment } from '@prisma/client';
 
-import { Subject } from 'rxjs';
-
 @Component({
   selector: 'wh-recipe-comments',
   templateUrl: './recipe-comments.component.html',

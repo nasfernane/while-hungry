@@ -2,6 +2,7 @@
 @import './../../../../../styles/base/colors';
 
 .commentsContainer {
+  width: 100%;
   margin-top: 30px;
   
   &__header, &__comment {
@@ -34,6 +35,8 @@
 
     &__data {
       margin-bottom: 20px;
+      width: 100%;
+
       &--user {
         text-transform: uppercase;
         font-weight: 500;
@@ -42,10 +45,13 @@
 
       &--comment {
         color: $primary-light;
+        max-width: 100%;
+        overflow-wrap: anywhere !important;
       }
 
       &--date {
-        font-size: 12px;
+        font-size: 11px;
+        font-weight: 500;
       }
     }
 

@@ -9,7 +9,7 @@
         </span>
       </div>
       <span class="ingredientsContainer__header__info--data">
-        {{ recipe.cookTime }}
+        {{ appService.formatTimer(recipe.cookTime) }}
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>

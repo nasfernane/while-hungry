@@ -7,6 +7,7 @@ import { Recipe } from '@prisma/client';
 import { RecipeReview } from '@prisma/client';
 import { RecipeFavorite } from '@prisma/client';
 import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui';
 
 @Component({
   selector: 'wh-recipes-overview-item',
@@ -23,6 +24,7 @@ export class RecipesOverviewItemComponent implements OnInit {
 
   constructor(
     private recipeService: RecipeService,
+    private uiService: UiService,
     public appService: AppService,
   ) { }
 
@@ -47,11 +49,37 @@ export class RecipesOverviewItemComponent implements OnInit {
     if (this.appService.userLogged) {
       this.recipeService.addOrRemoveFavorite(this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
         if (res) this.favoriteEvent.emit(true);
+
+        if (this.recipeInFavorites) {
+          this.uiService.openAlert('Recipe added to your favorites')
+        } else {
+          this.uiService.openAlert('Recipe removed from your favorites')
+        }
       });
 
       this.recipeInFavorites = !this.recipeInFavorites;
+    } else {
+      this.uiService.openLoginAlert()
     }
   }
+
+  // async addOrRemoveFavorite() {
+  //   if (this.appService.userLogged) {
+  //     this.recipeService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
+  //       if (res) {
+  //         this.recipeInFavorites = !this.recipeInFavorites;
+
+  //         if (this.recipeInFavorites) {
+  //           this.uiService.openAlert('Recipe added to your favorites')
+  //         } else {
+  //           this.uiService.openAlert('Recipe removed from your favorites')
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.uiService.openLoginAlert()
+  //   }
+  // }
 
   formatDate(date: string) {
     return moment(date).format('MMMM Do YYYY');
