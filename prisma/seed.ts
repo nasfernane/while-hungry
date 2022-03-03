@@ -6,6 +6,7 @@ import { recipeInstructionCategories } from './seeds/recipeInstructionCategories
 import { recipeTags } from './seeds/recipeTags';
 import { ingredients } from './seeds/ingredients';
 import { ustensils } from './seeds/ustensils';
+import { Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -29,6 +30,7 @@ async function main() {
     for (const r of recipes) await prisma.recipe.create({ data: r })
 
     console.log('Seeding finished.')
+
 }
 
 main().catch((e) => {

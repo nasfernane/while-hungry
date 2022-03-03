@@ -62,7 +62,7 @@ export class RecipesService {
             }
           },
           { 
-            avgRating: filters.rating ? +filters.rating : undefined,
+            avgReview: filters.rating ? +filters.rating : undefined,
           }
         ]
       },

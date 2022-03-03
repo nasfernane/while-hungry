@@ -9,6 +9,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         description: "Simple salmon tartare with a hint of dill.",
         difficulty: "Hard",
         unit: 'metrics',
+        avgReview: 3,
         recipeInstructions: {
             create: [
                 {
@@ -128,6 +129,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         description: "Simple tuna tartare with a hint of tarragon.",
         difficulty: "Medium",
         unit: 'metrics',
+        avgReview: 5,
         recipeInstructions: {
             create: [
               {
@@ -204,11 +206,11 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         recipeReviews: {
             create: [
                 {
-                    review: 3,
+                    review: 5,
                     authorId: 1,
                 },
                 {
-                    review: 1,
+                    review: 5,
                     authorId: 2,
                 },
                 {
@@ -247,6 +249,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         description: "Simple swordfish tartare with a hint of coriander.",
         difficulty: "Easy",
         unit: 'us',
+        avgReview: 2,
         recipeInstructions: {
             create: [
               {
@@ -323,7 +326,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
         recipeReviews: {
             create: [
                 {
-                    review: 3,
+                    review: 2,
                     authorId: 1,
                 },
                 {
@@ -331,7 +334,7 @@ export const recipes: Prisma.RecipeCreateInput[] = [
                     authorId: 2,
                 },
                 {
-                    review: 5,
+                    review: 3,
                     authorId: 3
                 }
             ]
