@@ -50,6 +50,8 @@ import { HomeRecipeComponent } from './components/home/home-recipe/home-recipe.c
 import { HomeBlogComponent } from './components/home/home-blog/home-blog.component';
 import { HomeApiComponent } from './components/home/home-api/home-api.component';
 import { HomeChatComponent } from './components/home/home-chat/home-chat.component';
+import { BlogItemComponent } from './components/blog/blog-item/blog-item.component';
+import { TruncatePipe } from '@wh/core-utils';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import { HomeChatComponent } from './components/home/home-chat/home-chat.compone
     RecipeIngredientsOptionsComponent, 
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
-    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, 
+    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
+    TruncatePipe,
   ],
   imports: [
     BrowserModule, 

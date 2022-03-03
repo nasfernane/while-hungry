@@ -1,59 +1,14 @@
 .blogWrapper {
-  height: 90vh;
-  overflow-y: auto;
-  width: 100%;
-  margin: 0 auto;
-  padding-top: 20px;
   position: relative;
+
+  &__posts {
+    width: 100%;
+  }
 
   &__newPostBtn {
     position: absolute;
-    right: 50px;
+    right: 0px;
     top: 30px;
   }
 
-  &__post {
-    border: 1px solid black;
-    border-radius: 16px;
-    padding: 20px 40px;
-    margin: 20px 0;
-    width: 30%;
-
-    &--overview:hover {
-      cursor: pointer;
-      background-color: #efefef;
-    }
-
-    &__header {
-      width: 100%;
-      background-color: grey;
-    }
-
-    &__content {
-      margin: 0 auto;
-      width: 80%;
-
-      h1 {
-        text-align: center;
-      }
-
-      mat-divider {
-        border-top-width: 2px;
-        margin: 15px 0;
-
-      }
-
-      &__info {
-        span {
-          font-size: 16px;
-          line-height: 20px;
-        }
-
-        mat-icon {
-          height: 20px;
-          font-size: 20px;
-        }
-      }
-    }
-  }
 }

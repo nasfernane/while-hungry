@@ -49,7 +49,7 @@ model Recipe {
   serves      Int
   description String
   unit        String
-  avgReview   Decimal?  @db.Decimal(10, 1)
+  avgReview   Decimal?   @db.Decimal(10, 1)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 
@@ -197,8 +197,9 @@ model Post {
   id        Int      @id @default(autoincrement())
   authorId  Int
   title     String   @db.VarChar(255)
-  content   String
+  content   String   @db.LongText
   published Boolean  @default(false)
+  picture   String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
