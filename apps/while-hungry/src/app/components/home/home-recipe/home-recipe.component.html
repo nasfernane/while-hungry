@@ -1,1 +1,4 @@
-<p>home-recipe works!</p>
+<div class="homeRecipeContainer">
+  <wh-recipes-overview-item *ngIf="recipe" [recipe]="recipe"></wh-recipes-overview-item>
+  <button class="mainButton homeRecipeContainer__btn" routerLink="/recipes">SEE ALL RECIPES</button>
+</div>

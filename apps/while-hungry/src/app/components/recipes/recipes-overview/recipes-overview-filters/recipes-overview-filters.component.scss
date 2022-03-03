@@ -33,12 +33,10 @@ $filters-height: 50px;
     width: 100%;
   }
 
-  &__filtersBtn {
-    height: 100%;
-  }
+ 
 
   .filterBtn {
-    border: 1px solid $primary;
+    border: none;
     cursor: pointer;
     height: $filters-height;
     margin-top: 3.5px;
@@ -47,7 +45,6 @@ $filters-height: 50px;
     color: $grey-light;
 
     &:hover {
-      border: 1px solid $primary-light;
       background-color: $primary-light;
     }
   }

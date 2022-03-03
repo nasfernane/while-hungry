@@ -9,7 +9,7 @@ $avatar-size: 120px;
   padding: 0;
   padding-top: calc($avatar-size / 2);
   padding-bottom: 10px;
-  border: 5px solid $primary-light;
+  border: 5px solid $primary;
 
   &__avatar {
     position: absolute;
@@ -50,16 +50,6 @@ $avatar-size: 120px;
 
     &__clapBtn {
       width: 90%;
-      padding: 10px;
-      text-transform: uppercase;
-      background-color: $primary-light;
-      border: none;
-      color: $grey-light !important;
-      cursor: pointer;
-
-      &:hover {
-        background-color: $primary;
-      }
     }
   }
 }

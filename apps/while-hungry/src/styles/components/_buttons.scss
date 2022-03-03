@@ -1,0 +1,18 @@
+// .mat-button-wrapper {
+//   color: #fff !important;
+// }
+
+.mainButton {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #fff !important;
+  border-radius: 0 !important;
+  background-color: $primary;
+  border: none;
+  padding: 10px;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: $primary-light;
+  }
+}

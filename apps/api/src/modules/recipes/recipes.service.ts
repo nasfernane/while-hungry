@@ -145,6 +145,44 @@ export class RecipesService {
     })
   }
 
+  findLast(): Promise<Recipe> {
+    return prisma.recipe.findFirst({
+      orderBy: {
+        createdAt: 'desc',
+      }, 
+      include: {
+        author: {
+          include: {
+            profile: true,
+          }
+        },
+        recipeInstructions: true,
+        recipeNotes: true,
+        requiredIngredients: {
+          include: {
+            Ingredient: true,
+          }
+        },
+        requiredUstensils: true,
+        recipeTags: {
+          include: {
+            tag: true,
+          }
+        },
+        recipeComments: {
+          include: {
+            author: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
+          }
+        },
+        recipeReviews: true,
+        recipeFavorites: true,
+      }
+    })
+  }
+
   update(id: number, recipe: Recipe): Promise<Recipe> {
     return prisma.recipe.update({
       where: {

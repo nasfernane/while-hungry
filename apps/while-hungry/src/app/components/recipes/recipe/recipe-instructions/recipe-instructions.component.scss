@@ -1,7 +1,7 @@
 @import './../../../../../styles/base/colors';
 
 .instructionsContainer {
-  border: 5px solid $primary-light;
+  border: 5px solid $primary;
 
   .instructionsTitle {
     font-variant: small-caps;
@@ -11,7 +11,7 @@
 
   &__header {
     width: 100%;
-    background-color: $primary-light;
+    background-color: $primary;
     height: 50px;
     margin-bottom: 20px;
     

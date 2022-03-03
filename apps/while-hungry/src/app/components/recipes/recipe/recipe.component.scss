@@ -45,9 +45,9 @@
         transition: 0.3s ease;
 
         &:hover {
-          color: #fff;
-          background-color: $primary;
-          border: 1px dashed #fff;
+          // color: #fff;
+          border: 1px solid $grey-light;
+          background-color: $grey-light;
         }
       }
   

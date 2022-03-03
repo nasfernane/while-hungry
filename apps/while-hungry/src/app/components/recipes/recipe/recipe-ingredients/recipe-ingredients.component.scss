@@ -1,14 +1,14 @@
 @import './../../../../../styles/base/colors';
 
 .ingredientsContainer {
-  border: 5px solid $primary-light;
+  border: 5px solid $primary;
   background-color: white;
 
   &__header {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: $primary-light;
-    border: 3px solid $primary-light;
+    background-color: $primary;
+    border: 3px solid $primary;
 
     &__info {
       width: 70%;
@@ -79,17 +79,7 @@
 
   &__shoppingBtn {
     width: 90%;
-    padding: 10px;
-    margin: 0 auto;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    background-color: $primary-light;
-    border: none;
-    color: $grey-light !important;
-    cursor: pointer;
-
-    &:hover {
-      background-color: $primary;
-    }
+    
   }
 }
