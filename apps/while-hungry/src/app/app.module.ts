@@ -46,6 +46,10 @@ import { RecipeInstructionsComponent } from './components/recipes/recipe/recipe-
 import { RecipeAddReviewComponent } from './components/recipes/recipe/recipe-add-review/recipe-add-review.component';
 import { RecipeCommentsComponent } from './components/recipes/recipe/recipe-comments/recipe-comments.component';
 import { RecipesOverviewFiltersComponent } from './components/recipes/recipes-overview/recipes-overview-filters/recipes-overview-filters.component';
+import { HomeRecipeComponent } from './components/home/home-recipe/home-recipe.component';
+import { HomeBlogComponent } from './components/home/home-blog/home-blog.component';
+import { HomeApiComponent } from './components/home/home-api/home-api.component';
+import { HomeChatComponent } from './components/home/home-chat/home-chat.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,7 @@ import { RecipesOverviewFiltersComponent } from './components/recipes/recipes-ov
     RecipeIngredientsOptionsComponent, 
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
-    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, 
+    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, 
   ],
   imports: [
     BrowserModule, 

@@ -3,7 +3,7 @@
     <mat-icon>{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
   </div>
   <div class="recipe__picture">
-    <img src="./../../../../../assets/img/tartare.jpeg" alt="">
+    <img src="./../../../../../assets/img/tartare.jpeg" alt="Recipe Picture" [routerLink]="['/recipes', recipe.id]">
   </div>
   <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between center">
     <mat-card-title class="recipe__header__name" [routerLink]="['/recipes', recipe.id]">
@@ -19,15 +19,6 @@
         <mat-icon>schedule</mat-icon>
         <span>{{ appService.formatTimer(recipe.cookTime) }}</span>
       </span>
-      <!-- <span fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon>outdoor_grill</mat-icon>
-        {{recipe.difficulty }}
-      </span>
-      <span fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon>star_outline
-        </mat-icon>
-        {{ appService.getAvgReview(recipe.recipeReviews) }}/5
-      </span> -->
     </div>
   </mat-card-header>
   <mat-divider [inset]="true"></mat-divider>

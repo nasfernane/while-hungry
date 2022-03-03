@@ -1,4 +1,5 @@
 <div class="navWrapper" fxLayout="row" fxLayoutAlign="space-between center">
+  <button class="navWrapper__button" mat-button routerLink="/home">Home</button>
   <button class="navWrapper__button" mat-button [matMenuTriggerFor]="eatMenu" routerLinkActive="active">Eat</button>
   <mat-menu #eatMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/recipes">Recipes</button>

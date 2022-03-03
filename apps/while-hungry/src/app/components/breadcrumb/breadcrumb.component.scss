@@ -3,7 +3,7 @@
 
 .breadcrumbContainer {
   width: 100%;
-  height: 40px;
+  height: $breadcrumb-height;
   background-color: $grey-light;
 
   .breadcrumb {

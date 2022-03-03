@@ -1,4 +1,5 @@
 $header-height: 70px;
+$breadcrumb-height: 40px;
 
-$container-min-height: calc(100vh - #{$header-height});
+$container-min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height});
 $container-width: 60vw;
