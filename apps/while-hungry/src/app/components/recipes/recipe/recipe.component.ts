@@ -45,6 +45,7 @@ export class RecipeComponent implements OnInit {
       if (recipe) {
         this.appService.breadcrumb = ['While Hungry', 'Recipe', recipe.name]
         this.recipe = recipe;
+        console.log(this.recipe);
       } else {
         this.router.navigate(['/recipes']);
       }

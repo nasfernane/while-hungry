@@ -9,11 +9,11 @@
         
       </div>
       <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="start flex-end">
-        <wh-recipe-rating *ngIf="recipe.avgRank" [rating]="appService.round1decimal(recipe.avgRank)"></wh-recipe-rating>
+        <wh-recipe-rating *ngIf="recipe.avgRating" [rating]="appService.round1decimal(recipe.avgRating)"></wh-recipe-rating>
         <span>{{ recipe.recipeReviews.length }} {{ recipe.recipeReviews.length > 1 ? 'REVIEWS' : 'REVIEW' }}</span>
-        <span fxLayout="row" fxLayoutAlign="start center" *ngIf="recipe.avgRank"> 
+        <span fxLayout="row" fxLayoutAlign="start center" *ngIf="recipe.avgRating"> 
           &nbsp; / &nbsp;
-          {{ appService.round1decimal(recipe.avgRank) }} AVERAGE
+          {{ appService.round1decimal(recipe.avgRating) }} AVERAGE
         </span>
 
       

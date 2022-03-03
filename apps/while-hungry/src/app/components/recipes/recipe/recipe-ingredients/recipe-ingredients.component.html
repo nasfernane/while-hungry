@@ -43,7 +43,7 @@
     <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
       <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
       <span class="ingredientsContainer__ingredients--quantity">
-        {{ appService.round(ingredient.quantity * scale * 
+        {{ appService.round2decimals(ingredient.quantity * scale * 
           (recipe.unit !== recipeUnit 
             ? +appService.convertUnitAmount(ingredient.unit) 
             : 1))
