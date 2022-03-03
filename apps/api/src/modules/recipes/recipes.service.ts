@@ -61,6 +61,9 @@ export class RecipesService {
               }
             }
           },
+          { 
+            avgRating: filters.rating ? +filters.rating : undefined,
+          }
         ]
       },
       include: {
@@ -92,26 +95,12 @@ export class RecipesService {
       }
     })
 
-    if (filters.rating) {
-      const res = [];
-
-      for (const recipe of recipes) {
-        const avgRating = this.sum(recipe.recipeReviews, 'review') / recipe.recipeReviews.length;
-        console.log(avgRating)
-        if (avgRating === +filters.rating) {
-          res.push(recipe);
-        }
-      }
-
-      return res;
-    } 
-
-    
 
     return recipes;
   }
 
-  sum(items, prop) {
+  // return sum of propertiers inside objets in an array
+  propSum(items, prop) {
     return items.reduce( function(a, b){
         return a + b[prop];
     }, 0);

@@ -13,7 +13,7 @@
       <span *ngFor="let tag of recipe.recipeTags">{{ tag.tag.name }}</span>
     </mat-card-subtitle>
     <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="space-between center">
-      <wh-recipe-rating [rating]="appService.getAvgReview(recipe.recipeReviews)" *ngIf="recipe.recipeReviews.length > 0"></wh-recipe-rating>
+      <wh-recipe-rating [rating]="appService.round1decimal(recipe.avgRank)" *ngIf="recipe.avgRank"></wh-recipe-rating>
 
       <span fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>schedule</mat-icon>

@@ -171,12 +171,31 @@ export class AppService {
   }
 
   // round to two decimals
-  public round(value: number) {
+  public round2decimals(value: number) {
     return Math.round((value + Number.EPSILON) * 100) / 100;
+  }
+
+  // round to two decimals
+  public round1decimal(value: number) {
+    return Math.round((value + Number.EPSILON) * 10) / 10;
   }
 
   // calculate average rating of review then round to one decimal
   getAvgReview(reviews: RecipeReview[]) {
     return Math.round((reviews.reduce((a, { review }) => a + review, 0) / reviews.length) * 10) / 10;
+  }
+
+  /**
+   * 
+   * @param items: Array
+   * @param prop: String
+   * @returns Int
+   * ex: const avgRating = this.sum(recipe.recipeReviews, 'review')
+   */
+  // return sum of propertiers inside objets in an array
+  propSum(items: Array<any>, prop: string) {
+  return items.reduce( function(a, b){
+      return a + b[prop];
+  }, 0);
   }
 }
