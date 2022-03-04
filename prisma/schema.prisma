@@ -15,10 +15,10 @@ model User {
   nickname  String   @unique @db.VarChar(30)
   role      Role     @default(User)
   avatar    String?
+  bio       String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile         Profile?
   recipies        Recipe[]
   claps           Clap[]           @relation("clapper")
   clapped         Clap[]           @relation("clapped")
@@ -28,16 +28,6 @@ model User {
   recipeReviews   RecipeReview[]
   recipeFavorites RecipeFavorite[]
 
-}
-
-model Profile {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @unique
-  bio       String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id])
 }
 
 model Recipe {
@@ -235,6 +225,7 @@ model Clap {
 enum Role {
   Creator  @map("Creator")
   Admin    @map("Admin")
+  Moderator    @map("Moderator")
   User     @map("User")
 }
 

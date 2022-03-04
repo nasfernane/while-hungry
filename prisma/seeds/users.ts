@@ -5,11 +5,7 @@ export const users: Prisma.UserCreateInput[] = [
         nickname: 'Gwen',
         email: 'gwen@seed.com',
         password: '$2b$10$k17nOFwCgO38m.7NB5o.1OjJaKQuPRgg63BvQgmtPh7wh.qgR6ksu',
-        profile: {
-            create: {
-                bio: 'Well known for being a top EU vicuna'
-            }
-        },
+        bio: 'Well known for being a top EU vicuna',
         role: "Admin",
         avatar: "avatar2",
         posts: {
@@ -32,6 +28,7 @@ export const users: Prisma.UserCreateInput[] = [
         nickname: 'Furimi',
         email: 'furimi@seed.com',
         password: '$2b$10$k17nOFwCgO38m.7NB5o.1OjJaKQuPRgg63BvQgmtPh7wh.qgR6ksu',
+        bio: 'Driven by her passions for naps and being petted',
         avatar: "avatar3",
         posts: {
             create: [
@@ -58,12 +55,6 @@ export const users: Prisma.UserCreateInput[] = [
                     }
                 }
             ]
-        },
-        profile: {
-            create: {
-                bio: 'Driven by her passions for naps and being petted'
-            }
-
         }
     },
     {
@@ -72,6 +63,7 @@ export const users: Prisma.UserCreateInput[] = [
         password: '$2b$10$k17nOFwCgO38m.7NB5o.1OjJaKQuPRgg63BvQgmtPh7wh.qgR6ksu',
         role: 'Creator',
         avatar: "avatar5",
+        bio: "Chops portobello mushrooms like a Samuraï",
         posts: {
             create: [
                 {
@@ -97,12 +89,6 @@ export const users: Prisma.UserCreateInput[] = [
                     }
                 }
             ]
-        },
-        profile: {
-            create: {
-                bio: 'Driven by her passions for naps and being petted'
-            }
-
         }
     }
 ]
