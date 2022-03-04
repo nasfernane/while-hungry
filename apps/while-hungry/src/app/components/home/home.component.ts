@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '@wh/core-utils';
 
 @Component({
   selector: 'wh-home',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  // constructor() { }
+
+  constructor(
+    private appService: AppService,
+  ) { }
 
   ngOnInit(): void {
-    console.log('home component !')
+    this.appService.breadcrumb = ['While Hungry', 'Home']
   }
 
 }

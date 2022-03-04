@@ -20,7 +20,7 @@ import { Post } from '@prisma/client';
   styleUrls: ['./blog-post.component.scss']
 })
 export class BlogPostComponent implements OnInit {
-  post: Post;
+  post: any;
 
   constructor(
     public appService: AppService,
@@ -33,8 +33,9 @@ export class BlogPostComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id')
 
     if (id) {
-      this.blogService.find(id).subscribe((post: Post) => {
+      this.blogService.find(id).subscribe((post: any) => {
         if (post) {
+          console.log(post);
           this.post = post;
           this.appService.breadcrumb = ['While Hungry', 'Blog', this.post.title]
         } else {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-// services
+// service
 import { RecipeService } from '@wh/core-data';
 
 @Component({
@@ -16,14 +16,13 @@ export class HomeRecipeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getLastRecipe();
+    this.findLastRecipe();
   }
 
-  getLastRecipe() {
+  findLastRecipe() {
     this.recipeService.findLast().subscribe((recipe) => {
       if (recipe) {
         this.recipe = recipe;
-        console.log(this.recipe);
       }
     })
   }

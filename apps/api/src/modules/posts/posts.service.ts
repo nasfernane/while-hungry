@@ -11,6 +11,7 @@ export class PostsService {
       data: {
         title: post.title,
         content: post.content,
+        picture: post.picture,
         published: false,
         authorId: post.authorId
       }
@@ -35,6 +36,19 @@ export class PostsService {
       }
     })
   }
+
+  findLast() {
+    return prisma.post.findFirst({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        author: true,
+      }
+    })
+  }
+
+
 
   update(id: number, post: Post) {
     return prisma.post.update({

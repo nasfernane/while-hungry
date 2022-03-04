@@ -72,7 +72,7 @@ export const users: Prisma.UserCreateInput[] = [
         posts: {
             create: [
                 {
-                    title: 'A post about about parsnips',
+                    title: 'A post about parsnips',
                     picture :'/posts/parsnips.jpg',
                     content: `Lorem ipsum nunc risus ligula, aliquet a arcu et, bibendum molestie odio. Curabitur sit amet nisl euismod, mattis ante nec, rhoncus arcu. Nullam vel efficitur nisl, sit amet mollis enim. In pulvinar condimentum dui, vitae tempus lorem lobortis in. Quisque ac nisi vitae est efficitur interdum a quis tortor. Suspendisse potenti. Proin pellentesque dictum velit, sit amet facilisis risus venenatis vitae. Nunc finibus condimentum quam, interdum pulvinar mauris dictum a. Proin facilisis neque non lorem maximus blandit. Aenean eu placerat erat, non dapibus arcu. Donec viverra nisi diam, ac rhoncus arcu auctor eget. Donec imperdiet porta volutpat. Sed egestas auctor finibus. Sed non nisi sit amet odio dignissim sagittis.
 

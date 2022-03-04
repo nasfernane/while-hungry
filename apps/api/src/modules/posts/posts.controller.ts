@@ -18,6 +18,11 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
+  @Get('/last')
+  findLast() {
+    return this.postsService.findLast();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(+id);

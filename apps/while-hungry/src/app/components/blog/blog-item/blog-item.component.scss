@@ -15,8 +15,6 @@
     .blogItem__infos__author--name {
       color: $green;
     }
-
-
   }
   &__img {
     width: 100%;
@@ -39,6 +37,9 @@
     transition: box-shadow .3s;
 
     &__title {
+      text-align: center;
+      width: 90%;
+      margin-bottom: 20px;
       font-weight: bold;
       transition: color .3s;
       text-transform: capitalize;
@@ -47,12 +48,12 @@
     &__content, &__author {
       width: 90%;
       margin: 0 auto;
+      text-align:justify;
     }
 
     &__content {
       font-size: 16px;
       margin-bottom: 20px;
-      text-align: center;
     }
 
     &__author {

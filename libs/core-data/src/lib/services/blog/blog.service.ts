@@ -32,4 +32,8 @@ export class BlogService {
   delete(post: Post) {
     return this.http.delete(ENDPOINT + `/${post.id}`);
   }
+
+  findLast() {
+    return this.http.get<Post>(ENDPOINT + `/last`);
+  }
 }

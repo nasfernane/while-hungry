@@ -3,8 +3,8 @@
     <img [src]="'./assets/img' +post.picture" alt="Post">
   </div>
   <div class="blogItem__infos" fxLayout="column" fxLayoutAlign="start center">
-      <h1 class="blogItem__infos__title">{{ post.title }}</h1>
-      <span class="blogItem__infos__content">{{ post.content | truncate : 70}}</span>
+      <mat-card-title class="blogItem__infos__title">{{ post.title }}</mat-card-title>
+      <span class="blogItem__infos__content">{{ post.content | truncate : 100}}</span>
       <div class="blogItem__infos__author" fxLayout="row" fxLayoutAlign="space-between center;">
         <span>
           Posted by

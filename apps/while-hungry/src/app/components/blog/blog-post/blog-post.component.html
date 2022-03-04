@@ -1,21 +1,20 @@
-<div class="blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
-  <div *ngIf="post" class="blogWrapper__post" fxLayout="column" fxLayoutAlign="start stretch">
-    <div class="blogWrapper__post__header" fxFlex="30"></div>
-    <div class="blogWrapper__post__content">
-      <h1>{{ post.title }}</h1>
-      <mat-divider></mat-divider>
-      <div class="blogWrapper__post__content__info" fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="blogWrapper__post__content__info--date" fxLayout="row" fxLayoutAlign="flex-start center"> 
-          <mat-icon>calendar_month</mat-icon>
-          <span>{{ post.updatedAt }}</span>
+<div class="blogWrapper globalContainer" fxLayout="column" fxLayoutAlign="start center">
+  
+  <div class="blogPost" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="['/blog/post/', post.id]" *ngIf="post">
+    <div class="blogPost__img" fxLayout="column" fxLayoutAlign="center center">
+      <img [src]="'./assets/img' +post.picture" alt="Post">
+    </div>
+    
+    <div class="blogPost__infos" fxLayout="column" fxLayoutAlign="start center">
+        <mat-card-title class="blogPost__infos__title">{{ post.title }}</mat-card-title>
+        <span class="blogPost__infos__content">{{ post.content }}</span>
+        <div class="blogPost__infos__author" fxLayout="row" fxLayoutAlign="space-between center;">
+          <span>
+            Posted by
+            <span class="blogPost__infos__author--name">{{ post.author.nickname }}</span>
+          </span>
+          <span>{{ appService.formatDate(post.createdAt) }}</span>
         </div>
-        <div class="blogWrapper__post__content__info--comments" fxLayout="row" fxLayoutAlign="flex-end center">
-          <mat-icon>chat_bubble_outline</mat-icon>
-          <span>no comment</span>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
-      <p>{{ post.content }}</p>
     </div>
   </div>
 </div>
