@@ -1,0 +1,12 @@
+@import './../../../../styles/base/colors';
+@import './../../../../styles/abstract/variables';
+
+.homeBlogContainer {
+  padding: 50px 0;
+  width: $container-width;
+  margin: 0 auto;
+
+  &__btn {
+    width: 32%;
+  }
+}

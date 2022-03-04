@@ -9,20 +9,20 @@ import { RecipeService } from '@wh/core-data';
   styleUrls: ['./home-recipe.component.scss']
 })
 export class HomeRecipeComponent implements OnInit {
-  recipe: any;
+  recipes: any;
 
   constructor(
     private recipeService: RecipeService,
   ) { }
 
   ngOnInit(): void {
-    this.findLastRecipe();
+    this.findLastRecipes();
   }
 
-  findLastRecipe() {
-    this.recipeService.findLast().subscribe((recipe) => {
-      if (recipe) {
-        this.recipe = recipe;
+  findLastRecipes() {
+    this.recipeService.findLast().subscribe((recipes) => {
+      if (recipes) {
+        this.recipes = recipes;
       }
     })
   }

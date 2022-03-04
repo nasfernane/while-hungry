@@ -145,11 +145,12 @@ export class RecipesService {
     })
   }
 
-  findLast(): Promise<Recipe> {
-    return prisma.recipe.findFirst({
+  findLast(): Promise<Recipe[]> {
+    return prisma.recipe.findMany({
       orderBy: {
         createdAt: 'desc',
       }, 
+      take: 3,
       include: {
         author: {
           include: {

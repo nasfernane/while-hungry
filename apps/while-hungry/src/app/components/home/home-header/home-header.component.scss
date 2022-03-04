@@ -1,10 +1,12 @@
 @import './../../../../styles/base/colors';
+@import './../../../../styles/abstract/variables';
 
 .homeHeaderContainer {
   padding: 50px;
   width: 100%;
 
   &__loop {
+    max-width: $container-width;
     font-family: rubik;
     margin: 0 auto;
     font-size: 24px;
@@ -30,6 +32,10 @@
 
     &--green {
       color: $green-light;
+    }
+
+    &--last {
+      margin-bottom: 0;
     }
   }
 }

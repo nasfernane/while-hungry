@@ -8,6 +8,7 @@ import { AppService } from '@wh/core-utils';
 })
 export class BlogItemComponent implements OnInit {
   @Input() post: any;
+  @Input() truncate: number;
 
   constructor(
     public appService: AppService,

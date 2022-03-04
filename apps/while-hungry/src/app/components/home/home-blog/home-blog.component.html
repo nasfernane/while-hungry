@@ -1,1 +1,4 @@
-<wh-blog-item [post]="post" *ngIf="post"></wh-blog-item>
+<div class="homeBlogContainer" fxLayout="column" fxLayoutAlign="start center">
+  <wh-blog-item [post]="post" [truncate]="250" *ngIf="post"></wh-blog-item>
+  <button class="mainButton homeBlogContainer__btn" routerLink="/blog">Check recent posts</button>
+</div>

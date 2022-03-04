@@ -1,8 +1,18 @@
 @import './../../../../styles/base/colors';
+@import './../../../../styles/abstract/variables';
 
 .homeRecipeContainer {
+  width: 100%;
+  background-color: $grey-light;
+
+  &__recipes {
+    padding: 50px 0;
+    width: $container-width;
+    margin: 0 auto;
+  }
+
   &__btn{
     margin-top: 20px;
-    width: 100%;
+    width: 32%;
   }
 }
