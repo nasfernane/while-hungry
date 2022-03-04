@@ -52,7 +52,6 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource<Recipe>(recipes);
     this.dataSource.paginator = this.paginator;
     this.recipes$ = this.dataSource.connect();
-    console.log(recipes)
   }
 
   favoriteEvent(event: boolean) {

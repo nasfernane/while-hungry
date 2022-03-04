@@ -29,11 +29,11 @@
   <mat-card-footer class="recipe__footer" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="recipe__footer__infos" fxLayout="row" fxLayoutAlign="space-between center">
       <div class="recipe__footer__infos__user" fxLayout="row" fxLayoutAlign="start center">
-        <img class="recipe__footer__infos__user__avatar" src="./../../../../../assets/img/avatar.png" alt="User Avatar">
+        <wh-avatar [avatar]="recipe.author.avatar" avatarSize="24px"></wh-avatar>
         <span class="recipe__footer__infos__user__nickname">{{ recipe.author.nickname }}</span>
       </div>
       <span class="recipe__footer__infos__date">{{ appService.formatDate(recipe.createdAt) }}</span>
-    </div>
+    </div> 
    
   </mat-card-footer>
 </mat-card>

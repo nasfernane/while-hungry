@@ -16,7 +16,6 @@ export class HomeBlogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('coucou')
     this.findLastPost();
   }
 
@@ -24,7 +23,6 @@ export class HomeBlogComponent implements OnInit {
     this.blogService.findLast().subscribe((post) => {
       if (post) {
         this.post = post;
-        console.log(this.post)
       }
     })
   }

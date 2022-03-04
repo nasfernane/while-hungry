@@ -94,6 +94,14 @@ export class AppService {
     }
   }
 
+  public getUserAvatar() {
+    if (this.currentUser && this.currentUser.nickname) {
+      return this.currentUser.avatar;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * check if current user is admin
    * @param role 

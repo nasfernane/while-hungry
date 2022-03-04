@@ -43,7 +43,6 @@ export class RecipeAuthorComponent implements OnInit {
       if (!this.alreadyClapped) {
         this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap) => {
           if (clap) {
-            console.log(clap);
             this.alreadyClapped = true;
             this.uiService.openAlert(`You clapped ${this.author.nickname}. Good job !`);
             this.setUserClapsCount();

@@ -62,26 +62,4 @@ export class RecipesOverviewItemComponent implements OnInit {
       this.uiService.openLoginAlert()
     }
   }
-
-  // async addOrRemoveFavorite() {
-  //   if (this.appService.userLogged) {
-  //     this.recipeService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
-  //       if (res) {
-  //         this.recipeInFavorites = !this.recipeInFavorites;
-
-  //         if (this.recipeInFavorites) {
-  //           this.uiService.openAlert('Recipe added to your favorites')
-  //         } else {
-  //           this.uiService.openAlert('Recipe removed from your favorites')
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.uiService.openLoginAlert()
-  //   }
-  // }
-
-  formatDate(date: string) {
-    return moment(date).format('MMMM Do YYYY');
-  }
 }

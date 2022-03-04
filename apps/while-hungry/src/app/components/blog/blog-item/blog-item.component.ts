@@ -6,7 +6,7 @@ import { AppService } from '@wh/core-utils';
   templateUrl: './blog-item.component.html',
   styleUrls: ['./blog-item.component.scss']
 })
-export class BlogItemComponent implements OnInit {
+export class BlogItemComponent {
   @Input() post: any;
   @Input() truncate: number;
 
@@ -14,8 +14,6 @@ export class BlogItemComponent implements OnInit {
     public appService: AppService,
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.post)
-  }
+ 
 
 }

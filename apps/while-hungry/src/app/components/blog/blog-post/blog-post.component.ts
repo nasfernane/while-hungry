@@ -35,7 +35,6 @@ export class BlogPostComponent implements OnInit {
     if (id) {
       this.blogService.find(id).subscribe((post: any) => {
         if (post) {
-          console.log(post);
           this.post = post;
           this.appService.breadcrumb = ['While Hungry', 'Blog', this.post.title]
         } else {

@@ -1,6 +1,6 @@
 // angular modules
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from "@angular/material/icon";
@@ -53,6 +53,7 @@ import { HomeChatComponent } from './components/home/home-chat/home-chat.compone
 import { BlogItemComponent } from './components/blog/blog-item/blog-item.component';
 import { TruncatePipe } from '@wh/core-utils';
 import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { HomeHeaderComponent } from './components/home/home-header/home-header.c
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent,
   ],
   imports: [
     BrowserModule, 
@@ -106,5 +107,16 @@ import { HomeHeaderComponent } from './components/home/home-header/home-header.c
 export class AppModule {
   constructor(
     private iconRegistry: MatIconRegistry,
-  ) {}
+    private sanitizer: DomSanitizer
+  ) {
+    iconRegistry
+    .addSvgIcon('avatar1', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female1.svg'))
+    .addSvgIcon('avatar2', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female2.svg'))
+    .addSvgIcon('avatar3', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female3.svg'))
+    .addSvgIcon('avatar4', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female4.svg'))
+    .addSvgIcon('avatar5', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male1.svg'))
+    .addSvgIcon('avatar6', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male2.svg'))
+    .addSvgIcon('avatar7', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male3.svg'))
+    .addSvgIcon('avatar8', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male4.svg'))
+  }
 }

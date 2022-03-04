@@ -11,6 +11,7 @@ export const users: Prisma.UserCreateInput[] = [
             }
         },
         role: "Admin",
+        avatar: "avatar2",
         posts: {
             create: [
                 {
@@ -31,6 +32,7 @@ export const users: Prisma.UserCreateInput[] = [
         nickname: 'Furimi',
         email: 'furimi@seed.com',
         password: '$2b$10$k17nOFwCgO38m.7NB5o.1OjJaKQuPRgg63BvQgmtPh7wh.qgR6ksu',
+        avatar: "avatar3",
         posts: {
             create: [
                 {
@@ -69,6 +71,7 @@ export const users: Prisma.UserCreateInput[] = [
         email: 'nassim@seed.com',
         password: '$2b$10$k17nOFwCgO38m.7NB5o.1OjJaKQuPRgg63BvQgmtPh7wh.qgR6ksu',
         role: 'Creator',
+        avatar: "avatar5",
         posts: {
             create: [
                 {
