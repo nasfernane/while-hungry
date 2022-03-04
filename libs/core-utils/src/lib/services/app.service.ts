@@ -202,8 +202,44 @@ export class AppService {
    */
   // return sum of propertiers inside objets in an array
   propSum(items: Array<any>, prop: string) {
-  return items.reduce( function(a, b){
-      return a + b[prop];
-  }, 0);
+    return items.reduce( function(a, b){
+        return a + b[prop];
+    }, 0);
   }
+
+  // deep copy an object;
+  // deepCopy(obj: any) {
+  //   let copy;
+
+  //   if (null == obj || "object" != typeof obj) return obj;
+
+  //   // Gestion des dates
+  //   // if (obj instanceof Date) {
+  //   //   copy = new Date();
+  //   //   copy.setTime(obj.getTime());
+  //   //   return copy;
+  //   // }
+
+  //   // Gestion des tableaux
+  //   // if (obj instanceof Array) {
+  //   //   copy = [];
+  //   //   for (let i = 0, len = obj.length; i < len; i++) {
+  //   //       copy[i] = this.deepCopy(obj[i]);
+  //   //   }
+  //   //   return copy;
+  //   // }
+
+  //   // Gestion des objets
+  //   if (obj instanceof Object) {
+  //     copy: Object = {};
+
+  //     for (const attr in obj) {
+  //         if (Object.prototype.hasOwnProperty.call(obj, attr)) copy[attr as keyof typeOf copy] = this.deepCopy(obj[attr]);
+  //         // if (obj.hasOwnProperty(attr)) copy[attr] = this.deepCopy(obj[attr]);
+  //     }
+  //     return copy;
+  //   }
+
+  //   throw new Error("Impossible de copier l'objet. Son type n'est pas supporté.");
+  // }
 }

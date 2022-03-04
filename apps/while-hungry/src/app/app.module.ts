@@ -54,6 +54,8 @@ import { BlogItemComponent } from './components/blog/blog-item/blog-item.compone
 import { TruncatePipe } from '@wh/core-utils';
 import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileAvatarsComponent } from './components/profile/profile-avatars/profile-avatars.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent,
   ],
   imports: [
     BrowserModule, 
