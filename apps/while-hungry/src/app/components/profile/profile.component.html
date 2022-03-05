@@ -1,3 +1,4 @@
-<div class="globalContainer" fxLayout="column" fxLayoutAlign="start stretch">
-  <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="160px" (click)="clickAvatar()"></wh-avatar>
+<div class="globalContainer profileContainer" fxLayout="row" fxLayoutAlign="start start">
+  <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="160px" (click)="clickAvatar()" [edit]="true"></wh-avatar>
+  <wh-profile-form fxFlex="80"></wh-profile-form>
 </div>

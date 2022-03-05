@@ -56,6 +56,7 @@ import { HomeHeaderComponent } from './components/home/home-header/home-header.c
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileAvatarsComponent } from './components/profile/profile-avatars/profile-avatars.component';
+import { ProfileFormComponent } from './components/profile/profile-form/profile-form.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { ProfileAvatarsComponent } from './components/profile/profile-avatars/pr
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent,
   ],
   imports: [
     BrowserModule, 

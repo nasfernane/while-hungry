@@ -5,9 +5,9 @@ $filters-height: 50px;
 .recipesFiltersContainer {
   width: 100%;
 
-  ::ng-deep .mat-form-field-outline-start, ::ng-deep .mat-form-field-outline-end {
-    border-radius: 0 0 0 0;
-  }
+  // ::ng-deep .mat-form-field-outline-start, ::ng-deep .mat-form-field-outline-end {
+  //   border-radius: 0 0 0 0;
+  // }
 
   ::ng-deep .mat-form-field-outline-start {
     border-left: 3px solid $primary;

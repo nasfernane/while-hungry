@@ -29,6 +29,10 @@ export class UserService {
     return this.http.post(ENDPOINT, user);
   }
 
+  update(id: number, user: object) {
+    return this.http.patch<User>(ENDPOINT + `/${id}`, user);
+  }
+
   clapUser(clapperId: number, clappedId: number) {
     return this.http.post<Clap>(
       CLAP_ENDPOINT, 
@@ -48,4 +52,11 @@ export class UserService {
       CLAP_ENDPOINT + '/count/' + userId
     )
   }
+
+  updateAvatar(id: number, avatar: object) {
+    return this.http.post<string>(
+      ENDPOINT + `/${id}/avatar/`, avatar
+    )
+  }
+
 }
