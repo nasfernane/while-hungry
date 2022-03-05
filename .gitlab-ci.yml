@@ -9,7 +9,7 @@ variables:
 
 stages:
   - install
-  - lint
+  # - lint
   # - test
   # - document
   - build
@@ -33,15 +33,15 @@ install:
     policy: pull-push
 
 #lint stages
-lint api:
-  stage: lint
-  script:
-    - npm run lint:api
+# lint api:
+#   stage: lint
+#   script:
+#     - npm run lint:api
 
-lint wh:
-  stage: lint
-  script:
-    - npm run lint:client
+# lint wh:
+#   stage: lint
+#   script:
+#     - npm run lint:client
 
 #build stages
 build api:
