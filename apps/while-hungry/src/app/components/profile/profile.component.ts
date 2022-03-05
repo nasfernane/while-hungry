@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 // schema
@@ -13,7 +13,7 @@ import { ProfileAvatarsComponent } from './profile-avatars/profile-avatars.compo
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   avatar: string;
 
   constructor(
@@ -22,11 +22,6 @@ export class ProfileComponent implements OnInit {
   ) {
     this.avatar = this.appService.getUserAvatar();
    }
-
-  ngOnInit(): void {
-    console.log('coucou');
-    // this.user.avatar = 'avatar7';
-  }
 
   clickAvatar() {
     this.matDialog.open(ProfileAvatarsComponent)

@@ -39,7 +39,7 @@ export class UsersService {
   }
 
   async updateAvatar(id: number, avatar: object) {
-    await prisma.user.update({
+    const user = await prisma.user.update({
       where: {
         id: id,
       }, 
@@ -47,5 +47,10 @@ export class UsersService {
         ...avatar
       }
     })
+
+    const accessToken = await Jwt.signAccessToken(user)
+    delete user.password;
+
+    return { ...user, accessToken };
   }
 }

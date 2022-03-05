@@ -1,4 +1,8 @@
-<div class="globalContainer profileContainer" fxLayout="row" fxLayoutAlign="start start">
+<div class="globalContainer profileContainer" fxLayout="column" fxLayoutAlign="start center">
   <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="160px" (click)="clickAvatar()" [edit]="true"></wh-avatar>
-  <wh-profile-form fxFlex="80"></wh-profile-form>
+  <div class="profileContainer__forms" fxLayout="row" fxLayoutAlign="space-between flex-start">
+    <wh-profile-form fxFlex="40"></wh-profile-form>
+    <wh-profile-password-update fxFlex="40"></wh-profile-password-update>
+  </div>
+  
 </div>

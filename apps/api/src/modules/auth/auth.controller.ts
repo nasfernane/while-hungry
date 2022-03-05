@@ -18,4 +18,10 @@ export class AuthController {
   login(@Body() Param) {
     return this.authService.login(Param);
   }
+
+  @Post('/pwupdate/:id')
+  updatePassword(@Param('id') id: string, @Body() passwords: object) {
+    return this.authService.updatePassword(+id, passwords);
+  }
+
 }

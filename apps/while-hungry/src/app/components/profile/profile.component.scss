@@ -1,9 +1,12 @@
 .profileContainer {
-  width: 50vw;
   padding-top: 80px;
   
   wh-avatar { 
     cursor: pointer;
-    margin-right: 60px;
+    margin-bottom: 60px;
+  }
+
+  &__forms {
+    width: 100%;
   }
 }

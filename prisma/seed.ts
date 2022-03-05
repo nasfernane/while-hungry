@@ -29,7 +29,7 @@ async function main() {
     console.log('Seeding recipes...')
     for (const r of recipes) await prisma.recipe.create({ data: r })
 
-    console.log('Seeding finished.')
+    console.log('Seeding completed.')
 
 }
 

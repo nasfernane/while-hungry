@@ -40,7 +40,7 @@ export class AuthService {
       }
     })
 
-    // if user not found or wront credentials
+    // if user not found or wrontg credentials
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return { status: 404, message: "Bad credentials" }
     }
@@ -49,6 +49,34 @@ export class AuthService {
     const accessToken = await Jwt.signAccessToken(user)
 
     return { ...user, accessToken };
+  }
 
+  async updatePassword(id: number, passwords: any) {
+    const { oldPassword, password } = passwords;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id
+      }
+    })
+
+    // if user not found or wrontg credentials
+    if (!user || !bcrypt.compareSync(oldPassword, user.password)) {
+      return { status: 404, message: "Bad credentials" }
+    } else {
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: id,
+        },
+        data: {
+          // hash new password
+          password: bcrypt.hashSync(password, 8),
+        },
+      })
+
+      const accessToken = await Jwt.signAccessToken(updatedUser)
+
+      return { ...updatedUser, accessToken };
+    }
   }
 }
