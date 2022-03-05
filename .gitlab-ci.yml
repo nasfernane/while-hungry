@@ -8,7 +8,7 @@ image: node:16-alpine
 #   SZ_DOCKER_HOST: gcr.io
 
 stages:
-  - install
+  - setup
   - lint
   # - test
   # - document
@@ -22,16 +22,25 @@ cache: &global_cache
     - .env
   policy: pull
 
-install:
-  stage: install
-  script:
-    - yarn install
-    # - yarn doc
-    - printenv >> .env
+install-dependencies:
+  stage: setup
+  interruptible: true
+  only:
+    - main
+    - merge_requests
   cache:
-    <<: *global_cache
-    #overide the policy
-    policy: pull-push
+    key:
+      files:
+        - yarn.lock
+      paths: 
+        - node_modules
+        - .yarn
+  script:
+    - yarn install --pure-lockfile --cache-folder .yarn
+  artifacts:
+    paths:
+    - node_modules
+
   # artifacts:
   #   paths:
   #     - documentation/reference
