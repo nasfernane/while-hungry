@@ -1,4 +1,4 @@
-image: mhart/alpine-node:14.15
+image: node:16-alpine
 
 # variables:
 #   SZ_ENV: $CI_COMMIT_REF_NAME
