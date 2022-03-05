@@ -1,110 +1,46 @@
-image: mhart/alpine-node:14.5
-
-# variables:
-#   SZ_ENV: $CI_COMMIT_REF_NAME
-#   SZ_MONGO_DB: $CI_COMMIT_REF_NAME
-#   GIT_DEPTH: 5
-#   SZ_DOCKER_IMAGE: $CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
-#   SZ_DOCKER_HOST: gcr.io
-
+image: node:16-alpine
 stages:
-  - install
-  # - lint
-  # - test
-  # - document
-  - build
-  # - dockerize
-  # - deploy
+  - setup
+  - test
 
-cache: &global_cache
-  paths:
-    - node_modules/
-    - .env
-  policy: pull
-
-install:
-  stage: install
-  script:
-    - npm install
-    - printenv >> .env
+install-dependencies:
+  stage: setup
+  interruptible: true
+  only:
+    - main
+    - merge_requests
   cache:
-    <<: *global_cache
-    #overide the policy
-    policy: pull-push
-
-#lint stages
-# lint api:
-#   stage: lint
-#   script:
-#     - npm run lint:api
-
-# lint wh:
-#   stage: lint
-#   script:
-#     - npm run lint:client
-
-#build stages
-build api:
-  stage: build
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+      - .yarn
   script:
-    - yarn build:api
+    - yarn install --pure-lockfile --cache-folder .yarn
   artifacts:
     paths:
-      - dist/apps/api
-    expire_in: 50 minutes
+      - node_modules
 
-build wh:
-  stage: build
-  script:
-    - yarn build:client
+.distributed:
+  interruptible: true
+  only:
+    - main
+    - merge_requests
+  needs:
+    - install-dependencies
   artifacts:
     paths:
-      - dist/apps/while-hungry
-    expire_in: 50 minutes
+      - node_modules/.cache/nx
 
+build:
+  stage: test
+  extends: .distributed
+  script:
+    - yarn nx affected --base=HEAD~1 --target=build --parallel=3
 
-# generate image:
-#   stage: dockerize
-#   image: docker:19.03.1
-#   dependencies:
-#     - build wh
-#     - build api
-#   services:
-#     - docker:19.03.1-dind
-#   before_script:
-#     - echo $SZ_GCP_KEY_JSON | base64 -d > /tmp/key.json
-#     - docker login -u _json_key --password-stdin https://$SZ_DOCKER_HOST < /tmp/key.json
-#     - export SZ_GCP_REG="${SZ_DOCKER_HOST}/${SZ_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
-#   script:
-#     - docker build -t $SZ_DOCKER_IMAGE .
-#     - docker tag $SZ_DOCKER_IMAGE $SZ_GCP_REG
-#     - docker push $SZ_GCP_REG
-#   after_script:
-#     - rm /tmp/key.json
-#   only:
-#     - main
-
-# deploy:
-#   image: google/cloud-sdk:alpine
-#   stage: deploy
-#   cache: {}
-#   dependencies: []
-#   before_script:
-#     - echo $SZ_GCP_KEY_JSON | base64 -d > /tmp/key.json
-#     - export SZ_GCP_REG="${SZ_DOCKER_HOST}/${SZ_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
-#     - export SZ_DEPLOY_NAME="sz-${CI_COMMIT_REF_NAME}"
-#   script:
-#     - gcloud auth activate-service-account --key-file /tmp/key.json --project=$SZ_GCP_PROJECT_ID
-#     - gcloud config set project $SZ_GCP_PROJECT_ID
-#     - gcloud config set compute/zone $SZ_GCP_DEPLOY_ZONE
-#     - result=$(gcloud compute instances list | grep -q $SZ_DEPLOY_NAME; echo $?)
-#     - >
-#       if [ $result == 0 ]; then
-#         gcloud compute instances update-container $SZ_DEPLOY_NAME --container-image $SZ_GCP_REG
-#       else
-#         gcloud compute instances create $SZ_DEPLOY_NAME --source-instance-template $CI_COMMIT_REF_NAME
-#       fi
-#   after_script:
-#     - rm /tmp/key.json
-#   only:
-#     - main
+test:
+  stage: test
+  extends: .distributed
+  script:
+    - yarn nx affected --base=HEAD~1 --target=test --parallel=2
