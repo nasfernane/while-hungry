@@ -32,14 +32,14 @@ install-dependencies:
     key:
       files:
         - yarn.lock
-      paths: 
-        - node_modules
-        - .yarn
+    paths:
+      - node_modules
+      - .yarn
   script:
     - yarn install --pure-lockfile --cache-folder .yarn
   artifacts:
     paths:
-    - node_modules
+      - node_modules
 
   # artifacts:
   #   paths:
