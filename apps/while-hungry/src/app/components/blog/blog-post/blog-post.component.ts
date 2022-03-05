@@ -2,17 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
-// libraries
-import * as moment from 'moment';
-import { Observable } from 'rxjs';
 
 // wh libraries
 import { BlogService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
-
-// schemas
-import { Post } from '@prisma/client';
-
 
 @Component({
   selector: 'wh-blog-post',

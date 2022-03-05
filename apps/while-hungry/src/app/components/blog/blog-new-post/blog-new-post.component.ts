@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog-new-post.component.scss']
 })
 export class BlogNewPostComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit(): void {
+    console.log('blog new post')
   }
 
 }

@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeChatComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+    console.log('home chat component');
   }
 
 }

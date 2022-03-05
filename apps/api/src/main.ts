@@ -24,7 +24,6 @@ async function bootstrap() {
   app.enableCors(); // enable cors origin between apps
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  // const httpAdapter = app.getHttpAdapter();
   configureSwagger(app);
   const port = process.env.PORT || 3333;
   await app.listen(port);

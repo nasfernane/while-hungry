@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeApiComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+    console.log('home api component');
   }
 
 }
