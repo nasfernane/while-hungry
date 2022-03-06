@@ -13,7 +13,7 @@ variables:
 
 stages:
   - setup
-  - lint
+  # - lint
   - build
   - dockerize
   - deploy
@@ -42,15 +42,15 @@ install:
       - node_modules
 
 #lint stages
-lint api:
-  stage: lint
-  script:
-    - yarn lint:api
+# lint api:
+#   stage: lint
+#   script:
+#     - yarn lint:api
 
-lint school:
-  stage: lint
-  script:
-    - yarn lint:client
+# lint school:
+#   stage: lint
+#   script:
+#     - yarn lint:client
 
 build wh:
   stage: build
@@ -78,8 +78,43 @@ generate image:
     - build api
   services:
     - docker:19.03.1-dind
+  before_script:
+    - echo $WH_GCP_KEY_JSON | base -d > /tmp/key.json
+    - docker login -u _json_key --password-stdin https://$WH_DOCKER_HOST < /tmp/key.json
+    - export WH_GCP_REG = "${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
   script:
     - docker build -t $WH_DOCKER_IMAGE .
+    - docker tag $WH_DOCKER_IMAGE
+    - docker push $WH_GCP_REG
+  after_script:
+    - rm /tmp/key.json
+
+deploy:
+  stage: deploy
+  image: google/cloud-sdk:alpine
+  cache: {}
+  dependencies: []
+  before_script:
+    - echo $WH_GCP_KEY_JSON | base -d > /tmp/key.json
+    - export WH_GCP_REG = "${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
+    - export WH_DEPLOY_NAME="wh-${CI_COMMIT_REF_name}"
+  script:
+    - gcloud auth activate-service-account --key-file /tmp/key.json --project=$WH_GCP_PROJECT_ID
+    - gcloud config set project $WH_GCP_PROJECT_ID
+    - gcloud config set compute/zone $WH_GCP_DEPLOY_ZONE
+    - result=$(gcloud compute instances list | grep -q $WH_DEPLOY_NAME; echo $?)
+    - > 
+      if [ $result == 0 ]; then
+        gcloud compute instances update-container $WH_DEPLOY_NAME --container-image
+        $WH_GCP_REG
+      else 
+        gcloud compute instances create $WH_DEPLOY_NAME --source-instance-template
+        $WH_COMMIT_REF_NAME
+      fi
+  after_script:
+    - rm /tmp/key.json
+  only:
+    - main
 
 
 
