@@ -32,7 +32,7 @@ build wh:
     - yarn build:client
   artifacts:
     paths:
-      - dist/while-hungry
+      - dist/apps/while-hungry
     expire_in: 50 minutes
 
 # build api:
