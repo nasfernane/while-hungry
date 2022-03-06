@@ -4,10 +4,10 @@ stages:
   - build
 
 cache: &global_cache
-paths:
-  - node_modules/
-  - .env
-policy: pull
+  paths:
+    - node_modules/
+    - .env
+  policy: pull
 
 
 install-dependencies:
