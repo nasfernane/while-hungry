@@ -3,7 +3,7 @@ FROM node:17
 # Maintainer
 LABEL maintainer="While Hungry <nasfernane@gmail.com>"
 
-RUN apt-get update && apt install nginx supervisor
+RUN apt-get update && apt-get install nginx supervisor
 
 # Override Nginx's default config
 RUN mkdir -p /run/nginx
