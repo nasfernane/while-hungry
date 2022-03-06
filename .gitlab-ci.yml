@@ -1,4 +1,4 @@
-image: node:17.6-alpine
+image: node:17-slim
 
 variables:
   NODE_ENV: $CI_COMMIT_REF_NAME

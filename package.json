@@ -16,7 +16,7 @@
     "reset": "prisma migrate reset --force && npm run seed",
     "build": "nx build",
     "build:client": "ng build --prod",
-    "build:api": "npx nx build --project=api",
+    "build:api": "nx build --project=api",
     "test": "nx test",
     "lint:api": "ng lint --project=api",
     "lint:client": "ng lint --project=while-hungry"
