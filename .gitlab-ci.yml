@@ -3,6 +3,13 @@ stages:
   - setup
   - build
 
+cache: &global_cache
+paths:
+  - node_modules/
+  - .env
+policy: pull
+
+
 install-dependencies:
   stage: setup
   interruptible: true
