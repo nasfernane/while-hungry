@@ -10,19 +10,16 @@ cache: &global_cache
   policy: pull
 
 
-install-dependencies:
+install:
   stage: setup
   interruptible: true
   only:
     - main
     - merge_requests
   cache:
-    key:
-      files:
-        - yarn.lock
-    paths:
-      - node_modules
-      - .yarn
+    <<: *global_cache
+    #overide the policy
+    policy: pull-push
   script:
     - yarn install --pure-lockfile --cache-folder .yarn
   artifacts:
