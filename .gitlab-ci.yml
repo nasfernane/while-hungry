@@ -1,17 +1,22 @@
 image: node:17
 
 variables:
-  NODE_ENV: $NODE_ENV
+  WH_ENV: $CI_COMMIT_REF_NAME
   PORT: $PORT
-  DATABASE_URL: $DATABASE_URL
-  SHADOW_DATABASE_URL: $SHADOW_DATABASE_URL
-  ACCESS_TOKEN_SECRET: $ACCESS_TOKEN_SECRET
+  GIT_DEPTH: 5
+  DATABASE_URL: $CI_COMMIT_REF_NAME
+  SHADOW_DATABASE_URL: $CI_COMMIT_REF_NAME
+  ACCESS_TOKEN_SECRET: $CI_COMMIT_REF_NAME
+  WH_DOCKER_IMAGE: $CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
+  WH_DOCKER_HOST: gcr.io
  
 
 stages:
   - setup
   - lint
   - build
+  - dockerize
+  - deploy
 
 cache: &global_cache
   paths:
@@ -47,8 +52,6 @@ lint school:
   script:
     - yarn lint:client
 
-
-
 build wh:
   stage: build
   script:
@@ -66,6 +69,19 @@ build api:
     paths:
       - dist/api
     expire_in: 50 minutes
+
+generate image:
+  stage: dockerize
+  image: docker:19.03.1
+  dependencies:
+    - build wh
+    - build api
+  services:
+    - docker:19.03.1-dind
+  script:
+    - docker build -t $WH_DOCKER_IMAGE .
+
+
 
 
 
