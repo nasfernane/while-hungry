@@ -22,15 +22,6 @@ install-dependencies:
     paths:
       - node_modules
 
-build api:
-  stage: build
-  script:
-    - yarn build:api
-  artifacts:
-    paths:
-      - dist/api
-    expire_in: 50 minutes
-
 build wh:
   stage: build
   script:
@@ -39,4 +30,15 @@ build wh:
     paths:
       - dist/while-hungry
     expire_in: 50 minutes
+
+# build api:
+#   stage: build
+#   script:
+#     - yarn build:api
+#   artifacts:
+#     paths:
+#       - dist/api
+#     expire_in: 50 minutes
+
+
 
