@@ -26,6 +26,7 @@
     "@angular/cdk": "^13.2.3",
     "@angular/common": "~13.1.0",
     "@angular/compiler": "~13.1.0",
+    "@angular/compiler-cli": "~13.1.0",
     "@angular/core": "~13.1.0",
     "@angular/flex-layout": "^13.0.0-beta.38",
     "@angular/forms": "~13.1.0",
@@ -38,6 +39,7 @@
     "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/platform-express": "^8.3.1",
     "@nestjs/swagger": "^4.8.2",
+    "typescript": "~4.4.3",
     "@ngrx/effects": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@nrwl/angular": "13.4.6",
@@ -63,7 +65,6 @@
     "@angular-eslint/eslint-plugin-template": "~13.0.1",
     "@angular-eslint/template-parser": "~13.0.1",
     "@angular/cli": "~13.1.0",
-    "@angular/compiler-cli": "~13.1.0",
     "@angular/language-service": "~13.1.0",
     "@nestjs/schematics": "^8.0.6",
     "@nestjs/testing": "^8.3.1",
@@ -98,8 +99,7 @@
     "postcss-url": "^10.1.1",
     "prettier": "^2.3.1",
     "supertest": "^6.2.2",
-    "ts-jest": "27.0.5",
-    "typescript": "~4.4.3"
+    "ts-jest": "27.0.5"
   },
   "description": "This project was generated using [Nx](https://nx.dev).",
   "main": "decorate-angular-cli.js",
