@@ -26,14 +26,20 @@ install:
     paths:
       - node_modules
 
-build wh:
+build:
   stage: build
+  extends: .distributed
   script:
-    - yarn build:client
-  artifacts:
-    paths:
-      - dist/apps/while-hungry
-    expire_in: 50 minutes
+    - yarn nx affected --base=HEAD~1 --target=build
+
+# build wh:
+#   stage: build
+#   script:
+#     - yarn build:client
+#   artifacts:
+#     paths:
+#       - dist/apps/while-hungry
+#     expire_in: 50 minutes
 
 # build api:
 #   stage: build
