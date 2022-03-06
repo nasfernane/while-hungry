@@ -222,11 +222,20 @@ model Clap {
   clapped User @relation("clapped", fields: [clappedId], references: [id])
 }
 
+model Definition {
+  id         Int    @id @default(autoincrement())
+  label      String
+  definition String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum Role {
-  Creator  @map("Creator")
-  Admin    @map("Admin")
-  Moderator    @map("Moderator")
-  User     @map("User")
+  Creator    @map("Creator")
+  Admin      @map("Admin")
+  Moderator  @map("Moderator")
+  User       @map("User")
 }
 
 enum Difficulty {
