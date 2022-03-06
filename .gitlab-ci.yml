@@ -10,6 +10,11 @@ cache: &global_cache
     - .env
   policy: pull
 
+run-yarn:
+  stage: setup
+  script:
+  - yarn
+
 install-dependencies:
   stage: setup
   interruptible: true
@@ -24,7 +29,7 @@ install-dependencies:
       - node_modules
       - .yarn
   script:
-    - yarn install --pure-lockfile --cache-folder .yarn
+    - yarn install
   artifacts:
     paths:
       - node_modules
