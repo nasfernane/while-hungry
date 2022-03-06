@@ -21,30 +21,17 @@ install:
     #overide the policy
     policy: pull-push
   script:
-    - yarn install --pure-lockfile --cache-folder .yarn
+    - yarn install
   artifacts:
     paths:
       - node_modules
 
-.distributed:
-  interruptible: true
-  only:
-    - main
-    - merge_requests
-  needs:
-    - install
-  artifacts:
-    paths:
-      - node_modules/.cache/nx
 
 build wh:
   stage: build
   script:
-    - yarn build:client --project=while-hungry
-  artifacts:
-    paths:
-      - dist/while-hungry
-    expire_in: 50 minutes
+    - yarn build
+
 
 # build wh:
 #   stage: build
