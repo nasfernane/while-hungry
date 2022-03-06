@@ -1,4 +1,4 @@
-image: node:17
+image: node:17-alpine
 
 variables:
   WH_ENV: $CI_COMMIT_REF_NAME
@@ -77,7 +77,7 @@ generate image:
     - build wh
     - build api
   services:
-    - docker:19.03.1-dind
+    - docker:20.10.12-dind
   before_script:
     - echo $WH_GCP_KEY_JSON | base -d > /tmp/key.json
     - docker login -u _json_key --password-stdin https://$WH_DOCKER_HOST < /tmp/key.json
