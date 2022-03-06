@@ -26,6 +26,17 @@ install:
     paths:
       - node_modules
 
+.distributed:
+  interruptible: true
+  only:
+    - main
+    - merge_requests
+  needs:
+    - install
+  artifacts:
+    paths:
+      - node_modules/.cache/nx
+
 build:
   stage: build
   extends: .distributed
