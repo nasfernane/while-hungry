@@ -1,7 +1,16 @@
 image: node:17
 
+variables:
+  NODE_ENV: $NODE_ENV
+  PORT: $PORT
+  DATABASE_URL: $DATABASE_URL
+  SHADOW_DATABASE_URL: $SHADOW_DATABASE_URL
+  ACCESS_TOKEN_SECRET: $ACCESS_TOKEN_SECRET
+ 
+
 stages:
   - setup
+  - lint
   - build
 
 cache: &global_cache
@@ -27,6 +36,18 @@ install:
     paths:
       - node_modules
 
+#lint stages
+lint api:
+  stage: lint
+  script:
+    - yarn lint:api
+
+lint school:
+  stage: lint
+  script:
+    - yarn lint:client
+
+
 
 build wh:
   stage: build
@@ -37,25 +58,17 @@ build wh:
       - dist/while-hungry
     expire_in: 50 minutes
 
+build api:
+  stage: build
+  script:
+    - yarn build:api
+  artifacts:
+    paths:
+      - dist/api
+    expire_in: 50 minutes
 
 
-# build wh:
-#   stage: build
-#   script:
-#     - yarn build:client
-#   artifacts:
-#     paths:
-#       - dist/apps/while-hungry
-#     expire_in: 50 minutes
 
-# build api:
-#   stage: build
-#   script:
-#     - yarn build:api
-#   artifacts:
-#     paths:
-#       - dist/api
-#     expire_in: 50 minutes
 
 
 
