@@ -30,7 +30,12 @@ install:
 build wh:
   stage: build
   script:
-    - yarn build
+    - yarn build:client
+  artifacts:
+    paths:
+      - dist/while-hungry
+    expire_in: 50 minutes
+
 
 
 # build wh:
