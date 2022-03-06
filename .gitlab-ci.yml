@@ -1,4 +1,4 @@
-image: node:17-alpine
+image: node:17
 
 variables:
   WH_ENV: $CI_COMMIT_REF_NAME
@@ -72,31 +72,33 @@ build api:
 
 generate image:
   stage: dockerize
-  image: docker:19.03.1
+  image: docker:20.10.12
   dependencies:
     - build wh
     - build api
   services:
     - docker:20.10.12-dind
   before_script:
-    - echo $WH_GCP_KEY_JSON | base -d > /tmp/key.json
+    - echo $WH_GCP_KEY_JSON | base64 -d > /tmp/key.json
     - docker login -u _json_key --password-stdin https://$WH_DOCKER_HOST < /tmp/key.json
-    - export WH_GCP_REG = "${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
+    - export WH_GCP_REG="${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
   script:
     - docker build -t $WH_DOCKER_IMAGE .
-    - docker tag $WH_DOCKER_IMAGE
+    - docker tag $WH_DOCKER_IMAGE $WH_GCP_REG
     - docker push $WH_GCP_REG
   after_script:
     - rm /tmp/key.json
+  only:
+    - main
 
 deploy:
-  stage: deploy
   image: google/cloud-sdk:alpine
+  stage: deploy
   cache: {}
   dependencies: []
   before_script:
-    - echo $WH_GCP_KEY_JSON | base -d > /tmp/key.json
-    - export WH_GCP_REG = "${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
+    - echo $WH_GCP_KEY_JSON | base64 -d > /tmp/key.json
+    - export WH_GCP_REG="${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
     - export WH_DEPLOY_NAME="wh-${CI_COMMIT_REF_name}"
   script:
     - gcloud auth activate-service-account --key-file /tmp/key.json --project=$WH_GCP_PROJECT_ID
@@ -105,11 +107,9 @@ deploy:
     - result=$(gcloud compute instances list | grep -q $WH_DEPLOY_NAME; echo $?)
     - > 
       if [ $result == 0 ]; then
-        gcloud compute instances update-container $WH_DEPLOY_NAME --container-image
-        $WH_GCP_REG
+        gcloud compute instances update-container $WH_DEPLOY_NAME --container-image $WH_GCP_REG
       else 
-        gcloud compute instances create $WH_DEPLOY_NAME --source-instance-template
-        $WH_COMMIT_REF_NAME
+        gcloud compute instances create $WH_DEPLOY_NAME --source-instance-template $WH_COMMIT_REF_NAME
       fi
   after_script:
     - rm /tmp/key.json
