@@ -1,20 +1,8 @@
 image: node:lts-alpine
-
-# variables:
-#   SZ_ENV: $CI_COMMIT_REF_NAME
-#   SZ_MONGO_DB: $CI_COMMIT_REF_NAME
-#   GIT_DEPTH: 5
-#   SZ_DOCKER_IMAGE: $CI_PROJECT_NAME:$CI_COMMIT_SHORT_SHA
-#   SZ_DOCKER_HOST: gcr.io
-
 stages:
   - setup
   - lint
-  # - test
-  # - document
   - build
-  # - dockerize
-  # - deploy
 
 cache: &global_cache
   paths:
@@ -40,11 +28,8 @@ install-dependencies:
   artifacts:
     paths:
       - node_modules
+    expire_in: 50 minutes
 
-  # artifacts:
-  #   paths:
-  #     - documentation/reference
-  #   expire_in: 50 minutes
 
 #lint stages
 lint api:
@@ -57,34 +42,6 @@ lint school:
   script:
     - yarn lint:client
 
-#test stages
-# test api:
-#   stage: test
-#   script:
-#     - yarn test
-#   artifacts:
-#     paths:
-#       - coverage/backend
-#     expire_in: 50 minutes
-
-# test school:
-#   stage: test
-#   script:
-#     - yarn test:client --project=school
-#   artifacts:
-#     paths:
-#       - coverage/school
-#     expire_in: 50 minutes
-
-# test shared:
-#   stage: test
-#   script:
-#     - yarn test:client --project=shared
-#   artifacts:
-#     paths:
-#       - coverage/shared
-#     expire_in: 50 minutes
-
 #build stages
 build api:
   stage: build
@@ -92,86 +49,15 @@ build api:
     - yarn build:api
   artifacts:
     paths:
-      - dist/apps/api
+      - dist/api
     expire_in: 50 minutes
 
-build school:
+build wh:
   stage: build
   script:
     - yarn build:client
   artifacts:
     paths:
-      - dist/apps/school
+      - dist/while-hungry
     expire_in: 50 minutes
 
-# pages:
-#   stage: document
-#   dependencies:
-#     - install
-#     - test api
-#     - test school
-#     - test shared
-#   script:
-#     - printenv | grep CI >> pipeline.txt
-#     - mv template/ public/
-#     - mv coverage/* public/
-#     - mv documentation/* public/
-#     - mv README.md public/
-#     - mv LICENSE public/
-#     - mv pipeline.txt public/
-#   cache: {}
-#   artifacts:
-#     paths:
-#       - public
-#     expire_in: 50 minutes
-#   only:
-#     - master
-
-# generate image:
-#   stage: dockerize
-#   image: docker:19.03.1
-#   dependencies:
-#     - build school
-#     - build admin
-#     - build super
-#     - build sandbox
-#     - build api
-#   services:
-#     - docker:19.03.1-dind
-#   before_script:
-#     - echo $SZ_GCP_KEY_JSON | base64 -d > /tmp/key.json
-#     - docker login -u _json_key --password-stdin https://$SZ_DOCKER_HOST < /tmp/key.json
-#     - export SZ_GCP_REG="${SZ_DOCKER_HOST}/${SZ_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
-#   script:
-#     - docker build -t $SZ_DOCKER_IMAGE .
-#     - docker tag $SZ_DOCKER_IMAGE $SZ_GCP_REG
-#     - docker push $SZ_GCP_REG
-#   after_script:
-#     - rm /tmp/key.json
-#   only:
-#     - master
-
-# deploy:
-#   image: google/cloud-sdk:alpine
-#   stage: deploy
-#   cache: {}
-#   dependencies: []
-#   before_script:
-#     - echo $SZ_GCP_KEY_JSON | base64 -d > /tmp/key.json
-#     - export SZ_GCP_REG="${SZ_DOCKER_HOST}/${SZ_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
-#     - export SZ_DEPLOY_NAME="sz-${CI_COMMIT_REF_NAME}"
-#   script:
-#     - gcloud auth activate-service-account --key-file /tmp/key.json --project=$SZ_GCP_PROJECT_ID
-#     - gcloud config set project $SZ_GCP_PROJECT_ID
-#     - gcloud config set compute/zone $SZ_GCP_DEPLOY_ZONE
-#     - result=$(gcloud compute instances list | grep -q $SZ_DEPLOY_NAME; echo $?)
-#     - >
-#       if [ $result == 0 ]; then
-#         gcloud compute instances update-container $SZ_DEPLOY_NAME --container-image $SZ_GCP_REG
-#       else
-#         gcloud compute instances create $SZ_DEPLOY_NAME --source-instance-template $CI_COMMIT_REF_NAME
-#       fi
-#   after_script:
-#     - rm /tmp/key.json
-#   only:
-#     - master
