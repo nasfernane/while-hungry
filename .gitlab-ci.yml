@@ -22,19 +22,21 @@ install-dependencies:
     paths:
       - node_modules
 
-.distributed:
-  interruptible: true
-  only:
-    - main
-    - merge_requests
-  needs:
-    - install-dependencies
+build api:
+  stage: build
+  script:
+    - yarn build:api
   artifacts:
     paths:
-      - node_modules/.cache/nx
+      - dist/api
+    expire_in: 50 minutes
 
-build:
+build wh:
   stage: build
-  extends: .distributed
   script:
-    - yarn build
+    - yarn build:client
+  artifacts:
+    paths:
+      - dist/while-hungry
+    expire_in: 50 minutes
+
