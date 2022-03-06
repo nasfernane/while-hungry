@@ -1,9 +1,9 @@
 FROM node:17
 
 # Maintainer
-LABEL maintainer="myWorkBench <suren@jsworkbench.com>"
+LABEL maintainer="While Hungry <nasfernane@gmail.com>"
 
-RUN apk update && apk add nginx supervisor
+RUN apt-get update && apt-get add nginx supervisor
 
 # Override Nginx's default config
 RUN mkdir -p /run/nginx
