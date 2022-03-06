@@ -14,8 +14,8 @@
     "seed": "npx node --loader ts-node/esm prisma/seed.ts",
     "reset": "prisma migrate reset --force && npm run seed",
     "build": "nx build",
-    "build:client": "ng build --prod --project=while-hungry ",
-    "build:api": "nx build --project=api",
+    "build:client": "ng build --prod --project=while-hungry",
+    "build:api": "nx build api",
     "test": "nx test",
     "lint:api": "ng lint --project=api",
     "lint:client": "ng lint --project=while-hungry"

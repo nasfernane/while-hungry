@@ -1,16 +1,18 @@
 <div class="profileFormContainer">
   <h1>Update your personal data</h1>
   <form class="profileFormContainer__form" fxLayout="column" fxLayoutAlign="space-between start" [formGroup]="profileForm"  #myProfileForm="ngForm">
-    <section fxLayout="row" fxLayoutAlign="space-between center">
-      <mat-form-field fxFlex="45">
+    <section>
+      <mat-form-field mat-form-field fxFlex="100">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email">
         <mat-error *ngIf="profileForm.controls['email'].hasError('pattern')">
           Incorrect email adress
         </mat-error>
       </mat-form-field>
+    </section>
 
-      <mat-form-field fxFlex="45">
+    <section>
+      <mat-form-field mat-form-field fxFlex="100">
         <mat-label>Nickname</mat-label>
         <input matInput 
           type="text" 
@@ -23,7 +25,7 @@
     </section>
 
     <section>
-      <mat-form-field fxFlex="100">
+      <mat-form-field mat-form-field fxFlex="100">
         <mat-label>Biography</mat-label>
         <textarea 
         formControlName="bio"
@@ -37,7 +39,7 @@
       ></textarea>
       </mat-form-field>
     </section>
-    <div class="profileFormContainer__form__btn" fxFlex="45">
+    <div class="profileFormContainer__form__btn" fxFlex="100">
       <button class="mainButton" (click)="updateUser()">UPDATE</button>
     </div>
   </form>
