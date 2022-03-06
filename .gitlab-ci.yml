@@ -1,7 +1,7 @@
 image: node:16-alpine
 stages:
   - setup
-  - test
+  - build
 
 install-dependencies:
   stage: setup
@@ -34,13 +34,7 @@ install-dependencies:
       - node_modules/.cache/nx
 
 build:
-  stage: test
+  stage: build
   extends: .distributed
   script:
-    - yarn nx affected --base=HEAD~1 --target=build --parallel=3
-
-test:
-  stage: test
-  extends: .distributed
-  script:
-    - yarn nx affected --base=HEAD~1 --target=test --parallel=2
+    - yarn build
