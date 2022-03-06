@@ -1,19 +1,7 @@
-image: node:16.14.0
+image: node:16-alpine
 stages:
   - setup
-  - lint
-  - build
-
-cache: &global_cache
-  paths:
-    - node_modules/
-    - .env
-  policy: pull
-
-run-yarn:
-  stage: setup
-  script:
-  - yarn
+  - test
 
 install-dependencies:
   stage: setup
@@ -29,40 +17,30 @@ install-dependencies:
       - node_modules
       - .yarn
   script:
-    - yarn install
+    - yarn install --pure-lockfile --cache-folder .yarn
   artifacts:
     paths:
       - node_modules
-    expire_in: 50 minutes
 
-
-#lint stages
-lint api:
-  stage: lint
-  script:
-    - yarn lint:api
-
-lint school:
-  stage: lint
-  script:
-    - yarn lint:client
-
-#build stages
-build api:
-  stage: build
-  script:
-    - yarn build:api
+.distributed:
+  interruptible: true
+  only:
+    - main
+    - merge_requests
+  needs:
+    - install-dependencies
   artifacts:
     paths:
-      - dist/api
-    expire_in: 50 minutes
+      - node_modules/.cache/nx
 
-build wh:
-  stage: build
+build:
+  stage: test
+  extends: .distributed
   script:
-    - yarn build:client
-  artifacts:
-    paths:
-      - dist/while-hungry
-    expire_in: 50 minutes
+    - yarn nx affected --base=HEAD~1 --target=build --parallel=3
 
+test:
+  stage: test
+  extends: .distributed
+  script:
+    - yarn nx affected --base=HEAD~1 --target=test --parallel=2
