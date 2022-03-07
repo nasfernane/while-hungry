@@ -1,8 +1,8 @@
-image: node:17
+image: mhart/alpine-node:14.17
 
 variables:
   NODE_ENV: $CI_COMMIT_REF_NAME
-  PORT: $PORT
+  PORT: $CI_COMMIT_REF_NAME
   DATABASE_URL: $CI_COMMIT_REF_NAME
   SHADOW_DATABASE_URL: $CI_COMMIT_REF_NAME
   ACCESS_TOKEN_SECRET: $CI_COMMIT_REF_NAME
@@ -13,7 +13,6 @@ variables:
 
 stages:
   - setup
-  # - lint
   - build
   - dockerize
   - deploy
@@ -40,17 +39,6 @@ install:
   artifacts:
     paths:
       - node_modules
-
-#lint stages
-# lint api:
-#   stage: lint
-#   script:
-#     - yarn lint:api
-
-# lint school:
-#   stage: lint
-#   script:
-#     - yarn lint:client
 
 build wh:
   stage: build

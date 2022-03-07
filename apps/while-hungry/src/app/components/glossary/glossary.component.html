@@ -1,3 +1,5 @@
 <div class="glossaryContainer globalContainer">
-  <wh-glossary-section *ngFor="let section of definitions | keyvalue" [section]="section"></wh-glossary-section>
+  <span *ngFor="let letter of alphabet" (click)="scroll('letter-' + letter)">{{ letter }}</span>
+  
+  <wh-glossary-section id="{{ 'letter-' + section.key }}" *ngFor="let section of definitions | keyvalue" [section]="section" #test></wh-glossary-section>
 </div>

@@ -34,7 +34,7 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "to plunge into boiling water, remove after moment, and then plunge into iced water to halt the cooking process, usually referring to vegetable or fruit"
     },
     {
-        label: "Braising ",
+        label: "Braising",
         definition: "a combination-cooking method that first sears the food at high temperature, then finished it in a covered pot at low temperature while sitting in some amount of liquid"
     },
     {

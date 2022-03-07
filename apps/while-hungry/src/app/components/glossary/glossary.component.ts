@@ -40,4 +40,12 @@ export class GlossaryComponent implements OnInit {
     console.log(this.definitions)
   }
 
+  scroll(el: string) {
+    const element = document.getElementById(el);
+
+    if (element) {
+      element.scrollIntoView({behavior: 'smooth'});
+    }
+  }
+
 }
