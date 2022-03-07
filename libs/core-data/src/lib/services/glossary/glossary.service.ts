@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment';
 import { Definition } from '@prisma/client';
 
 
-const ENDPOINT = environment.API_URL + '/glossary';
+const ENDPOINT = environment.API_URL + '/definitions';
 
 @Injectable({
   providedIn: 'root'

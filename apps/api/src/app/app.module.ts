@@ -6,6 +6,7 @@ import { ClapsModule } from './../modules/claps/claps.module';
 import { ReviewsModule } from '../modules/reviews/reviews.module';
 import { RecipesCommentsModule } from '../modules/recipes-comments/recipes-comments.module';
 import { UsersModule } from '../modules/users/users.module';
+import { DefinitionsModule } from '../modules/definitions/definitions.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -18,7 +19,8 @@ import { AppService } from './app.service';
     ClapsModule,
     ReviewsModule,
     RecipesCommentsModule,
-    UsersModule
+    UsersModule,
+    DefinitionsModule
   ],
   controllers: [AppController],
   providers: [AppService],
