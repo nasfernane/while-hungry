@@ -7,9 +7,7 @@ import { AppService } from '@wh/core-utils';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
-
   constructor(
     public appService: AppService,
   ) { }
-
 }

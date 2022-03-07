@@ -1,4 +1,4 @@
-<div class="breadcrumbContainer">
+<div class="breadcrumbContainer" *ngIf="appService.getBreadcrumb()">
   <div class="breadcrumb" [innerHtml]="appService.getBreadcrumb()" fxLayout="row" fxLayoutAlign="start center">
   </div>
 </div>

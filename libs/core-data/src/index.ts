@@ -6,3 +6,4 @@ export { UserService } from './lib/services/user/user.service';
 export { ReviewService} from './lib/services/reviews/review.service';
 export { RecipeCommentService } from './lib/services/recipe-comments/recipe-comment.service'
 export { GlossaryService } from './lib/services/glossary/glossary.service';
+export { FavoritesService } from './lib/services/favorites/favorites.service';

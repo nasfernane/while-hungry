@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { GlossaryService } from '@wh/core-data';
 
+// services
+import { GlossaryService } from '@wh/core-data';
+import { AppService } from '@wh/core-utils';
+
+// schema
 import { Definition } from '@prisma/client';
 @Component({
   selector: 'wh-glossary',
@@ -13,18 +17,24 @@ export class GlossaryComponent implements OnInit {
   alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
   constructor(
+    private appService: AppService,
     private glossaryService: GlossaryService,
   ) { 
     this.definitions = new Map()
   }
 
   ngOnInit(): void {
+    this.appService.breadcrumb = ['While Hungry', 'Glossary']
     this.glossaryService.getGlossary().subscribe((glossary: Definition[]) => {
       if (glossary) this.glossary = glossary;
       this.organizeGlossary(this.glossary);
     })
   }
 
+  /**
+   *  organize all definitions by letter section
+   * @param glossary 
+   */
   organizeGlossary(glossary: Definition[]) {
     for (const letter of this.alphabet) {
       const section = [];
@@ -33,13 +43,14 @@ export class GlossaryComponent implements OnInit {
           section.push(def);
         }
       }
-
       this.definitions.set(letter, section)
     }
-
-    console.log(this.definitions)
   }
 
+  /**
+   * scroll to the chosen letter section on click
+   * @param el 
+   */
   scroll(el: string) {
     const element = document.getElementById(el);
 

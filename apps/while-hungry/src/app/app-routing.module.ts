@@ -11,6 +11,7 @@ import { BlogPostComponent } from './components/blog/blog-post/blog-post.compone
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GlossaryComponent } from './components/glossary/glossary.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 // guards
 import { AdminGuard  } from './guards/admin.guard';
@@ -30,8 +31,9 @@ const routes: Routes = [
     { path: 'post/:id', component: BlogPostComponent }
   ] 
   },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'glossary', component: GlossaryComponent } 
+  { path: 'profile', component: ProfileComponent, canActivate: [ AuthGuard ] },
+  { path: 'favorites', component: FavoritesComponent, canActivate: [ AuthGuard ]},
+  { path: 'glossary', component: GlossaryComponent }
 ]
 @NgModule({
   declarations: [],

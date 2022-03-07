@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.appService.breadcrumb = ['While Hungry', 'Home']
+    this.appService.breadcrumb = []
   }
 
 }

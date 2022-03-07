@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+
+// schema
 import { Post } from '@prisma/client';
 
+// endpoint
 const ENDPOINT = environment.API_URL + '/posts'
 
 @Injectable({

@@ -3,7 +3,6 @@
   <button class="navWrapper__button" mat-button [matMenuTriggerFor]="eatMenu" routerLinkActive="active">Eat</button>
   <mat-menu #eatMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/recipes">Recipes</button>
-    <button mat-menu-item routerLink="/favorites">Favorites</button>
     <button mat-menu-item routerLink="/batch-cooking">Batch cooking</button>
   </mat-menu>
   <button class="navWrapper__button" mat-button [matMenuTriggerFor]="learnMenu">Read</button>
@@ -20,6 +19,7 @@
   <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="40px" *ngIf="appService.userLogged" class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu"></wh-avatar>
   <mat-menu #userMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/profile">Profile</button>
+    <button mat-menu-item routerLink="/favorites">Favorites</button>
     <button mat-menu-item routerLink="/list">Shopping list</button>
     <button mat-menu-item (click)="logout()">Disconnect</button>
   </mat-menu>

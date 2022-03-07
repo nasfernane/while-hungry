@@ -20,6 +20,7 @@ export class ProfileComponent {
     public appService: AppService,
     private matDialog: MatDialog,
   ) {
+    this.appService.breadcrumb = ['While Hungry', 'Your profile']
     this.avatar = this.appService.getUserAvatar();
    }
 
