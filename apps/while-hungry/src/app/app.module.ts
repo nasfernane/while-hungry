@@ -61,7 +61,6 @@ import { ProfilePasswordUpdateComponent } from './components/profile/profile-pas
 import { GlossaryComponent } from './components/glossary/glossary.component';
 import { GlossarySectionComponent } from './components/glossary/glossary-section/glossary-section.component';
 import { GlossarySectionDefinitionComponent } from './components/glossary/glossary-section/glossary-section-definition/glossary-section-definition.component';
-import { GlossaryHeaderComponent } from './components/glossary/glossary-header/glossary-header.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +82,7 @@ import { GlossaryHeaderComponent } from './components/glossary/glossary-header/g
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, GlossaryHeaderComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent,
   ],
   imports: [
     BrowserModule, 

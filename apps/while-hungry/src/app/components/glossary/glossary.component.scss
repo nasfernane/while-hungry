@@ -1,0 +1,23 @@
+@import './../../../styles/base/colors';
+
+.glossaryContainer {
+  
+  &__link {
+    padding: 20px;
+    font-size: 20px;
+    border: 3px solid $primary;
+
+    &--letter {
+      text-transform: uppercase;
+
+      &:hover {
+        color: $primary-light;
+        cursor: pointer;
+      }
+    }
+
+    &--div {
+      margin: 0px 10px;
+    }
+  }
+}

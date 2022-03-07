@@ -118,7 +118,7 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "the French term for egg"
     },
     {
-        label: "Parboiling ",
+        label: "Parboiling",
         definition: "the process of adding foods to boiling waters, cooking until they are softened, then removing before they are fully cooked, usually to partially cook an item which will then be cooked another way"
     },
     {
@@ -154,7 +154,7 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "a technique used in grilling, baking, or sautéing in which the surface of the food is cooked at high temperature until a crust forms"
     },
     {
-        label: "Staling ",
+        label: "Staling",
         definition: "a chemical and physical process in which foods such as bread become hard, musty, or dry, also known as 'going stale'"
     },
     {
@@ -166,11 +166,11 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "gently heating vegetables in a little oil, with frequent stirring and turning to ensure emitted liquid will evaporate; usually results in tender, or in some cases such as onions', translucent pieces"
     },
     {
-        label: "Tempering ",
+        label: "Tempering",
         definition: "raising the temperature of a cold or room-temperature ingredient by slowly adding hot or boiling liquid, often referring to eggs"
     },
     {
-        label: "Tourner ",
+        label: "Tourner",
         definition: "to cut ingredients such as carrots or potatoes into a barrel-like shape that form six or seven sides on the length of the item being cut, using a Tourner knife or a paring knife"
     },
     {
@@ -182,7 +182,7 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "made without yeast or any other leavening agent, often referring to bread"
     },
     {
-        label: "Velouté ",
+        label: "Velouté",
         definition: "a type of sauce in which a light stock, such as chicken of fish, is thickened with a flour that is cooked and then allowed to turn light brown"
     },
     {
@@ -198,11 +198,11 @@ export const definitions: Prisma.DefinitionCreateInput[] = [
         definition: "a cooking utensil used to blend ingredients in a process such as whipping"
     },
     {
-        label: "Yakitori ",
+        label: "Yakitori",
         definition: "a Japanese dish of small pieces of boneless chicken that is marinated, skewered, and grilled"
     },
     {
-        label: "Zest ",
+        label: "Zest",
         definition: "to cut the zest, or the colorful part of the skin that contains oils and provide aroma and flavor, away from the fruit"
     },
 ]
