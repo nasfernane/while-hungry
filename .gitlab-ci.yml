@@ -81,7 +81,7 @@ generate image:
   before_script:
     - echo $WH_GCP_KEY_JSON | base64 -d > /tmp/key.json
     - docker login -u _json_key --password-stdin https://$WH_DOCKER_HOST < /tmp/key.json
-    - export WH_GCP_REG="${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}"
+    - export WH_GCP_REG="${WH_DOCKER_HOST}/while-hungry/${CI_COMMIT_REF_NAME}"
   script:
     - docker build -t $WH_DOCKER_IMAGE .
     - docker tag $WH_DOCKER_IMAGE $WH_GCP_REG
@@ -98,11 +98,11 @@ deploy:
   dependencies: []
   before_script:
     - echo $WH_GCP_KEY_JSON | base64 -d > /tmp/key.json
-    - export WH_GCP_REG="${WH_DOCKER_HOST}/${WH_GCP_PROJECT_ID}/${CI_COMMIT_REF_NAME}:latest"
+    - export WH_GCP_REG="${WH_DOCKER_HOST}/while-hungry/${CI_COMMIT_REF_NAME}:latest"
     - export WH_DEPLOY_NAME="wh-${CI_COMMIT_REF_name}"
   script:
-    - gcloud auth activate-service-account --key-file /tmp/key.json --project=$WH_GCP_PROJECT_ID
-    - gcloud config set project $WH_GCP_PROJECT_ID
+    - gcloud auth activate-service-account --key-file /tmp/key.json --project=while-hungry
+    - gcloud config set project while-hungry
     - gcloud config set compute/zone $WH_GCP_DEPLOY_ZONE
     - result=$(gcloud compute instances list | grep -q $WH_DEPLOY_NAME; echo $?)
     - > 
