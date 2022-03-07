@@ -1,6 +1,9 @@
 <mat-card class="recipe noBox" >
-  <div class="recipe__favorite" fxLayout="row" fxLayoutAlign="space-between center" (click)="addOrRemoveFavorite()">
+  <div class="recipe__favorite" fxLayout="row" fxLayoutAlign="space-between center" (click)="addOrRemoveFavorite()" *ngIf="!removeIcon">
     <mat-icon>{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
+  </div>
+  <div class="recipe__favorite" fxLayout="row" fxLayoutAlign="space-between center" (click)="addOrRemoveFavorite()" *ngIf="removeIcon">
+    <mat-icon>heart_broken</mat-icon>
   </div>
   <div class="recipe__picture">
     <img src="./../../../../../assets/img/tartare.jpeg" alt="Recipe Picture" [routerLink]="['/recipes', recipe.id]">

@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 })
 export class RecipesOverviewFiltersComponent implements AfterViewInit{
   @Output() updateEvent = new EventEmitter<object>();
+  @Output() resetEvent = new EventEmitter<boolean>();
   @ViewChild('ratingSelect') ratingSelect: MatSelect;  
   filtersForm: FormGroup;
   rating = 1;
@@ -36,7 +37,6 @@ export class RecipesOverviewFiltersComponent implements AfterViewInit{
     const difficultyFilter = this.filtersForm.controls['difficulty'].value;
     const ratingFilter = this.filtersForm.controls['rating'].value;
     const tagFilter = this.filtersForm.controls['tags'].value;
-
     const filters: any = {};
 
     if (difficultyFilter) filters.difficulty = difficultyFilter;
@@ -44,6 +44,10 @@ export class RecipesOverviewFiltersComponent implements AfterViewInit{
     if (tagFilter) filters.tag = tagFilter;
     
     this.updateEvent.emit(filters);
+  }
+
+  resetData() {
+    this.resetEvent.emit(true);
   }
 
 }

@@ -42,7 +42,7 @@
       </mat-select>
     </mat-form-field>
 
-      <button fxFlex="15" class="filterBtn" (click)="myFiltersForm.resetForm()">RESET</button>
+      <button fxFlex="15" class="filterBtn" (click)="myFiltersForm.resetForm(); resetData()">RESET</button>
       <button fxFlex="15" class="filterBtn" (click)="filterData()">SEARCH</button>
     
   </form>

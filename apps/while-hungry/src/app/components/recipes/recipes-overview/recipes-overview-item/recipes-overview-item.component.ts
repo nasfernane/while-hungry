@@ -16,6 +16,7 @@ import { UiService } from '@wh/ui';
 })
 export class RecipesOverviewItemComponent implements OnInit {
   @Input() recipe: any;
+  @Input() removeIcon = false;
   @Output() favoriteEvent = new EventEmitter<boolean>();
 
   recipeId: number;
@@ -54,6 +55,7 @@ export class RecipesOverviewItemComponent implements OnInit {
           this.uiService.openAlert('Recipe added to your favorites')
         } else {
           this.uiService.openAlert('Recipe removed from your favorites')
+          if (this.removeIcon) this.favoriteEvent.emit(true);
         }
       });
 

@@ -1,6 +1,6 @@
 <!-- <wh-breadcrumb></wh-breadcrumb> -->
 <div class="recipeOverviewContainer globalContainer globalContainer--breadcrumb"  fxLayout="column" fxLayoutAlign="start stretch">
-  <wh-recipes-overview-filters (updateEvent)="getData($event)"></wh-recipes-overview-filters>
+  <wh-recipes-overview-filters (updateEvent)="getData($event)" (resetEvent)="getData()"></wh-recipes-overview-filters>
   <div class="recipeOverviewContainer__recipes" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
     <wh-recipes-overview-item fxFlex="32%" *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
   </div>

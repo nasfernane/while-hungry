@@ -1,7 +1,7 @@
 <div class="favoritesContainer globalContainer" fxLayout="column" fxLayoutAlign="start stretch">
-  <wh-recipes-overview-filters (updateEvent)="getData($event)"></wh-recipes-overview-filters>
+  <wh-recipes-overview-filters (updateEvent)="getData($event)" (resetEvent)="getData()"></wh-recipes-overview-filters>
   <div class="favoritesContainer__recipes" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
-    <wh-recipes-overview-item fxFlex="32%" *ngFor="let favorite of favorites$ | async" [recipe]="favorite.recipe"></wh-recipes-overview-item>
+    <wh-recipes-overview-item fxFlex="32%" *ngFor="let favorite of favorites$ | async" [recipe]="favorite.recipe"  [removeIcon]="true" (favoriteEvent)="getData()"></wh-recipes-overview-item >
   </div>
   <mat-paginator [pageSizeOptions]="[3, 9, 18]"></mat-paginator>
 </div>

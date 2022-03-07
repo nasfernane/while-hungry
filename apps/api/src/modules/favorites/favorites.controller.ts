@@ -17,9 +17,9 @@ export class FavoritesController {
     return this.favoritesService.findAll(+id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.favoritesService.findOne(+id);
+  @Post(':id')
+  findAllWithFilters(@Param('id') id: string, @Body() filters: object) {
+    return this.favoritesService.findAllWithFilters(+id, filters);
   }
 
   @Patch(':id')

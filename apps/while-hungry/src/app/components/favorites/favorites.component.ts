@@ -8,7 +8,7 @@ import { AppService } from '@wh/core-utils';
 import { FavoritesService } from '@wh/core-data';
 
 // schema
-import { Recipe, RecipeFavorite } from '@prisma/client';
+import { RecipeFavorite } from '@prisma/client';
 
 @Component({
   selector: 'wh-favorites',
@@ -27,9 +27,9 @@ export class FavoritesComponent implements OnInit, OnDestroy  {
   ) { }
 
   ngOnInit(): void {
+    this.appService.breadcrumb = ['While Hungry', 'Your favorites']
     this.changeDetectorRef.detectChanges();
     this.getData();
-    this.appService.breadcrumb = ['While Hungry', 'Glossary']
   }
 
   ngOnDestroy() {

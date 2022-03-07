@@ -53,6 +53,62 @@ export class FavoritesService {
     return favorites;
   }
 
+  async findAllWithFilters(id: number, filters) {
+    const favorites = await prisma.recipeFavorite.findMany({
+      where: {
+        userId: id,
+        recipe: {
+          AND: [
+            {
+              difficulty: filters.difficulty ? filters.difficulty : undefined,
+            },
+            {
+              recipeTags: {
+                some: {
+                  tag: {
+                    name: filters.tag ? filters.tag : undefined,
+                  }
+                }
+              }
+            },
+            { 
+              avgReview: filters.rating ? +filters.rating : undefined,
+            }
+          ]
+        }
+      },
+      include: {
+        recipe: {
+          include: {
+            author: true,
+            recipeInstructions: true,
+            recipeNotes: true,
+            requiredIngredients: {
+              include: {
+                Ingredient: true,
+              }
+            },
+            requiredUstensils: true,
+            recipeTags: {
+              include: {
+                tag: true,
+              }
+            },
+            recipeComments: {
+              include: {
+                author: true,
+              },
+            },
+            recipeReviews: true,
+            recipeFavorites: true,
+          }
+        }
+      }
+    })
+
+    return favorites;
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} favorite`;
   }
