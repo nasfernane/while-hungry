@@ -109,7 +109,7 @@ deploy:
       if [ $result == 0 ]; then
         gcloud compute instances update-container $WH_DEPLOY_NAME --container-image $WH_GCP_REG
       else 
-        gcloud compute instances create $WH_DEPLOY_NAME --source-instance-template wh-template
+        gcloud compute instances create $WH_DEPLOY_NAME --source-instance-template wh-template-2
       fi
   after_script:
     - rm /tmp/key.json
