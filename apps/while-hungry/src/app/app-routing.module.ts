@@ -10,6 +10,7 @@ import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-p
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GlossaryComponent } from './components/glossary/glossary.component';
 
 // guards
 import { AdminGuard  } from './guards/admin.guard';
@@ -29,7 +30,8 @@ const routes: Routes = [
     { path: 'post/:id', component: BlogPostComponent }
   ] 
   },
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent },
+  { path: 'glossary', component: GlossaryComponent } 
 ]
 @NgModule({
   declarations: [],
