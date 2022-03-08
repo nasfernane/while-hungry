@@ -10,14 +10,20 @@ import { HttpExceptionFilter } from './../../../../filters/http-exception.filter
 @Injectable()
 @UseFilters(new HttpExceptionFilter())
 export class RegisterService {
+  /**
+   * registers users
+   * @param param 
+   * @returns created user
+   */
   async register(param) {
     const { email, nickname, passwordConfirm } = param;
     let { password } = param;
     
     if (password === passwordConfirm) {
       password = bcrypt.hashSync(password, 8)
+      // create new user with a default avatar
       const user = await prisma.user.create({
-        data: { email, nickname, password }
+        data: { email, nickname, password, avatar: 'avatar9' }
       })
 
       const accessToken = await Jwt.signAccessToken(user)

@@ -7,6 +7,9 @@
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <wh-avatar [ngClass]="{'avatar-active': avatar === avatarActive}" *ngFor="let avatar of avatarsMale" [avatar]="avatar" [avatarSize]="avatarSize" (click)="setAvatar(avatar)"></wh-avatar>
     </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <wh-avatar [ngClass]="{'avatar-active': avatar === avatarActive}" *ngFor="let avatar of avatarsNetwork" [avatar]="avatar" [avatarSize]="avatarSize" (click)="setAvatar(avatar)"></wh-avatar>
+    </div>
   </div>
   <div class="profileAvatarsContainer__actions" fxLayout="row" fxLayoutAlign="space-around center">
     <button fxFlex="30" class="mainButton" (click)="updateAvatar()">PICK</button>

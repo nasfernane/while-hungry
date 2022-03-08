@@ -29,6 +29,13 @@ export class ProfileAvatarsComponent {
     'avatar8',
   ]
 
+  avatarsNetwork: string[] = [
+    'avatar9',
+    'avatar10',
+    'avatar11',
+    'avatar12'
+  ]
+
   constructor(
     private appService: AppService,
     private userService: UserService,

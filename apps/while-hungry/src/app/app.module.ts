@@ -126,5 +126,9 @@ export class AppModule {
     .addSvgIcon('avatar6', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male2.svg'))
     .addSvgIcon('avatar7', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male3.svg'))
     .addSvgIcon('avatar8', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male4.svg'))
+    .addSvgIcon('avatar9', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network1.svg'))
+    .addSvgIcon('avatar10', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network2.svg'))
+    .addSvgIcon('avatar11', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network3.svg'))
+    .addSvgIcon('avatar12', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network4.svg'))
   }
 }
