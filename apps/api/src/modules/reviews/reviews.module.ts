@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ReviewsService } from './reviews.service';
-import { ReviewsController } from './reviews.controller';
+import { CheckModule } from './useCases/check/check.module';
+import { UpdateModule } from './useCases/update/update.module';
+import { CreateModule } from '../recipes-comments/useCases/create.module';
 
 @Module({
-  controllers: [ReviewsController],
-  providers: [ReviewsService]
+  imports: [
+    CreateModule,
+    UpdateModule,
+    CheckModule
+  ]
 })
 export class ReviewsModule {}

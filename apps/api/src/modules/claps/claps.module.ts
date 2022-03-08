@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ClapsService } from './claps.service';
-import { ClapsController } from './claps.controller';
 
+// use cases modules
+import { CheckModule } from './useCases/check/check.module';
+import { CreateModule } from './useCases/create/create.module';
+import { CountModule } from './useCases/getUserCount/count.module';
 @Module({
-  controllers: [ClapsController],
-  providers: [ClapsService]
+  imports: [
+    CheckModule,
+    CreateModule,
+    CountModule
+  ]
 })
 export class ClapsModule {}

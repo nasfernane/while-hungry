@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 // services
 import { AppService } from '@wh/core-utils';
-import { RecipeService } from '@wh/core-data';
+import { FavoritesService, RecipeService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
 import { RecipeCommentService } from '@wh/core-data';
 
@@ -27,6 +27,7 @@ export class RecipeInstructionsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private appService: AppService,
+    private favoritesService: FavoritesService,
     private recipeService: RecipeService,
     private recipeCommentsService: RecipeCommentService,
     private uiService: UiService,
@@ -44,7 +45,7 @@ export class RecipeInstructionsComponent implements OnInit {
 
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
-      this.recipeService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
+      this.favoritesService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
         if (res) {
           this.recipeInFavorites = !this.recipeInFavorites;
 

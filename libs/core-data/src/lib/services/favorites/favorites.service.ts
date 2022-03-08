@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 // schema
-import { Recipe, RecipeFavorite } from '@prisma/client';
+import { RecipeFavorite } from '@prisma/client';
 
 
 // endpoint
@@ -23,5 +23,21 @@ export class FavoritesService {
 
   allWithFilters(userId: number, filters: any) {
     return this.http.post<RecipeFavorite[]>(ENDPOINT + `/${userId}`, filters);
+  }
+
+  addOrRemoveFavorite(recipeId: number, userId: number, recipeInFavorites: boolean, favoriteId?: number) {
+    if (recipeInFavorites && favoriteId) {
+      return this.deleteFavorite(favoriteId)
+    } else {
+      return this.addFavorite(recipeId, userId)
+    }
+  }
+
+  addFavorite(recipeId: number, userId: number) {
+    return this.http.post<RecipeFavorite>(ENDPOINT, { userId, recipeId });
+  }
+
+  deleteFavorite(favoriteId: number) {
+    return this.http.delete(ENDPOINT + `/${favoriteId}`)
   }
 }

@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
-import { FavoritesService } from './favorites.service';
-import { FavoritesController } from './favorites.controller';
+
+import { FindAllModule } from './useCases/findAll/findAll.module';
+import { FindAllFilteredModule } from './useCases/findAllFiltered/findAllFiltered.module';
+import { CreateModule } from './useCases/create/create.module';
+import { DeleteModule } from './useCases/delete/delete.module';
 
 @Module({
-  controllers: [FavoritesController],
-  providers: [FavoritesService]
+  imports: [
+    FindAllModule,
+    FindAllFilteredModule,
+    CreateModule,
+    DeleteModule
+  ],
 })
 export class FavoritesModule {}

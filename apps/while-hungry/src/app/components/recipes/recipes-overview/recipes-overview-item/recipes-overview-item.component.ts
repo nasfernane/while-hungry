@@ -1,11 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { RecipeService } from '@wh/core-data';
+import { FavoritesService, RecipeService } from '@wh/core-data';
 
-import moment from 'moment';
-
-import { Recipe } from '@prisma/client';
-import { RecipeReview } from '@prisma/client';
+// prisma schema
 import { RecipeFavorite } from '@prisma/client';
+
+// services
 import { AppService } from '@wh/core-utils';
 import { UiService } from '@wh/ui';
 
@@ -21,10 +20,12 @@ export class RecipesOverviewItemComponent implements OnInit {
 
   recipeId: number;
   userId: number;
+  favoriteId: number;
   recipeInFavorites = false;
 
   constructor(
     private recipeService: RecipeService,
+    private favoritesService: FavoritesService,
     private uiService: UiService,
     public appService: AppService,
   ) { }
@@ -39,6 +40,7 @@ export class RecipesOverviewItemComponent implements OnInit {
         for (const element of this.recipe.recipeFavorites) {
           if (element.userId === this.userId) {
             this.recipeInFavorites = true;
+            this.favoriteId = element.id;
             break;
           }
         }
@@ -48,18 +50,19 @@ export class RecipesOverviewItemComponent implements OnInit {
 
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
-      this.recipeService.addOrRemoveFavorite(this.recipeId, this.userId, !this.recipeInFavorites).subscribe(res => {
-        if (res) this.favoriteEvent.emit(true);
+      this.favoritesService.addOrRemoveFavorite(this.recipeId, this.userId, this.recipeInFavorites, this.favoriteId ? this.favoriteId : undefined).subscribe((res: any) => {
+        if (res) {
+          this.favoriteEvent.emit(true);
+          if (!this.recipeInFavorites) {
+            this.uiService.openAlert('Recipe added to your favorites')
+          } else {
+            this.uiService.openAlert('Recipe removed from your favorites')
+            if (this.removeIcon) this.favoriteEvent.emit(true);
+          }
 
-        if (this.recipeInFavorites) {
-          this.uiService.openAlert('Recipe added to your favorites')
-        } else {
-          this.uiService.openAlert('Recipe removed from your favorites')
-          if (this.removeIcon) this.favoriteEvent.emit(true);
+          this.recipeInFavorites = !this.recipeInFavorites;
         }
       });
-
-      this.recipeInFavorites = !this.recipeInFavorites;
     } else {
       this.uiService.openLoginAlert()
     }

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { RecipesCommentsService } from './recipes-comments.service';
-import { RecipesCommentsController } from './recipes-comments.controller';
+import { CreateModule } from './useCases/create.module';
 
 @Module({
-  controllers: [RecipesCommentsController],
-  providers: [RecipesCommentsService]
+  imports: [
+    CreateModule
+  ]
 })
 export class RecipesCommentsModule {}
