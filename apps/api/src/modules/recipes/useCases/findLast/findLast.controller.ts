@@ -12,7 +12,6 @@ export class FindLastController {
    */
   @Get('/last')
   findLast() {
-    console.log('topinambour')
     return this.service.findLast();
   }
 

@@ -1,17 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'wh-glossary-section-definition',
   templateUrl: './glossary-section-definition.component.html',
   styleUrls: ['./glossary-section-definition.component.scss']
 })
-export class GlossarySectionDefinitionComponent implements OnInit {
+export class GlossarySectionDefinitionComponent {
   @Input() definition: any;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.definition);
-  }
-
 }
