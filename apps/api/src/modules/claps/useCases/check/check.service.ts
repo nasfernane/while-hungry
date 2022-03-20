@@ -12,8 +12,8 @@ export class CheckService {
   async check(clap: Clap) {
     const clapExists = await prisma.clap.findFirst({
       where: {
-        clapperId: +clap.clapperId,
-        clappedId: +clap.clappedId
+        clapperId: +(clap.clapperId),
+        clappedId: +(clap.clappedId)
       }
     })
 

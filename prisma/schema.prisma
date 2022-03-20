@@ -27,7 +27,27 @@ model User {
   recipeComments  RecipeComment[]
   recipeReviews   RecipeReview[]
   recipeFavorites RecipeFavorite[]
+  shoppingLists ShoppingList[]
+}
 
+model ShoppingList {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  recipe String
+
+  shoppingListItems ShoppingListItem[]
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model ShoppingListItem {
+  id        Int      @id @default(autoincrement())
+  shoppingListId Int
+  name String
+  quantity Decimal @db.Decimal(10, 2)
+  unit String
+
+  shoppingList ShoppingList @relation(fields: [shoppingListId], references: [id])
 }
 
 model Recipe {

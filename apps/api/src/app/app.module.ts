@@ -10,6 +10,7 @@ import { RecipesCommentsModule } from '../modules/recipes-comments/recipes-comme
 import { UsersModule } from '../modules/users/users.module';
 import { DefinitionsModule } from '../modules/definitions/definitions.module';
 import { FavoritesModule } from '../modules/favorites/favorites.module';
+import { ShoppingListModule } from '../modules/shopping-list/shopping-list.module';
 
 // app controller & service
 import { AppController } from './app.controller';
@@ -25,7 +26,8 @@ import { AppService } from './app.service';
     RecipesCommentsModule,
     UsersModule,
     DefinitionsModule,
-    FavoritesModule
+    FavoritesModule,
+    ShoppingListModule
   ],
   controllers: [AppController],
   providers: [AppService],

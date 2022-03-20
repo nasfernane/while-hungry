@@ -62,6 +62,9 @@ import { GlossaryComponent } from './components/glossary/glossary.component';
 import { GlossarySectionComponent } from './components/glossary/glossary-section/glossary-section.component';
 import { GlossarySectionDefinitionComponent } from './components/glossary/glossary-section/glossary-section-definition/glossary-section-definition.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
+import { ShoppinglistGlobalComponent } from './components/shoppinglist/shoppinglist-global/shoppinglist-global.component';
+import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglist-item/shoppinglist-item.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +86,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, FavoritesComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, FavoritesComponent, ShoppinglistComponent, ShoppinglistGlobalComponent, ShoppinglistItemComponent,
   ],
   imports: [
     BrowserModule, 

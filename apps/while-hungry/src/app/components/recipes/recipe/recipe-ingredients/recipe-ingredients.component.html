@@ -43,15 +43,8 @@
     <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
       <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
       <span class="ingredientsContainer__ingredients--quantity">
-        {{ appService.round2decimals(ingredient.quantity * scale * 
-          (recipe.unit !== recipeUnit 
-            ? +appService.convertUnitAmount(ingredient.unit) 
-            : 1))
-          }} 
-        {{ recipe.unit === recipeUnit 
-          ? ingredient.unit
-          : appService.convertUnitLabel(recipeUnit, ingredient.unit)
-        }}
+        {{ getQuantity(ingredient) }} 
+        {{ getUnit(ingredient) }}
         &nbsp;
       </span>
       <span class="ingredientsContainer__ingredients--name" matTooltip="{{ ingredient.Ingredient.description }}">{{ ingredient.Ingredient.name }}</span>

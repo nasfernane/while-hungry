@@ -12,6 +12,7 @@ import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GlossaryComponent } from './components/glossary/glossary.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 
 // guards
 import { AdminGuard  } from './guards/admin.guard';
@@ -33,7 +34,8 @@ const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent, canActivate: [ AuthGuard ] },
   { path: 'favorites', component: FavoritesComponent, canActivate: [ AuthGuard ]},
-  { path: 'glossary', component: GlossaryComponent }
+  { path: 'glossary', component: GlossaryComponent },
+  { path: 'shopping', component: ShoppinglistComponent}
 ]
 @NgModule({
   declarations: [],

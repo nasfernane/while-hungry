@@ -18,14 +18,6 @@ export class RecipeCommentService {
     private http: HttpClient,
   ) { }
 
-  // findAll(id: string) {
-
-  // }
-
-  // getFeatured() {
-
-  // }
-
   create(comment: any) {
     return this.http.post<RecipeComment>(ENDPOINT, comment)
   }

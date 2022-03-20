@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+
+// services
+import { ShoppingListService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from '@wh/ui';
-
 
 @Component({
   selector: 'wh-recipe-ingredients',
@@ -17,6 +19,7 @@ export class RecipeIngredientsComponent implements OnInit {
   constructor(
     public appService: AppService,
     private uiService: UiService,
+    private shoppingListService: ShoppingListService,
   ) {}
 
   ngOnInit() {
@@ -36,7 +39,39 @@ export class RecipeIngredientsComponent implements OnInit {
     }
   }
 
+  getQuantity(ingredient: any) {
+    return this.appService.round2decimals(ingredient.quantity * this.scale * 
+      (
+        this.recipe.unit !== this.recipeUnit 
+        ? +(this.appService.convertUnitAmount(ingredient.unit))
+        : 1
+      )
+    )
+  }
+
+  getUnit(ingredient: any) {
+    return this.recipe.unit === this.recipeUnit 
+          ? ingredient.unit
+          : this.appService.convertUnitLabel(this.recipeUnit, ingredient.unit)
+  }
+
   addShoppingList() {
-    this.uiService.openAlert('Feature available soon !')
+    const wishlist = [];
+
+    for (const ingredient of this.ingredients) {
+      wishlist.push(
+        {
+          name: ingredient.Ingredient.name,
+          quantity: this.getQuantity(ingredient),
+          unit: this.getUnit(ingredient)
+        }
+      )
+    }
+
+    if (wishlist.length > 0) {
+      this.shoppingListService.create(this.appService.getUserId(), this.recipe.name, wishlist).subscribe((res) => {
+        console.log(res);
+      })
+    }
   }
 }
