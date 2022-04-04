@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 // services
 import { ShoppingListService } from '@wh/core-data';
+import { UiService } from '@wh/ui';
 
 @Component({
   selector: 'wh-shoppinglist-item',
@@ -16,6 +17,7 @@ export class ShoppinglistItemComponent {
   constructor(
     private router: Router,
     private service: ShoppingListService,
+    private uiService: UiService,
   ) {}
 
 
@@ -23,6 +25,7 @@ export class ShoppinglistItemComponent {
     this.service.remove(id).subscribe((res: any) => {
       if (res) {
         this.resetEvent.emit(true);
+        this.uiService.openAlert('Recipe removed from your shopping list')
       }
     })
   }
