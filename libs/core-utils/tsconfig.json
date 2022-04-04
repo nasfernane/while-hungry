@@ -11,6 +11,7 @@
     }
   ],
   "compilerOptions": {
+    "useUnknownInCatchVariables": false,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -19,6 +20,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
+    
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "useUnknownInCatchVariables": false,
     "outDir": "../../dist/out-tsc",
     "types": [],
     "target": "ES2017"

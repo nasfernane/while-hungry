@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "useUnknownInCatchVariables": false,
     "esModuleInterop": true,
     "rootDir": ".",
     "sourceMap": true,

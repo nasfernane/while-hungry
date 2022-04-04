@@ -33,11 +33,12 @@ model User {
 model ShoppingList {
   id        Int      @id @default(autoincrement())
   userId    Int
-  recipe String
+  recipeId Int
 
   shoppingListItems ShoppingListItem[]
 
   user User @relation(fields: [userId], references: [id])
+  recipe Recipe @relation(fields: [recipeId], references: [id])
 }
 
 model ShoppingListItem {
@@ -72,6 +73,7 @@ model Recipe {
   recipeReviews       RecipeReview[]
   recipeTags          RecipeTag[]
   recipeFavorites     RecipeFavorite[]
+  shoppingLists ShoppingList[]
 
   author User @relation(fields: [authorId], references: [id])
 }

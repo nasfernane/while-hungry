@@ -69,8 +69,8 @@ export class RecipeIngredientsComponent implements OnInit {
     }
 
     if (wishlist.length > 0) {
-      this.shoppingListService.create(this.appService.getUserId(), this.recipe.name, wishlist).subscribe((res) => {
-        console.log(res);
+      this.shoppingListService.create(this.appService.getUserId(), this.recipe.id, wishlist).subscribe((res) => {
+        this.uiService.openAlert('Recipe added to your shopping list')
       })
     }
   }

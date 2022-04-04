@@ -1,0 +1,42 @@
+@import './../../../../styles/base/colors';
+
+.listGlobal {
+  border: 5px solid $primary;
+
+  &__header {
+    width: 100%;
+    height: 50px;
+    background-color: $primary;
+
+    span {
+      color: $grey-light;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+  }
+
+  &__list {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+
+    &__item {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    font-weight: bold;
+  }
+
+  &__footer  {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+
+    button {
+      width: 100%;
+    }
+  }
+}

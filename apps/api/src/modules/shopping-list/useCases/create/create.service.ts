@@ -14,9 +14,10 @@ export class CreateService {
    * @returns new comment
    */
   async create(shoppinglist: any) {
+    console.log(shoppinglist)
     const list = 
       {
-        recipe: shoppinglist.name,
+        recipeId: shoppinglist.recipeId,
         userId: +shoppinglist.userId,
         shoppingListItems: {
           create: [

@@ -16,7 +16,25 @@ export class ShoppingListService {
     private http: HttpClient,
   ) { }
 
-  create(userId: number, recipeName: string, ingredients: Array<any>) {
-    return this.http.post<ShoppingList>(ENDPOINT, {userId: userId, name: recipeName, ingredients})
+  /* A function that creates a new shopping list. */
+  create(userId: number, recipeId: number, ingredients: Array<any>) {
+    return this.http.post<ShoppingList>(ENDPOINT, {userId: userId, recipeId: recipeId, ingredients})
+  }
+
+  /**
+   * It returns an Observable of ShoppingList.
+   * @param {number} id - number
+   * @returns An Observable of type ShoppingList
+   */
+  findAll(id: number) {
+    return this.http.get<ShoppingList>(ENDPOINT+ `/${id}`)
+  }
+
+  removeAll(id: number) {
+    return this.http.delete<ShoppingList>(ENDPOINT+ `/all/${id}`)
+  }
+
+  remove(id: string) {
+    return this.http.delete<ShoppingList>(ENDPOINT+ `/${id}`)
   }
 }
