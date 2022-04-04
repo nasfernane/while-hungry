@@ -1,5 +1,4 @@
 <div class="globalContainer blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
-  <!-- <button *ngIf="appService.isAdmin()" class="mainButton blogWrapper__newPostBtn" [routerLink]="['/blog/post/new']">Add a new post</button> -->
   <div class="blogWrapper__posts" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
     <wh-blog-item fxFlex="45%" *ngFor="let post of posts$ | async" [post]="post"></wh-blog-item>
   </div>

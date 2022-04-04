@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, OnChanges, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -12,7 +12,8 @@ import { Recipe } from '@prisma/client';
   templateUrl: './recipes-overview.component.html',
   styleUrls: ['./recipes-overview.component.scss']
 })
-export class RecipesOverviewComponent implements OnInit, OnDestroy {
+export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() recipeName = '';
   recipes$: Observable<any[]>;
   @ViewChild(MatPaginator) 'paginator': MatPaginator;
   dataSource: MatTableDataSource<Recipe> = new MatTableDataSource<Recipe>();
@@ -20,18 +21,31 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private recipeService: RecipeService,
-    private appService: AppService
+    public appService: AppService
   ) {}
 
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
-    this.getData();
+    this.fetchData();
     this.appService.breadcrumb = ['While Hungry', 'Recipes', 'Overview']
+  }
+  
+  ngOnChanges() {
+    this.fetchData();
   }
 
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
+    }
+  }
+
+  fetchData() {
+    // if checking for specific recipes for new recipe form
+    if (this.recipeName) {
+      this.getDataWithName() 
+    } else {
+      this.getData();
     }
   }
 
@@ -46,6 +60,12 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy {
         if (recipes) this.linkDataSource(recipes);
       })
     }
+  }
+
+  getDataWithName() {
+    this.recipeService.allWithName(this.recipeName).subscribe((recipes: Recipe[]) => {
+      if (recipes) this.linkDataSource(recipes);
+    })
   }
 
   linkDataSource(recipes: Recipe[]) {

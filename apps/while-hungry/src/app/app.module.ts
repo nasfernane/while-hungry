@@ -65,6 +65,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
 import { ShoppinglistGlobalComponent } from './components/shoppinglist/shoppinglist-global/shoppinglist-global.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglist-item/shoppinglist-item.component';
+import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglis
     RecipeRatingComponent, 
     RecipeInstructionsComponent, 
     RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, FavoritesComponent, ShoppinglistComponent, ShoppinglistGlobalComponent, ShoppinglistItemComponent,
+    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, FavoritesComponent, ShoppinglistComponent, ShoppinglistGlobalComponent, ShoppinglistItemComponent, NewRecipeComponent,
   ],
   imports: [
     BrowserModule, 

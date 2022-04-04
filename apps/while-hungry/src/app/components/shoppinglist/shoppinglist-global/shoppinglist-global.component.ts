@@ -26,7 +26,6 @@ export class ShoppinglistGlobalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log('on change')
     this.setData();
   }
 

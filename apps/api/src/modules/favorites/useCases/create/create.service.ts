@@ -9,8 +9,6 @@ import { prisma } from '@wh/prisma-client';
 @Injectable()
 export class CreateService {
   async create(favorite: RecipeFavorite) {
-    console.log(favorite)
-
     const newFavorite: RecipeFavorite = await prisma.recipeFavorite.create({
       data: {
         ...favorite

@@ -1,6 +1,29 @@
-// .mat-button-wrapper {
-//   color: #fff !important;
-// }
+.btn {
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  border: none;
+  padding: 10px;
+  margin: 0 auto;
+
+  &--main {
+    color: #fff !important;
+    background-color: $primary !important;
+
+    &:hover {
+      background-color: $primary-light !important;
+    }
+  }
+
+  &--secondary {
+    background-color: $grey !important;
+
+    &:hover {
+      background-color: $grey-light !important;
+    }
+  }
+}
+
 
 .mainButton {
   cursor: pointer;

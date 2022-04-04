@@ -9,6 +9,7 @@ import { FindAllModule } from './useCases/findAll/findAll.module';
 import { FindAllFilteredModule } from './useCases/findAllFiltered/findAllFiltered.module';
 import { FindLastModule } from './useCases/findLast/findLast.module';
 import { UpdateModule } from './useCases/update/update.module';
+import { FindAllNamedModule } from './useCases/findAllNamed/findAllNamed.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { UpdateModule } from './useCases/update/update.module';
     FindAllModule,
     FindAllFilteredModule,
     UpdateModule,
-    FindModule
+    FindModule,
+    FindAllNamedModule
   ]
   
 })

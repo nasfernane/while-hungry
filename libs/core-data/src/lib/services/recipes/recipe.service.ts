@@ -22,6 +22,10 @@ export class RecipeService {
     return this.http.post<Recipe[]>(ENDPOINT + '/filters', filters);
   }
 
+  allWithName(name: string) {
+    return this.http.get<Recipe[]>(ENDPOINT + '/name/' + name);
+  }
+
   find(id: string) {
     return this.http.get<Recipe>(ENDPOINT + `/${id}`);
   }

@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GlossaryComponent } from './components/glossary/glossary.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
+import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 
 // guards
 import { AdminGuard  } from './guards/admin.guard';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'recipes', children: [
       { path: '', component: RecipesOverviewComponent },
+      { path: 'add', component: NewRecipeComponent},
       { path: ':id', component: RecipeComponent },
     ] 
   },

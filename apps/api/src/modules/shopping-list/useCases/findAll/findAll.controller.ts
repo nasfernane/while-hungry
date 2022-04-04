@@ -10,7 +10,6 @@ export class FindAllController {
 
   @Get(':id')
   create(@Param('id') id: number) {
-    console.log('controller')
     return this.service.findAll(id);
   }
 }

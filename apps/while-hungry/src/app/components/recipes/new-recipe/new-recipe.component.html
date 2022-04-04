@@ -1,0 +1,112 @@
+<div class="globalContainer">
+  <h1>Add new recipe</h1>
+  <span>Welcome to the recipe addition form. Follow the different steps, enter the necessary information for your recipe and share it with the community.</span>
+  <mat-stepper [linear]="true" #stepper>
+    <!-- first step: recipe name and check recipes -->
+    <mat-step>
+      <ng-template matStepLabel>New recipe</ng-template>
+      <span>Choose a title and check if the recipe already exists on the website.</span>
+      <form [formGroup]="recipeNameGroup">
+        <mat-form-field>
+          <mat-label>Recipe name</mat-label>
+          <input matInput type="text" min="0" formControlName="name" required number>
+        </mat-form-field>
+      </form>
+      <div class="step__footer">
+        <button class="btn btn--secondary">Cancel</button>
+        <button 
+          class="btn btn--main"
+          [disabled]="recipeNameGroup.invalid"
+          (click)="stepper.next()">
+          Next
+        </button>
+      </div>
+      <wh-recipes-overview *ngIf="recipeName" [recipeName]="recipeName"></wh-recipes-overview>
+    </mat-step>
+    <!-- Second step : informations -->
+    <mat-step>
+      <ng-template matStepLabel>Informations</ng-template>
+      <span>Recipe's name : {{ recipeName }}</span>
+      <form [formGroup]="informationGroup">
+        <div>
+          <section >
+            <p>Servings</p>
+            <mat-form-field>
+              <mat-label>people</mat-label>
+              <input matInput type="number" min="0" formControlName="servings" required number>
+            </mat-form-field>
+          </section>
+          <section>
+            <p>Cook time</p>
+            <mat-form-field>
+              <mat-label>hours</mat-label>
+              <input matInput type="number" min="0" formControlName="hours" required number>
+            </mat-form-field>
+            <span>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
+            <mat-form-field>
+              <mat-label>minutes</mat-label>
+              <input matInput type="number" min="0" formControlName="minutes" required number>
+            </mat-form-field>
+          </section>
+          <section style="margin-bottom: 20px;">
+            <p>Difficulty</p>
+            <mat-radio-group aria-label="Select an mat-option" formControlName="difficulty">
+              <mat-radio-button value="Easy">Easy</mat-radio-button>
+              <mat-radio-button value="Medium">Medium</mat-radio-button>
+              <mat-radio-button value="Difficult">Difficult</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </div>
+        <div class="step__footer">
+          <button class="btn btn--secondary">Cancel</button>
+          <button 
+            class="btn btn--main"
+            [disabled]="recipeNameGroup.invalid"
+            (click)="stepper.next()">
+            Next
+          </button>
+        </div>
+      </form>
+      
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Ingredients</ng-template>
+      <span>Recipe's name : {{ recipeName }}</span>
+      <h2>Add an ingredient</h2>
+      <div fxLayout="row" fxLayoutAlign="flex-start flex-start">
+        <form [formGroup]="ingredientGroup" class="newRecipeForm__ingredients" fxFlex="70">
+          <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" min="0" formControlName="quantity" required number>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Unit</mat-label>
+            <mat-select formControlName="unit">
+              <mat-option>-- None --</mat-option>
+              <mat-optgroup *ngFor="let group of unitsGroups" [label]="group.name">
+                <mat-option *ngFor="let unit of group.units" [value]="unit.value">
+                  {{unit.viewValue}}
+                </mat-option>
+              </mat-optgroup>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Ingredient</mat-label>
+            <input matInput type="text" minlength="0" formControlName="ingredient" required number>
+          </mat-form-field>
+          <mat-icon (click)="addIngredient()">add_circle</mat-icon>
+        </form>
+        <div fxFlex="25" *ngIf="ingredients.length > 0" class="newRecipeForm__ingredients__recap">
+          <div class="newRecipeForm__ingredients__recap__header" fxLayout="row" fxLayoutAlign="center center">
+            <span>Ingredients</span>
+          </div>
+          <div *ngFor="let ingredient of ingredients">
+            <span class="newRecipeForm__ingredients__recap__label">• {{ ingredient['ingredient'] }} :</span>
+            <span class="newRecipeForm__ingredients__recap__quantity">&nbsp;{{ ingredient['quantity'] }} {{ ingredient['unit'] }}</span>
+          </div>
+        </div>
+      </div>
+      
+    </mat-step>
+  </mat-stepper>
+</div>
