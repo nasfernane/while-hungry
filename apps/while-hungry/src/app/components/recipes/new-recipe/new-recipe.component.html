@@ -72,7 +72,7 @@
           <button class="btn btn--secondary">Cancel</button>
           <button 
             class="btn btn--main"
-            [disabled]="recipeNameGroup.invalid"
+            [disabled]="recipeNameGroup.invalid || informationGroup.invalid"
             (click)="stepper.next()">
             Next
           </button>
@@ -113,23 +113,13 @@
             <button class="btn btn--secondary" (click)="stepper.previous()">Previous</button>
             <button 
               class="btn btn--main"
-              [disabled]="ingredients.length <= 0"
+              [disabled]="ingredients.length <= 0 || recipeNameGroup.invalid || informationGroup.invalid"
               (click)="stepper.next()">
               Next
             </button>
           </div>
         </div>
-        <wh-recipe-ingredients [recipe]="formatRecipe()" [preview]="true" fxFlex="30"></wh-recipe-ingredients>
-
-        <!-- <div fxFlex="30" *ngIf="ingredients.length > 0" class="newRecipeForm__ingredients__recap">
-          <div class="newRecipeForm__ingredients__recap__header" fxLayout="row" fxLayoutAlign="center center">
-            <span>Ingredients</span>
-          </div>
-          <div *ngFor="let ingredient of ingredients" class="newRecipeForm__ingredients__recap__line">
-            <span class="newRecipeForm__ingredients__recap__label">• {{ ingredient['name'] }} :</span>
-            <span class="newRecipeForm__ingredients__recap__quantity">&nbsp;{{ ingredient['quantity'] }} {{ ingredient['unit'] }}</span>
-          </div>
-        </div> -->
+        <wh-recipe-ingredients [recipe]="formatRecipe()" [preview]="true" fxFlex="30" *ngIf="ingredients.length > 0"></wh-recipe-ingredients>
       </div>
     </mat-step>
     <mat-step>
@@ -195,7 +185,7 @@
           <button class="btn btn--secondary" (click)="stepper.previous()">Previous</button>
           <button 
             class="btn btn--main"
-            [disabled]="instructions.length <= 0"
+            [disabled]="instructions.length <= 0 || ingredients.length <= 0 || recipeNameGroup.invalid || informationGroup.invalid"
             (click)="stepper.next()">
             Next
           </button>
@@ -244,7 +234,7 @@
         <button class="btn btn--secondary" (click)="stepper.previous()">Previous</button>
         <button 
           class="btn btn--main"
-          [disabled]="instructions.length <= 0"
+          [disabled]="!isValidRecipe()"
           (click)="createRecipe()">
           Create
         </button>

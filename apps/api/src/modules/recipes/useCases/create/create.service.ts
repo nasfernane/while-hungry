@@ -8,10 +8,32 @@ import { Recipe } from '@prisma/client';
 
 @Injectable()
 export class CreateService {
-  async create(recipe: Recipe): Promise<Recipe> {
+  async create(recipe: any): Promise<Recipe> {
     const newRecipe = await prisma.recipe.create({
       data: {
-        ...recipe
+        author: { connect: { id: recipe.authorId } },
+        name: recipe.name,
+        picture: recipe.picture || null,
+        difficulty: recipe.difficulty,
+        cookTime: recipe.cookTime,
+        serves: recipe.serves,
+        description: 'coucou',
+        unit: recipe.unit,
+        requiredIngredients: {
+          create: [
+            ...recipe.requiredIngredients,
+          ]
+        },
+        recipeInstructions: {
+          create: [
+            ...recipe.recipeInstructions,
+          ]
+        },
+        recipeNotes: {
+          create: [
+            ...recipe.recipeNotes,
+          ]
+        }
       }
     })
 

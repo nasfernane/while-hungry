@@ -30,7 +30,7 @@ export class RecipeService {
     return this.http.get<Recipe>(ENDPOINT + `/${id}`);
   }
 
-  create(recipe: Recipe) {
+  create(recipe: Record<string, unknown>) {
     return this.http.post(ENDPOINT, recipe);
   }
 
@@ -49,5 +49,5 @@ export class RecipeService {
   findLast() {
     return this.http.get<Recipe>(ENDPOINT + `/last`);
   }
-  
+
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // services
 import { AppService } from '@wh/core-utils';
+import { RecipeService } from '@wh/core-data';
+import { UiService } from '@wh/ui';
 
 interface Unit {
   value: string;
@@ -28,7 +30,7 @@ export class NewRecipeComponent implements OnInit {
   ingredients: Record<string, unknown>[] = [];
   instructions: Record<string, unknown>[] = [];
   notes: Record<string, unknown>[] = [];
-  previewRecipe: Record<string, unknown> = {};
+  recipe: Record<string, unknown> = {};
 
   unitsGroupsMetrics: UnitGroup[] = [
     {
@@ -86,6 +88,8 @@ export class NewRecipeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private appService: AppService,
+    private recipeService: RecipeService,
+    private uiService: UiService,
   ) { }
 
   ngOnInit(): void {
@@ -133,7 +137,7 @@ export class NewRecipeComponent implements OnInit {
 
     if (quantity && unit && name) {
       const newIngredient = {
-        quantity: String(quantity),
+        quantity,
         unit,
         name
       }
@@ -152,6 +156,7 @@ export class NewRecipeComponent implements OnInit {
 
     if (instruction) {
       this.instructions.push({
+        categoryId: 4,
         label,
         instruction
       })
@@ -192,12 +197,17 @@ export class NewRecipeComponent implements OnInit {
     }
   }
 
+ 
   /**
-   * Returns true if the recipe is valid.
-   * @returns The return value is true.
+   * If all of the form groups are valid, return true. Otherwise, return false
+   * @returns A boolean value.
    */
   isValidRecipe() {
-    return true;
+    if (this.recipeNameGroup.valid && this.informationGroup.valid && this.ingredients.length > 0 && this.instructions.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -209,25 +219,32 @@ export class NewRecipeComponent implements OnInit {
   }
 
   formatRecipe() {
-    if (this.isValidRecipe()) {
-      this.previewRecipe = {
-        cookTime: this.formatCookTime(),
-        difficulty: this.informationGroup.controls['difficulty'].value,
-        serves: this.informationGroup.controls['servings'].value,
-        unit: this.informationGroup.controls['units'].value,
-        requiredIngredients: this.ingredients,
-        recipeInstructions: this.instructions,
-        recipeNotes: this.notes || null,
-      }
-  
-      return this.previewRecipe;
-    } else {
-      return undefined;
+    this.recipe = {
+      name: this.recipeNameGroup.controls['name'].value,
+      authorId: this.appService.getUserId(),
+      cookTime: this.formatCookTime(),
+      difficulty: this.informationGroup.controls['difficulty'].value,
+      serves: this.informationGroup.controls['servings'].value,
+      unit: this.informationGroup.controls['units'].value,
+      requiredIngredients: this.ingredients,
+      recipeInstructions: this.instructions,
+      recipeNotes: this.notes || null,
     }
-    
+
+    return this.recipe;
   }
 
   createRecipe() {
-    console.log('coucou')
+    this.formatRecipe();
+    console.log(this.recipe);
+    if (this.isValidRecipe() && this.recipe) {
+      this.recipeService.create(this.recipe).subscribe((res) => {
+        console.log('res')
+        console.log(res)
+      })
+    } else {
+      console.log('test')
+      this.uiService.openAlert('Your recipe is incomplete, please verify all steps')
+    }
   }
 }
