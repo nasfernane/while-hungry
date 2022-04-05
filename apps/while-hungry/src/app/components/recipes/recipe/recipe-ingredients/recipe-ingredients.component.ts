@@ -12,6 +12,7 @@ import { UiService } from '@wh/ui';
 })
 export class RecipeIngredientsComponent implements OnInit {
   @Input() recipe: any;
+  @Input() preview = false;
   ingredients: any[];
   recipeUnit: string;
   scale = 1;
@@ -23,6 +24,7 @@ export class RecipeIngredientsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.recipe);
     this.ingredients = this.recipe.requiredIngredients;
     this.recipeUnit = this.recipe.unit;
   }
@@ -61,7 +63,7 @@ export class RecipeIngredientsComponent implements OnInit {
     for (const ingredient of this.ingredients) {
       wishlist.push(
         {
-          name: ingredient.Ingredient.name,
+          name: ingredient.name,
           quantity: this.getQuantity(ingredient),
           unit: this.getUnit(ingredient)
         }

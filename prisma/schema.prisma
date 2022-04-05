@@ -160,6 +160,7 @@ model RecipeTagList {
   RecipeTag RecipeTag[]
 }
 
+// inactive, keeping it for later
 model Ingredient {
   id          Int      @id @default(autoincrement())
   name        String   @db.VarChar(25)
@@ -168,20 +169,18 @@ model Ingredient {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  requiredIngredient RequiredIngredient[]
 }
 
 model RequiredIngredient {
   id           Int      @id @default(autoincrement())
   recipeId     Int
-  ingredientId Int
+  name        String   @db.VarChar(25)
   quantity     Int
   unit         String   @db.VarChar(15)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   Recipe     Recipe     @relation(fields: [recipeId], references: [id])
-  Ingredient Ingredient @relation(fields: [ingredientId], references: [id])
 }
 
 model Ustensil {

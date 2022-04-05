@@ -14,11 +14,7 @@ export class FindAllService {
         author: true,
         recipeInstructions: true,
         recipeNotes: true,
-        requiredIngredients: {
-          include: {
-            Ingredient: true,
-          }
-        },
+        requiredIngredients: true,
         requiredUstensils: true,
         recipeTags: {
           include: {

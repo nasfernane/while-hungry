@@ -11,12 +11,12 @@
 }
 
 .newRecipeForm {
-  &__ingredients {
+  &__ingredients, &__instructions {
     mat-form-field {
       margin-right: 20px;
     }
 
-    mat-icon {
+    mat-icon.addIcon {
       width: 40px;
       height: 40px;
       font-size: 40px;
@@ -33,7 +33,7 @@
 
       &__header {
         background-color: $primary;
-        height: 30px;
+        height: 50px;
 
         span {
           color: $grey-light;
@@ -42,14 +42,99 @@
         }
       }
 
-      div:nth-child(2) {
-        padding: 20px;
+      &__line {
+        padding: 5px 20px;
       }
 
       &__label {
         font-weight: 500;
       }
+
+      &__instructions, &__notes  {
+        padding: 20px;
+      }
+
+      &__instructions {
+        &__line {
+          margin-bottom: 10px;
+
+          &__number {
+            margin-right: 10px;
+            text-align: center;
+            min-height: 18px !important;
+            min-width : 18px !important;
+            max-height: 18px !important;
+            max-width : 18px !important;
+            font-size: 14px;
+            border-radius: 50%;
+            background-color: $primary;
+            color: $grey-light;
+          }
+
+          &__label {
+            font-weight: 500;
+            margin-right: 5px;
+          }
+        }
+
+        
+      }
+
+      &__notes {
+        background-color: $grey-light;
+
+        &__line {
+          width: 100%;
+          background-color: #fff;
+          padding: 10px;
+          margin-bottom: 20px;
+
+          &__icon {
+            height: 22px;
+            width: 22px;
+
+            mat-icon {
+              color: $primary;
+              margin-right: 10px;
+              height: 22px;
+              width: 22px;
+              font-size: 22px;
+              align-self: center;
+              line-height: 22px;
+              padding: 0;
+            }
+          }
+
+          &__label {
+            font-weight: 500;
+            margin-right: 5px;
+          }
+          
+        }
+
+        & > span {
+          margin-bottom: 20px;
+          font-weight: 500;
+          align-self: center;
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+
+        
+      } 
     }
+  }
+}
+
+
+.recipeName {
+  width: 100%;
+  margin-bottom: 20px;
+
+  span {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
   }
 }
 
