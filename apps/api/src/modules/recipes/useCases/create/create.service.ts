@@ -39,5 +39,9 @@ export class CreateService {
 
     return newRecipe;
   }
+
+  async storePicture(picture: Express.Multer.File) {
+    return picture;
+  } 
   
 }

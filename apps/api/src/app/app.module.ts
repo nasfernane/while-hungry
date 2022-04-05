@@ -11,6 +11,7 @@ import { UsersModule } from '../modules/users/users.module';
 import { DefinitionsModule } from '../modules/definitions/definitions.module';
 import { FavoritesModule } from '../modules/favorites/favorites.module';
 import { ShoppingListModule } from '../modules/shopping-list/shopping-list.module';
+import { FilesModule } from '../modules/files/files.module';
 
 // app controller & service
 import { AppController } from './app.controller';
@@ -27,7 +28,8 @@ import { AppService } from './app.service';
     UsersModule,
     DefinitionsModule,
     FavoritesModule,
-    ShoppingListModule
+    ShoppingListModule,
+    FilesModule
   ],
   controllers: [AppController],
   providers: [AppService],

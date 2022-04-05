@@ -68,6 +68,7 @@ import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglis
 import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

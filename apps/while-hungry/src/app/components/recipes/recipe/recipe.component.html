@@ -19,7 +19,7 @@
       
       </div>
       <p class="recipe__header__description">{{ recipe.description }}</p>
-      <img class=" recipe__header__img" src="{{ './../../../../assets/img/recipes/' + recipe.picture }}" alt="{{recipe.name}}">
+      <img class=" recipe__header__img" [src]="(environment.API_URL + '/getpicture/' + recipe.picture)" alt="{{recipe.name}}">
     </mat-card-header>
     <mat-card-content>
       <wh-recipe-instructions [recipe]="recipe" (updateEvent)="getData(recipeId)"></wh-recipe-instructions>

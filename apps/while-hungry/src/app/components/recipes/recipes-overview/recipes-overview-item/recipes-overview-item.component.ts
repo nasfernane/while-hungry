@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FavoritesService, RecipeService } from '@wh/core-data';
+import { environment } from "./../../../../../environments/environment";
 
 // prisma schema
 import { RecipeFavorite } from '@prisma/client';
@@ -17,7 +18,8 @@ export class RecipesOverviewItemComponent implements OnInit {
   @Input() recipe: any;
   @Input() removeIcon = false;
   @Output() favoriteEvent = new EventEmitter<boolean>();
-
+  environment = environment
+  
   recipeId: number;
   userId: number;
   favoriteId: number;

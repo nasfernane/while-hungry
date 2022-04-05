@@ -6,7 +6,7 @@
     <mat-icon>heart_broken</mat-icon>
   </div>
   <div class="recipe__picture">
-    <img src="{{ './../../../../../assets/img/recipes/' + recipe.picture }}" alt="Recipe Picture" [routerLink]="['/recipes', recipe.id]">
+    <img [src]="(environment.API_URL + '/getpicture/' + recipe.picture)" alt="Recipe Picture" [routerLink]="['/recipes', recipe.id]">
   </div>
   <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between center">
     <mat-card-title class="recipe__header__name" [routerLink]="['/recipes', recipe.id]">

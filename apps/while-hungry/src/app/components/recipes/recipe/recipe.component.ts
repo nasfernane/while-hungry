@@ -4,10 +4,11 @@ import { RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from '@wh/ui';
 
+// model
 import { Recipe } from '@prisma/client';
-import { RecipeReview } from '@prisma/client';
 
-import { Observable } from 'rxjs';
+// env file
+import { environment } from "./../../../../environments/environment";
 
 @Component({
   selector: 'wh-recipe',
@@ -19,6 +20,7 @@ export class RecipeComponent implements OnInit {
   recipeId: string;
   userId: number;
   recipeInFavorites = false;
+  environment = environment // get env file pour picture requests
 
   constructor(
     public appService: AppService,

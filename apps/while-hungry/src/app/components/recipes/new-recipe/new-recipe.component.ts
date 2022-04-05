@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -31,6 +32,8 @@ export class NewRecipeComponent implements OnInit {
   instructions: Record<string, unknown>[] = [];
   notes: Record<string, unknown>[] = [];
   recipe: Record<string, unknown> = {};
+  pictureFile: File;
+  pictureName: string;
 
   unitsGroupsMetrics: UnitGroup[] = [
     {
@@ -90,6 +93,7 @@ export class NewRecipeComponent implements OnInit {
     private appService: AppService,
     private recipeService: RecipeService,
     private uiService: UiService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -229,22 +233,42 @@ export class NewRecipeComponent implements OnInit {
       requiredIngredients: this.ingredients,
       recipeInstructions: this.instructions,
       recipeNotes: this.notes || null,
+      picture: this.pictureName || null,
     }
 
     return this.recipe;
   }
 
   createRecipe() {
-    this.formatRecipe();
-    console.log(this.recipe);
     if (this.isValidRecipe() && this.recipe) {
-      this.recipeService.create(this.recipe).subscribe((res) => {
-        console.log('res')
-        console.log(res)
+      this.recipeService.storePicture(this.formatPicture()).subscribe((picture: any) => {
+        if (picture) {
+          this.pictureName = picture.filename;
+          this.formatRecipe();
+
+          this.recipeService.create(this.recipe).subscribe((res: any) => {
+            if (res) {
+              this.uiService.openAlert('Recipe successfully created')
+              this.router.navigate(['recipes', res.id])
+            }
+          })
+        }
       })
     } else {
-      console.log('test')
       this.uiService.openAlert('Your recipe is incomplete, please verify all steps')
     }
+  }
+
+  // On picture select
+  setPicture(event: any) {
+    this.pictureFile = event.target.files[0];
+}
+
+  // on picture add
+  formatPicture() {
+    const formData = new FormData(); 
+    formData.append("picture", this.pictureFile, this.pictureFile.name);
+  
+    return formData;
   }
 }

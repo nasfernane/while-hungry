@@ -67,6 +67,12 @@
               <mat-radio-button value="us">US</mat-radio-button>
             </mat-radio-group>
           </section>
+          <section>
+            <p>Add a picture</p>
+            <div>
+              <input type="file" (change)="setPicture($event)">
+            </div>
+          </section>
         </div>
         <div class="step__footer">
           <button class="btn btn--secondary">Cancel</button>

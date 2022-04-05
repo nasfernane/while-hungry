@@ -5,10 +5,17 @@ import  { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
+import * as fs from 'fs-extra';
 
 @Injectable()
 export class FindAllService {
   async findAll(): Promise<Recipe[]> {
+    // await fs.promises.readdir(process.env.STORAGE + '/assets/pictures').then(async (data) => {
+    //   console.log('data');
+    //   console.log(data);
+    // })
+    // test
+    console.log(process.env.STORAGE);
     const recipes = await prisma.recipe.findMany({
       include: {
         author: true,

@@ -31,7 +31,11 @@ export class RecipeService {
   }
 
   create(recipe: Record<string, unknown>) {
-    return this.http.post(ENDPOINT, recipe);
+    return this.http.post(ENDPOINT, recipe );
+  }
+
+  storePicture(picture: FormData) {
+    return this.http.post(ENDPOINT + '/picture', picture );
   }
 
   update(recipe: Recipe) {
