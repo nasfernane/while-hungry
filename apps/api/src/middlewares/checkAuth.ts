@@ -12,8 +12,8 @@ const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
         return next(new createError.Unauthorised())
     };
 
-    await Jwt.signAccessToken(token).then(user => {
-        req.user = user;
+    await Jwt.verifyAccessToken(token).then(user => {
+        if (req['user']) req['user'] = user;
         next();
     }).catch(e => {
         next(new createError.Unauthorised(e.message))
