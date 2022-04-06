@@ -47,6 +47,7 @@ export class NewRecipeComponent implements OnInit {
   recipe: Record<string, unknown> = {};
   pictureFile: File;
   pictureName: string;
+  previewPicturePath: string;
 
   // unit options if user chooses "Metrics"
   unitsGroupsMetrics: UnitGroup[] = [
@@ -334,7 +335,15 @@ export class NewRecipeComponent implements OnInit {
   // On picture select
   setPicture(event: any) {
     this.pictureFile = event.target.files[0];
-}
+
+  
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewPicturePath = reader.result as string;
+    }
+
+    reader.readAsDataURL(this.pictureFile);
+  }
 
   // on picture add
   formatPicture() {

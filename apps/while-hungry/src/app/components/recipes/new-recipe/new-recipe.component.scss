@@ -11,6 +11,20 @@
     font-style: italic;
     color: $primary-light;
   }
+
+  &__preview {
+    &__image {
+      margin-bottom: 20px;
+      margin-right: 20px;
+      height: 15vh;
+      width: auto;
+
+      img {
+        height: 15vh;
+        min-height: 15vh
+      }
+    }
+  }
 }
 
 .tagsContainer {

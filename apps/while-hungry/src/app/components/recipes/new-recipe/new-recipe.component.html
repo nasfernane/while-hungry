@@ -42,9 +42,14 @@
           <section>
             <h2>Add a picture</h2>
             <div class="uploadFile">
-              <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-              <span *ngIf="pictureFile">{{ pictureFile.name }}</span>
-              <input hidden (change)="setPicture($event)" #fileInput type="file">
+              <div *ngIf="pictureFile" class="uploadFile__preview" fxLayout="row" fxLayoutAlign="flex-start center">
+                <div class="uploadFile__preview__image">
+                  <img [src]="previewPicturePath" alt="File Uploading">
+                </div>
+                <span>{{ pictureFile.name }}</span>
+              </div>
+              <button type="button" mat-raised-button (click)="fileInput.click()">{{ pictureFile ? "Change File" : "Choose File" }}</button>
+              <input hidden (change)="setPicture($event)" #fileInput type="file" accept="image/*">
             </div>
           </section>
           <section>
