@@ -279,6 +279,10 @@ export class NewRecipeComponent implements OnInit {
     return (this.informationGroup.controls['hours'].value * 60) + this.informationGroup.controls['minutes'].value
   }
 
+  /**
+   * This function formats the recipe object to be sent to the server
+   * @returns The recipe object.
+   */
   formatRecipe() {
     this.recipe = {
       name: this.recipeNameGroup.controls['name'].value,
@@ -298,6 +302,10 @@ export class NewRecipeComponent implements OnInit {
     return this.recipe;
   }
 
+  /**
+   * It takes the tags array and formats it into a format that the API expects.
+   * @returns An array of objects with the tagId property.
+   */
   formatTags() {
     const formatedTags: Record<string, number>[] = [];
     this.tags.forEach(tag => {
@@ -332,7 +340,10 @@ export class NewRecipeComponent implements OnInit {
     }
   }
 
-  // On picture select
+ /**
+  * It sets the pictureFile property to the file selected by the user and setup file preview.
+  * @param {any} event - any
+  */
   setPicture(event: any) {
     this.pictureFile = event.target.files[0];
 
