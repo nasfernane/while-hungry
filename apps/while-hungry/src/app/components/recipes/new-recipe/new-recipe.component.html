@@ -4,28 +4,34 @@
   <mat-stepper #stepper>
   <!-- <mat-stepper [linear]="true" #stepper> -->
     <!-- first step: recipe name and check recipes -->
-    <mat-step>
+    <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>New recipe</ng-template>
-      <span>Choose a title and check if the recipe already exists on the website.</span>
       <form [formGroup]="recipeNameGroup">
-        <mat-form-field>
-          <mat-label>Recipe name</mat-label>
-          <input matInput type="text" min="0" formControlName="name" required number>
-        </mat-form-field>
+        <h2>Choose a title and a description for your recipe. Check if the recipe already exists on the website</h2>
+        <div fxLayout="row" fxLayoutAlign="flex-start flex-start">
+          <mat-form-field fxFlex="20" style="margin-right: 20px;">
+            <mat-label>Recipe name</mat-label>
+            <input matInput type="text" min="0" formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field fxFlex="40">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" min="0" formControlName="description" required>
+          </mat-form-field>
+        </div>
       </form>
       <div class="step__footer">
         <button class="btn btn--secondary">Cancel</button>
         <button 
           class="btn btn--main"
           [disabled]="recipeNameGroup.invalid"
-          (click)="stepper.next()">
+          matStepperNext>
           Next
         </button>
       </div>
       <wh-recipes-overview *ngIf="recipeName" [recipeName]="recipeName"></wh-recipes-overview>
     </mat-step>
     <!-- Second step : informations -->
-    <mat-step>
+    <mat-step [stepControl]="informationGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>Informations</ng-template>
       <div class="recipeName" *ngIf="recipeName" fxLayout="row" fxLayoutAlign="center center">
         <span>{{ recipeName }}</span>
@@ -33,15 +39,44 @@
       
       <form [formGroup]="informationGroup">
         <div>
+          <section>
+            <h2>Add a picture</h2>
+            <div class="uploadFile">
+              <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+              <span *ngIf="pictureFile">{{ pictureFile.name }}</span>
+              <input hidden (change)="setPicture($event)" #fileInput type="file">
+            </div>
+          </section>
+          <section>
+            <h2>Add recipe tags (max 3)</h2>
+            <div fxLayout="row" fxLayoutAlign="flex-start">
+              <mat-form-field style="margin-right: 20px;">
+                <mat-label>Tag</mat-label>
+                <mat-select formControlName="tag">
+                  <mat-option>-- None --</mat-option>
+                  <div *ngFor="let option of tagOptions">
+                    <mat-option [value]="option.value" *ngIf="!checkTag(option.name)">{{ option.name }}</mat-option>
+                  </div>
+                </mat-select>
+              </mat-form-field>
+              <mat-icon (click)="addTag()" class="addIcon" style="margin-right: 20px">add_circle</mat-icon>
+              <div class="tagsContainer" *ngIf="tags.length > 0" fxLayout="row" fxLayoutAlign="flex-start center">
+                <div class="tagsContainer__tag" fxLayout="row" fxLayoutAlign="center center" *ngFor="let tag of tags; let i = index" (click)="removeTag(i)">
+                  <mat-icon>delete</mat-icon>
+                  <span>{{ tag.name }}</span>
+                </div>
+              </div>
+            </div>
+          </section>
           <section >
-            <p>Servings</p>
+            <h2>Servings</h2>
             <mat-form-field>
               <mat-label>people</mat-label>
               <input matInput type="number" min="0" formControlName="servings" required number>
             </mat-form-field>
           </section>
           <section>
-            <p>Cook time</p>
+            <h2>Cook time</h2>
             <mat-form-field>
               <mat-label>hours</mat-label>
               <input matInput type="number" min="0" formControlName="hours" required number>
@@ -53,7 +88,7 @@
             </mat-form-field>
           </section>
           <section style="margin-bottom: 20px;">
-            <p>Difficulty</p>
+            <h2>Difficulty</h2>
             <mat-radio-group aria-label="Select an mat-option" formControlName="difficulty">
               <mat-radio-button value="Easy">Easy</mat-radio-button>
               <mat-radio-button value="Medium">Medium</mat-radio-button>
@@ -61,21 +96,16 @@
             </mat-radio-group>
           </section>
           <section style="margin-bottom: 20px;">
-            <p>Measurement units</p>
+            <h2>Measurement units</h2>
             <mat-radio-group aria-label="Select an mat-option" formControlName="units">
               <mat-radio-button value="metrics">Metrics</mat-radio-button>
               <mat-radio-button value="us">US</mat-radio-button>
             </mat-radio-group>
           </section>
-          <section>
-            <p>Add a picture</p>
-            <div>
-              <input type="file" (change)="setPicture($event)">
-            </div>
-          </section>
+          
         </div>
         <div class="step__footer">
-          <button class="btn btn--secondary">Cancel</button>
+          <button class="btn btn--secondary" (click)="stepper.previous()">Previous</button>
           <button 
             class="btn btn--main"
             [disabled]="recipeNameGroup.invalid || informationGroup.invalid"
@@ -85,7 +115,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step>
+    <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>Ingredients</ng-template>
       <div class="recipeName" *ngIf="recipeName" fxLayout="row" fxLayoutAlign="center center">
         <span>{{ recipeName }}</span>

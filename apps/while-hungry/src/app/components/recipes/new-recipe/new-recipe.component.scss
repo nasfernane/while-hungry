@@ -1,5 +1,57 @@
 @import './../../../../styles/base/colors';
 
+.uploadFile {
+  margin-bottom: 20px;
+
+  button {
+    margin-right: 10px;
+  }
+
+  span {
+    font-style: italic;
+    color: $primary-light;
+  }
+}
+
+.tagsContainer {
+  height: 50px;
+
+  &__tag {
+    cursor: pointer;
+    transform: translateY(6px);
+    border: 1px dashed $primary;
+    height: 40px;
+    margin-right: 10px;
+
+    mat-icon {
+      display: none;
+      position: absolute;
+      left: calc(50% - 10px);
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: $primary;
+    }
+
+    span {
+      padding: 0 10px;
+      font-variant: small-caps;
+    }
+
+    &:hover {
+      background-color: rgba($grey-light, 0.6);
+
+      span {
+        color: rgba($primary-dark, 0.6)
+      }
+
+      mat-icon {
+        display: block;
+      }
+    }
+  }
+}
+
 .step__footer {
   .btn {
     width: 100px;
@@ -10,22 +62,22 @@
   }
 }
 
+mat-icon.addIcon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+  transform: translateY(12px);
+  cursor: pointer;
+  
+  &:hover {
+    color: $primary-light;
+  }
+}
+
 .newRecipeForm {
   &__ingredients, &__instructions {
     mat-form-field {
       margin-right: 20px;
-    }
-
-    mat-icon.addIcon {
-      width: 40px;
-      height: 40px;
-      font-size: 40px;
-      transform: translateY(12px);
-      cursor: pointer;
-      
-      &:hover {
-        color: $primary-light;
-      }
     }
 
     &__recap {

@@ -17,7 +17,7 @@ export class CreateService {
         difficulty: recipe.difficulty,
         cookTime: recipe.cookTime,
         serves: recipe.serves,
-        description: 'coucou',
+        description: recipe.description,
         unit: recipe.unit,
         requiredIngredients: {
           create: [
@@ -32,6 +32,11 @@ export class CreateService {
         recipeNotes: {
           create: [
             ...recipe.recipeNotes,
+          ]
+        },
+        recipeTags: {
+          create: [
+            ...recipe.recipeTags,
           ]
         }
       }

@@ -10,3 +10,8 @@
 .mat-horizontal-stepper-content {
   padding-top: 20px !important;
 }
+
+// uncomment this to deactivate header navigation in steppers
+// ::ng-deep .mat-horizontal-stepper-header{
+//   pointer-events: none !important;
+// }
