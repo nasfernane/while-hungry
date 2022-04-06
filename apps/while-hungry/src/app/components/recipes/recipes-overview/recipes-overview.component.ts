@@ -27,6 +27,7 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
     this.fetchData();
+
     // if component is not called from new recipe form, we set breadcrumb
     if (!this.recipeName) this.appService.breadcrumb = ['While Hungry', 'Recipes', 'Overview']
   }

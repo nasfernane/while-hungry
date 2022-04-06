@@ -7,5 +7,5 @@
   <div class="recipeOverviewContainer__recipes" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
     <wh-recipes-overview-item fxFlex="32%" *ngFor="let recipe of recipes$ | async" [recipe]="recipe" (favoriteEvent)="favoriteEvent(true)"></wh-recipes-overview-item>
   </div>
-  <mat-paginator [pageSizeOptions]="[3, 9, 18]" *ngIf="recipes$"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[3, 9, 18]"></mat-paginator>
 </div>
