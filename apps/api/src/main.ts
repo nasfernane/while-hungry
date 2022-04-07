@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -21,7 +16,23 @@ const configureSwagger = (app) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(); // enable cors origin between apps
+  // enable cors origin between apps
+  // app.enableCors(); 
+  const whitelist = ['http://localhost:4200', 'http://152.228.218.72'];
+  app.enableCors({
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1) {
+        console.log("allowed cors for:", origin)
+        callback(null, true)
+      } else {
+        console.log("blocked cors for:", origin)
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+    methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
+    credentials: true,
+  });
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   configureSwagger(app);
