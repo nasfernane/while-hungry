@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://152.228.218.72:3000",
+    "target": "https://api.whilehungry.com",
     "secure": false
   }
 }
