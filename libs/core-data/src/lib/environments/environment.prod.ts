@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: "//api.whilehungry.com",
+  API_URL: "http://152.228.218.72/api",
 };
