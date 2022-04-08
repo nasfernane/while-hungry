@@ -64,10 +64,10 @@ deploy_main:
   stage: deploy
   variables:
     SERVER: "nasfernane@152.228.218.72"
-    CHEMIN: "/var/www/html/"
+    CHEMIN: "/var/www/whilehungry/"
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - /sbin/ip route|awk '/default/ { print $3 }'
-    - sudo /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
+    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
     - main
     - merge_requests
