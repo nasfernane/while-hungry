@@ -1,6 +1,6 @@
 <!-- <wh-breadcrumb></wh-breadcrumb> -->
 <div class="recipeOverviewContainer globalContainer globalContainer--breadcrumb"  fxLayout="column" fxLayoutAlign="start stretch">
-  <div class="addRecipe" matTooltip="Add recipe" [routerLink]="['add']">
+  <div class="addRecipe" matTooltip="Add recipe" (click)="navNewRecipe()">
     <mat-icon>add_circle</mat-icon>
   </div>
   <wh-recipes-overview-filters (updateEvent)="getData($event)" (resetEvent)="getData()" *ngIf="!recipeName"></wh-recipes-overview-filters>

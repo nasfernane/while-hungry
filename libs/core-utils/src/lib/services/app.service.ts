@@ -59,7 +59,7 @@ export class AppService {
    * @returns object
    */
   public getUser(): Record<string, unknown> {
-    return this.currentUser;
+    return this.currentUser || null;
   }
 
   /**
@@ -103,12 +103,24 @@ export class AppService {
   }
 
   /**
-   * check if current user is admin
+   * checks if current user is admin
    * @param role 
    * @returns boolean
    */
   public isAdmin(role: string = this.getUserRole()) {
     return ['Creator', 'Admin'].includes(role);
+  }
+
+ /**
+  * checks if user is logged
+  * @returns A boolean value.
+  */
+  public isLogged() {
+    if (this.currentUser && this.currentUser.accessToken) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

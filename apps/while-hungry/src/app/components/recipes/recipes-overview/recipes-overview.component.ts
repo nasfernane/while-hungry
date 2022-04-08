@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { Recipe } from '@prisma/client';
+import { Router } from '@angular/router';
+import { UiService } from '@wh/ui';
 
 @Component({
   selector: 'wh-recipes-overview',
@@ -21,6 +23,8 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private recipeService: RecipeService,
+    private router: Router,
+    private uiService: UiService,
     public appService: AppService
   ) {}
 
@@ -78,5 +82,13 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
 
   favoriteEvent(event: boolean) {
     if (event) this.getData();
+  }
+
+  navNewRecipe() {
+    if (this.appService.getUser()) {
+      this.router.navigate(['recipes', 'add']);
+    } else {
+      this.uiService.openLoginAlert()
+    }
   }
 }
