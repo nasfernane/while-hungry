@@ -20,6 +20,7 @@ cache: &global_cache
 
 stages:
   - setup
+  - lint
   - build
   - deploy
 
@@ -38,6 +39,22 @@ install:
   artifacts:
     paths:
       - node_modules
+
+lint front: 
+  stage: lint
+  script: 
+  - npm run lint:client
+  only:
+    - main
+    - merge_requests
+
+lint api: 
+  stage: lint
+  script:
+  - npm run lint:api
+  only:
+    - main
+    - merge_requests
 
 build front:
   stage: build
