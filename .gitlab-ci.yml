@@ -68,6 +68,6 @@ deploy_main:
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
     - /sbin/ip route|awk '/default/ { print $3 }'
-    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN} --exclude-from="exclude.build"
+    - sudo rsync -a -delete /dist/apps/while-hungry/ ${SERVER}:${CHEMIN} --exclude-from="exclude.build"
     - main
     - merge_requests
