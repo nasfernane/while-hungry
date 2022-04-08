@@ -1,0 +1,49 @@
+image: node:13
+
+before_script:
+  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
+  - chmod 700 ~/.ssh/id_ed25519
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_ed25519
+  - ssh-keyscan -t ed25519 152.228.218.72 > ~/.ssh/known_hosts
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  - chmod 644 ~/.ssh/known_hosts
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+
+build_parcel_main:
+  stage: build
+  script:
+    - npm install
+    - node -v
+    - npm run build:client
+  artifacts:
+    expire_in: 20 mins
+    paths:
+      - ./dist/apps/while-hungry
+  only:
+    - main
+
+deploy_main:
+  stage: deploy
+  variables:
+    SERVEUR: "nasfernane@152.228.218.72"
+    CHEMIN: "/var/www/html/"
+  script:
+    - which rsync || ( apt update -y && apt install rsync -y )
+    - ls -la
+    - ls -la ./dist/apps/
+    - /sbin/ip route|awk '/default/ { print $3 }'
+    - ls ./dist/apps/
+    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVEUR}:${CHEMIN}. --exclude-from="exclude.build"
+  only:
+    - main
