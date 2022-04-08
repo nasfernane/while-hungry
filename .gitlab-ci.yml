@@ -1,4 +1,4 @@
-image: node:13
+image: mhart/alpine-node:16.4
 
 before_script:
   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
@@ -20,7 +20,7 @@ stages:
   - build
   - deploy
 
-build_parcel_main:
+build_front:
   stage: build
   script:
     - npm install
