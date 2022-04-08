@@ -1,7 +1,7 @@
 image: mhart/alpine-node:16.4
 
 before_script:
-  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+  - "which ssh-agent || ( apk update -y && apk install openssh-client -y )"
   - mkdir -p ~/.ssh
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
   - chmod 700 ~/.ssh/id_ed25519
@@ -15,23 +15,50 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - .env
+  policy: pull
 
 stages:
+  - setup
   - build
   - deploy
 
-build_front:
-  stage: build
-  script:
-    - npm install
-    - node -v
-    - npm run build:client
-  artifacts:
-    expire_in: 20 mins
-    paths:
-      - ./dist/apps/while-hungry
+install:
+  stage: setup
+  interruptible: true
   only:
     - main
+    - merge_requests
+  cache:
+    <<: *global_cache
+    #overide the policy
+    policy: pull-push
+  script:
+    - npm run install
+  artifacts:
+    paths:
+      - node_modules
+
+build front:
+  stage: build
+  script:
+    - npm run build:client
+  artifacts:
+    paths:
+      - ./dist/apps/while-hungry
+    expire_in: 50 mins
+  only:
+    - main
+    - merge_requests
+
+build api:
+  stage: build
+  script:
+    - npm run build:api
+  artifacts:
+    paths:
+      - ./dist/apps/api
+    expire_in: 50 minutes
 
 deploy_main:
   stage: deploy
