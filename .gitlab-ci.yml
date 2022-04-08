@@ -34,7 +34,7 @@ install:
     #overide the policy
     policy: pull-push
   script:
-    - npm run install
+    - npm install
   artifacts:
     paths:
       - node_modules
