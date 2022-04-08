@@ -70,6 +70,6 @@ deploy_main:
     - ls -la ./dist/apps/
     - /sbin/ip route|awk '/default/ { print $3 }'
     - ls ./dist/apps/
-    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}.
+    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
     - main
     - merge_requests
