@@ -85,7 +85,7 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   navNewRecipe() {
-    if (this.appService.getUser()) {
+    if (this.appService.isLogged()) {
       this.router.navigate(['recipes', 'add']);
     } else {
       this.uiService.openLoginAlert()
