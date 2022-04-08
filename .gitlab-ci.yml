@@ -67,9 +67,7 @@ deploy_main:
     CHEMIN: "/var/www/html/"
   script:
     - which rsync || ( apt update -y && apt install rsync -y )
-    - ls -la ./dist/apps/
     - /sbin/ip route|awk '/default/ { print $3 }'
-    - ls ./dist/apps/
-    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
+    - sudo /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
     - main
     - merge_requests
