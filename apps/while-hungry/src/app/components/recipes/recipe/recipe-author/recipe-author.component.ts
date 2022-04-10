@@ -31,9 +31,15 @@ export class RecipeAuthorComponent implements OnInit {
       }
     });
 
-    this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((alreadyClapped: boolean) => {
-      this.alreadyClapped = alreadyClapped;
-    });
+    if (this.appService.isLogged()) {
+      this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((alreadyClapped: boolean) => {
+        this.alreadyClapped = alreadyClapped;
+      });
+    } else {
+      this.alreadyClapped = false;
+    }
+
+    
 
    this.setUserClapsCount();
   }

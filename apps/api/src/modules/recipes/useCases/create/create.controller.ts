@@ -19,11 +19,6 @@ export class CreateController {
     return this.service.create(recipe);
   }
 
-  // @Post('/picture')
-  // @UseInterceptors(FileInterceptor('picture'))
-  // storePicture(@UploadedFile() picture: Express.Multer.File) {
-  //   return this.service.storePicture(picture);
-  // }
   @Post('/picture')
   @UseInterceptors(FileInterceptor('picture', {
     storage: diskStorage({
@@ -35,9 +30,13 @@ export class CreateController {
           },
         }),
        }))
+
+  /**
+   * The function takes a picture as a parameter, and then returns the result of the storePicture
+   * function in the service
+   * @param picture - Express.Multer.File
+   */
   storePicture(@UploadedFile() picture: Express.Multer.File) {
     return this.service.storePicture(picture);
   }
-
-  
 }

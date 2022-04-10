@@ -34,6 +34,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
+// check auth token middleware
+const checkAuth_1 = __webpack_require__("./apps/api/src/middlewares/checkAuth.ts");
 // modules
 const recipes_module_1 = __webpack_require__("./apps/api/src/modules/recipes/recipes.module.ts");
 const posts_module_1 = __webpack_require__("./apps/api/src/modules/posts/posts.module.ts");
@@ -50,6 +52,11 @@ const files_module_1 = __webpack_require__("./apps/api/src/modules/files/files.m
 const app_controller_1 = __webpack_require__("./apps/api/src/app/app.controller.ts");
 const app_service_1 = __webpack_require__("./apps/api/src/app/app.service.ts");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(checkAuth_1.CheckAuthMiddleware)
+            .forRoutes('users', 'favorites', 'shopping-list', { path: 'recipes', method: common_1.RequestMethod.POST }, { path: 'recipes/:id', method: common_1.RequestMethod.DELETE }, { path: 'recipes/:id', method: common_1.RequestMethod.PATCH }, { path: 'recipes-comments', method: common_1.RequestMethod.POST }, { path: 'recipes/picture', method: common_1.RequestMethod.POST }, { path: 'reviews', method: common_1.RequestMethod.POST }, { path: 'reviews:id', method: common_1.RequestMethod.PATCH }, { path: 'claps', method: common_1.RequestMethod.POST }, { path: 'claps/check', method: common_1.RequestMethod.POST });
+    }
 };
 AppModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
@@ -120,6 +127,37 @@ HttpExceptionFilter = (0, tslib_1.__decorate)([
     (0, common_1.Catch)(common_1.HttpException)
 ], HttpExceptionFilter);
 exports.HttpExceptionFilter = HttpExceptionFilter;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/middlewares/checkAuth.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CheckAuthMiddleware = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const common_2 = __webpack_require__("@nestjs/common");
+const jwt = (0, tslib_1.__importStar)(__webpack_require__("jsonwebtoken"));
+let CheckAuthMiddleware = class CheckAuthMiddleware {
+    use(req, res, next) {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
+            const decoded = token ? jwt.verify(token, process.env['ACCESS_TOKEN_SECRET']) : null;
+            if (!token || !decoded) {
+                throw new common_2.HttpException('Unauthorized', common_2.HttpStatus.UNAUTHORIZED);
+            }
+            ;
+            next();
+        });
+    }
+};
+CheckAuthMiddleware = (0, tslib_1.__decorate)([
+    (0, common_1.Injectable)()
+], CheckAuthMiddleware);
+exports.CheckAuthMiddleware = CheckAuthMiddleware;
 
 
 /***/ }),
@@ -2678,11 +2716,11 @@ let CreateController = class CreateController {
     create(recipe) {
         return this.service.create(recipe);
     }
-    // @Post('/picture')
-    // @UseInterceptors(FileInterceptor('picture'))
-    // storePicture(@UploadedFile() picture: Express.Multer.File) {
-    //   return this.service.storePicture(picture);
-    // }
+    /**
+     * The function takes a picture as a parameter, and then returns the result of the storePicture
+     * function in the service
+     * @param picture - Express.Multer.File
+     */
     storePicture(picture) {
         return this.service.storePicture(picture);
     }
@@ -4504,23 +4542,13 @@ const http_errors_1 = (0, tslib_1.__importDefault)(__webpack_require__("http-err
 dotenv_1.default.config();
 class Jwt {
     static signAccessToken(payload) {
+        console.log('sign access token');
         return new Promise((resolve, reject) => {
             jwt.sign({ payload }, process.env['ACCESS_TOKEN_SECRET'], {}, (err, token) => {
                 if (err) {
                     reject(http_errors_1.default['InternalServeurError']);
                 }
                 resolve(token);
-            });
-        });
-    }
-    static verifyAccessToken(token) {
-        return new Promise((resolve, reject) => {
-            jwt.verify(token, process.env['ACCESS_TOKEN_SECRET'], (err, payload) => {
-                if (err) {
-                    const message = err.name == 'JsonWebTokenError' ? 'Unauthorised' : err.message;
-                    return reject(new http_errors_1.default['Unauthorised'](message));
-                }
-                resolve(payload);
             });
         });
     }

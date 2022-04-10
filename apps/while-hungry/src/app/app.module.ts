@@ -6,7 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from "@angular/material/icon";
 import { MatIconRegistry } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -66,6 +66,7 @@ import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.co
 import { ShoppinglistGlobalComponent } from './components/shoppinglist/shoppinglist-global/shoppinglist-global.component';
 import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglist-item/shoppinglist-item.component';
 import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 
@@ -115,6 +116,7 @@ import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.c
     
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'auto'}},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

@@ -102,6 +102,14 @@ export class AppService {
     }
   }
 
+  public getUserToken() {
+    if (this.currentUser && this.currentUser.accessToken) {
+      return this.currentUser.accessToken;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * checks if current user is admin
    * @param role 

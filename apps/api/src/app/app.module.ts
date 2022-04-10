@@ -1,4 +1,7 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod  } from '@nestjs/common';
+
+// check auth token middleware
+import { CheckAuthMiddleware } from '../middlewares/checkAuth';
 
 // modules
 import { RecipesModule } from './../modules/recipes/recipes.module'
@@ -34,4 +37,23 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(CheckAuthMiddleware)
+      .forRoutes(
+        'users',
+        'favorites',
+        'shopping-list',
+        { path: 'recipes', method: RequestMethod.POST },
+        { path: 'recipes/:id', method: RequestMethod.DELETE },
+        { path: 'recipes/:id', method: RequestMethod.PATCH },
+        { path: 'recipes-comments', method: RequestMethod.POST },
+        { path: 'recipes/picture', method: RequestMethod.POST },
+        { path: 'reviews', method: RequestMethod.POST },
+        { path: 'reviews:id', method: RequestMethod.PATCH },
+        { path: 'claps', method: RequestMethod.POST },
+        { path: 'claps/check', method: RequestMethod.POST },
+      )
+  }
+}

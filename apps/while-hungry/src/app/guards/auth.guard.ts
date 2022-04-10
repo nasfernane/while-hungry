@@ -11,7 +11,6 @@ export class AuthGuard implements CanActivate {
     public appService: AppService,
     public router: Router,
   ) {
-
   }
 
   canActivate(
@@ -24,5 +23,4 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-  
 }

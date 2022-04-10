@@ -1,23 +1,19 @@
-import createError from 'http-errors'
+import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
+import { HttpException, HttpStatus } from '@nestjs/common';
 import { Jwt } from "./../utils/jwt";
+import * as jwt from "jsonwebtoken";
 
-const checkAuth = async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.headers.authorization) {
-        return next(new createError.Unauthorised('Access token is required !'))
-    }
+@Injectable()
+export class CheckAuthMiddleware implements NestMiddleware {
+  async use(req: Request, res: Response, next: NextFunction) {
+    const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
+    const decoded = token ? jwt.verify(token, process.env['ACCESS_TOKEN_SECRET'] as string) : null;
 
-    const token = req.headers.authorization.split(' ')[1]
-    if (!token) {
-        return next(new createError.Unauthorised())
+    if (!token || !decoded) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     };
 
-    await Jwt.verifyAccessToken(token).then(user => {
-        if (req['user']) req['user'] = user;
-        next();
-    }).catch(e => {
-        next(new createError.Unauthorised(e.message))
-    })
+    next();
+  }
 }
-
-module.exports = checkAuth;
