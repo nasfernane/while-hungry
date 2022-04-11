@@ -16,7 +16,7 @@
     <button mat-menu-item routerLink="/api">API</button>
   </mat-menu>
   <button *ngIf="!appService.userLogged" class="navWrapper__button" mat-button (click)="uiService.openLogin()">Login</button>
-  <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="40px" *ngIf="appService.userLogged" class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu"></wh-avatar>
+  <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="4rem" *ngIf="appService.userLogged" class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu"></wh-avatar>
   <mat-menu #userMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/profile">Profile</button>
     <button mat-menu-item routerLink="/favorites">Favorites</button>

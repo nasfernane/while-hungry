@@ -5,7 +5,7 @@
     cursor: pointer;
 
     .blogItem__infos {
-      box-shadow: 10px 10px 10px rgba(33,33,33,.2); 
+      box-shadow: 1rem 1rem 1rem rgba(33,33,33,.2); 
       background-color: rgba(#fff, 0.96);
       &__title {
         color: $green;
@@ -29,17 +29,17 @@
 
   &__infos {
     width: 70%;
-    padding: 20px 0;
+    padding: 2rem 0;
     margin: 0 auto;
     background-color: rgba(#fff, 0.9);
     position: relative;
-    top: -60px;
+    top: -6rem;
     transition: box-shadow .3s;
 
     &__title {
       text-align: center;
       width: 90%;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
       font-weight: bold;
       transition: color .3s;
       text-transform: capitalize;
@@ -52,8 +52,8 @@
     }
 
     &__content {
-      font-size: 16px;
-      margin-bottom: 20px;
+      font-size: 1.6rem;
+      margin-bottom: 2rem;
     }
 
     &__author {

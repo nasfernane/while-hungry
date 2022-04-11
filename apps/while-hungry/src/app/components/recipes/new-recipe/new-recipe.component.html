@@ -9,7 +9,7 @@
       <form [formGroup]="recipeNameGroup">
         <h2>Choose a title and a description for your recipe. Check if the recipe already exists on the website</h2>
         <div fxLayout="row" fxLayoutAlign="flex-start flex-start">
-          <mat-form-field fxFlex="20" style="margin-right: 20px;">
+          <mat-form-field fxFlex="20" style="margin-right: 2rem;">
             <mat-label>Recipe name</mat-label>
             <input matInput type="text" min="0" formControlName="name" required>
           </mat-form-field>
@@ -55,7 +55,7 @@
           <section>
             <h2>Add recipe tags (max 3)</h2>
             <div fxLayout="row" fxLayoutAlign="flex-start">
-              <mat-form-field style="margin-right: 20px;">
+              <mat-form-field style="margin-right: 2rem;">
                 <mat-label>Tag</mat-label>
                 <mat-select formControlName="tag">
                   <mat-option>-- None --</mat-option>
@@ -64,7 +64,7 @@
                   </div>
                 </mat-select>
               </mat-form-field>
-              <mat-icon (click)="addTag()" class="addIcon" style="margin-right: 20px">add_circle</mat-icon>
+              <mat-icon (click)="addTag()" class="addIcon" style="margin-right: 2rem">add_circle</mat-icon>
               <div class="tagsContainer" *ngIf="tags.length > 0" fxLayout="row" fxLayoutAlign="flex-start center">
                 <div class="tagsContainer__tag" fxLayout="row" fxLayoutAlign="center center" *ngFor="let tag of tags; let i = index" (click)="removeTag(i)">
                   <mat-icon>delete</mat-icon>
@@ -92,7 +92,7 @@
               <input matInput type="number" min="0" formControlName="minutes" required number>
             </mat-form-field>
           </section>
-          <section style="margin-bottom: 20px;">
+          <section style="margin-bottom: 2rem;">
             <h2>Difficulty</h2>
             <mat-radio-group aria-label="Select an mat-option" formControlName="difficulty">
               <mat-radio-button value="Easy">Easy</mat-radio-button>
@@ -100,7 +100,7 @@
               <mat-radio-button value="Difficult">Difficult</mat-radio-button>
             </mat-radio-group>
           </section>
-          <section style="margin-bottom: 20px;">
+          <section style="margin-bottom: 2rem;">
             <h2>Measurement units</h2>
             <mat-radio-group aria-label="Select an mat-option" formControlName="units">
               <mat-radio-button value="metrics">Metrics</mat-radio-button>
@@ -193,7 +193,7 @@
           </mat-form-field>
           <mat-icon (click)="addNote()" class="addIcon">add_circle</mat-icon>
         </div>
-        <div class="newRecipeForm__instructions__recap" *ngIf="instructions.length > 0 || notes.length > 0" style="width: 80%; margin-bottom: 20px;">
+        <div class="newRecipeForm__instructions__recap" *ngIf="instructions.length > 0 || notes.length > 0" style="width: 80%; margin-bottom: 2rem;">
           <div class="newRecipeForm__instructions__recap__header" fxLayout="row" fxLayoutAlign="center center">
             <span>Instructions</span>
           </div>
@@ -207,7 +207,7 @@
             </div>
           </div>
           <ng-template #noInstructions>
-            <div fxLayout="column" fxLayoutAlign="center center" style="padding: 20px;">
+            <div fxLayout="column" fxLayoutAlign="center center" style="padding: 2rem;">
               <span>You need to add atleast one instruction to your recipe</span>
             </div>
           </ng-template>
@@ -240,7 +240,7 @@
       </div>
       
       <div fxLayout="row" fxLayoutAlign="space-between flex-start" *ngIf="isValidRecipe()">
-        <div class="newRecipeForm__instructions__recap" *ngIf="instructions.length > 0 || notes.length > 0" style="margin-bottom: 20px;" fxFlex="65">
+        <div class="newRecipeForm__instructions__recap" *ngIf="instructions.length > 0 || notes.length > 0" style="margin-bottom: 2rem;" fxFlex="65">
           <div class="newRecipeForm__instructions__recap__header" fxLayout="row" fxLayoutAlign="center center">
             <span>Instructions</span>
           </div>
@@ -254,7 +254,7 @@
             </div>
           </div>
           <ng-template #noInstructions>
-            <div fxLayout="column" fxLayoutAlign="center center" style="padding: 20px;">
+            <div fxLayout="column" fxLayoutAlign="center center" style="padding: 2rem;">
               <span>You need to add atleast one instruction to your recipe</span>
             </div>
           </ng-template>

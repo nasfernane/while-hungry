@@ -3,38 +3,38 @@
 
 .commentsContainer {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 3rem;
   
   &__header, &__comment {
     width: 100%;
   }
 
   &__header {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     span {
-      font-size: 20px;
+      font-size: 2rem;
       text-transform: uppercase;
       font-weight: 500;
       letter-spacing: 1.5;
       color: $primary;
-      margin-bottom: 5px;
+      margin-bottom: 0.5rem;
     }
   }
 
   &__comment { 
-    padding-bottom: 20px;
+    padding-bottom: 2rem;
 
     
     &__avatar {
-      margin-right: 10px;
+      margin-right: 1rem;
       img {
-        width: 40px;
-        height: 40px;
+        width: 4rem;
+        height: 4rem;
       }
     }
 
     &__data {
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
       width: 100%;
 
       &--user {
@@ -50,7 +50,7 @@
       }
 
       &--date {
-        font-size: 11px;
+        font-size: 1.1rem;
         font-weight: 500;
       }
     }

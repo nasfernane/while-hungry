@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { FindAllService } from './findAll.service';
+import { SkipThrottle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('recipes')
 export class FindAllController {
   constructor(private readonly service: FindAllService) {}

@@ -51,6 +51,7 @@ const files_module_1 = __webpack_require__("./apps/api/src/modules/files/files.m
 // app controller & service
 const app_controller_1 = __webpack_require__("./apps/api/src/app/app.controller.ts");
 const app_service_1 = __webpack_require__("./apps/api/src/app/app.service.ts");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -61,6 +62,10 @@ let AppModule = class AppModule {
 AppModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         imports: [
+            throttler_1.ThrottlerModule.forRoot({
+                ttl: 300000,
+                limit: 100,
+            }),
             recipes_module_1.RecipesModule,
             posts_module_1.PostsModule,
             auth_module_1.AuthModule,
@@ -173,6 +178,8 @@ const common_1 = __webpack_require__("@nestjs/common");
 const register_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/register/register.module.ts");
 const login_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/login/login.module.ts");
 const updatePassword_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/updatePassword/updatePassword.module.ts");
+const core_1 = __webpack_require__("@nestjs/core");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let AuthModule = class AuthModule {
 };
 AuthModule = (0, tslib_1.__decorate)([
@@ -182,6 +189,9 @@ AuthModule = (0, tslib_1.__decorate)([
             login_module_1.LoginModule,
             updatePassword_module_1.UpdatePasswordModule
         ],
+        providers: [
+            { provide: core_1.APP_GUARD, useClass: throttler_1.ThrottlerGuard }
+        ]
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;
@@ -2707,8 +2717,8 @@ const platform_express_1 = __webpack_require__("@nestjs/platform-express");
 const create_service_1 = __webpack_require__("./apps/api/src/modules/recipes/useCases/create/create.service.ts");
 const multer_1 = __webpack_require__("multer");
 const path_1 = __webpack_require__("path");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 const client_1 = __webpack_require__("@prisma/client");
-// const dir = path.join(__dirname, '/assets/pictures/recipes')
 let CreateController = class CreateController {
     constructor(service) {
         this.service = service;
@@ -2733,7 +2743,9 @@ let CreateController = class CreateController {
     (0, tslib_1.__metadata)("design:returntype", void 0)
 ], CreateController.prototype, "create", null);
 (0, tslib_1.__decorate)([
-    (0, common_1.Post)('/picture'),
+    (0, common_1.Post)('/picture')
+    /* A decorator that intercepts the file and stores it in the public folder. */
+    ,
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('picture', {
         storage: (0, multer_1.diskStorage)({
             destination: __dirname + '/public',
@@ -2749,6 +2761,7 @@ let CreateController = class CreateController {
     (0, tslib_1.__metadata)("design:returntype", void 0)
 ], CreateController.prototype, "storePicture", null);
 CreateController = (0, tslib_1.__decorate)([
+    (0, throttler_1.SkipThrottle)(),
     (0, common_1.Controller)('recipes'),
     (0, tslib_1.__metadata)("design:paramtypes", [typeof (_d = typeof create_service_1.CreateService !== "undefined" && create_service_1.CreateService) === "function" ? _d : Object])
 ], CreateController);
@@ -3192,6 +3205,7 @@ exports.FindAllController = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const findAll_service_1 = __webpack_require__("./apps/api/src/modules/recipes/useCases/findAll/findAll.service.ts");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let FindAllController = class FindAllController {
     constructor(service) {
         this.service = service;
@@ -3211,6 +3225,7 @@ let FindAllController = class FindAllController {
     (0, tslib_1.__metadata)("design:returntype", void 0)
 ], FindAllController.prototype, "findAll", null);
 FindAllController = (0, tslib_1.__decorate)([
+    (0, throttler_1.SkipThrottle)(),
     (0, common_1.Controller)('recipes'),
     (0, tslib_1.__metadata)("design:paramtypes", [typeof (_a = typeof findAll_service_1.FindAllService !== "undefined" && findAll_service_1.FindAllService) === "function" ? _a : Object])
 ], FindAllController);
@@ -4611,6 +4626,13 @@ module.exports = require("@nestjs/swagger");
 
 /***/ }),
 
+/***/ "@nestjs/throttler":
+/***/ ((module) => {
+
+module.exports = require("@nestjs/throttler");
+
+/***/ }),
+
 /***/ "@prisma/client":
 /***/ ((module) => {
 
@@ -4711,6 +4733,9 @@ const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const core_1 = __webpack_require__("@nestjs/core");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
+// somewhere in your initialization file
+// ...
+// somewhere in your initialization file
 const app_module_1 = __webpack_require__("./apps/api/src/app/app.module.ts");
 const configureSwagger = (app) => {
     const options = new swagger_1.DocumentBuilder()
@@ -4724,9 +4749,17 @@ const configureSwagger = (app) => {
 function bootstrap() {
     return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(app_module_1.AppModule);
-        app.enableCors(); // enable cors origin between apps
+        // set api prefix
         const globalPrefix = 'api';
         app.setGlobalPrefix(globalPrefix);
+        // set http headers to prevent security vulnerabilites
+        // app.use(helmet());
+        // enable cors origin between apps
+        app.enableCors();
+        // protection against csurf attacks
+        // app.use(cookieParser());
+        // app.use(csurf());
+        // configure swagger for api endpoints documentation
         configureSwagger(app);
         const port = process.env.PORT || 3000;
         yield app.listen(port);

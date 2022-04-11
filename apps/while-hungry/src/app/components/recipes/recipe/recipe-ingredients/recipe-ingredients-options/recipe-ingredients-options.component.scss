@@ -3,22 +3,22 @@
 .optionsContainer {
 
   &__units {
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
   button {
-    height: 26px;
-    width: 26px;
+    height: 2.6rem;
+    width: 2.6rem;
     background-color: white;
-    border: 1px solid $grey-dark;
+    border: 0.1rem solid $grey-dark;
     color: $grey-dark;
-    padding: 3px;
-    margin-right: 5px;
+    padding: 0.3rem;
+    margin-right: 0.5rem;
     cursor: pointer;
   
     &.active {
       color: $primary-dark;
-      border: 1px solid $primary-dark;
+      border: 0.1rem solid $primary-dark;
     }
   }
 }

@@ -20,7 +20,7 @@
   
     &__infos {
       width: 70%;
-      padding: 20px 0;
+      padding: 2rem 0;
       margin: 0 auto;
       background-color: rgba(#fff, 0.9);
       position: relative;
@@ -31,11 +31,11 @@
         text-align: center;
         color: $green-light;
         width: 90%;
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
         font-weight: bold;
         transition: color .3s;
         text-transform: capitalize;
-        margin: 50px 20px;
+        margin: 5rem 2rem;
       }
       
       &__content, &__author {
@@ -44,10 +44,10 @@
       }
   
       &__content {
-        font-size: 16px;
-        margin-bottom: 20px;
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
         text-align: justify;
-        margin-bottom: 50px;
+        margin-bottom: 5rem;
         
       }
   

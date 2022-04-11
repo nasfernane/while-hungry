@@ -12,6 +12,6 @@ export class AvatarComponent implements OnInit{
   editSize: string ;
 
   ngOnInit() {
-   this.editSize = (+(this.avatarSize.substring(0, this.avatarSize.length - 2)) / 3) + 'px';
+    this.editSize = (+(this.avatarSize.substring(0, this.avatarSize.length - 3)) / 3) + 'rem';
   }
 }

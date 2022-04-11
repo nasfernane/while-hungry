@@ -12,7 +12,7 @@ import { UiService } from '@wh/ui';
   styleUrls: ['./profile-avatars.component.scss']
 })
 export class ProfileAvatarsComponent {
-  avatarSize = '120px';
+  avatarSize = '12rem';
   avatarActive: string;
 
   avatarsFemale: string[] = [

@@ -5,8 +5,8 @@
   height: 100%;
 
   span {
-    font-size: 20px;
-    margin: 50px;
+    font-size: 2rem;
+    margin: 5rem;
   }
 
   img {
@@ -20,7 +20,7 @@
 .shoppingListContainer {
   &__items {
     width: 90%;
-    border: 5px solid $primary;
-    padding: 20px;
+    border: 0.5rem solid $primary;
+    padding: 2rem;
   }
 }

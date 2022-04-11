@@ -1,15 +1,15 @@
 .ratingContainer {
-  margin-right: 5px;
+  margin-right: 0.5rem;
 
   &--small {
     margin: 0;
     padding: 0;
-    padding-left: 40px;
+    padding-left: 4rem;
   }
 
   mat-icon.small {
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
   }
 }

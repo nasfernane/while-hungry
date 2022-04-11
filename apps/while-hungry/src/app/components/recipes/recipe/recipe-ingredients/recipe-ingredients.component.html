@@ -1,6 +1,6 @@
 <div class="ingredientsContainer" *ngIf="ingredients.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
   <div class="ingredientsContainer__header" fxLayout="column" fxLayoutAlign="space-around stretch">
-    <section class="ingredientsContainer__header__info"  fxLayout="row" fxLayoutAlign="space-between center">
+    <section class="ingredientsContainer__header__info"  fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>schedule</mat-icon>
         &nbsp;
@@ -13,7 +13,7 @@
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>
-    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayoutAlign="space-between center">
+    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>restaurant_menu</mat-icon>
         &nbsp;
@@ -24,7 +24,7 @@
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>
-    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayoutAlign="space-between center">
+    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>outdoor_grill</mat-icon>
         &nbsp;
@@ -36,7 +36,7 @@
     </section>
   </div>
   <div class="ingredientsContainer__ingredients">
-    <div class="ingredientsContainer__ingredients__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="ingredientsContainer__ingredients__header" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
       <span class="ingredientsContainer__ingredients__header--title">INGREDIENTS</span>
       <wh-recipe-ingredients-options [units]="recipe.unit" (unitsEvent)="unitEvent($event)" (scaleEvent)="scaleEvent($event)" *ngIf="!preview"></wh-recipe-ingredients-options>
     </div>

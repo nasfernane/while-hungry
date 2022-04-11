@@ -1,7 +1,7 @@
 <div class="recipeContainer globalContainer" fxLayout="row" fxLayoutAlign="space-between start">
   <mat-card class="recipe noBox" *ngIf="recipe" fxFlex="60">
     <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between start">
-      <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%; margin-bottom: 20px;">
+      <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%; margin-bottom: 2rem;">
         <span class="recipe__header__name" fxLayout="row" fxLayoutAlign="start flex-start">
           {{recipe.name}}
           <span class="recipe__header__tags" *ngFor="let tag of recipe.recipeTags" matTooltip="{{ 'Check all recipes related to the ' + tag.tag.name + ' tag'}}" routerLink="/recipes">{{ tag.tag.name }}</span>

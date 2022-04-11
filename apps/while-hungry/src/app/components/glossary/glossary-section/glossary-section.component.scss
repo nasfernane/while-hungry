@@ -1,11 +1,11 @@
 @import './../../../../styles/base/colors';
 
 .sectionContainer {
-  margin-top: 20px;
+  margin-top: 2rem;
   h1 {
     text-transform: uppercase;
-    padding-bottom: 5px;
-    border-bottom: 1px solid $primary-light;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid $primary-light;
   }
 
 }

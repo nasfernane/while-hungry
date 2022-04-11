@@ -5,11 +5,12 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { Multer } from 'multer';
 import * as path from 'path';
+import { SkipThrottle } from '@nestjs/throttler';
 
 import { Recipe } from '@prisma/client';
 
-// const dir = path.join(__dirname, '/assets/pictures/recipes')
 
+@SkipThrottle()
 @Controller('recipes')
 export class CreateController {
   constructor(private readonly service: CreateService) {}
@@ -20,6 +21,7 @@ export class CreateController {
   }
 
   @Post('/picture')
+  /* A decorator that intercepts the file and stores it in the public folder. */
   @UseInterceptors(FileInterceptor('picture', {
     storage: diskStorage({
       destination: __dirname + '/public',

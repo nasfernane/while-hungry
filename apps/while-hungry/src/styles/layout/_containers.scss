@@ -6,6 +6,6 @@
   padding-bottom: 2%;
 
   &--breadcrumb {
-    min-height: calc(#{$container-min-height} - 30px);
+    min-height: calc(#{$container-min-height} - 3rem);
   }
 }

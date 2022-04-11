@@ -3,9 +3,9 @@
 .glossaryContainer {
   
   &__link {
-    padding: 20px;
-    font-size: 20px;
-    border: 3px solid $primary;
+    padding: 2rem;
+    font-size: 2rem;
+    border: 0.3rem solid $primary;
 
     &--letter {
       text-transform: uppercase;
@@ -17,7 +17,7 @@
     }
 
     &--div {
-      margin: 0px 10px;
+      margin: 0rem 1rem;
     }
   }
 }

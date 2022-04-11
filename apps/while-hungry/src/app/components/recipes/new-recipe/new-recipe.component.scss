@@ -1,10 +1,10 @@
 @import './../../../../styles/base/colors';
 
 .uploadFile {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   button {
-    margin-right: 10px;
+    margin-right: 1rem;
   }
 
   span {
@@ -14,8 +14,8 @@
 
   &__preview {
     &__image {
-      margin-bottom: 20px;
-      margin-right: 20px;
+      margin-bottom: 2rem;
+      margin-right: 2rem;
       height: 15vh;
       width: auto;
 
@@ -28,27 +28,27 @@
 }
 
 .tagsContainer {
-  height: 50px;
+  height: 5rem;
 
   &__tag {
     cursor: pointer;
-    transform: translateY(6px);
-    border: 1px dashed $primary;
-    height: 40px;
-    margin-right: 10px;
+    transform: translateY(0.6rem);
+    border: 0.1rem dashed $primary;
+    height: 4rem;
+    margin-right: 1rem;
 
     mat-icon {
       display: none;
       position: absolute;
-      left: calc(50% - 10px);
-      font-size: 20px;
-      width: 20px;
-      height: 20px;
+      left: calc(50% - 1rem);
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
       color: $primary;
     }
 
     span {
-      padding: 0 10px;
+      padding: 0 1rem;
       font-variant: small-caps;
     }
 
@@ -68,19 +68,19 @@
 
 .step__footer {
   .btn {
-    width: 100px;
+    width: 10rem;
 
     &:first-child {
-      margin-right: 20px;
+      margin-right: 2rem;
     }
   }
 }
 
 mat-icon.addIcon {
-  width: 40px;
-  height: 40px;
-  font-size: 40px;
-  transform: translateY(12px);
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  transform: translateY(1.2rem);
   cursor: pointer;
   
   &:hover {
@@ -91,25 +91,25 @@ mat-icon.addIcon {
 .newRecipeForm {
   &__ingredients, &__instructions {
     mat-form-field {
-      margin-right: 20px;
+      margin-right: 2rem;
     }
 
     &__recap {
-      border: 5px solid $primary;
+      border: 0.5rem solid $primary;
 
       &__header {
         background-color: $primary;
-        height: 50px;
+        height: 5rem;
 
         span {
           color: $grey-light;
           text-transform: uppercase;
-          font-size: 16px;
+          font-size: 1.6rem;
         }
       }
 
       &__line {
-        padding: 5px 20px;
+        padding: 0.5rem 2rem;
       }
 
       &__label {
@@ -117,21 +117,21 @@ mat-icon.addIcon {
       }
 
       &__instructions, &__notes  {
-        padding: 20px;
+        padding: 2rem;
       }
 
       &__instructions {
         &__line {
-          margin-bottom: 10px;
+          margin-bottom: 1rem;
 
           &__number {
-            margin-right: 10px;
+            margin-right: 1rem;
             text-align: center;
-            min-height: 18px !important;
-            min-width : 18px !important;
-            max-height: 18px !important;
-            max-width : 18px !important;
-            font-size: 14px;
+            min-height: 1.8rem !important;
+            min-width : 1.8rem !important;
+            max-height: 1.8rem !important;
+            max-width : 1.8rem !important;
+            font-size: 1.4rem;
             border-radius: 50%;
             background-color: $primary;
             color: $grey-light;
@@ -139,7 +139,7 @@ mat-icon.addIcon {
 
           &__label {
             font-weight: 500;
-            margin-right: 5px;
+            margin-right: 0.5rem;
           }
         }
 
@@ -152,38 +152,38 @@ mat-icon.addIcon {
         &__line {
           width: 100%;
           background-color: #fff;
-          padding: 10px;
-          margin-bottom: 20px;
+          padding: 1rem;
+          margin-bottom: 2rem;
 
           &__icon {
-            height: 22px;
-            width: 22px;
+            height: 2.2rem;
+            width: 2.2rem;
 
             mat-icon {
               color: $primary;
-              margin-right: 10px;
-              height: 22px;
-              width: 22px;
-              font-size: 22px;
+              margin-right: 1rem;
+              height: 2.2rem;
+              width: 2.2rem;
+              font-size: 2.2rem;
               align-self: center;
-              line-height: 22px;
+              line-height: 2.2rem;
               padding: 0;
             }
           }
 
           &__label {
             font-weight: 500;
-            margin-right: 5px;
+            margin-right: 0.5rem;
           }
           
         }
 
         & > span {
-          margin-bottom: 20px;
+          margin-bottom: 2rem;
           font-weight: 500;
           align-self: center;
           text-transform: uppercase;
-          font-size: 16px;
+          font-size: 1.6rem;
         }
 
         
@@ -195,10 +195,10 @@ mat-icon.addIcon {
 
 .recipeName {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   span {
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: 500;
     text-transform: uppercase;
   }

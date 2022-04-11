@@ -16,10 +16,10 @@
     
     &__header {
       width: 100%;
-      padding-bottom: 30px;
+      padding-bottom: 3rem;
       
       &__name {
-        font-size: 36px;
+        font-size: 3.6rem;
         margin: 0;
         padding: 0;
         display: inline-box;
@@ -31,22 +31,22 @@
         }
         
         span {
-          margin-right: 5px;
-          font-size: 24px;
+          margin-right: 0.5rem;
+          font-size: 2.4rem;
         }
       }
   
       &__tags {
-        font-size: 16px;
-        border: 1px dashed $primary;
-        padding: 1px 5px;
-        margin: 0 10px;
+        font-size: 1.6rem;
+        border: 0.1rem dashed $primary;
+        padding: 0.1rem 0.5rem;
+        margin: 0 1rem;
         cursor: pointer;
         transition: 0.3s ease;
 
         &:hover {
           // color: #fff;
-          border: 1px solid $grey-light;
+          border: 0.1rem solid $grey-light;
           background-color: $grey-light;
         }
       }
@@ -55,10 +55,10 @@
         width: 100%;
   
         span {
-          font-size: 16px;
+          font-size: 1.6rem;
           
           mat-icon {
-            margin-right: 5px;
+            margin-right: 0.5rem;
           }
         }
       }
@@ -68,9 +68,9 @@
       }
 
       &__description {
-        margin: 10px 0 20px 0;
+        margin: 1rem 0 2rem 0;
         font-style: italic;
-        font-size: 18px;
+        font-size: 1.8rem;
       }
     }
   
@@ -81,7 +81,7 @@
   
       &__instruction {
         &__index {
-          margin-right: 5px;
+          margin-right: 0.5rem;
         }
       }
     }
@@ -91,9 +91,9 @@
     }
   
     mat-divider {
-      margin-top: 10px;
-      margin-bottom: 10px;
-      border-top-width: 2px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border-top-width: 0.2rem;
     }
   }
 

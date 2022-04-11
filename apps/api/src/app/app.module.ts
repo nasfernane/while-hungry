@@ -19,9 +19,15 @@ import { FilesModule } from '../modules/files/files.module';
 // app controller & service
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ThrottlerModule } from '@nestjs/throttler';
+
 
 @Module({
   imports: [
+    ThrottlerModule.forRoot({
+      ttl: 300000,
+      limit: 100,
+    }),
     RecipesModule,
     PostsModule, 
     AuthModule, 

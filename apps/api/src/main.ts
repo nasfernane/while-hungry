@@ -1,6 +1,15 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import helmet from 'helmet';
+import csurf from 'csurf';
+import cookieParser from 'cookie-parser';
+// somewhere in your initialization file
+
+// ...
+// somewhere in your initialization file
+
+
 
 import { AppModule } from './app/app.module';
 
@@ -16,11 +25,27 @@ const configureSwagger = (app) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(); // enable cors origin between apps
+
+  // set api prefix
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+
+  // set http headers to prevent security vulnerabilites
+  // app.use(helmet());
+
+  // enable cors origin between apps
+  app.enableCors(); 
+
+  // protection against csurf attacks
+  // app.use(cookieParser());
+  // app.use(csurf());
+
+
+
+  // configure swagger for api endpoints documentation
   configureSwagger(app);
   const port = process.env.PORT || 3000;
+
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

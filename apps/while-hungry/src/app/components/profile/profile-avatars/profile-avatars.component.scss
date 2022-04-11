@@ -1,29 +1,29 @@
 @import './../../../../styles/base/colors';
 
 .profileAvatarsContainer {
-  padding: 50px;
+  padding: 5rem;
 
   h1 {
     text-align: center;
   }
 
   wh-avatar {
-    border: 6px solid #fff;
-    margin: 20px;
+    border: 0.6rem solid #fff;
+    margin: 2rem;
     border-radius: 50%;
     transition: all .2s;
 
     &.avatar-active {
-      border: 6px solid $green-light;
+      border: 0.6rem solid $green-light;
       transform: scale(1.1);
-      box-shadow:  13px 13px 26px #d5d5d5,
-      -13px -13px 26px #ffffff;
+      box-shadow:  1.3rem 1.3rem 2.6rem #d5d5d5,
+      -1.3rem -1.3rem 2.6rem #ffffff;
       
     }
   }
 
   &__actions {
     width: 100%;
-    padding: 20px;
+    padding: 2rem;
   }
 }

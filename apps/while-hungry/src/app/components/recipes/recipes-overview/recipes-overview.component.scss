@@ -13,20 +13,20 @@
   }
 
   wh-recipes-overview-filters {
-    margin-bottom: 30px;
+    margin-bottom: 3rem;
   }
 
   .addRecipe {
-    height: 50px;
+    height: 5rem;
     position: fixed;
-    top: calc(50% - 25px);
-    right: 50px;
+    top: calc(50% - 2.5rem);
+    right: 5rem;
     cursor: pointer;
 
     mat-icon {
-      height: 50px;
-      width: 50px;
-      font-size: 50px;
+      height: 5rem;
+      width: 5rem;
+      font-size: 5rem;
     
       &:hover {
         color: $primary-light;
