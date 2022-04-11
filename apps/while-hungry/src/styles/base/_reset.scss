@@ -17,3 +17,15 @@ body {
   font-weight: 400;
   letter-spacing: 0.05rem;
 }
+
+@media (max-width: 1200px) {
+  html {
+  	font-size: 67.5%;
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+  	font-size: 72.5%;
+  }
+}

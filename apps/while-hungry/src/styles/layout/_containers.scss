@@ -4,8 +4,26 @@
   margin: 0 auto;
   padding-top: 2%;
   padding-bottom: 2%;
+}
 
-  &--breadcrumb {
-    min-height: calc(#{$container-min-height} - 3rem);
+
+@media (max-width: 1200px) {
+  .globalContainer {
+    width: calc($container-width + 20vw);
   }
 }
+
+@media (max-width: 700px) {
+  .globalContainer {
+    width: calc($container-width + 30vw);
+  }
+}
+
+@media (max-width: 500px) {
+  .globalContainer {
+    width: calc($container-width + 40vw);
+  }
+}
+
+
+
