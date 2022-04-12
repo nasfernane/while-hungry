@@ -4,12 +4,6 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import csurf from 'csurf';
 import cookieParser from 'cookie-parser';
-// somewhere in your initialization file
-
-// ...
-// somewhere in your initialization file
-
-
 
 import { AppModule } from './app/app.module';
 
@@ -39,8 +33,6 @@ async function bootstrap() {
   // protection against csurf attacks
   // app.use(cookieParser());
   // app.use(csurf());
-
-
 
   // configure swagger for api endpoints documentation
   configureSwagger(app);

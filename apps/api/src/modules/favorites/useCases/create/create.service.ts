@@ -15,7 +15,10 @@ export class CreateService {
       }
     })
 
-    return newFavorite;
+    if (newFavorite) {
+      return newFavorite;
+    }
+
   }
  
 }

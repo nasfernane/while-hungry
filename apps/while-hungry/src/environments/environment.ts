@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  API_URL: 'http://localhost:3000/api',
-  // API_URL: 'https://api.whilehungry.com/api',
+  // API_URL: 'http://localhost:3000/api',
+  /* This is the url for the backend. */
+  API_URL: 'https://api.whilehungry.com/api',
   production: false,
 };
 

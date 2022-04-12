@@ -10,4 +10,24 @@
     height: 100%;
     width: $container-width;
   }
+
+  @media (max-width: 1200px) {
+    .header {
+      width: calc($container-width + 20vw);
+    }
+  }
+
+  @media (max-width: 800px) {
+    .header {
+      width: calc($container-width + 30vw);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .header {
+      width: calc($container-width + 40vw);
+    }
+  }
 }
+
+

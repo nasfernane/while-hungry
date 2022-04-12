@@ -2,10 +2,6 @@ describe('Blog page', () => {
   beforeEach(() => cy.visit('/blog'));
   beforeEach(() => cy.viewport(2000, 1200));
 
-  it('displays a title', () => {
-    cy.get('h1').contains('Blog');
-  });
-
   it('contains posts', () => {
     cy.get('.blogWrapper__post');
   })
@@ -19,5 +15,4 @@ describe('Blog page', () => {
     cy.contains('A post about organic hummus').click();
     cy.url().should('eq', Cypress.config().baseUrl + 'blog/post/1')
   })
-
 })

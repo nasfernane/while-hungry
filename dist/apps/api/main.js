@@ -1486,7 +1486,9 @@ let CreateService = class CreateService {
             const newFavorite = yield prisma_client_1.prisma.recipeFavorite.create({
                 data: Object.assign({}, favorite)
             });
-            return newFavorite;
+            if (newFavorite) {
+                return newFavorite;
+            }
         });
     }
 };
@@ -3313,7 +3315,7 @@ exports.FindAllService = FindAllService;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FindLastController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -3324,7 +3326,7 @@ let FindLastController = class FindLastController {
         this.service = service;
     }
     /**
-     * return last 3 FindLast posted
+     * return the 3 last recipes created
      * @returns an array of Recipe
      */
     findLast() {
@@ -3335,11 +3337,11 @@ let FindLastController = class FindLastController {
     (0, common_1.Get)('/last'),
     (0, tslib_1.__metadata)("design:type", Function),
     (0, tslib_1.__metadata)("design:paramtypes", []),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:returntype", typeof (_a = typeof Promise !== "undefined" && Promise) === "function" ? _a : Object)
 ], FindLastController.prototype, "findLast", null);
 FindLastController = (0, tslib_1.__decorate)([
     (0, common_1.Controller)('recipes'),
-    (0, tslib_1.__metadata)("design:paramtypes", [typeof (_a = typeof findLast_service_1.FindLastService !== "undefined" && findLast_service_1.FindLastService) === "function" ? _a : Object])
+    (0, tslib_1.__metadata)("design:paramtypes", [typeof (_b = typeof findLast_service_1.FindLastService !== "undefined" && findLast_service_1.FindLastService) === "function" ? _b : Object])
 ], FindLastController);
 exports.FindLastController = FindLastController;
 
@@ -4557,7 +4559,6 @@ const http_errors_1 = (0, tslib_1.__importDefault)(__webpack_require__("http-err
 dotenv_1.default.config();
 class Jwt {
     static signAccessToken(payload) {
-        console.log('sign access token');
         return new Promise((resolve, reject) => {
             jwt.sign({ payload }, process.env['ACCESS_TOKEN_SECRET'], {}, (err, token) => {
                 if (err) {
@@ -4733,9 +4734,6 @@ const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const core_1 = __webpack_require__("@nestjs/core");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
-// somewhere in your initialization file
-// ...
-// somewhere in your initialization file
 const app_module_1 = __webpack_require__("./apps/api/src/app/app.module.ts");
 const configureSwagger = (app) => {
     const options = new swagger_1.DocumentBuilder()
