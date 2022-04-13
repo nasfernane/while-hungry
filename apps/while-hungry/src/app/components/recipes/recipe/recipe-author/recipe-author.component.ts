@@ -5,6 +5,8 @@ import { RecipeService, UserService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
 import { AppService } from '@wh/core-utils';
 
+import { Clap } from '@prisma/client';
+
 
 @Component({
   selector: 'wh-recipe-author',
@@ -47,7 +49,7 @@ export class RecipeAuthorComponent implements OnInit {
   clapUser() {
     if (this.appService.userLogged) {
       if (!this.alreadyClapped) {
-        this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap) => {
+        this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap: Clap) => {
           if (clap) {
             this.alreadyClapped = true;
             this.uiService.openAlert(`You clapped ${this.author.nickname}. Good job !`);
