@@ -48,7 +48,7 @@ export class RecipeAddReviewComponent implements OnInit {
 
   // get hearts visual depending on user rating
   getIcon(position: number) {
-    return position > this.userRating ? 'favorite_border' : 'favorite';
+    return position > this.userRating ? 'star_border' : 'star';
   }
 
   // update rating value and message
