@@ -24,7 +24,6 @@ export class RecipeIngredientsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.recipe);
     this.ingredients = this.recipe.requiredIngredients;
     this.recipeUnit = this.recipe.unit;
   }

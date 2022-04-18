@@ -48,6 +48,7 @@ const definitions_module_1 = __webpack_require__("./apps/api/src/modules/definit
 const favorites_module_1 = __webpack_require__("./apps/api/src/modules/favorites/favorites.module.ts");
 const shopping_list_module_1 = __webpack_require__("./apps/api/src/modules/shopping-list/shopping-list.module.ts");
 const files_module_1 = __webpack_require__("./apps/api/src/modules/files/files.module.ts");
+const recipes_tags_module_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/recipes-tags.module.ts");
 // app controller & service
 const app_controller_1 = __webpack_require__("./apps/api/src/app/app.controller.ts");
 const app_service_1 = __webpack_require__("./apps/api/src/app/app.service.ts");
@@ -76,7 +77,8 @@ AppModule = (0, tslib_1.__decorate)([
             definitions_module_1.DefinitionsModule,
             favorites_module_1.FavoritesModule,
             shopping_list_module_1.ShoppingListModule,
-            files_module_1.FilesModule
+            files_module_1.FilesModule,
+            recipes_tags_module_1.RecipesTagsModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
@@ -2569,6 +2571,115 @@ exports.CreateService = CreateService;
 
 /***/ }),
 
+/***/ "./apps/api/src/modules/recipes-tags/recipes-tags.module.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RecipesTagsModule = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const findAll_module_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.module.ts");
+let RecipesTagsModule = class RecipesTagsModule {
+};
+RecipesTagsModule = (0, tslib_1.__decorate)([
+    (0, common_1.Module)({
+        imports: [findAll_module_1.FindAllModule]
+    })
+], RecipesTagsModule);
+exports.RecipesTagsModule = RecipesTagsModule;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.controller.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FindAllController = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const findAll_service_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.service.ts");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
+let FindAllController = class FindAllController {
+    constructor(service) {
+        this.service = service;
+    }
+    /**
+     * find all recipe tags options
+     * @returns an array of tags
+     */
+    findAll() {
+        return this.service.findAll();
+    }
+};
+(0, tslib_1.__decorate)([
+    (0, common_1.Get)(),
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", typeof (_a = typeof Promise !== "undefined" && Promise) === "function" ? _a : Object)
+], FindAllController.prototype, "findAll", null);
+FindAllController = (0, tslib_1.__decorate)([
+    (0, throttler_1.SkipThrottle)(),
+    (0, common_1.Controller)('tags'),
+    (0, tslib_1.__metadata)("design:paramtypes", [typeof (_b = typeof findAll_service_1.FindAllService !== "undefined" && findAll_service_1.FindAllService) === "function" ? _b : Object])
+], FindAllController);
+exports.FindAllController = FindAllController;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.module.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FindAllModule = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const findAll_service_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.service.ts");
+const findAll_controller_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.controller.ts");
+let FindAllModule = class FindAllModule {
+};
+FindAllModule = (0, tslib_1.__decorate)([
+    (0, common_1.Module)({
+        controllers: [findAll_controller_1.FindAllController],
+        providers: [findAll_service_1.FindAllService]
+    })
+], FindAllModule);
+exports.FindAllModule = FindAllModule;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FindAllService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+// prisma client
+const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
+let FindAllService = class FindAllService {
+    findAll() {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            const tags = yield prisma_client_1.prisma.recipeTagList.findMany();
+            return tags;
+        });
+    }
+};
+FindAllService = (0, tslib_1.__decorate)([
+    (0, common_1.Injectable)()
+], FindAllService);
+exports.FindAllService = FindAllService;
+
+
+/***/ }),
+
 /***/ "./apps/api/src/modules/recipes/recipes.module.ts":
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -3272,12 +3383,6 @@ const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts")
 let FindAllService = class FindAllService {
     findAll() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            // await fs.promises.readdir(process.env.STORAGE + '/assets/pictures').then(async (data) => {
-            //   console.log('data');
-            //   console.log(data);
-            // })
-            // test
-            console.log(process.env.STORAGE);
             const recipes = yield prisma_client_1.prisma.recipe.findMany({
                 include: {
                     author: true,
@@ -3654,7 +3759,7 @@ const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const check_module_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/check/check.module.ts");
 const update_module_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/update/update.module.ts");
-const create_module_1 = __webpack_require__("./apps/api/src/modules/recipes-comments/useCases/create.module.ts");
+const create_module_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/create/create.module.ts");
 let ReviewsModule = class ReviewsModule {
 };
 ReviewsModule = (0, tslib_1.__decorate)([
@@ -3769,6 +3874,99 @@ CheckService = (0, tslib_1.__decorate)([
     (0, common_1.Injectable)()
 ], CheckService);
 exports.CheckService = CheckService;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/reviews/useCases/create/create.controller.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateController = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+// service
+const create_service_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/create/create.service.ts");
+// schemas
+const client_1 = __webpack_require__("@prisma/client");
+let CreateController = class CreateController {
+    constructor(service) {
+        this.service = service;
+    }
+    /**
+     * create new review on recipe
+     * @param review
+     * @returns new review
+     */
+    create(review) {
+        return this.service.create(review);
+    }
+};
+(0, tslib_1.__decorate)([
+    (0, common_1.Post)(),
+    (0, tslib_1.__param)(0, (0, common_1.Body)()),
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", [typeof (_a = typeof client_1.RecipeReview !== "undefined" && client_1.RecipeReview) === "function" ? _a : Object]),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
+], CreateController.prototype, "create", null);
+CreateController = (0, tslib_1.__decorate)([
+    (0, common_1.Controller)('reviews'),
+    (0, tslib_1.__metadata)("design:paramtypes", [typeof (_b = typeof create_service_1.CreateService !== "undefined" && create_service_1.CreateService) === "function" ? _b : Object])
+], CreateController);
+exports.CreateController = CreateController;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/reviews/useCases/create/create.module.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateModule = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const create_service_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/create/create.service.ts");
+const create_controller_1 = __webpack_require__("./apps/api/src/modules/reviews/useCases/create/create.controller.ts");
+let CreateModule = class CreateModule {
+};
+CreateModule = (0, tslib_1.__decorate)([
+    (0, common_1.Module)({
+        controllers: [create_controller_1.CreateController],
+        providers: [create_service_1.CreateService]
+    })
+], CreateModule);
+exports.CreateModule = CreateModule;
+
+
+/***/ }),
+
+/***/ "./apps/api/src/modules/reviews/useCases/create/create.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+// prisma client
+const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
+let CreateService = class CreateService {
+    create(review) {
+        return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
+            const newReview = yield prisma_client_1.prisma.recipeReview.create({
+                data: Object.assign({}, review)
+            });
+            return newReview;
+        });
+    }
+};
+CreateService = (0, tslib_1.__decorate)([
+    (0, common_1.Injectable)()
+], CreateService);
+exports.CreateService = CreateService;
 
 
 /***/ }),

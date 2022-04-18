@@ -60,7 +60,7 @@
                 <mat-select formControlName="tag">
                   <mat-option>-- None --</mat-option>
                   <div *ngFor="let option of tagOptions">
-                    <mat-option [value]="option.value" *ngIf="!checkTag(option.name)">{{ option.name }}</mat-option>
+                    <mat-option [value]="option.name" *ngIf="!checkTag(option.name)">{{ option.name }}</mat-option>
                   </div>
                 </mat-select>
               </mat-form-field>

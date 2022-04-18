@@ -9,8 +9,6 @@ import { RecipeReview } from '@prisma/client';
 @Injectable()
 export class CreateService {
   async create(review: RecipeReview): Promise<RecipeReview> {
-    console.log('review')
-    console.log(review)
     const newReview: RecipeReview = await prisma.recipeReview.create({
       data: {
         ...review

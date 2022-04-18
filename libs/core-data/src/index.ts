@@ -8,3 +8,4 @@ export { RecipeCommentService } from './lib/services/recipe-comments/recipe-comm
 export { GlossaryService } from './lib/services/glossary/glossary.service';
 export { FavoritesService } from './lib/services/favorites/favorites.service';
 export { ShoppingListService } from './lib/services/shopping-list/shopping-list.service';
+export { RecipeTagsService } from './lib/services/recipe-tags/recipe-tags.service';

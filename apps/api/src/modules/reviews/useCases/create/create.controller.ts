@@ -17,8 +17,6 @@ export class CreateController {
    */
   @Post()
   create(@Body() review: RecipeReview) {
-    console.log('review controller')
-    console.log(review)
     return this.service.create(review);
   }
 }

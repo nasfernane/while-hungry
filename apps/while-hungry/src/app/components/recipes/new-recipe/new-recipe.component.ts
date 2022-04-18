@@ -5,8 +5,10 @@ import { Router } from '@angular/router';
 
 // services
 import { AppService } from '@wh/core-utils';
-import { RecipeService } from '@wh/core-data';
+import { RecipeService, RecipeTagsService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
+
+import { RecipeTagList } from '@prisma/client';
 
 interface Unit {
   value: string;
@@ -16,11 +18,6 @@ interface Unit {
 interface UnitGroup {
   name: string;
   units: Unit[];
-}
-
-interface TagOption {
-  name: string;
-  value: number;
 }
 
 @Component({
@@ -40,7 +37,7 @@ export class NewRecipeComponent implements OnInit {
   ingredientGroup: FormGroup;
   instructionGroup: FormGroup;
   recipeName = '';
-  tags: TagOption[] = [];
+  tags: RecipeTagList[] = [];
   ingredients: Record<string, unknown>[] = [];
   instructions: Record<string, unknown>[] = [];
   notes: Record<string, unknown>[] = [];
@@ -104,13 +101,7 @@ export class NewRecipeComponent implements OnInit {
   ];
 
   // tag options for select
-  tagOptions: TagOption[] = [
-    { name: "French", value: 1 },
-    { name : "Japanese", value: 2 },
-    { name : "Italian", value: 3 },
-    { name : "Healthy", value: 4 },
-    { name : "Vegetarian", value: 5 }
-  ]
+  tagOptions: RecipeTagList[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -118,6 +109,7 @@ export class NewRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private uiService: UiService,
     private router: Router,
+    private tagsService: RecipeTagsService,
   ) { }
 
   ngOnInit(): void {
@@ -155,6 +147,11 @@ export class NewRecipeComponent implements OnInit {
     this.recipeNameGroup.controls['name'].valueChanges.subscribe(value => {
       this.recipeName = value;
     })
+
+    // get all recipe tag options
+    this.tagsService.getRecipeTags().subscribe((tags: any) => {
+      this.tagOptions = tags;
+    })
   }
 
   /**
@@ -185,7 +182,6 @@ export class NewRecipeComponent implements OnInit {
     } else if (index && index > -1 && this.tags.length > 0) {
       this.tags.splice(index, 1);
     }
-    console.log(this.tags);
   }
 
   /**
@@ -230,7 +226,6 @@ export class NewRecipeComponent implements OnInit {
    * Add a note to the list of notes
    */
   addNote() {
-    console.log('add note')
     const label = this.instructionGroup.controls['noteLabel'].value || '';
     const note = this.instructionGroup.controls['note'].value;
 
@@ -310,7 +305,7 @@ export class NewRecipeComponent implements OnInit {
     const formatedTags: Record<string, number>[] = [];
     this.tags.forEach(tag => {
       formatedTags.push({
-        tagId: tag.value,
+        tagId: tag.id,
       })
     });
 
