@@ -31,7 +31,6 @@ export class RecipesOverviewFiltersComponent implements OnInit, AfterViewInit{
   ngOnInit() {
     this.tagsService.getRecipeTags().subscribe((tags: any) => {
       this.tagCategories = tags;
-      console.log(this.tagCategories)
     })
   }
 
