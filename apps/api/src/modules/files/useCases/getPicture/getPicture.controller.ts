@@ -1,5 +1,5 @@
 import { Controller, Get, Param, StreamableFile, Response } from '@nestjs/common';
-import { createReadStream } from 'fs';
+import { createReadStream, existsSync } from 'fs';
 import { join } from 'path';
 
 @Controller('getpicture')
@@ -14,8 +14,16 @@ export class GetPictureController {
    */
   find(@Param('name') name: string, @Response({ passthrough: true }) res): StreamableFile {
     // return this.service.find(name);
+    const fileExists = existsSync(join(__dirname, 'public/' + name));
+    let file;
 
-    const file = createReadStream(join(__dirname, 'public/' + name))
+    // const file = createReadStream(join(__dirname, 'public/' + name));
+    if (fileExists) {
+      file = createReadStream(join(__dirname, 'public/' + name));
+    } else {
+      file = createReadStream(join(__dirname, 'public/nopicture.jpg'));
+    }
+    
     res.set({
       'Content-Type': 'application/json',
       'Content-Disposition': 'attachment; filename="test.jpeg"',

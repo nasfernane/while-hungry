@@ -1894,7 +1894,15 @@ let GetPictureController = class GetPictureController {
      */
     find(name, res) {
         // return this.service.find(name);
-        const file = (0, fs_1.createReadStream)((0, path_1.join)(__dirname, 'public/' + name));
+        const fileExists = (0, fs_1.existsSync)((0, path_1.join)(__dirname, 'public/' + name));
+        let file;
+        // const file = createReadStream(join(__dirname, 'public/' + name));
+        if (fileExists) {
+            file = (0, fs_1.createReadStream)((0, path_1.join)(__dirname, 'public/' + name));
+        }
+        else {
+            file = (0, fs_1.createReadStream)((0, path_1.join)(__dirname, 'public/nopicture.jpg'));
+        }
         res.set({
             'Content-Type': 'application/json',
             'Content-Disposition': 'attachment; filename="test.jpeg"',
@@ -4936,6 +4944,9 @@ const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const core_1 = __webpack_require__("@nestjs/core");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
+// import helmet from 'helmet';
+// import csurf from 'csurf';
+// import cookieParser from 'cookie-parser';
 const app_module_1 = __webpack_require__("./apps/api/src/app/app.module.ts");
 const configureSwagger = (app) => {
     const options = new swagger_1.DocumentBuilder()
