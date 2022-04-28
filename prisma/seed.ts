@@ -21,7 +21,7 @@ async function main() {
     for (const u of ustensils) await prisma.ustensil.create({ data: u })
 
     console.log('Seeding recipe tags...')
-    for (const rt of recipeTags) await prisma.recipeTagList.create({ data: rt })
+    for (const rt of recipeTags) await prisma.recipeTagCategory.create({ data: rt })
 
     console.log('Seeding instruction categories...')
     for (const ic of recipeInstructionCategories) await prisma.recipeInstructionCategory.create({ data: ic })

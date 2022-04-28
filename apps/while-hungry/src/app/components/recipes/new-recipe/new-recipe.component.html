@@ -59,9 +59,13 @@
                 <mat-label>Tag</mat-label>
                 <mat-select formControlName="tag">
                   <mat-option>-- None --</mat-option>
-                  <div *ngFor="let option of tagOptions">
-                    <mat-option [value]="option.name" *ngIf="!checkTag(option.name)">{{ option.name }}</mat-option>
-                  </div>
+                  <mat-optgroup *ngFor="let category of tagCategories" [label]="category.name">
+                      <ng-container *ngFor="let label of category.RecipeTagLabels">
+                        <mat-option [value]="label" *ngIf="!checkTag(label.name)">
+                          {{ label.name }}
+                        </mat-option>
+                      </ng-container>
+                  </mat-optgroup>
                 </mat-select>
               </mat-form-field>
               <mat-icon (click)="addTag()" class="addIcon" style="margin-right: 2rem">add_circle</mat-icon>

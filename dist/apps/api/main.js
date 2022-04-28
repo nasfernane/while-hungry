@@ -2609,7 +2609,7 @@ let FindAllController = class FindAllController {
     }
     /**
      * find all recipe tags options
-     * @returns an array of tags
+     * @returns an array of tags categories including different labels
      */
     findAll() {
         return this.service.findAll();
@@ -2667,7 +2667,11 @@ const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts")
 let FindAllService = class FindAllService {
     findAll() {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            const tags = yield prisma_client_1.prisma.recipeTagList.findMany();
+            const tags = yield prisma_client_1.prisma.recipeTagCategory.findMany({
+                include: {
+                    RecipeTagLabels: true,
+                }
+            });
             return tags;
         });
     }

@@ -106,7 +106,7 @@ CREATE TABLE `RecipeTag` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `RecipeTagList` (
+CREATE TABLE `RecipeTagLabel` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(25) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -222,7 +222,7 @@ ALTER TABLE `RecipeReview` ADD CONSTRAINT `RecipeReview_authorId_fkey` FOREIGN K
 ALTER TABLE `RecipeTag` ADD CONSTRAINT `RecipeTag_recipeId_fkey` FOREIGN KEY (`recipeId`) REFERENCES `Recipe`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `RecipeTag` ADD CONSTRAINT `RecipeTag_tagId_fkey` FOREIGN KEY (`tagId`) REFERENCES `RecipeTagList`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `RecipeTag` ADD CONSTRAINT `RecipeTag_tagId_fkey` FOREIGN KEY (`tagId`) REFERENCES `RecipeTagLabel`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `RequiredIngredient` ADD CONSTRAINT `RequiredIngredient_recipeId_fkey` FOREIGN KEY (`recipeId`) REFERENCES `Recipe`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

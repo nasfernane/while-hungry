@@ -8,7 +8,8 @@ import { AppService } from '@wh/core-utils';
 import { RecipeService, RecipeTagsService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
 
-import { RecipeTagList } from '@prisma/client';
+// prisma schema
+import { RecipeTagCategory, RecipeTagLabel } from '@prisma/client';
 
 interface Unit {
   value: string;
@@ -37,7 +38,7 @@ export class NewRecipeComponent implements OnInit {
   ingredientGroup: FormGroup;
   instructionGroup: FormGroup;
   recipeName = '';
-  tags: RecipeTagList[] = [];
+  tags: RecipeTagLabel[] = [];
   ingredients: Record<string, unknown>[] = [];
   instructions: Record<string, unknown>[] = [];
   notes: Record<string, unknown>[] = [];
@@ -101,7 +102,7 @@ export class NewRecipeComponent implements OnInit {
   ];
 
   // tag options for select
-  tagOptions: RecipeTagList[];
+  tagCategories: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -150,7 +151,8 @@ export class NewRecipeComponent implements OnInit {
 
     // get all recipe tag options
     this.tagsService.getRecipeTags().subscribe((tags: any) => {
-      this.tagOptions = tags;
+      this.tagCategories = tags;
+      console.log(this.tagCategories)
     })
   }
 
@@ -162,7 +164,7 @@ export class NewRecipeComponent implements OnInit {
 
     if (tag && !(this.tags.includes(tag)) && (this.tags.length < 3)) {
       // use tag options to fill array
-      this.tags.push(this.tagOptions[tag - 1]);
+      this.tags.push(tag);
       this.informationGroup.controls['tag'].reset();
     }
   }

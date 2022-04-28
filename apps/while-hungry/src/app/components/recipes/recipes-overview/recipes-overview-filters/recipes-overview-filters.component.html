@@ -35,10 +35,18 @@
 
     <mat-form-field fxFlex="20">
       <mat-select formControlName="tags" placeholder="Select tags">
-        <mat-option value="Japanese">Japanese</mat-option>
+        <!-- <mat-option value="Japanese">Japanese</mat-option>
         <mat-option value="Healthy">Healthy</mat-option>
         <mat-option value="Italian">Italian</mat-option>
-        <mat-option value="Vegetarian">Vegetarian</mat-option>
+        <mat-option value="Vegetarian">Vegetarian</mat-option> -->
+        <mat-option>-- None --</mat-option>
+        <mat-optgroup *ngFor="let category of tagCategories" [label]="category.name">
+          <ng-container *ngFor="let label of category.RecipeTagLabels">
+            <mat-option [value]="label.name">
+              {{ label.name }}
+            </mat-option>
+          </ng-container>
+        </mat-optgroup>
       </mat-select>
     </mat-form-field>
 

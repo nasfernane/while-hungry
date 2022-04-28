@@ -76,6 +76,9 @@ build api:
     paths:
       - ./dist/apps/api
     expire_in: 50 minutes
+  only:
+    - main
+    - merge_requests
 
 deploy_main:
   stage: deploy
