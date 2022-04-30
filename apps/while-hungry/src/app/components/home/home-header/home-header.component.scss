@@ -2,8 +2,8 @@
 @import './../../../../styles/abstract/variables';
 
 .homeHeaderContainer {
-  padding: 5rem;
   width: 100%;
+  padding: 50px 0;
 
   &__loop {
     max-width: $container-width;
@@ -38,5 +38,23 @@
     &--last {
       margin-bottom: 0;
     }
+  }
+}
+
+@media (max-width: 1200px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 20vw);
+  }
+}
+
+@media (max-width: 700px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 30vw);
+  }
+}
+
+@media (max-width: 500px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 40vw); 
   }
 }

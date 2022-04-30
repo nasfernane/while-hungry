@@ -20,14 +20,17 @@ import { RecipesTagsModule } from '../modules/recipes-tags/recipes-tags.module';
 // app controller & service
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ThrottlerModule } from '@nestjs/throttler';
+
+// trottler (rate limiter)
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
 
 @Module({
   imports: [
     ThrottlerModule.forRoot({
-      ttl: 300000,
-      limit: 100,
+      ttl: 10,
+      limit: 5000,
     }),
     RecipesModule,
     PostsModule, 
@@ -43,7 +46,10 @@ import { ThrottlerModule } from '@nestjs/throttler';
     RecipesTagsModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    { provide: APP_GUARD, useClass: ThrottlerGuard }
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

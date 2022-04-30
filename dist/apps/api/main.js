@@ -52,6 +52,8 @@ const recipes_tags_module_1 = __webpack_require__("./apps/api/src/modules/recipe
 // app controller & service
 const app_controller_1 = __webpack_require__("./apps/api/src/app/app.controller.ts");
 const app_service_1 = __webpack_require__("./apps/api/src/app/app.service.ts");
+// trottler (rate limiter)
+const core_1 = __webpack_require__("@nestjs/core");
 const throttler_1 = __webpack_require__("@nestjs/throttler");
 let AppModule = class AppModule {
     configure(consumer) {
@@ -64,8 +66,8 @@ AppModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         imports: [
             throttler_1.ThrottlerModule.forRoot({
-                ttl: 300000,
-                limit: 100,
+                ttl: 10,
+                limit: 5000,
             }),
             recipes_module_1.RecipesModule,
             posts_module_1.PostsModule,
@@ -81,7 +83,10 @@ AppModule = (0, tslib_1.__decorate)([
             recipes_tags_module_1.RecipesTagsModule
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [
+            app_service_1.AppService,
+            { provide: core_1.APP_GUARD, useClass: throttler_1.ThrottlerGuard }
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;
@@ -180,8 +185,6 @@ const common_1 = __webpack_require__("@nestjs/common");
 const register_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/register/register.module.ts");
 const login_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/login/login.module.ts");
 const updatePassword_module_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/updatePassword/updatePassword.module.ts");
-const core_1 = __webpack_require__("@nestjs/core");
-const throttler_1 = __webpack_require__("@nestjs/throttler");
 let AuthModule = class AuthModule {
 };
 AuthModule = (0, tslib_1.__decorate)([
@@ -191,9 +194,6 @@ AuthModule = (0, tslib_1.__decorate)([
             login_module_1.LoginModule,
             updatePassword_module_1.UpdatePasswordModule
         ],
-        providers: [
-            { provide: core_1.APP_GUARD, useClass: throttler_1.ThrottlerGuard }
-        ]
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;
@@ -213,6 +213,7 @@ const common_1 = __webpack_require__("@nestjs/common");
 const login_service_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/login/login.service.ts");
 const http_exception_filter_1 = __webpack_require__("./apps/api/src/filters/http-exception.filter.ts");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let LoginController = class LoginController {
     constructor(service) {
         this.service = service;
@@ -224,6 +225,7 @@ let LoginController = class LoginController {
 (0, tslib_1.__decorate)([
     (0, swagger_1.ApiResponse)({ status: 201, description: 'The user has been successfully logged.' }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
+    (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/login'),
     (0, tslib_1.__param)(0, (0, common_1.Body)()),
     (0, tslib_1.__metadata)("design:type", Function),
@@ -317,6 +319,7 @@ const common_1 = __webpack_require__("@nestjs/common");
 const register_service_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/register/register.service.ts");
 const http_exception_filter_1 = __webpack_require__("./apps/api/src/filters/http-exception.filter.ts");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let RegisterController = class RegisterController {
     constructor(service) {
         this.service = service;
@@ -330,6 +333,7 @@ let RegisterController = class RegisterController {
 (0, tslib_1.__decorate)([
     (0, swagger_1.ApiResponse)({ status: 201, description: 'The user has been successfully created.' }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
+    (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/register'),
     (0, tslib_1.__param)(0, (0, common_1.Body)()),
     (0, tslib_1.__metadata)("design:type", Function),
@@ -430,6 +434,7 @@ const common_1 = __webpack_require__("@nestjs/common");
 const updatePassword_service_1 = __webpack_require__("./apps/api/src/modules/auth/useCases/updatePassword/updatePassword.service.ts");
 const http_exception_filter_1 = __webpack_require__("./apps/api/src/filters/http-exception.filter.ts");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
+const throttler_1 = __webpack_require__("@nestjs/throttler");
 let UpdatePasswordController = class UpdatePasswordController {
     constructor(service) {
         this.service = service;
@@ -440,6 +445,7 @@ let UpdatePasswordController = class UpdatePasswordController {
 };
 (0, tslib_1.__decorate)([
     (0, swagger_1.ApiResponse)({ status: 201, description: 'The password has been successfully updated.' }),
+    (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/pwupdate/:id'),
     (0, tslib_1.__param)(0, (0, common_1.Param)('id')),
     (0, tslib_1.__param)(1, (0, common_1.Body)()),
@@ -2610,7 +2616,6 @@ exports.FindAllController = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const findAll_service_1 = __webpack_require__("./apps/api/src/modules/recipes-tags/useCases/findAll/findAll.service.ts");
-const throttler_1 = __webpack_require__("@nestjs/throttler");
 let FindAllController = class FindAllController {
     constructor(service) {
         this.service = service;
@@ -2630,7 +2635,6 @@ let FindAllController = class FindAllController {
     (0, tslib_1.__metadata)("design:returntype", typeof (_a = typeof Promise !== "undefined" && Promise) === "function" ? _a : Object)
 ], FindAllController.prototype, "findAll", null);
 FindAllController = (0, tslib_1.__decorate)([
-    (0, throttler_1.SkipThrottle)(),
     (0, common_1.Controller)('tags'),
     (0, tslib_1.__metadata)("design:paramtypes", [typeof (_b = typeof findAll_service_1.FindAllService !== "undefined" && findAll_service_1.FindAllService) === "function" ? _b : Object])
 ], FindAllController);
@@ -2842,7 +2846,6 @@ const platform_express_1 = __webpack_require__("@nestjs/platform-express");
 const create_service_1 = __webpack_require__("./apps/api/src/modules/recipes/useCases/create/create.service.ts");
 const multer_1 = __webpack_require__("multer");
 const path_1 = __webpack_require__("path");
-const throttler_1 = __webpack_require__("@nestjs/throttler");
 const client_1 = __webpack_require__("@prisma/client");
 let CreateController = class CreateController {
     constructor(service) {
@@ -2886,7 +2889,6 @@ let CreateController = class CreateController {
     (0, tslib_1.__metadata)("design:returntype", void 0)
 ], CreateController.prototype, "storePicture", null);
 CreateController = (0, tslib_1.__decorate)([
-    (0, throttler_1.SkipThrottle)(),
     (0, common_1.Controller)('recipes'),
     (0, tslib_1.__metadata)("design:paramtypes", [typeof (_d = typeof create_service_1.CreateService !== "undefined" && create_service_1.CreateService) === "function" ? _d : Object])
 ], CreateController);
@@ -3330,7 +3332,6 @@ exports.FindAllController = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const findAll_service_1 = __webpack_require__("./apps/api/src/modules/recipes/useCases/findAll/findAll.service.ts");
-const throttler_1 = __webpack_require__("@nestjs/throttler");
 let FindAllController = class FindAllController {
     constructor(service) {
         this.service = service;
@@ -3350,7 +3351,6 @@ let FindAllController = class FindAllController {
     (0, tslib_1.__metadata)("design:returntype", void 0)
 ], FindAllController.prototype, "findAll", null);
 FindAllController = (0, tslib_1.__decorate)([
-    (0, throttler_1.SkipThrottle)(),
     (0, common_1.Controller)('recipes'),
     (0, tslib_1.__metadata)("design:paramtypes", [typeof (_a = typeof findAll_service_1.FindAllService !== "undefined" && findAll_service_1.FindAllService) === "function" ? _a : Object])
 ], FindAllController);

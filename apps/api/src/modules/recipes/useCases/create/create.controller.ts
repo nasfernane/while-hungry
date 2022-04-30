@@ -3,14 +3,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateService } from './create.service';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { Multer } from 'multer';
 import * as path from 'path';
-import { SkipThrottle } from '@nestjs/throttler';
 
 import { Recipe } from '@prisma/client';
 
 
-@SkipThrottle()
 @Controller('recipes')
 export class CreateController {
   constructor(private readonly service: CreateService) {}

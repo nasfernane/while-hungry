@@ -1,31 +1,37 @@
 @import './../../../styles/main.scss';
 
 .headerWrapper {
-  height: 7rem;
-  width: 100%;
+  height: $header-height;
+  width: 100vw;
   border-bottom: 0.1rem solid $grey-dark;
 
   .header {
     margin: 0 auto;
     height: 100%;
     width: $container-width;
+    max-width: 100vw !important;
   }
 
-  @media (max-width: 1200px) {
+
+  @media (max-width: 120rem) {
     .header {
       width: calc($container-width + 20vw);
     }
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 80rem) {
     .header {
       width: calc($container-width + 30vw);
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 50rem) {
     .header {
       width: calc($container-width + 40vw);
+    }
+
+    wh-header-nav {
+      margin: 0 auto !important;
     }
   }
 }
