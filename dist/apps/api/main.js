@@ -4993,7 +4993,9 @@ function bootstrap() {
         const globalPrefix = 'api';
         app.setGlobalPrefix(globalPrefix);
         // set http headers to prevent security vulnerabilites
-        app.use((0, helmet_1.default)());
+        app.use((0, helmet_1.default)({
+            crossOriginResourcePolicy: false,
+        }));
         // enable cors origin between apps
         app.enableCors();
         // protection against csurf attacks
@@ -5004,6 +5006,9 @@ function bootstrap() {
             saveUninitialized: false,
         }));
         app.use((0, csurf_1.default)());
+        app.use('*', function (req, res) {
+            res.cookie('XSRF-TOKEN', req.csrfToken());
+        });
         // configure swagger for api endpoints documentation
         configureSwagger(app);
         const port = process.env.PORT || 3000;

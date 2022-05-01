@@ -26,7 +26,10 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   // set http headers to prevent security vulnerabilites
-  app.use(helmet());
+  app.use(helmet({
+    crossOriginResourcePolicy: false,
+  }
+  ));
 
   // enable cors origin between apps
   app.enableCors(); 
@@ -41,6 +44,9 @@ async function bootstrap() {
     }),
   );
   app.use(csurf());
+  app.use('*', function (req, res) {
+    res.cookie('XSRF-TOKEN', req.csrfToken())
+  })
 
   // configure swagger for api endpoints documentation
   configureSwagger(app);
