@@ -4858,10 +4858,38 @@ module.exports = require("bcrypt");
 
 /***/ }),
 
+/***/ "cookie-parser":
+/***/ ((module) => {
+
+module.exports = require("cookie-parser");
+
+/***/ }),
+
+/***/ "csurf":
+/***/ ((module) => {
+
+module.exports = require("csurf");
+
+/***/ }),
+
 /***/ "dotenv":
 /***/ ((module) => {
 
 module.exports = require("dotenv");
+
+/***/ }),
+
+/***/ "express-session":
+/***/ ((module) => {
+
+module.exports = require("express-session");
+
+/***/ }),
+
+/***/ "helmet":
+/***/ ((module) => {
+
+module.exports = require("helmet");
 
 /***/ }),
 
@@ -4944,9 +4972,10 @@ const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const core_1 = __webpack_require__("@nestjs/core");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
-// import helmet from 'helmet';
-// import csurf from 'csurf';
-// import cookieParser from 'cookie-parser';
+const helmet_1 = (0, tslib_1.__importDefault)(__webpack_require__("helmet"));
+const csurf_1 = (0, tslib_1.__importDefault)(__webpack_require__("csurf"));
+const cookie_parser_1 = (0, tslib_1.__importDefault)(__webpack_require__("cookie-parser"));
+const express_session_1 = (0, tslib_1.__importDefault)(__webpack_require__("express-session"));
 const app_module_1 = __webpack_require__("./apps/api/src/app/app.module.ts");
 const configureSwagger = (app) => {
     const options = new swagger_1.DocumentBuilder()
@@ -4964,12 +4993,17 @@ function bootstrap() {
         const globalPrefix = 'api';
         app.setGlobalPrefix(globalPrefix);
         // set http headers to prevent security vulnerabilites
-        // app.use(helmet());
+        app.use((0, helmet_1.default)());
         // enable cors origin between apps
         app.enableCors();
         // protection against csurf attacks
-        // app.use(cookieParser());
-        // app.use(csurf());
+        app.use((0, cookie_parser_1.default)());
+        app.use((0, express_session_1.default)({
+            secret: 'ultrasecresessionpassword',
+            resave: false,
+            saveUninitialized: false,
+        }));
+        app.use((0, csurf_1.default)());
         // configure swagger for api endpoints documentation
         configureSwagger(app);
         const port = process.env.PORT || 3000;

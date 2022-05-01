@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import csurf from 'csurf';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 import { AppModule } from './app/app.module';
 
@@ -32,6 +33,13 @@ async function bootstrap() {
 
   // protection against csurf attacks
   app.use(cookieParser());
+  app.use(
+    session({
+      secret: 'ultrasecresessionpassword',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
   app.use(csurf());
 
   // configure swagger for api endpoints documentation

@@ -76,6 +76,7 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-ngrx": "^2.0.4",
+    "express-session": "^1.17.2",
     "fs-extra": "^10.0.1",
     "helmet": "^5.0.2",
     "http-errors": "^2.0.0",
@@ -93,6 +94,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express-session": "^1.17.4",
     "@types/http-errors": "^1.8.2",
     "@types/jest": "27.0.2",
     "@types/jsonwebtoken": "^8.5.8",
