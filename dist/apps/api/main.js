@@ -4993,9 +4993,7 @@ function bootstrap() {
         const globalPrefix = 'api';
         app.setGlobalPrefix(globalPrefix);
         // set http headers to prevent security vulnerabilites
-        app.use((0, helmet_1.default)({
-            crossOriginResourcePolicy: false,
-        }));
+        app.use((0, helmet_1.default)());
         // enable cors origin between apps
         app.enableCors();
         // protection against csurf attacks

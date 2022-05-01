@@ -26,10 +26,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   // set http headers to prevent security vulnerabilites
-  app.use(helmet({
-    crossOriginResourcePolicy: false,
-  }
-  ));
+  app.use(helmet());
 
   // enable cors origin between apps
   app.enableCors(); 
