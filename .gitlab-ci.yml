@@ -43,7 +43,7 @@ install:
 lint front: 
   stage: lint
   script: 
-  - npm run lint:client
+  - npm run lint:web
   only:
     - main
     - merge_requests
