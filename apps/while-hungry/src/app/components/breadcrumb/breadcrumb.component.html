@@ -1,4 +1,8 @@
-<div class="breadcrumbContainer" *ngIf="appService.getBreadcrumb()">
-  <div class="breadcrumb" [innerHtml]="appService.getBreadcrumb()" fxLayout="row" fxLayoutAlign="start center">
+<div class="breadcrumbContainer" *ngIf="appService.getBreadcrumb().length > 0">
+  <div class="breadcrumb" fxLayout="row" fxLayoutAlign="start center">
+    <div *ngFor="let el of appService.getBreadcrumb(); let last = last">
+      <span class="breadcrumb__chunk" (click)="navBreadcrumb(el)">{{ el }}</span>
+      <span *ngIf="!last">&nbsp;»&nbsp;</span>
+    </div>
   </div>
 </div>

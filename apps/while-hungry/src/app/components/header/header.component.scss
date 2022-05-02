@@ -13,19 +13,19 @@
   }
 
 
-  @media (max-width: 120rem) {
+  @media (max-width: 1200px) {
     .header {
       width: calc($container-width + 20vw);
     }
   }
 
-  @media (max-width: 80rem) {
+  @media (max-width: 800px) {
     .header {
       width: calc($container-width + 30vw);
     }
   }
 
-  @media (max-width: 50rem) {
+  @media (max-width: 500px) {
     .header {
       width: calc($container-width + 40vw);
     }

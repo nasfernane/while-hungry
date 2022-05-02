@@ -10,7 +10,7 @@ import { RecipeReview } from '@prisma/client';
 export class AppService {
   public currentUser: any = {};
   public userLogged = false;
-  private _breadcrumb = "";
+  private _breadcrumb: string[] = [];
 
 
   /**
@@ -139,12 +139,12 @@ export class AppService {
     if (currentUser) this.setUser(JSON.parse(currentUser));
   }
 
-  public getBreadcrumb(): string {
+  public getBreadcrumb(): string[] {
     return this._breadcrumb;
   }
 
   set breadcrumb(v: Array<string>) {
-    setTimeout(() => (this._breadcrumb = v.map(v2 => "<span class='breadcrumb__chunk' routerLink='v2'>&nbsp;"+v2+"&nbsp;</span>").join("<span class='breadcrumb__divider'>&nbsp»&nbsp</span>")));
+    this._breadcrumb = v;
   }
 
   public formatDate(date: string) {
