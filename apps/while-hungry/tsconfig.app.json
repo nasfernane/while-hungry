@@ -3,7 +3,7 @@
   "compilerOptions": {
     "useUnknownInCatchVariables": false,
     "outDir": "../../dist/out-tsc",
-    "types": [],
+    "types": ["node"],
     "target": "ES2017"
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

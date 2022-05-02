@@ -22,7 +22,8 @@
       "@wh/core-utils": ["libs/core-utils/src/index.ts"],
       "@wh/material": ["libs/material/src/index.ts"],
       "@wh/prisma-client": ["libs/prisma-client/src/index.ts"],
-      "@wh/ui": ["libs/ui/src/index.ts"]
+      "@wh/ui": ["libs/ui/src/index.ts"],
+      "@wh/env": ["apps/while-hungry/src/environments/environment.ts"] 
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -69,7 +69,6 @@ import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.c
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

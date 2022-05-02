@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // utils
-import { environment } from '../../environments/environment';
+import { environment } from '@wh/env';
 import { ShoppingList } from '@prisma/client';
 
 const ENDPOINT = environment.API_URL + '/shopping-list';
