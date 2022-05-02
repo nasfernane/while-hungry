@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // utils
 import { environment } from '../../environments/environment';
 
-import { RecipeTag } from '@prisma/client';
+import { RecipeTagCategory } from '@prisma/client';
 
 const ENDPOINT = environment.API_URL + '/tags';
 
@@ -18,6 +18,6 @@ export class RecipeTagsService {
   ) { }
 
   getRecipeTags() {
-    return this.http.get<RecipeTag[]>(ENDPOINT);
+    return this.http.get<RecipeTagCategory[]>(ENDPOINT);
   }
 }

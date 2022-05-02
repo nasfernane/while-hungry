@@ -150,7 +150,7 @@ export class NewRecipeComponent implements OnInit {
     })
 
     // get all recipe tag options
-    this.tagsService.getRecipeTags().subscribe((tags: any) => {
+    this.tagsService.getRecipeTags().subscribe((tags: RecipeTagCategory[]) => {
       this.tagCategories = tags;
     })
   }

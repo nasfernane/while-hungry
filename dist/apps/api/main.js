@@ -1910,8 +1910,8 @@ let GetPictureController = class GetPictureController {
             file = (0, fs_1.createReadStream)((0, path_1.join)(__dirname, 'public/nopicture.jpg'));
         }
         res.set({
-            'Content-Type': 'application/json',
-            'Content-Disposition': 'attachment; filename="test.jpeg"',
+            'Content-Type': 'image/jpeg',
+            'Content-Disposition': 'attachment; filename="picture.jpeg"',
         });
         return new common_1.StreamableFile(file);
     }
@@ -4858,31 +4858,10 @@ module.exports = require("bcrypt");
 
 /***/ }),
 
-/***/ "cookie-parser":
-/***/ ((module) => {
-
-module.exports = require("cookie-parser");
-
-/***/ }),
-
-/***/ "csurf":
-/***/ ((module) => {
-
-module.exports = require("csurf");
-
-/***/ }),
-
 /***/ "dotenv":
 /***/ ((module) => {
 
 module.exports = require("dotenv");
-
-/***/ }),
-
-/***/ "express-session":
-/***/ ((module) => {
-
-module.exports = require("express-session");
 
 /***/ }),
 
@@ -4973,9 +4952,6 @@ const common_1 = __webpack_require__("@nestjs/common");
 const core_1 = __webpack_require__("@nestjs/core");
 const swagger_1 = __webpack_require__("@nestjs/swagger");
 const helmet_1 = (0, tslib_1.__importDefault)(__webpack_require__("helmet"));
-const csurf_1 = (0, tslib_1.__importDefault)(__webpack_require__("csurf"));
-const cookie_parser_1 = (0, tslib_1.__importDefault)(__webpack_require__("cookie-parser"));
-const express_session_1 = (0, tslib_1.__importDefault)(__webpack_require__("express-session"));
 const app_module_1 = __webpack_require__("./apps/api/src/app/app.module.ts");
 const configureSwagger = (app) => {
     const options = new swagger_1.DocumentBuilder()
@@ -4993,20 +4969,22 @@ function bootstrap() {
         const globalPrefix = 'api';
         app.setGlobalPrefix(globalPrefix);
         // set http headers to prevent security vulnerabilites
-        app.use((0, helmet_1.default)());
+        app.use((0, helmet_1.default)({ crossOriginResourcePolicy: false }));
         // enable cors origin between apps
         app.enableCors();
         // protection against csurf attacks
-        app.use((0, cookie_parser_1.default)());
-        app.use((0, express_session_1.default)({
-            secret: 'ultrasecresessionpassword',
-            resave: false,
-            saveUninitialized: false,
-        }));
-        app.use((0, csurf_1.default)());
-        app.use('*', function (req, res) {
-            res.cookie('XSRF-TOKEN', req.csrfToken());
-        });
+        // app.use(cookieParser());
+        // app.use(
+        //   session({
+        //     secret: 'ultrasecresessionpassword',
+        //     resave: false,
+        //     saveUninitialized: false,
+        //   }),
+        // );
+        // app.use(csurf());
+        // app.use('*', function (req, res) {
+        //   res.cookie('XSRF-TOKEN', req.csrfToken())
+        // })
         // configure swagger for api endpoints documentation
         configureSwagger(app);
         const port = process.env.PORT || 3000;

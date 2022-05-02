@@ -25,8 +25,8 @@ export class GetPictureController {
     }
     
     res.set({
-      'Content-Type': 'application/json',
-      'Content-Disposition': 'attachment; filename="test.jpeg"',
+      'Content-Type': 'image/jpeg',
+      'Content-Disposition': 'attachment; filename="picture.jpeg"',
     });
     return new StreamableFile(file);
   }
