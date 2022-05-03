@@ -87,13 +87,15 @@ deploy_main:
     WEB_PATH: '/var/www/www.whilehungry.com/'
     API_PATH: '/home/nasfernane/while-hungry/dist/apps/api/'
   script:
-    # check rsync install
+    # check installs
     - which rsync || ( apt update -y && apt install rsync -y )
+    - which pm2 || ( apt update -y && apt install pm2 -y )
     # push front
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
     # push back
     - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
-    - pm2 restart wh-api
+    - /usr/bin/pm2 kill
+    - /user/bin/pm2 start npm --name wh-api -- run serve:api
   only:
     - main
     - merge_requests
