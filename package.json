@@ -9,7 +9,7 @@
     "start": "nx serve",
     "serve:api": "nx run api:serve",
     "serve:web": "ng serve",
-    "start:prod": "node dist/api/main --configuration=production",
+    "start:prod": "node dist/api/main",
     "generate-prisma-schema": "cat prisma/models/base/base.prisma prisma/models/*.prisma > prisma/schema.prisma",
     "serve:all": "concurrently \" npm run serve:api \" \" npm run serve:web \"",
     "cypress": "nx e2e while-hungry-e2e --watch",
