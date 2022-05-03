@@ -5,6 +5,12 @@
     width: 100%;
   }
 
+  @media (max-width: 959px) {
+    wh-blog-item {
+      margin: 0 auto;
+    }
+  }
+
   &__newPostBtn {
     position: absolute;
     right: 0rem;
