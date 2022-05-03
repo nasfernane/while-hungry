@@ -80,13 +80,10 @@ AppModule = (0, tslib_1.__decorate)([
             favorites_module_1.FavoritesModule,
             shopping_list_module_1.ShoppingListModule,
             files_module_1.FilesModule,
-            recipes_tags_module_1.RecipesTagsModule
+            recipes_tags_module_1.RecipesTagsModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [
-            app_service_1.AppService,
-            { provide: core_1.APP_GUARD, useClass: throttler_1.ThrottlerGuard }
-        ],
+        providers: [app_service_1.AppService, { provide: core_1.APP_GUARD, useClass: throttler_1.ThrottlerGuard }],
     })
 ], AppModule);
 exports.AppModule = AppModule;
@@ -126,9 +123,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         const response = ctx.getResponse();
         const request = ctx.getRequest();
         const status = exception.getStatus();
-        response
-            .status(status)
-            .json({
+        response.status(status).json({
             statusCode: status,
             timestamp: new Date().toISOString(),
             path: request.url,
@@ -156,12 +151,15 @@ const jwt = (0, tslib_1.__importStar)(__webpack_require__("jsonwebtoken"));
 let CheckAuthMiddleware = class CheckAuthMiddleware {
     use(req, res, next) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
-            const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
-            const decoded = token ? jwt.verify(token, process.env['ACCESS_TOKEN_SECRET']) : null;
+            const token = req.headers.authorization
+                ? req.headers.authorization.split(' ')[1]
+                : null;
+            const decoded = token
+                ? jwt.verify(token, process.env['ACCESS_TOKEN_SECRET'])
+                : null;
             if (!token || !decoded) {
                 throw new common_2.HttpException('Unauthorized', common_2.HttpStatus.UNAUTHORIZED);
             }
-            ;
             next();
         });
     }
@@ -189,11 +187,7 @@ let AuthModule = class AuthModule {
 };
 AuthModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            register_module_1.RegisterModule,
-            login_module_1.LoginModule,
-            updatePassword_module_1.UpdatePasswordModule
-        ],
+        imports: [register_module_1.RegisterModule, login_module_1.LoginModule, updatePassword_module_1.UpdatePasswordModule],
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;
@@ -223,7 +217,10 @@ let LoginController = class LoginController {
     }
 };
 (0, tslib_1.__decorate)([
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'The user has been successfully logged.' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'The user has been successfully logged.',
+    }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
     (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/login'),
@@ -258,7 +255,7 @@ let LoginModule = class LoginModule {
 LoginModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [login_controller_1.LoginController],
-        providers: [login_service_1.LoginService]
+        providers: [login_service_1.LoginService],
     })
 ], LoginModule);
 exports.LoginModule = LoginModule;
@@ -285,12 +282,12 @@ let LoginService = class LoginService {
             const { email, password } = param;
             const user = yield prisma_client_1.prisma.user.findUnique({
                 where: {
-                    email
-                }
+                    email,
+                },
             });
             // if user not found or wrontg credentials
             if (!user || !bcrypt.compareSync(password, user.password)) {
-                return { status: 404, message: "Bad credentials" };
+                return { status: 404, message: 'Bad credentials' };
             }
             delete user.password;
             const accessToken = yield jwt_1.Jwt.signAccessToken(user);
@@ -331,7 +328,10 @@ let RegisterController = class RegisterController {
     }
 };
 (0, tslib_1.__decorate)([
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'The user has been successfully created.' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'The user has been successfully created.',
+    }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
     (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/register'),
@@ -366,7 +366,7 @@ let RegisterModule = class RegisterModule {
 RegisterModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [register_controller_1.RegisterController],
-        providers: [register_service_1.RegisterService]
+        providers: [register_service_1.RegisterService],
     })
 ], RegisterModule);
 exports.RegisterModule = RegisterModule;
@@ -402,7 +402,7 @@ let RegisterService = class RegisterService {
                 password = bcrypt.hashSync(password, 8);
                 // create new user with a default avatar
                 const user = yield prisma_client_1.prisma.user.create({
-                    data: { email, nickname, password, avatar: 'avatar9' }
+                    data: { email, nickname, password, avatar: 'avatar9' },
                 });
                 const accessToken = yield jwt_1.Jwt.signAccessToken(user);
                 return Object.assign(Object.assign({}, user), { accessToken });
@@ -444,7 +444,10 @@ let UpdatePasswordController = class UpdatePasswordController {
     }
 };
 (0, tslib_1.__decorate)([
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'The password has been successfully updated.' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'The password has been successfully updated.',
+    }),
     (0, throttler_1.Throttle)(3, 2),
     (0, common_1.Post)('/pwupdate/:id'),
     (0, tslib_1.__param)(0, (0, common_1.Param)('id')),
@@ -479,7 +482,7 @@ let UpdatePasswordModule = class UpdatePasswordModule {
 UpdatePasswordModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [updatePassword_controller_1.UpdatePasswordController],
-        providers: [updatePassword_service_1.UpdatePasswordService]
+        providers: [updatePassword_service_1.UpdatePasswordService],
     })
 ], UpdatePasswordModule);
 exports.UpdatePasswordModule = UpdatePasswordModule;
@@ -506,12 +509,12 @@ let UpdatePasswordService = class UpdatePasswordService {
             const { oldPassword, password } = passwords;
             const user = yield prisma_client_1.prisma.user.findUnique({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
             // if user not found or wrontg credentials
             if (!user || !bcrypt.compareSync(oldPassword, user.password)) {
-                return { status: 404, message: "Bad credentials" };
+                return { status: 404, message: 'Bad credentials' };
             }
             else {
                 const updatedUser = yield prisma_client_1.prisma.user.update({
@@ -554,11 +557,7 @@ let ClapsModule = class ClapsModule {
 };
 ClapsModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            check_module_1.CheckModule,
-            create_module_1.CreateModule,
-            count_module_1.CountModule
-        ]
+        imports: [check_module_1.CheckModule, create_module_1.CreateModule, count_module_1.CountModule],
     })
 ], ClapsModule);
 exports.ClapsModule = ClapsModule;
@@ -626,7 +625,7 @@ let CheckModule = class CheckModule {
 CheckModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [check_controller_1.CheckController],
-        providers: [check_service_1.CheckService]
+        providers: [check_service_1.CheckService],
     })
 ], CheckModule);
 exports.CheckModule = CheckModule;
@@ -653,9 +652,9 @@ let CheckService = class CheckService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const clapExists = yield prisma_client_1.prisma.clap.findFirst({
                 where: {
-                    clapperId: +(clap.clapperId),
-                    clappedId: +(clap.clappedId)
-                }
+                    clapperId: +clap.clapperId,
+                    clappedId: +clap.clappedId,
+                },
             });
             if (clapExists) {
                 return true;
@@ -697,7 +696,10 @@ let CreateController = class CreateController {
     }
 };
 (0, tslib_1.__decorate)([
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'The clap has been successfully created.' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'The clap has been successfully created.',
+    }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
     (0, common_1.Post)(),
     (0, tslib_1.__param)(0, (0, common_1.Body)()),
@@ -730,7 +732,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -755,8 +757,8 @@ let CreateService = class CreateService {
             const newClap = yield prisma_client_1.prisma.clap.create({
                 data: {
                     clapperId: +clap.clapperId,
-                    clappedId: +clap.clappedId
-                }
+                    clappedId: +clap.clappedId,
+                },
             });
             return newClap;
         });
@@ -826,7 +828,7 @@ let CountModule = class CountModule {
 CountModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [count_controller_1.CountController],
-        providers: [count_service_1.CountService]
+        providers: [count_service_1.CountService],
     })
 ], CountModule);
 exports.CountModule = CountModule;
@@ -853,8 +855,8 @@ let CountService = class CountService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const count = yield prisma_client_1.prisma.clap.count({
                 where: {
-                    clappedId: +id
-                }
+                    clappedId: +id,
+                },
             });
             return count;
         });
@@ -892,7 +894,7 @@ DefinitionsModule = (0, tslib_1.__decorate)([
             find_module_1.FindModule,
             findAll_module_1.FindAllModule,
             update_module_1.UpdateModule,
-        ]
+        ],
     })
 ], DefinitionsModule);
 exports.DefinitionsModule = DefinitionsModule;
@@ -928,7 +930,10 @@ let CreateController = class CreateController {
     }
 };
 (0, tslib_1.__decorate)([
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'The user has been successfully created.' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'The user has been successfully created.',
+    }),
     (0, swagger_1.ApiResponse)({ status: 403, description: 'Forbidden.' }),
     (0, common_1.Post)(),
     (0, tslib_1.__param)(0, (0, common_1.Body)()),
@@ -961,7 +966,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -983,7 +988,7 @@ let CreateService = class CreateService {
     create(definition) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const newDefinition = yield prisma_client_1.prisma.definition.create({
-                data: Object.assign({}, definition)
+                data: Object.assign({}, definition),
             });
             return newDefinition;
         });
@@ -1051,7 +1056,7 @@ let DeleteModule = class DeleteModule {
 DeleteModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [delete_controller_1.DeleteController],
-        providers: [delete_service_1.DeleteService]
+        providers: [delete_service_1.DeleteService],
     })
 ], DeleteModule);
 exports.DeleteModule = DeleteModule;
@@ -1073,8 +1078,8 @@ let DeleteService = class DeleteService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             yield prisma_client_1.prisma.definition.delete({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
         });
     }
@@ -1141,7 +1146,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -1169,7 +1174,7 @@ let FindAllService = class FindAllService {
             const definitions = yield prisma_client_1.prisma.definition.findMany({
                 orderBy: {
                     label: 'asc',
-                }
+                },
             });
             return definitions;
         });
@@ -1242,7 +1247,7 @@ let FindModule = class FindModule {
 FindModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [find_controller_1.FindController],
-        providers: [find_service_1.FindService]
+        providers: [find_service_1.FindService],
     })
 ], FindModule);
 exports.FindModule = FindModule;
@@ -1270,8 +1275,8 @@ let FindService = class FindService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const definition = yield prisma_client_1.prisma.definition.findFirst({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
             return definition;
         });
@@ -1344,7 +1349,7 @@ let UpdateModule = class UpdateModule {
 UpdateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [update_controller_1.UpdateController],
-        providers: [update_service_1.UpdateService]
+        providers: [update_service_1.UpdateService],
     })
 ], UpdateModule);
 exports.UpdateModule = UpdateModule;
@@ -1364,18 +1369,18 @@ const common_1 = __webpack_require__("@nestjs/common");
 const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
 let UpdateService = class UpdateService {
     /**
-    * update a definition based on id
-    * @param id
-    * @param definition
-    * @returns updated definition
-    */
+     * update a definition based on id
+     * @param id
+     * @param definition
+     * @returns updated definition
+     */
     update(id, definition) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const updatedDefinition = yield prisma_client_1.prisma.definition.update({
                 where: {
-                    id
+                    id,
                 },
-                data: Object.assign({}, definition)
+                data: Object.assign({}, definition),
             });
             return updatedDefinition;
         });
@@ -1405,12 +1410,7 @@ let FavoritesModule = class FavoritesModule {
 };
 FavoritesModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            findAll_module_1.FindAllModule,
-            findAllFiltered_module_1.FindAllFilteredModule,
-            create_module_1.CreateModule,
-            delete_module_1.DeleteModule
-        ],
+        imports: [findAll_module_1.FindAllModule, findAllFiltered_module_1.FindAllFilteredModule, create_module_1.CreateModule, delete_module_1.DeleteModule],
     })
 ], FavoritesModule);
 exports.FavoritesModule = FavoritesModule;
@@ -1470,7 +1470,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -1492,7 +1492,7 @@ let CreateService = class CreateService {
     create(favorite) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const newFavorite = yield prisma_client_1.prisma.recipeFavorite.create({
-                data: Object.assign({}, favorite)
+                data: Object.assign({}, favorite),
             });
             if (newFavorite) {
                 return newFavorite;
@@ -1557,7 +1557,7 @@ let DeleteModule = class DeleteModule {
 DeleteModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [delete_controller_1.DeleteController],
-        providers: [delete_service_1.DeleteService]
+        providers: [delete_service_1.DeleteService],
     })
 ], DeleteModule);
 exports.DeleteModule = DeleteModule;
@@ -1580,8 +1580,8 @@ let DeleteService = class DeleteService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const deletedFavorite = yield prisma_client_1.prisma.recipeFavorite.delete({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
             return deletedFavorite;
         });
@@ -1654,7 +1654,7 @@ let FindAllFilteredModule = class FindAllFilteredModule {
 FindAllFilteredModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAllFiltered_controller_1.FindAllFilteredController],
-        providers: [findAllFiltered_service_1.FindAllFilteredService]
+        providers: [findAllFiltered_service_1.FindAllFilteredService],
     })
 ], FindAllFilteredModule);
 exports.FindAllFilteredModule = FindAllFilteredModule;
@@ -1688,15 +1688,15 @@ let FindAllFilteredService = class FindAllFilteredService {
                                     some: {
                                         tag: {
                                             name: filters.tag ? filters.tag : undefined,
-                                        }
-                                    }
-                                }
+                                        },
+                                    },
+                                },
                             },
                             {
                                 avgReview: filters.rating ? +filters.rating : undefined,
-                            }
-                        ]
-                    }
+                            },
+                        ],
+                    },
                 },
                 include: {
                     recipe: {
@@ -1709,7 +1709,7 @@ let FindAllFilteredService = class FindAllFilteredService {
                             recipeTags: {
                                 include: {
                                     tag: true,
-                                }
+                                },
                             },
                             recipeComments: {
                                 include: {
@@ -1718,9 +1718,9 @@ let FindAllFilteredService = class FindAllFilteredService {
                             },
                             recipeReviews: true,
                             recipeFavorites: true,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             });
             return favorites;
         });
@@ -1791,7 +1791,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -1818,7 +1818,7 @@ let FindAllService = class FindAllService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const favorites = yield prisma_client_1.prisma.recipeFavorite.findMany({
                 where: {
-                    userId: id
+                    userId: id,
                 },
                 include: {
                     recipe: {
@@ -1831,7 +1831,7 @@ let FindAllService = class FindAllService {
                             recipeTags: {
                                 include: {
                                     tag: true,
-                                }
+                                },
                             },
                             recipeComments: {
                                 include: {
@@ -1840,9 +1840,9 @@ let FindAllService = class FindAllService {
                             },
                             recipeReviews: true,
                             recipeFavorites: true,
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             });
             return favorites;
         });
@@ -1870,9 +1870,7 @@ let FilesModule = class FilesModule {
 };
 FilesModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            getPicture_module_1.GetPictureModule
-        ]
+        imports: [getPicture_module_1.GetPictureModule],
     })
 ], FilesModule);
 exports.FilesModule = FilesModule;
@@ -1975,8 +1973,8 @@ PostsModule = (0, tslib_1.__decorate)([
             findLast_module_1.FindLastModule,
             find_module_1.FindModule,
             findAll_module_1.FindAllModule,
-            update_module_1.UpdateModule
-        ]
+            update_module_1.UpdateModule,
+        ],
     })
 ], PostsModule);
 exports.PostsModule = PostsModule;
@@ -2034,7 +2032,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -2060,8 +2058,8 @@ let CreateService = class CreateService {
                     content: post.content,
                     picture: post.picture,
                     published: false,
-                    authorId: post.authorId
-                }
+                    authorId: post.authorId,
+                },
             });
             return newPost;
         });
@@ -2127,7 +2125,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -2155,7 +2153,7 @@ let FindAllService = class FindAllService {
             const posts = yield prisma_client_1.prisma.post.findMany({
                 include: {
                     author: true,
-                }
+                },
             });
             return posts;
         });
@@ -2222,7 +2220,7 @@ let FindLastModule = class FindLastModule {
 FindLastModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findLast_controller_1.FindLastController],
-        providers: [findLast_service_1.FindLastService]
+        providers: [findLast_service_1.FindLastService],
     })
 ], FindLastModule);
 exports.FindLastModule = FindLastModule;
@@ -2253,7 +2251,7 @@ let FindLastService = class FindLastService {
                 },
                 include: {
                     author: true,
-                }
+                },
             });
             return post;
         });
@@ -2321,7 +2319,7 @@ let FindModule = class FindModule {
 FindModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [find_controller_1.FindController],
-        providers: [find_service_1.FindService]
+        providers: [find_service_1.FindService],
     })
 ], FindModule);
 exports.FindModule = FindModule;
@@ -2344,11 +2342,11 @@ let FindService = class FindService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const post = yield prisma_client_1.prisma.post.findUnique({
                 where: {
-                    id: id
+                    id: id,
                 },
                 include: {
                     author: true,
-                }
+                },
             });
             return post;
         });
@@ -2419,7 +2417,7 @@ let UpdateModule = class UpdateModule {
 UpdateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [update_controller_1.UpdateController],
-        providers: [update_service_1.UpdateService]
+        providers: [update_service_1.UpdateService],
     })
 ], UpdateModule);
 exports.UpdateModule = UpdateModule;
@@ -2439,18 +2437,18 @@ const common_1 = __webpack_require__("@nestjs/common");
 const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
 let UpdateService = class UpdateService {
     /**
-    * update a post based on id
-    * @param id
-    * @param post
-    * @returns updated post
-    */
+     * update a post based on id
+     * @param id
+     * @param post
+     * @returns updated post
+     */
     update(id, post) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const updatedPost = yield prisma_client_1.prisma.post.update({
                 where: {
-                    id: id
+                    id: id,
                 },
-                data: post
+                data: post,
             });
             return updatedPost;
         });
@@ -2477,9 +2475,7 @@ let RecipesCommentsModule = class RecipesCommentsModule {
 };
 RecipesCommentsModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            create_module_1.CreateModule
-        ]
+        imports: [create_module_1.CreateModule],
     })
 ], RecipesCommentsModule);
 exports.RecipesCommentsModule = RecipesCommentsModule;
@@ -2544,7 +2540,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -2571,7 +2567,7 @@ let CreateService = class CreateService {
     create(comment) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const newComment = yield prisma_client_1.prisma.recipeComment.create({
-                data: Object.assign({}, comment)
+                data: Object.assign({}, comment),
             });
             return newComment;
         });
@@ -2598,7 +2594,7 @@ let RecipesTagsModule = class RecipesTagsModule {
 };
 RecipesTagsModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [findAll_module_1.FindAllModule]
+        imports: [findAll_module_1.FindAllModule],
     })
 ], RecipesTagsModule);
 exports.RecipesTagsModule = RecipesTagsModule;
@@ -2658,7 +2654,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -2682,7 +2678,7 @@ let FindAllService = class FindAllService {
             const tags = yield prisma_client_1.prisma.recipeTagCategory.findMany({
                 include: {
                     RecipeTagLabels: true,
-                }
+                },
             });
             return tags;
         });
@@ -2727,8 +2723,8 @@ RecipesModule = (0, tslib_1.__decorate)([
             findAllFiltered_module_1.FindAllFilteredModule,
             update_module_1.UpdateModule,
             find_module_1.FindModule,
-            findAllNamed_module_1.FindAllNamedModule
-        ]
+            findAllNamed_module_1.FindAllNamedModule,
+        ],
     })
 ], RecipesModule);
 exports.RecipesModule = RecipesModule;
@@ -2790,7 +2786,7 @@ let AuthorCountModule = class AuthorCountModule {
 AuthorCountModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [authorCount_controller_1.AuthorCountController],
-        providers: [authorCount_service_1.AuthorCountService]
+        providers: [authorCount_service_1.AuthorCountService],
     })
 ], AuthorCountModule);
 exports.AuthorCountModule = AuthorCountModule;
@@ -2819,7 +2815,7 @@ let AuthorCountService = class AuthorCountService {
             const count = yield prisma_client_1.prisma.recipe.count({
                 where: {
                     authorId: +authorId,
-                }
+                },
             });
             return count;
         });
@@ -2878,7 +2874,10 @@ let CreateController = class CreateController {
         storage: (0, multer_1.diskStorage)({
             destination: __dirname + '/public',
             filename: (req, file, cb) => {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                const randomName = Array(32)
+                    .fill(null)
+                    .map(() => Math.round(Math.random() * 16).toString(16))
+                    .join('');
                 return cb(null, `${randomName}${(0, path_1.extname)(file.originalname)}`);
             },
         }),
@@ -2912,7 +2911,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -2944,26 +2943,18 @@ let CreateService = class CreateService {
                     description: recipe.description,
                     unit: recipe.unit,
                     requiredIngredients: {
-                        create: [
-                            ...recipe.requiredIngredients,
-                        ]
+                        create: [...recipe.requiredIngredients],
                     },
                     recipeInstructions: {
-                        create: [
-                            ...recipe.recipeInstructions,
-                        ]
+                        create: [...recipe.recipeInstructions],
                     },
                     recipeNotes: {
-                        create: [
-                            ...recipe.recipeNotes,
-                        ]
+                        create: [...recipe.recipeNotes],
                     },
                     recipeTags: {
-                        create: [
-                            ...recipe.recipeTags,
-                        ]
-                    }
-                }
+                        create: [...recipe.recipeTags],
+                    },
+                },
             });
             return newRecipe;
         });
@@ -3037,7 +3028,7 @@ let DeleteModule = class DeleteModule {
 DeleteModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [delete_controller_1.DeleteController],
-        providers: [delete_service_1.DeleteService]
+        providers: [delete_service_1.DeleteService],
     })
 ], DeleteModule);
 exports.DeleteModule = DeleteModule;
@@ -3059,7 +3050,7 @@ let DeleteService = class DeleteService {
     delete(id) {
         return prisma_client_1.prisma.recipe.delete({
             where: {
-                id: id
+                id: id,
             },
         });
     }
@@ -3126,7 +3117,7 @@ let FindAllFilteredModule = class FindAllFilteredModule {
 FindAllFilteredModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAllFiltered_controller_1.FindAllFilteredController],
-        providers: [findAllFiltered_service_1.FindAllFilteredService]
+        providers: [findAllFiltered_service_1.FindAllFilteredService],
     })
 ], FindAllFilteredModule);
 exports.FindAllFilteredModule = FindAllFilteredModule;
@@ -3146,10 +3137,10 @@ const common_1 = __webpack_require__("@nestjs/common");
 const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
 let FindAllFilteredService = class FindAllFilteredService {
     /**
-    * return all recipes based on filters
-    * @param filters
-    * @returns an array of Recipe
-    */
+     * return all recipes based on filters
+     * @param filters
+     * @returns an array of Recipe
+     */
     findAllFiltered(filters) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const recipes = yield prisma_client_1.prisma.recipe.findMany({
@@ -3163,14 +3154,14 @@ let FindAllFilteredService = class FindAllFilteredService {
                                 some: {
                                     tag: {
                                         name: filters.tag ? filters.tag : undefined,
-                                    }
-                                }
-                            }
+                                    },
+                                },
+                            },
                         },
                         {
                             avgReview: filters.rating ? +filters.rating : undefined,
-                        }
-                    ]
+                        },
+                    ],
                 },
                 include: {
                     author: true,
@@ -3190,7 +3181,7 @@ let FindAllFilteredService = class FindAllFilteredService {
                     },
                     recipeReviews: true,
                     recipeFavorites: true,
-                }
+                },
             });
             return recipes;
         });
@@ -3258,7 +3249,7 @@ let FindAllNamedModule = class FindAllNamedModule {
 FindAllNamedModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAllNamed_controller_1.FindAllNamedController],
-        providers: [findAllNamed_service_1.FindAllNamedService]
+        providers: [findAllNamed_service_1.FindAllNamedService],
     })
 ], FindAllNamedModule);
 exports.FindAllNamedModule = FindAllNamedModule;
@@ -3287,8 +3278,8 @@ let FindAllNamedService = class FindAllNamedService {
             const recipes = yield prisma_client_1.prisma.recipe.findMany({
                 where: {
                     name: {
-                        contains: name
-                    }
+                        contains: name,
+                    },
                 },
                 include: {
                     author: true,
@@ -3308,7 +3299,7 @@ let FindAllNamedService = class FindAllNamedService {
                     },
                     recipeReviews: true,
                     recipeFavorites: true,
-                }
+                },
             });
             return recipes;
         });
@@ -3374,7 +3365,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -3405,7 +3396,7 @@ let FindAllService = class FindAllService {
                     recipeTags: {
                         include: {
                             tag: true,
-                        }
+                        },
                     },
                     recipeComments: {
                         include: {
@@ -3414,7 +3405,7 @@ let FindAllService = class FindAllService {
                     },
                     recipeReviews: true,
                     recipeFavorites: true,
-                }
+                },
             });
             return recipes;
         });
@@ -3480,7 +3471,7 @@ let FindLastModule = class FindLastModule {
 FindLastModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findLast_controller_1.FindLastController],
-        providers: [findLast_service_1.FindLastService]
+        providers: [findLast_service_1.FindLastService],
     })
 ], FindLastModule);
 exports.FindLastModule = FindLastModule;
@@ -3519,7 +3510,7 @@ let FindLastService = class FindLastService {
                     recipeTags: {
                         include: {
                             tag: true,
-                        }
+                        },
                     },
                     recipeComments: {
                         include: {
@@ -3527,11 +3518,11 @@ let FindLastService = class FindLastService {
                         },
                         orderBy: {
                             createdAt: 'desc',
-                        }
+                        },
                     },
                     recipeReviews: true,
                     recipeFavorites: true,
-                }
+                },
             });
             return recipes;
         });
@@ -3599,7 +3590,7 @@ let FindModule = class FindModule {
 FindModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [find_controller_1.FindController],
-        providers: [find_service_1.FindService]
+        providers: [find_service_1.FindService],
     })
 ], FindModule);
 exports.FindModule = FindModule;
@@ -3622,7 +3613,7 @@ let FindService = class FindService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const recipe = yield prisma_client_1.prisma.recipe.findUnique({
                 where: {
-                    id: id
+                    id: id,
                 },
                 include: {
                     author: true,
@@ -3633,7 +3624,7 @@ let FindService = class FindService {
                     recipeTags: {
                         include: {
                             tag: true,
-                        }
+                        },
                     },
                     recipeComments: {
                         include: {
@@ -3641,11 +3632,11 @@ let FindService = class FindService {
                         },
                         orderBy: {
                             createdAt: 'desc',
-                        }
+                        },
                     },
                     recipeReviews: true,
                     recipeFavorites: true,
-                }
+                },
             });
             return recipe;
         });
@@ -3716,7 +3707,7 @@ let UpdateModule = class UpdateModule {
 UpdateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [update_controller_1.UpdateController],
-        providers: [update_service_1.UpdateService]
+        providers: [update_service_1.UpdateService],
     })
 ], UpdateModule);
 exports.UpdateModule = UpdateModule;
@@ -3745,9 +3736,9 @@ let UpdateService = class UpdateService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const updatedRecipe = prisma_client_1.prisma.recipe.update({
                 where: {
-                    id: id
+                    id: id,
                 },
-                data: Object.assign({}, recipe)
+                data: Object.assign({}, recipe),
             });
             return updatedRecipe;
         });
@@ -3776,11 +3767,7 @@ let ReviewsModule = class ReviewsModule {
 };
 ReviewsModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            create_module_1.CreateModule,
-            update_module_1.UpdateModule,
-            check_module_1.CheckModule
-        ]
+        imports: [create_module_1.CreateModule, update_module_1.UpdateModule, check_module_1.CheckModule],
     })
 ], ReviewsModule);
 exports.ReviewsModule = ReviewsModule;
@@ -3845,7 +3832,7 @@ let CheckModule = class CheckModule {
 CheckModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [check_controller_1.CheckController],
-        providers: [check_service_1.CheckService]
+        providers: [check_service_1.CheckService],
     })
 ], CheckModule);
 exports.CheckModule = CheckModule;
@@ -3865,18 +3852,18 @@ const common_1 = __webpack_require__("@nestjs/common");
 const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts");
 let CheckService = class CheckService {
     /**
-       * check if user already reviewed a recipe
-       * @param recipeId
-       * @param userId
-       * @returns review
-       */
+     * check if user already reviewed a recipe
+     * @param recipeId
+     * @param userId
+     * @returns review
+     */
     check(recipeId, userId) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const review = yield prisma_client_1.prisma.recipeReview.findFirst({
                 where: {
                     recipeId: +recipeId,
                     authorId: +userId,
-                }
+                },
             });
             return review;
         });
@@ -3947,7 +3934,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -3969,7 +3956,7 @@ let CreateService = class CreateService {
     create(review) {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const newReview = yield prisma_client_1.prisma.recipeReview.create({
-                data: Object.assign({}, review)
+                data: Object.assign({}, review),
             });
             return newReview;
         });
@@ -4042,7 +4029,7 @@ let UpdateModule = class UpdateModule {
 UpdateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [update_controller_1.UpdateController],
-        providers: [update_service_1.UpdateService]
+        providers: [update_service_1.UpdateService],
     })
 ], UpdateModule);
 exports.UpdateModule = UpdateModule;
@@ -4073,7 +4060,7 @@ let UpdateService = class UpdateService {
                 where: {
                     id: id,
                 },
-                data: Object.assign({}, review)
+                data: Object.assign({}, review),
             });
             return updatedReview;
         });
@@ -4103,12 +4090,7 @@ let ShoppingListModule = class ShoppingListModule {
 };
 ShoppingListModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            create_module_1.CreateModule,
-            findAll_module_1.FindAllModule,
-            deleteAll_module_1.DeleteAllModule,
-            delete_module_1.DeleteModule
-        ]
+        imports: [create_module_1.CreateModule, findAll_module_1.FindAllModule, deleteAll_module_1.DeleteAllModule, delete_module_1.DeleteModule],
     })
 ], ShoppingListModule);
 exports.ShoppingListModule = ShoppingListModule;
@@ -4171,7 +4153,7 @@ let CreateModule = class CreateModule {
 CreateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [create_controller_1.CreateController],
-        providers: [create_service_1.CreateService]
+        providers: [create_service_1.CreateService],
     })
 ], CreateModule);
 exports.CreateModule = CreateModule;
@@ -4201,10 +4183,8 @@ let CreateService = class CreateService {
                 recipeId: shoppinglist.recipeId,
                 userId: +shoppinglist.userId,
                 shoppingListItems: {
-                    create: [
-                        ...shoppinglist.ingredients
-                    ]
-                }
+                    create: [...shoppinglist.ingredients],
+                },
             };
             const newList = yield prisma_client_1.prisma.shoppingList.create({ data: list });
             return newList;
@@ -4269,7 +4249,7 @@ let DeleteAllModule = class DeleteAllModule {
 DeleteAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [deleteAll_controller_1.DeleteAllController],
-        providers: [deleteAll_service_1.DeleteAllService]
+        providers: [deleteAll_service_1.DeleteAllService],
     })
 ], DeleteAllModule);
 exports.DeleteAllModule = DeleteAllModule;
@@ -4296,7 +4276,7 @@ let DeleteAllService = class DeleteAllService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const shoppingLists = yield prisma_client_1.prisma.shoppingList.findMany({
                 where: {
-                    userId: +userId
+                    userId: +userId,
                 },
             });
             if (shoppingLists) {
@@ -4304,14 +4284,14 @@ let DeleteAllService = class DeleteAllService {
                 for (const list of shoppingLists) {
                     const count = yield prisma_client_1.prisma.shoppingListItem.deleteMany({
                         where: {
-                            shoppingListId: +list.id
+                            shoppingListId: +list.id,
                         },
                     });
                     // then delete list
                     if (count) {
                         yield prisma_client_1.prisma.shoppingList.delete({
                             where: {
-                                id: +list.id
+                                id: +list.id,
                             },
                         });
                     }
@@ -4320,7 +4300,7 @@ let DeleteAllService = class DeleteAllService {
             // check if all lists successfully deleted
             const checkLists = yield prisma_client_1.prisma.shoppingList.findMany({
                 where: {
-                    userId: +userId
+                    userId: +userId,
                 },
             });
             if (checkLists.length === 0) {
@@ -4387,7 +4367,7 @@ let DeleteModule = class DeleteModule {
 DeleteModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [delete_controller_1.DeleteController],
-        providers: [delete_service_1.DeleteService]
+        providers: [delete_service_1.DeleteService],
     })
 ], DeleteModule);
 exports.DeleteModule = DeleteModule;
@@ -4411,15 +4391,15 @@ let DeleteService = class DeleteService {
             // delete list items first
             const count = yield prisma_client_1.prisma.shoppingListItem.deleteMany({
                 where: {
-                    shoppingListId: id
+                    shoppingListId: id,
                 },
             });
             // then delete list
             if (count) {
                 const deletedList = yield prisma_client_1.prisma.shoppingList.delete({
                     where: {
-                        id
-                    }
+                        id,
+                    },
                 });
                 return deletedList;
             }
@@ -4484,7 +4464,7 @@ let FindAllModule = class FindAllModule {
 FindAllModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [findAll_controller_1.FindAllController],
-        providers: [findAll_service_1.FindAllService]
+        providers: [findAll_service_1.FindAllService],
     })
 ], FindAllModule);
 exports.FindAllModule = FindAllModule;
@@ -4511,12 +4491,12 @@ let FindAllService = class FindAllService {
         return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
             const shoppingLists = yield prisma_client_1.prisma.shoppingList.findMany({
                 where: {
-                    userId: +userId
+                    userId: +userId,
                 },
                 include: {
                     recipe: true,
-                    shoppingListItems: true
-                }
+                    shoppingListItems: true,
+                },
             });
             return shoppingLists;
         });
@@ -4580,7 +4560,7 @@ let UpdateAvatarModule = class UpdateAvatarModule {
 UpdateAvatarModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [updateAvatar_controller_1.UpdateAvatarController],
-        providers: [updateAvatar_service_1.UpdateAvatarService]
+        providers: [updateAvatar_service_1.UpdateAvatarService],
     })
 ], UpdateAvatarModule);
 exports.UpdateAvatarModule = UpdateAvatarModule;
@@ -4607,7 +4587,7 @@ let UpdateAvatarService = class UpdateAvatarService {
                 where: {
                     id: id,
                 },
-                data: Object.assign({}, avatar)
+                data: Object.assign({}, avatar),
             });
             if (user) {
                 const accessToken = yield jwt_1.Jwt.signAccessToken(user);
@@ -4682,7 +4662,7 @@ let UpdateModule = class UpdateModule {
 UpdateModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
         controllers: [update_controller_1.UpdateController],
-        providers: [update_service_1.UpdateService]
+        providers: [update_service_1.UpdateService],
     })
 ], UpdateModule);
 exports.UpdateModule = UpdateModule;
@@ -4715,7 +4695,7 @@ let UpdateService = class UpdateService {
                 where: {
                     id: id,
                 },
-                data: Object.assign({}, userData)
+                data: Object.assign({}, userData),
             });
             const accessToken = yield jwt_1.Jwt.signAccessToken(user);
             delete user.password;
@@ -4745,10 +4725,7 @@ let UsersModule = class UsersModule {
 };
 UsersModule = (0, tslib_1.__decorate)([
     (0, common_1.Module)({
-        imports: [
-            update_module_1.UpdateModule,
-            updateAvatar_module_1.UpdateAvatarModule
-        ]
+        imports: [update_module_1.UpdateModule, updateAvatar_module_1.UpdateAvatarModule],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;
