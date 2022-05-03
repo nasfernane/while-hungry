@@ -37,8 +37,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/while-hungry/src/environments/environment.ts",
-              "with": "apps/while-hungry/src/environments/environment.prod.ts"
+              "replace": "libs/environments/src/lib/environment.ts",
+                  "with": "libs/environments/src/lib/environment.prod.ts"
             }
           ],
           "outputHashing": "all"

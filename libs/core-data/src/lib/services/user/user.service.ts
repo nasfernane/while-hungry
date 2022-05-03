@@ -4,11 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '@prisma/client';
 import { Clap } from '@prisma/client';
 
-import { environment as devenv } from './../../environments/environment';
-import { environment as prodenv } from './../../environments/environment.prod';
+import { environment } from '@wh/environments';
 
-const ENDPOINT = devenv.API_URL + '/users';
-const CLAP_ENDPOINT = devenv.API_URL + '/claps';
+const ENDPOINT = environment.API_URL + '/users';
+const CLAP_ENDPOINT = environment.API_URL + '/claps';
 
 
 @Injectable({

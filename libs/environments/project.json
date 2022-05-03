@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/environments",
+  "sourceRoot": "libs/environments/src",
+  "prefix": "wh",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/environments"],
+      "options": {
+        "jestConfig": "libs/environments/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/environments/src/**/*.ts",
+          "libs/environments/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:environments"]
+}
