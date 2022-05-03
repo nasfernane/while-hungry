@@ -11,14 +11,12 @@
     border: 0.6rem solid #fff;
     margin: 2rem;
     border-radius: 50%;
-    transition: all .2s;
+    transition: all 0.2s;
 
     &.avatar-active {
       border: 0.6rem solid $green-light;
       transform: scale(1.1);
-      box-shadow:  1.3rem 1.3rem 2.6rem #d5d5d5,
-      -1.3rem -1.3rem 2.6rem #ffffff;
-      
+      box-shadow: 1.3rem 1.3rem 2.6rem #d5d5d5, -1.3rem -1.3rem 2.6rem #ffffff;
     }
   }
 

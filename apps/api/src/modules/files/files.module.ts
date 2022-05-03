@@ -4,9 +4,6 @@ import { Module } from '@nestjs/common';
 import { GetPictureModule } from './useCases/getPicture/getPicture.module';
 
 @Module({
-  imports: [
-    GetPictureModule
-  ]
-  
+  imports: [GetPictureModule],
 })
 export class FilesModule {}

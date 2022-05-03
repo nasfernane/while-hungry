@@ -14,6 +14,6 @@ import { UpdateModule } from './useCases/update/update.module';
     FindModule,
     FindAllModule,
     UpdateModule,
-  ]
+  ],
 })
 export class DefinitionsModule {}

@@ -10,15 +10,12 @@ import { RecipeComment } from '@prisma/client';
 const ENDPOINT = environment.API_URL + '/recipes-comments';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeCommentService {
-
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   create(comment: any) {
-    return this.http.post<RecipeComment>(ENDPOINT, comment)
+    return this.http.post<RecipeComment>(ENDPOINT, comment);
   }
 }

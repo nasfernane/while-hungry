@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
 // schemas
 import { RecipeReview } from '@prisma/client';
 
@@ -9,13 +8,10 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/reviews';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReviewService {
-
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   find(id: string) {
     return this.http.get<RecipeReview>(ENDPOINT + `/${id}`);
@@ -30,6 +26,8 @@ export class ReviewService {
   }
 
   checkIfReviewed(recipeId: number, userId: number) {
-    return this.http.get<RecipeReview>(ENDPOINT + `/check/${recipeId}/${userId}`)
+    return this.http.get<RecipeReview>(
+      ENDPOINT + `/check/${recipeId}/${userId}`
+    );
   }
 }

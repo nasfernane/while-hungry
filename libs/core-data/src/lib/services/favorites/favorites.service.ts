@@ -5,15 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { RecipeFavorite } from '@prisma/client';
 
 import { environment } from '@wh/environments';
-const ENDPOINT = environment.API_URL + '/favorites'
+const ENDPOINT = environment.API_URL + '/favorites';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   all(userId: number) {
     return this.http.get<RecipeFavorite[]>(ENDPOINT + `/${userId}`);
@@ -23,11 +21,16 @@ export class FavoritesService {
     return this.http.post<RecipeFavorite[]>(ENDPOINT + `/${userId}`, filters);
   }
 
-  addOrRemoveFavorite(recipeId: number, userId: number, recipeInFavorites: boolean, favoriteId?: number) {
+  addOrRemoveFavorite(
+    recipeId: number,
+    userId: number,
+    recipeInFavorites: boolean,
+    favoriteId?: number
+  ) {
     if (recipeInFavorites && favoriteId) {
-      return this.deleteFavorite(favoriteId)
+      return this.deleteFavorite(favoriteId);
     } else {
-      return this.addFavorite(recipeId, userId)
+      return this.addFavorite(recipeId, userId);
     }
   }
 
@@ -36,6 +39,6 @@ export class FavoritesService {
   }
 
   deleteFavorite(favoriteId: number) {
-    return this.http.delete(ENDPOINT + `/${favoriteId}`)
+    return this.http.delete(ENDPOINT + `/${favoriteId}`);
   }
 }

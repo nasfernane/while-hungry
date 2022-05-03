@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { RecipeTagCategory } from '@prisma/client';
@@ -12,8 +12,8 @@ export class FindAllService {
     const tags = await prisma.recipeTagCategory.findMany({
       include: {
         RecipeTagLabels: true,
-      }
-    })
+      },
+    });
 
     return tags;
   }

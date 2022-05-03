@@ -8,7 +8,7 @@ import { UiService } from '@wh/ui';
 @Component({
   selector: 'wh-shoppinglist-item',
   templateUrl: './shoppinglist-item.component.html',
-  styleUrls: ['./shoppinglist-item.component.scss']
+  styleUrls: ['./shoppinglist-item.component.scss'],
 })
 export class ShoppinglistItemComponent {
   @Input() list: any;
@@ -17,21 +17,19 @@ export class ShoppinglistItemComponent {
   constructor(
     private router: Router,
     private service: ShoppingListService,
-    private uiService: UiService,
+    private uiService: UiService
   ) {}
-
 
   removeList(id: string) {
     this.service.remove(id).subscribe((res: any) => {
       if (res) {
         this.resetEvent.emit(true);
-        this.uiService.openAlert('Recipe removed from your shopping list')
+        this.uiService.openAlert('Recipe removed from your shopping list');
       }
-    })
+    });
   }
 
   navRecipe(recipeId: string) {
     this.router.navigate(['/recipes', recipeId]);
   }
-
 }

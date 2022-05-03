@@ -1,16 +1,17 @@
-import { Prisma } from "@prisma/client"
+import { Prisma } from '@prisma/client';
 
-export const recipeInstructionCategories: Prisma.RecipeInstructionCategoryCreateInput[] = [
+export const recipeInstructionCategories: Prisma.RecipeInstructionCategoryCreateInput[] =
+  [
     {
-        name: "plain",
+      name: 'plain',
     },
     {
-        name: "while",
+      name: 'while',
     },
     {
-        name: "for",
+      name: 'for',
     },
     {
-        name: "If"
-    }
-]
+      name: 'If',
+    },
+  ];

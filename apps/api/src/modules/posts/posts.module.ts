@@ -11,7 +11,7 @@ import { UpdateModule } from './useCases/update/update.module';
     FindLastModule,
     FindModule,
     FindAllModule,
-    UpdateModule
-  ]
+    UpdateModule,
+  ],
 })
 export class PostsModule {}

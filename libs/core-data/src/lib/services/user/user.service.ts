@@ -9,15 +9,11 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/users';
 const CLAP_ENDPOINT = environment.API_URL + '/claps';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  constructor(
-    public http: HttpClient,
-  ) { }
+  constructor(public http: HttpClient) {}
 
   all() {
     return this.http.get<User[]>(ENDPOINT);
@@ -36,29 +32,21 @@ export class UserService {
   }
 
   clapUser(clapperId: number, clappedId: number) {
-    return this.http.post<Clap>(
-      CLAP_ENDPOINT, 
-      { clapperId, clappedId }
-    )
+    return this.http.post<Clap>(CLAP_ENDPOINT, { clapperId, clappedId });
   }
 
   checkIfClapped(clapperId: number, clappedId: number) {
-    return this.http.post<boolean>(
-      CLAP_ENDPOINT + '/check', 
-      { clapperId, clappedId }
-    )
+    return this.http.post<boolean>(CLAP_ENDPOINT + '/check', {
+      clapperId,
+      clappedId,
+    });
   }
 
   getUserClapsCount(userId: number) {
-    return this.http.get<number>(
-      CLAP_ENDPOINT + '/count/' + userId
-    )
+    return this.http.get<number>(CLAP_ENDPOINT + '/count/' + userId);
   }
 
   updateAvatar(id: number, avatar: object) {
-    return this.http.post<string>(
-      ENDPOINT + `/${id}/avatar/`, avatar
-    )
+    return this.http.post<string>(ENDPOINT + `/${id}/avatar/`, avatar);
   }
-
 }

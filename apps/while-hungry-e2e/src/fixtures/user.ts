@@ -1,5 +1,4 @@
 export const user = {
-  "email": "furimi@seed.com",
-  "password": "seed123"
-}
-
+  email: 'furimi@seed.com',
+  password: 'seed123',
+};

@@ -11,14 +11,12 @@ export class CreateService {
   async create(favorite: RecipeFavorite) {
     const newFavorite: RecipeFavorite = await prisma.recipeFavorite.create({
       data: {
-        ...favorite
-      }
-    })
+        ...favorite,
+      },
+    });
 
     if (newFavorite) {
       return newFavorite;
     }
-
   }
- 
 }

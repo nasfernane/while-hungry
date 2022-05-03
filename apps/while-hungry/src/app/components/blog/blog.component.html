@@ -1,6 +1,21 @@
-<div class="globalContainer blogWrapper" fxLayout="column" fxLayoutAlign="flex-start center">
-  <div class="blogWrapper__posts" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
-    <wh-blog-item fxFlex="45%" fxFlex.lt-md="90%" fxFlex.lt-sm="100%" *ngFor="let post of posts$ | async" [post]="post"></wh-blog-item>
+<div
+  class="globalContainer blogWrapper"
+  fxLayout="column"
+  fxLayoutAlign="flex-start center"
+>
+  <div
+    class="blogWrapper__posts"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between"
+    fxLayoutGap="grid"
+  >
+    <wh-blog-item
+      fxFlex="45%"
+      fxFlex.lt-md="90%"
+      fxFlex.lt-sm="100%"
+      *ngFor="let post of posts$ | async"
+      [post]="post"
+    ></wh-blog-item>
   </div>
   <mat-paginator [pageSizeOptions]="[3, 9, 18]"></mat-paginator>
 </div>

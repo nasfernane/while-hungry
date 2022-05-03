@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
@@ -20,33 +20,24 @@ export class CreateService {
         description: recipe.description,
         unit: recipe.unit,
         requiredIngredients: {
-          create: [
-            ...recipe.requiredIngredients,
-          ]
+          create: [...recipe.requiredIngredients],
         },
         recipeInstructions: {
-          create: [
-            ...recipe.recipeInstructions,
-          ]
+          create: [...recipe.recipeInstructions],
         },
         recipeNotes: {
-          create: [
-            ...recipe.recipeNotes,
-          ]
+          create: [...recipe.recipeNotes],
         },
         recipeTags: {
-          create: [
-            ...recipe.recipeTags,
-          ]
-        }
-      }
-    })
+          create: [...recipe.recipeTags],
+        },
+      },
+    });
 
     return newRecipe;
   }
 
   async storePicture(picture: Express.Multer.File) {
     return picture;
-  } 
-  
+  }
 }

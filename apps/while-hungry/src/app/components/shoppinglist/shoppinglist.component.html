@@ -1,18 +1,44 @@
 <div class="shoppingListContainer globalContainer">
-  <div *ngIf="shoppingLists && shoppingLists.length > 0; else noData" fxLayout="row" fxLayoutAlign="space-between flex-start">
-    <wh-shoppinglist-global (resetEvent)="getShoppingList()" [lists]="shoppingLists"  fxFlex="30"></wh-shoppinglist-global>
-    <div fxFlex="65"  class="shoppingListContainer__items" fxLayout="column" fxLayoutAlign="flex-start center">
+  <div
+    *ngIf="shoppingLists && shoppingLists.length > 0; else noData"
+    fxLayout="row"
+    fxLayoutAlign="space-between flex-start"
+  >
+    <wh-shoppinglist-global
+      (resetEvent)="getShoppingList()"
+      [lists]="shoppingLists"
+      fxFlex="30"
+    ></wh-shoppinglist-global>
+    <div
+      fxFlex="65"
+      class="shoppingListContainer__items"
+      fxLayout="column"
+      fxLayoutAlign="flex-start center"
+    >
       <h1>Recipes</h1>
-      <div fxLayout="row wrap" fxLayoutAlign="space-evenly" fxLayoutGap="grid" style="width: 100%;">
-        <wh-shoppinglist-item fxFlex="30%" *ngFor="let list of shoppingLists" [list]="list" (resetEvent)="getShoppingList()"></wh-shoppinglist-item>
+      <div
+        fxLayout="row wrap"
+        fxLayoutAlign="space-evenly"
+        fxLayoutGap="grid"
+        style="width: 100%"
+      >
+        <wh-shoppinglist-item
+          fxFlex="30%"
+          *ngFor="let list of shoppingLists"
+          [list]="list"
+          (resetEvent)="getShoppingList()"
+        ></wh-shoppinglist-item>
       </div>
     </div>
   </div>
   <ng-template #noData>
-    <div class="noDataContainer" fxLayout="column" fxLayoutAlign="flex-start center">
+    <div
+      class="noDataContainer"
+      fxLayout="column"
+      fxLayoutAlign="flex-start center"
+    >
       <span>Your shopping list is currently empty.</span>
-      <img src="./../../../assets/img/illustrations/nodata.jpg" alt="No Data">
+      <img src="./../../../assets/img/illustrations/nodata.jpg" alt="No Data" />
     </div>
   </ng-template>
-  
 </div>

@@ -8,9 +8,8 @@ describe('ShoppinglistGlobalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShoppinglistGlobalComponent ]
-    })
-    .compileComponents();
+      declarations: [ShoppinglistGlobalComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

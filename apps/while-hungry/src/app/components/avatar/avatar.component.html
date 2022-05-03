@@ -1,5 +1,20 @@
-<div class="avatar" [ngStyle]="{'width': avatarSize, 'height': avatarSize }" fxLayout="column" fxLayoutALign="center center">
-  <mat-icon class="avatar__icon" [svgIcon]="avatar" alt="User Avatar" *ngIf="avatar" [ngStyle]="{'font-size': avatarSize }"></mat-icon>
-  <mat-icon class="avatar__edit material-icons-outlined" *ngIf="edit" [ngStyle]="{ 'font-size': editSize }">create</mat-icon>
+<div
+  class="avatar"
+  [ngStyle]="{ width: avatarSize, height: avatarSize }"
+  fxLayout="column"
+  fxLayoutALign="center center"
+>
+  <mat-icon
+    class="avatar__icon"
+    [svgIcon]="avatar"
+    alt="User Avatar"
+    *ngIf="avatar"
+    [ngStyle]="{ 'font-size': avatarSize }"
+  ></mat-icon>
+  <mat-icon
+    class="avatar__edit material-icons-outlined"
+    *ngIf="edit"
+    [ngStyle]="{ 'font-size': editSize }"
+    >create</mat-icon
+  >
 </div>
-

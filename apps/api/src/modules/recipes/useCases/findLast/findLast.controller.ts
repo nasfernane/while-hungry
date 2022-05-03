@@ -2,7 +2,6 @@ import { Controller, Get } from '@nestjs/common';
 import { FindLastService } from './findLast.service';
 import { Recipe } from '@prisma/client';
 
-
 @Controller('recipes')
 export class FindLastController {
   constructor(private readonly service: FindLastService) {}

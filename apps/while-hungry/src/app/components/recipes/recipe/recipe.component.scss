@@ -8,16 +8,19 @@
 
   .recipe {
     width: 100%;
-    
-    mat-card-header, mat-card-content, mat-card-footer, mat-divider {
+
+    mat-card-header,
+    mat-card-content,
+    mat-card-footer,
+    mat-divider {
       width: 100%;
       margin: 0 auto;
     }
-    
+
     &__header {
       width: 100%;
       padding-bottom: 3rem;
-      
+
       &__name {
         font-size: 3.6rem;
         margin: 0;
@@ -29,13 +32,13 @@
         mat-icon {
           cursor: pointer;
         }
-        
+
         span {
           margin-right: 0.5rem;
           font-size: 2.4rem;
         }
       }
-  
+
       &__tags {
         font-size: 1.6rem;
         border: 0.1rem dashed $primary;
@@ -50,19 +53,19 @@
           background-color: $grey-light;
         }
       }
-  
+
       &__infos {
         width: 100%;
-  
+
         span {
           font-size: 1.6rem;
-          
+
           mat-icon {
             margin-right: 0.5rem;
           }
         }
       }
-  
+
       &__img {
         max-width: 100%;
       }
@@ -73,23 +76,22 @@
         font-size: 1.8rem;
       }
     }
-  
+
     &__content {
       p {
         text-align: center;
       }
-  
+
       &__instruction {
         &__index {
           margin-right: 0.5rem;
         }
       }
     }
-  
+
     &__footer {
-      
     }
-  
+
     mat-divider {
       margin-top: 1rem;
       margin-bottom: 1rem;

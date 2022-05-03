@@ -14,12 +14,11 @@ export class CheckController {
   constructor(private readonly service: CheckService) {}
   /**
    * check if user already clapped the author
-   * @param clap 
+   * @param clap
    * @returns a boolean
    */
   @Post('/check')
   check(@Body() clap: Clap) {
     return this.service.check(clap);
   }
- 
 }

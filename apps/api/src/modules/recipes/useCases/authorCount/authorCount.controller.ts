@@ -7,7 +7,7 @@ export class AuthorCountController {
 
   /**
    * get recipe count based on user id
-   * @param id 
+   * @param id
    * @returns number
    */
   @Get('authorcount/:id')

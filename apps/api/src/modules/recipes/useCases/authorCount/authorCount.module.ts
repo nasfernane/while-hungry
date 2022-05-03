@@ -4,6 +4,6 @@ import { AuthorCountController } from './authorCount.controller';
 
 @Module({
   controllers: [AuthorCountController],
-  providers: [AuthorCountService]
+  providers: [AuthorCountService],
 })
 export class AuthorCountModule {}

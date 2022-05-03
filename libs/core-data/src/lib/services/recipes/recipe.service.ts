@@ -6,13 +6,10 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/recipes';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeService {
-
-  constructor(
-    public http: HttpClient,
-  ) { }
+  constructor(public http: HttpClient) {}
 
   all() {
     return this.http.get<Recipe[]>(ENDPOINT);
@@ -31,11 +28,11 @@ export class RecipeService {
   }
 
   create(recipe: Record<string, unknown>) {
-    return this.http.post(ENDPOINT, recipe );
+    return this.http.post(ENDPOINT, recipe);
   }
 
   storePicture(picture: FormData) {
-    return this.http.post(ENDPOINT + '/picture', picture );
+    return this.http.post(ENDPOINT + '/picture', picture);
   }
 
   update(recipe: Recipe) {
@@ -53,5 +50,4 @@ export class RecipeService {
   findLast() {
     return this.http.get<Recipe>(ENDPOINT + `/last`);
   }
-
 }

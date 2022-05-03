@@ -10,7 +10,7 @@ import { RecipeComment } from '@prisma/client';
 @Component({
   selector: 'wh-recipe-comments',
   templateUrl: './recipe-comments.component.html',
-  styleUrls: ['./recipe-comments.component.scss']
+  styleUrls: ['./recipe-comments.component.scss'],
 })
 export class RecipeCommentsComponent implements OnInit, OnChanges {
   @Input() recipe: any;
@@ -18,8 +18,8 @@ export class RecipeCommentsComponent implements OnInit, OnChanges {
 
   constructor(
     private recipeCommentService: RecipeCommentService,
-    public appService: AppService,
-  ) { }
+    public appService: AppService
+  ) {}
 
   ngOnInit(): void {
     this.comments = this.recipe.recipeComments;
@@ -28,5 +28,4 @@ export class RecipeCommentsComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.comments = this.recipe.recipeComments;
   }
-
 }

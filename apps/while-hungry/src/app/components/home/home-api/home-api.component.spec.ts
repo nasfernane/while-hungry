@@ -8,9 +8,8 @@ describe('HomeApiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeApiComponent ]
-    })
-    .compileComponents();
+      declarations: [HomeApiComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

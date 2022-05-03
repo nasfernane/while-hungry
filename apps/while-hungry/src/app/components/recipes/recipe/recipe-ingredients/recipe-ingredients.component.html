@@ -1,6 +1,20 @@
-<div class="ingredientsContainer" *ngIf="ingredients.length > 0" fxLayout="column" fxLayoutAlign="start stretch">
-  <div class="ingredientsContainer__header" fxLayout="column" fxLayoutAlign="space-around stretch">
-    <section class="ingredientsContainer__header__info"  fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
+<div
+  class="ingredientsContainer"
+  *ngIf="ingredients.length > 0"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+>
+  <div
+    class="ingredientsContainer__header"
+    fxLayout="column"
+    fxLayoutAlign="space-around stretch"
+  >
+    <section
+      class="ingredientsContainer__header__info"
+      fxLayout="row"
+      fxLayout.lt-lg="column"
+      fxLayoutAlign="space-between center"
+    >
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>schedule</mat-icon>
         &nbsp;
@@ -13,7 +27,12 @@
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>
-    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
+    <section
+      class="ingredientsContainer__header__info"
+      fxLayout="row"
+      fxLayout.lt-lg="column"
+      fxLayoutAlign="space-between center"
+    >
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>restaurant_menu</mat-icon>
         &nbsp;
@@ -24,11 +43,18 @@
       </span>
     </section>
     <mat-divider [inset]="true"></mat-divider>
-    <section class="ingredientsContainer__header__info" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
+    <section
+      class="ingredientsContainer__header__info"
+      fxLayout="row"
+      fxLayout.lt-lg="column"
+      fxLayoutAlign="space-between center"
+    >
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>outdoor_grill</mat-icon>
         &nbsp;
-        <span class="ingredientsContainer__header__info--label">difficulty &nbsp;</span>
+        <span class="ingredientsContainer__header__info--label"
+          >difficulty &nbsp;</span
+        >
       </div>
       <span class="ingredientsContainer__header__info--data">
         {{ recipe.difficulty }}
@@ -36,19 +62,43 @@
     </section>
   </div>
   <div class="ingredientsContainer__ingredients">
-    <div class="ingredientsContainer__ingredients__header" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
-      <span class="ingredientsContainer__ingredients__header--title">INGREDIENTS</span>
-      <wh-recipe-ingredients-options [units]="recipe.unit" (unitsEvent)="unitEvent($event)" (scaleEvent)="scaleEvent($event)" *ngIf="!preview"></wh-recipe-ingredients-options>
+    <div
+      class="ingredientsContainer__ingredients__header"
+      fxLayout="row"
+      fxLayout.lt-lg="column"
+      fxLayoutAlign="space-between center"
+    >
+      <span class="ingredientsContainer__ingredients__header--title"
+        >INGREDIENTS</span
+      >
+      <wh-recipe-ingredients-options
+        [units]="recipe.unit"
+        (unitsEvent)="unitEvent($event)"
+        (scaleEvent)="scaleEvent($event)"
+        *ngIf="!preview"
+      ></wh-recipe-ingredients-options>
     </div>
-    <div *ngFor="let ingredient of ingredients" fxLayout="row" fxLayoutAlign="start center">
+    <div
+      *ngFor="let ingredient of ingredients"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
       <span class="ingredientsContainer__ingredients--dot">&#9679;</span>
       <span class="ingredientsContainer__ingredients--quantity">
-        {{ getQuantity(ingredient) }} 
+        {{ getQuantity(ingredient) }}
         {{ getUnit(ingredient) }}
         &nbsp;
       </span>
-      <span class="ingredientsContainer__ingredients--name">{{ ingredient.name }}</span>
+      <span class="ingredientsContainer__ingredients--name">{{
+        ingredient.name
+      }}</span>
     </div>
   </div>
-  <button class="btn btn--main ingredientsContainer__shoppingBtn" (click)="addShoppingList()" *ngIf="!preview">Add to your shopping list</button>
+  <button
+    class="btn btn--main ingredientsContainer__shoppingBtn"
+    (click)="addShoppingList()"
+    *ngIf="!preview"
+  >
+    Add to your shopping list
+  </button>
 </div>

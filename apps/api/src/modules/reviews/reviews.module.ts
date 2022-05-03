@@ -4,10 +4,6 @@ import { UpdateModule } from './useCases/update/update.module';
 import { CreateModule } from './useCases/create/create.module';
 
 @Module({
-  imports: [
-    CreateModule,
-    UpdateModule,
-    CheckModule
-  ]
+  imports: [CreateModule, UpdateModule, CheckModule],
 })
 export class ReviewsModule {}

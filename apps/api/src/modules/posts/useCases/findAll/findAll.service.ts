@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { Post } from '@prisma/client';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 @Injectable()
 export class FindAllService {
@@ -16,8 +16,8 @@ export class FindAllService {
     const posts = await prisma.post.findMany({
       include: {
         author: true,
-      }
-    })
+      },
+    });
 
     return posts;
   }

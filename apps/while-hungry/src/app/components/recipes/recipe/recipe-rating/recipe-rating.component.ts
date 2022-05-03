@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'wh-recipe-rating',
   templateUrl: './recipe-rating.component.html',
-  styleUrls: ['./recipe-rating.component.scss']
+  styleUrls: ['./recipe-rating.component.scss'],
 })
 export class RecipeRatingComponent {
   @Input() rating = 0;

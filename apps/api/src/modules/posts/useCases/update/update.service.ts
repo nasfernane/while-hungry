@@ -4,25 +4,24 @@ import { Injectable } from '@nestjs/common';
 import { Post } from '@prisma/client';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 @Injectable()
 export class UpdateService {
-   /**
+  /**
    * update a post based on id
-   * @param id 
-   * @param post 
+   * @param id
+   * @param post
    * @returns updated post
    */
   async update(id: number, post: Post): Promise<Post> {
     const updatedPost: Post = await prisma.post.update({
       where: {
-        id: id
+        id: id,
       },
-      data: post
-    })
+      data: post,
+    });
 
     return updatedPost;
   }
-
 }

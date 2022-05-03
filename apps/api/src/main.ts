@@ -14,9 +14,9 @@ const configureSwagger = (app) => {
     .setDescription('REST API')
     .setVersion('1.0')
     .build();
-    const document = SwaggerModule.createDocument(app, options);
-    SwaggerModule.setup('api', app, document);
-}
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
+};
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,12 +26,10 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   // set http headers to prevent security vulnerabilites
-  app.use(helmet(
-    { crossOriginResourcePolicy: false }
-  ));
+  app.use(helmet({ crossOriginResourcePolicy: false }));
 
   // enable cors origin between apps
-  app.enableCors(); 
+  app.enableCors();
 
   // protection against csurf attacks
   // app.use(cookieParser());

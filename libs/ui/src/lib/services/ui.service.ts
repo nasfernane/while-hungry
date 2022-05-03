@@ -6,20 +6,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginComponent } from './../components/login/login.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UiService {
   loginDialogRef: any;
 
-  constructor(
-    private matDialog: MatDialog,
-    public _alert: MatSnackBar,
-  ) {}
+  constructor(private matDialog: MatDialog, public _alert: MatSnackBar) {}
 
   public openLogin() {
     this.loginDialogRef = this.matDialog.open(LoginComponent, {
       panelClass: 'form80',
-    })
+    });
   }
 
   public closeLogin() {
@@ -27,13 +24,21 @@ export class UiService {
   }
 
   public openAlert(message: string, seconds?: number) {
-    this._alert.open(message, undefined, { duration: seconds ? seconds * 1000 : 2000, verticalPosition: 'top', panelClass: 'centered-snackbar'});
+    this._alert.open(message, undefined, {
+      duration: seconds ? seconds * 1000 : 2000,
+      verticalPosition: 'top',
+      panelClass: 'centered-snackbar',
+    });
   }
 
   public openLoginAlert() {
-    const alert = this._alert.open('This action requires authentification', 'login', { duration: 3000, verticalPosition: 'top'})
+    const alert = this._alert.open(
+      'This action requires authentification',
+      'login',
+      { duration: 3000, verticalPosition: 'top' }
+    );
     alert.onAction().subscribe(() => {
-      this.openLogin()
-    })
+      this.openLogin();
+    });
   }
 }

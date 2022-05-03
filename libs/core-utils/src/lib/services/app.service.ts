@@ -5,37 +5,36 @@ import moment from 'moment';
 import { RecipeReview } from '@prisma/client';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppService {
   public currentUser: any = {};
   public userLogged = false;
   private _breadcrumb: string[] = [];
 
-
   /**
- * log out user, clear current user infos and local storage
- */
+   * log out user, clear current user infos and local storage
+   */
   public logout() {
-    this.currentUser = null
+    this.currentUser = null;
     this.userLogged = false;
     localStorage.clear();
   }
 
   /**
    * set user data both in service and local storage
-   * @param user 
+   * @param user
    */
   public setUserData(user: any) {
     if (user) {
-      this.setUser(user)
-      this.setUserToLocalStorage(JSON.stringify(this.getUser()))
+      this.setUser(user);
+      this.setUserToLocalStorage(JSON.stringify(this.getUser()));
     }
   }
 
   /**
    * set current user informations in the service
-   * @param user 
+   * @param user
    */
   public setUser(user: any) {
     this.currentUser = user;
@@ -44,7 +43,7 @@ export class AppService {
 
   /**<
    * set current user informations in local storage
-   * @param user 
+   * @param user
    */
   private setUserToLocalStorage(user: any) {
     if (user === null) {
@@ -112,17 +111,17 @@ export class AppService {
 
   /**
    * checks if current user is admin
-   * @param role 
+   * @param role
    * @returns boolean
    */
   public isAdmin(role: string = this.getUserRole()) {
     return ['Creator', 'Admin'].includes(role);
   }
 
- /**
-  * checks if user is logged
-  * @returns A boolean value.
-  */
+  /**
+   * checks if user is logged
+   * @returns A boolean value.
+   */
   public isLogged() {
     if (this.currentUser && this.currentUser.accessToken) {
       return true;
@@ -153,7 +152,7 @@ export class AppService {
 
   public formatTimer(timer: number) {
     if (timer >= 60) {
-      const hours = Math.floor(timer / 60);          
+      const hours = Math.floor(timer / 60);
       const mins = timer % 60;
 
       return `${hours} H ${mins !== 0 ? mins + ' mins.' : ''}`;
@@ -162,21 +161,18 @@ export class AppService {
     }
   }
 
-  public convertUnitLabel(convertToUnit: string, unit: string){
-    const unitMapping = new Map<string, string>([
-      ['grams', 'ounces'],
-    ])
+  public convertUnitLabel(convertToUnit: string, unit: string) {
+    const unitMapping = new Map<string, string>([['grams', 'ounces']]);
 
     if (convertToUnit === 'us') {
       if (unitMapping.get(unit)) {
-        return unitMapping.get(unit)
+        return unitMapping.get(unit);
       } else {
         return unit;
       }
     } else if (convertToUnit === 'metrics') {
       for (const [key, value] of unitMapping.entries()) {
-        if (value === unit)
-          return key;
+        if (value === unit) return key;
       }
       return unit;
     }
@@ -186,15 +182,15 @@ export class AppService {
 
   public convertUnitAmount(unit: string) {
     const unitMapping = {
-      'grams': 0.035,
-    }
+      grams: 0.035,
+    };
 
     for (const [key, value] of Object.entries(unitMapping)) {
       if (key === unit) {
         return value;
       }
     }
-    
+
     return 1;
   }
 
@@ -210,11 +206,15 @@ export class AppService {
 
   // calculate average rating of review then round to one decimal
   getAvgReview(reviews: RecipeReview[]) {
-    return Math.round((reviews.reduce((a, { review }) => a + review, 0) / reviews.length) * 10) / 10;
+    return (
+      Math.round(
+        (reviews.reduce((a, { review }) => a + review, 0) / reviews.length) * 10
+      ) / 10
+    );
   }
 
   /**
-   * 
+   *
    * @param items: Array
    * @param prop: String
    * @returns Int
@@ -222,8 +222,8 @@ export class AppService {
    */
   // return sum of propertiers inside objets in an array
   propSum(items: Array<any>, prop: string) {
-    return items.reduce( function(a, b){
-        return a + b[prop];
+    return items.reduce(function (a, b) {
+      return a + b[prop];
     }, 0);
   }
 

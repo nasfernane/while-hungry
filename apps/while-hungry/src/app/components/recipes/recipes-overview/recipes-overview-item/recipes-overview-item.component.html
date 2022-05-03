@@ -1,22 +1,62 @@
-<mat-card class="recipe noBox" >
-  <div class="recipe__favorite" fxLayout="row" fxLayoutAlign="space-between center" (click)="addOrRemoveFavorite()" [matTooltip]=" recipeInFavorites ? 'Add to your favorites' : 'Remove from your favorites'" *ngIf="!removeIcon">
-    <mat-icon>{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
+<mat-card class="recipe noBox">
+  <div
+    class="recipe__favorite"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    (click)="addOrRemoveFavorite()"
+    [matTooltip]="
+      recipeInFavorites ? 'Add to your favorites' : 'Remove from your favorites'
+    "
+    *ngIf="!removeIcon"
+  >
+    <mat-icon>{{
+      recipeInFavorites ? 'favorite' : 'favorite_border'
+    }}</mat-icon>
   </div>
-  <div class="recipe__favorite" fxLayout="row" fxLayoutAlign="space-between center" (click)="addOrRemoveFavorite()" *ngIf="removeIcon" [matTooltip]="'Remove from your favorites'">
+  <div
+    class="recipe__favorite"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    (click)="addOrRemoveFavorite()"
+    *ngIf="removeIcon"
+    [matTooltip]="'Remove from your favorites'"
+  >
     <mat-icon>heart_broken</mat-icon>
   </div>
   <div class="recipe__picture">
-    <img [src]="(environment.API_URL + '/getpicture/' + recipe.picture)" alt="Recipe Picture" [routerLink]="['/recipes', recipe.id]">
+    <img
+      [src]="environment.API_URL + '/getpicture/' + recipe.picture"
+      alt="Recipe Picture"
+      [routerLink]="['/recipes', recipe.id]"
+    />
   </div>
-  <mat-card-header class="recipe__header" fxLayout="column" fxLayoutAlign="space-between center">
-    <mat-card-title class="recipe__header__name" [routerLink]="['/recipes', recipe.id]">
-      {{recipe.name}}
+  <mat-card-header
+    class="recipe__header"
+    fxLayout="column"
+    fxLayoutAlign="space-between center"
+  >
+    <mat-card-title
+      class="recipe__header__name"
+      [routerLink]="['/recipes', recipe.id]"
+    >
+      {{ recipe.name }}
     </mat-card-title>
-    <mat-card-subtitle class="recipe__header__tags" fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-card-subtitle
+      class="recipe__header__tags"
+      fxLayout="row"
+      fxLayoutAlign="space-around center"
+    >
       <span *ngFor="let tag of recipe.recipeTags">{{ tag.tag.name }}</span>
     </mat-card-subtitle>
-    <div class="recipe__header__infos" fxLayout="row" fxLayoutAlign="space-between center">
-      <wh-recipe-rating [rating]="recipe.avgReview" *ngIf="recipe.avgReview"></wh-recipe-rating>
+    <div
+      class="recipe__header__infos"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <wh-recipe-rating
+        [rating]="recipe.avgReview"
+        *ngIf="recipe.avgReview"
+      ></wh-recipe-rating>
 
       <span fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>schedule</mat-icon>
@@ -29,15 +69,32 @@
     <p matTooltip="{{ recipe.description }}">{{ recipe.description }}</p>
   </mat-card-content>
   <mat-divider [inset]="true"></mat-divider>
-  <mat-card-footer class="recipe__footer" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="recipe__footer__infos" fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="recipe__footer__infos__user" fxLayout="row" fxLayoutAlign="start center">
-        <wh-avatar [avatar]="recipe.author.avatar" avatarSize="2.4rem"></wh-avatar>
-        <span class="recipe__footer__infos__user__nickname">{{ recipe.author.nickname }}</span>
+  <mat-card-footer
+    class="recipe__footer"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
+    <div
+      class="recipe__footer__infos"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <div
+        class="recipe__footer__infos__user"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <wh-avatar
+          [avatar]="recipe.author.avatar"
+          avatarSize="2.4rem"
+        ></wh-avatar>
+        <span class="recipe__footer__infos__user__nickname">{{
+          recipe.author.nickname
+        }}</span>
       </div>
-      <span class="recipe__footer__infos__date">{{ appService.formatDate(recipe.createdAt) }}</span>
-    </div> 
-   
+      <span class="recipe__footer__infos__date">{{
+        appService.formatDate(recipe.createdAt)
+      }}</span>
+    </div>
   </mat-card-footer>
 </mat-card>
-

@@ -4,23 +4,33 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '@prisma/client';
 import { environment } from '@wh/environments';
 
-const ENDPOINT = environment.API_URL + '/auth'
+const ENDPOINT = environment.API_URL + '/auth';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthentificationService {
-
-  constructor(
-    public http: HttpClient,
-  ) { }
+  constructor(public http: HttpClient) {}
 
   public login(email: string, password: string) {
-    return this.http.post(ENDPOINT + '/login', { email: email, password: password });
+    return this.http.post(ENDPOINT + '/login', {
+      email: email,
+      password: password,
+    });
   }
 
-  public register(email: string, nickname: string, password: string, passwordConfirm: string) {
-    return this.http.post(ENDPOINT + '/register', { email: email, nickname: nickname, password: password, passwordConfirm: passwordConfirm });
+  public register(
+    email: string,
+    nickname: string,
+    password: string,
+    passwordConfirm: string
+  ) {
+    return this.http.post(ENDPOINT + '/register', {
+      email: email,
+      nickname: nickname,
+      password: password,
+      passwordConfirm: passwordConfirm,
+    });
   }
 
   public updatePassword(id: number, passwords: object) {

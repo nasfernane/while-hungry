@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'wh-recipe-ingredients-options',
   templateUrl: './recipe-ingredients-options.component.html',
-  styleUrls: ['./recipe-ingredients-options.component.scss']
+  styleUrls: ['./recipe-ingredients-options.component.scss'],
 })
 export class RecipeIngredientsOptionsComponent {
   @Input() units: string;
@@ -14,7 +14,7 @@ export class RecipeIngredientsOptionsComponent {
   switchUnits(value: string) {
     if (this.units !== value) {
       this.units = value;
-      this.unitsEvent.emit(value)
+      this.unitsEvent.emit(value);
     }
   }
 
@@ -24,5 +24,4 @@ export class RecipeIngredientsOptionsComponent {
       this.scaleEvent.emit(value);
     }
   }
-
 }

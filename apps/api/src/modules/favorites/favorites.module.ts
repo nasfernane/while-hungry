@@ -6,11 +6,6 @@ import { CreateModule } from './useCases/create/create.module';
 import { DeleteModule } from './useCases/delete/delete.module';
 
 @Module({
-  imports: [
-    FindAllModule,
-    FindAllFilteredModule,
-    CreateModule,
-    DeleteModule
-  ],
+  imports: [FindAllModule, FindAllFilteredModule, CreateModule, DeleteModule],
 })
 export class FavoritesModule {}

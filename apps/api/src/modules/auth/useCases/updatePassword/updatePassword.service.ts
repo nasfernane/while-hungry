@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { prisma  } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 import * as bcrypt from 'bcrypt';
 import { Jwt } from './../../../../utils/jwt';
 import { UseFilters } from '@nestjs/common';
@@ -13,13 +13,13 @@ export class UpdatePasswordService {
 
     const user = await prisma.user.findUnique({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
 
     // if user not found or wrontg credentials
     if (!user || !bcrypt.compareSync(oldPassword, user.password)) {
-      return { status: 404, message: "Bad credentials" }
+      return { status: 404, message: 'Bad credentials' };
     } else {
       const updatedUser = await prisma.user.update({
         where: {
@@ -29,9 +29,9 @@ export class UpdatePasswordService {
           // hash new password
           password: bcrypt.hashSync(password, 8),
         },
-      })
+      });
 
-      const accessToken = await Jwt.signAccessToken(updatedUser)
+      const accessToken = await Jwt.signAccessToken(updatedUser);
 
       return { ...updatedUser, accessToken };
     }

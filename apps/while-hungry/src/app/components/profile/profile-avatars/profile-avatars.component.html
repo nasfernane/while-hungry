@@ -1,20 +1,52 @@
-<div class="profileAvatarsContainer" fxLayout="column" fxLayoutAlign="start stretch">
+<div
+  class="profileAvatarsContainer"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+>
   <h1>Choose your avatar</h1>
-  <div class="profileAvatarsContainer__avatars" fxLayout="column" fxLayoutAlign="space-between stretch">
+  <div
+    class="profileAvatarsContainer__avatars"
+    fxLayout="column"
+    fxLayoutAlign="space-between stretch"
+  >
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <wh-avatar [ngClass]="{'avatar-active': avatar === avatarActive}" *ngFor="let avatar of avatarsFemale" [avatar]="avatar" [avatarSize]="avatarSize" (click)="setAvatar(avatar)"></wh-avatar>
+      <wh-avatar
+        [ngClass]="{ 'avatar-active': avatar === avatarActive }"
+        *ngFor="let avatar of avatarsFemale"
+        [avatar]="avatar"
+        [avatarSize]="avatarSize"
+        (click)="setAvatar(avatar)"
+      ></wh-avatar>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <wh-avatar [ngClass]="{'avatar-active': avatar === avatarActive}" *ngFor="let avatar of avatarsMale" [avatar]="avatar" [avatarSize]="avatarSize" (click)="setAvatar(avatar)"></wh-avatar>
+      <wh-avatar
+        [ngClass]="{ 'avatar-active': avatar === avatarActive }"
+        *ngFor="let avatar of avatarsMale"
+        [avatar]="avatar"
+        [avatarSize]="avatarSize"
+        (click)="setAvatar(avatar)"
+      ></wh-avatar>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <wh-avatar [ngClass]="{'avatar-active': avatar === avatarActive}" *ngFor="let avatar of avatarsNetwork" [avatar]="avatar" [avatarSize]="avatarSize" (click)="setAvatar(avatar)"></wh-avatar>
+      <wh-avatar
+        [ngClass]="{ 'avatar-active': avatar === avatarActive }"
+        *ngFor="let avatar of avatarsNetwork"
+        [avatar]="avatar"
+        [avatarSize]="avatarSize"
+        (click)="setAvatar(avatar)"
+      ></wh-avatar>
     </div>
   </div>
-  <div class="profileAvatarsContainer__actions" fxLayout="row" fxLayoutAlign="space-around center">
-    <button fxFlex="30" class="btn btn--secondary" (click)="closeDialog()">CANCEL</button>
-    <button fxFlex="30" class="btn btn--main" (click)="updateAvatar()">PICK</button>
+  <div
+    class="profileAvatarsContainer__actions"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+  >
+    <button fxFlex="30" class="btn btn--secondary" (click)="closeDialog()">
+      CANCEL
+    </button>
+    <button fxFlex="30" class="btn btn--main" (click)="updateAvatar()">
+      PICK
+    </button>
   </div>
 </div>
-
-

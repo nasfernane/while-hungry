@@ -5,15 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from '@prisma/client';
 
 import { environment } from '@wh/environments';
-const ENDPOINT = environment.API_URL + '/posts'
+const ENDPOINT = environment.API_URL + '/posts';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BlogService {
-  constructor(
-    public http: HttpClient,
-  ) { }
+  constructor(public http: HttpClient) {}
 
   all() {
     return this.http.get<Post[]>(ENDPOINT);
@@ -28,7 +26,7 @@ export class BlogService {
   }
 
   update(post: Post) {
-    return this.http.put(ENDPOINT + `/${post.id}`, post)
+    return this.http.put(ENDPOINT + `/${post.id}`, post);
   }
 
   delete(post: Post) {

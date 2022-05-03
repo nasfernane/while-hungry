@@ -21,7 +21,7 @@
 
       img {
         height: 15vh;
-        min-height: 15vh
+        min-height: 15vh;
       }
     }
   }
@@ -56,7 +56,7 @@
       background-color: rgba($grey-light, 0.6);
 
       span {
-        color: rgba($primary-dark, 0.6)
+        color: rgba($primary-dark, 0.6);
       }
 
       mat-icon {
@@ -82,14 +82,15 @@ mat-icon.addIcon {
   font-size: 4rem;
   transform: translateY(1.2rem);
   cursor: pointer;
-  
+
   &:hover {
     color: $primary-light;
   }
 }
 
 .newRecipeForm {
-  &__ingredients, &__instructions {
+  &__ingredients,
+  &__instructions {
     mat-form-field {
       margin-right: 2rem;
     }
@@ -116,7 +117,8 @@ mat-icon.addIcon {
         font-weight: 500;
       }
 
-      &__instructions, &__notes  {
+      &__instructions,
+      &__notes {
         padding: 2rem;
       }
 
@@ -128,9 +130,9 @@ mat-icon.addIcon {
             margin-right: 1rem;
             text-align: center;
             min-height: 1.8rem !important;
-            min-width : 1.8rem !important;
+            min-width: 1.8rem !important;
             max-height: 1.8rem !important;
-            max-width : 1.8rem !important;
+            max-width: 1.8rem !important;
             font-size: 1.4rem;
             border-radius: 50%;
             background-color: $primary;
@@ -142,8 +144,6 @@ mat-icon.addIcon {
             margin-right: 0.5rem;
           }
         }
-
-        
       }
 
       &__notes {
@@ -175,7 +175,6 @@ mat-icon.addIcon {
             font-weight: 500;
             margin-right: 0.5rem;
           }
-          
         }
 
         & > span {
@@ -185,13 +184,10 @@ mat-icon.addIcon {
           text-transform: uppercase;
           font-size: 1.6rem;
         }
-
-        
-      } 
+      }
     }
   }
 }
-
 
 .recipeName {
   width: 100%;
@@ -203,4 +199,3 @@ mat-icon.addIcon {
     text-transform: uppercase;
   }
 }
-

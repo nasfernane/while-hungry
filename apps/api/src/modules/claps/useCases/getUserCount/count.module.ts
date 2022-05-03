@@ -4,6 +4,6 @@ import { CountController } from './count.controller';
 
 @Module({
   controllers: [CountController],
-  providers: [CountService]
+  providers: [CountService],
 })
 export class CountModule {}

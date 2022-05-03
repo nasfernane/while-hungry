@@ -14,14 +14,16 @@ export class CreateController {
 
   /**
    * Create a new definition
-   * @param definition 
+   * @param definition
    * @returns definition
    */
-  @ApiResponse({ status: 201, description: 'The user has been successfully created.'})
-  @ApiResponse({ status: 403, description: 'Forbidden.'})
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully created.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @Post()
   create(@Body() definition: Definition) {
     return this.service.create(definition);
   }
-
 }

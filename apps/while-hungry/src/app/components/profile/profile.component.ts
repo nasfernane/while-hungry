@@ -11,21 +11,17 @@ import { ProfileAvatarsComponent } from './profile-avatars/profile-avatars.compo
 @Component({
   selector: 'wh-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
   avatar: string;
 
-  constructor(
-    public appService: AppService,
-    private matDialog: MatDialog,
-  ) {
-    this.appService.breadcrumb = ['While Hungry', 'Your profile']
+  constructor(public appService: AppService, private matDialog: MatDialog) {
+    this.appService.breadcrumb = ['While Hungry', 'Your profile'];
     this.avatar = this.appService.getUserAvatar();
-   }
-
-  clickAvatar() {
-    this.matDialog.open(ProfileAvatarsComponent)
   }
 
+  clickAvatar() {
+    this.matDialog.open(ProfileAvatarsComponent);
+  }
 }

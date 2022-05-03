@@ -1,6 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { DeleteService } from './delete.service';
-
 
 @Controller('Delete')
 export class DeleteController {
@@ -8,8 +15,8 @@ export class DeleteController {
 
   /**
    * delete a definition based on id
-   * @param id 
-   * @returns 
+   * @param id
+   * @returns
    */
   @Delete(':id')
   remove(@Param('id') id: string) {

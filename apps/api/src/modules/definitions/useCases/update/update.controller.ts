@@ -12,13 +12,12 @@ export class UpdateController {
 
   /**
    * update a definition based on id
-   * @param id 
-   * @param definition 
+   * @param id
+   * @param definition
    * @returns updated definition
    */
   @Patch(':id')
   update(@Param('id') id: string, @Body() definition: Definition) {
     return this.service.update(+id, definition);
   }
-
 }

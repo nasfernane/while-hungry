@@ -7,13 +7,10 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/definitions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GlossaryService {
-
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getGlossary() {
     return this.http.get<Definition[]>(ENDPOINT);

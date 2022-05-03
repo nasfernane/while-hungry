@@ -9,8 +9,8 @@ export class UpdateController {
 
   /**
    * update a recipe based on id
-   * @param id 
-   * @param recipe 
+   * @param id
+   * @param recipe
    * @returns updated recipe
    */
   @Patch(':id')

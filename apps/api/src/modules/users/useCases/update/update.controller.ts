@@ -9,8 +9,8 @@ export class UpdateController {
 
   /**
    * updates user data based on id
-   * @param id 
-   * @param user 
+   * @param id
+   * @param user
    * @returns new user data
    */
   @Patch(':id')

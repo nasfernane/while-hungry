@@ -9,17 +9,16 @@ describe('API - Register', () => {
         body: {
           email: 'jean-edern@gmail.com',
           nickname: 'Jean-edern',
-          password: "pw123"
-        }
-      })
-      .should((response) => {
+          password: 'pw123',
+        },
+      }).should((response) => {
         cy.log(JSON.stringify(response.body));
         expect(response.status).to.eq(201);
-        expect(response.body.email).to.not.be.null
-        expect(response.body.nickname).to.not.be.null
-        expect(response.body.role).to.not.be.null
-        expect(response.body.id).to.eq(4)
-      })
-    })
-  })
-})
+        expect(response.body.email).to.not.be.null;
+        expect(response.body.nickname).to.not.be.null;
+        expect(response.body.role).to.not.be.null;
+        expect(response.body.id).to.eq(4);
+      });
+    });
+  });
+});

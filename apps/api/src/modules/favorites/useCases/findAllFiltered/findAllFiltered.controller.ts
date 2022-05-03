@@ -12,12 +12,11 @@ export class FindAllFilteredController {
   /**
    * find all favorite recipes bases on user id, with filters
    * @param id (user)
-   * @param filters 
+   * @param filters
    * @returns an array of RecipeFavorite
    */
   @Post(':id')
   findAllWithFilters(@Param('id') id: string, @Body() filters: object) {
     return this.service.findAllFiltered(+id, filters);
   }
-
 }

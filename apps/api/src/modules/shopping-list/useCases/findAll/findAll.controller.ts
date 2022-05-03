@@ -3,7 +3,6 @@ import { Controller, Get, Param } from '@nestjs/common';
 // service
 import { FindAllService } from './findAll.service';
 
-
 @Controller('shopping-list')
 export class FindAllController {
   constructor(private readonly service: FindAllService) {}

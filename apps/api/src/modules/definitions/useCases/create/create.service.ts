@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // schema
 import { Definition } from '@prisma/client';
@@ -11,9 +11,9 @@ export class CreateService {
   async create(definition: Definition) {
     const newDefinition = await prisma.definition.create({
       data: {
-        ...definition
-      }
-    })
+        ...definition,
+      },
+    });
 
     return newDefinition;
   }

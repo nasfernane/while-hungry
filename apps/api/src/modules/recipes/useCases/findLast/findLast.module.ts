@@ -4,6 +4,6 @@ import { FindLastController } from './findLast.controller';
 
 @Module({
   controllers: [FindLastController],
-  providers: [FindLastService]
+  providers: [FindLastService],
 })
 export class FindLastModule {}

@@ -12,7 +12,7 @@ export class CreateController {
 
   /**
    * create new review on recipe
-   * @param review 
+   * @param review
    * @returns new review
    */
   @Post()

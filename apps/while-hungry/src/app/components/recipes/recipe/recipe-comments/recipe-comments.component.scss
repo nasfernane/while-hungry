@@ -1,11 +1,11 @@
-
 @import './../../../../../styles/base/colors';
 
 .commentsContainer {
   width: 100%;
   margin-top: 3rem;
-  
-  &__header, &__comment {
+
+  &__header,
+  &__comment {
     width: 100%;
   }
 
@@ -21,10 +21,9 @@
     }
   }
 
-  &__comment { 
+  &__comment {
     padding-bottom: 2rem;
 
-    
     &__avatar {
       margin-right: 1rem;
       img {
@@ -54,7 +53,5 @@
         font-weight: 500;
       }
     }
-
-    
   }
 }

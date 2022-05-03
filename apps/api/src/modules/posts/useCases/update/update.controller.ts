@@ -8,8 +8,8 @@ export class UpdateController {
   constructor(private readonly service: UpdateService) {}
   /**
    * update a post based on id
-   * @param id 
-   * @param post 
+   * @param id
+   * @param post
    * @returns updated post
    */
   @Patch(':id')
@@ -17,4 +17,3 @@ export class UpdateController {
     return this.service.update(+id, post);
   }
 }
-

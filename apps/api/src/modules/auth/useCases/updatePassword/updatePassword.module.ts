@@ -4,6 +4,6 @@ import { UpdatePasswordController } from './updatePassword.controller';
 
 @Module({
   controllers: [UpdatePasswordController],
-  providers: [UpdatePasswordService]
+  providers: [UpdatePasswordService],
 })
 export class UpdatePasswordModule {}

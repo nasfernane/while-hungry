@@ -8,10 +8,7 @@ import { AppService } from '@wh/core-utils';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private http: HttpClient,
-    private appService: AppService,
-  ) {}
+  constructor(private http: HttpClient, private appService: AppService) {}
 
   ngOnInit() {
     this.appService.loadUserFromLocalStorage();

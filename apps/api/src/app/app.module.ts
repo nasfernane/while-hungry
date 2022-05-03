@@ -1,11 +1,16 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod  } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 
 // check auth token middleware
 import { CheckAuthMiddleware } from '../middlewares/checkAuth';
 
 // modules
-import { RecipesModule } from './../modules/recipes/recipes.module'
-import { PostsModule } from './../modules/posts/posts.module'
+import { RecipesModule } from './../modules/recipes/recipes.module';
+import { PostsModule } from './../modules/posts/posts.module';
 import { AuthModule } from './../modules/auth/auth.module';
 import { ClapsModule } from './../modules/claps/claps.module';
 import { ReviewsModule } from '../modules/reviews/reviews.module';
@@ -25,7 +30,6 @@ import { AppService } from './app.service';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
-
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -33,8 +37,8 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
       limit: 5000,
     }),
     RecipesModule,
-    PostsModule, 
-    AuthModule, 
+    PostsModule,
+    AuthModule,
     ClapsModule,
     ReviewsModule,
     RecipesCommentsModule,
@@ -43,13 +47,10 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
     FavoritesModule,
     ShoppingListModule,
     FilesModule,
-    RecipesTagsModule
+    RecipesTagsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    { provide: APP_GUARD, useClass: ThrottlerGuard }
-  ],
+  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
@@ -67,7 +68,7 @@ export class AppModule implements NestModule {
         { path: 'reviews', method: RequestMethod.POST },
         { path: 'reviews:id', method: RequestMethod.PATCH },
         { path: 'claps', method: RequestMethod.POST },
-        { path: 'claps/check', method: RequestMethod.POST },
-      )
+        { path: 'claps/check', method: RequestMethod.POST }
+      );
   }
 }

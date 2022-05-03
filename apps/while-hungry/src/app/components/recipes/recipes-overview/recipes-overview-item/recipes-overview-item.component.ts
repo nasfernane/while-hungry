@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FavoritesService, RecipeService } from '@wh/core-data';
-import { environment } from "@wh/environments";
-
+import { environment } from '@wh/environments';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -10,14 +9,14 @@ import { UiService } from '@wh/ui';
 @Component({
   selector: 'wh-recipes-overview-item',
   templateUrl: './recipes-overview-item.component.html',
-  styleUrls: ['./recipes-overview-item.component.scss']
+  styleUrls: ['./recipes-overview-item.component.scss'],
 })
 export class RecipesOverviewItemComponent implements OnInit {
   @Input() recipe: any;
   @Input() removeIcon = false;
   @Output() favoriteEvent = new EventEmitter<boolean>();
-  environment = environment
-  
+  environment = environment;
+
   recipeId: number;
   userId: number;
   favoriteId: number;
@@ -27,8 +26,8 @@ export class RecipesOverviewItemComponent implements OnInit {
     private recipeService: RecipeService,
     private favoritesService: FavoritesService,
     private uiService: UiService,
-    public appService: AppService,
-  ) { }
+    public appService: AppService
+  ) {}
 
   ngOnInit() {
     this.recipeId = this.recipe.id;
@@ -50,21 +49,28 @@ export class RecipesOverviewItemComponent implements OnInit {
 
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
-      this.favoritesService.addOrRemoveFavorite(this.recipeId, this.userId, this.recipeInFavorites, this.favoriteId ? this.favoriteId : undefined).subscribe((res: any) => {
-        if (res) {
-          this.favoriteEvent.emit(true);
-          if (!this.recipeInFavorites) {
-            this.uiService.openAlert('Recipe added to your favorites')
-          } else {
-            this.uiService.openAlert('Recipe removed from your favorites')
-            if (this.removeIcon) this.favoriteEvent.emit(true);
-          }
+      this.favoritesService
+        .addOrRemoveFavorite(
+          this.recipeId,
+          this.userId,
+          this.recipeInFavorites,
+          this.favoriteId ? this.favoriteId : undefined
+        )
+        .subscribe((res: any) => {
+          if (res) {
+            this.favoriteEvent.emit(true);
+            if (!this.recipeInFavorites) {
+              this.uiService.openAlert('Recipe added to your favorites');
+            } else {
+              this.uiService.openAlert('Recipe removed from your favorites');
+              if (this.removeIcon) this.favoriteEvent.emit(true);
+            }
 
-          this.recipeInFavorites = !this.recipeInFavorites;
-        }
-      });
+            this.recipeInFavorites = !this.recipeInFavorites;
+          }
+        });
     } else {
-      this.uiService.openLoginAlert()
+      this.uiService.openLoginAlert();
     }
   }
 }

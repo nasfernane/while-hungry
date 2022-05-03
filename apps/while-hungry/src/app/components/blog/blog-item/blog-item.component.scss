@@ -5,7 +5,7 @@
     cursor: pointer;
 
     .blogItem__infos {
-      box-shadow: 1rem 1rem 1rem rgba(33,33,33,.2); 
+      box-shadow: 1rem 1rem 1rem rgba(33, 33, 33, 0.2);
       background-color: rgba(#fff, 0.96);
       &__title {
         color: $green;
@@ -34,21 +34,22 @@
     background-color: rgba(#fff, 0.9);
     position: relative;
     top: -6rem;
-    transition: box-shadow .3s;
+    transition: box-shadow 0.3s;
 
     &__title {
       text-align: center;
       width: 90%;
       margin-bottom: 2rem;
       font-weight: bold;
-      transition: color .3s;
+      transition: color 0.3s;
       text-transform: capitalize;
     }
-    
-    &__content, &__author {
+
+    &__content,
+    &__author {
       width: 90%;
       margin: 0 auto;
-      text-align:justify;
+      text-align: justify;
     }
 
     &__content {
@@ -59,7 +60,7 @@
     &__author {
       &--name {
         font-weight: 500;
-        transition: color .3s;
+        transition: color 0.3s;
       }
     }
   }

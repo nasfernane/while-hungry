@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
 
 @Injectable()
 export class FindAllFilteredService {
-   /**
+  /**
    * return all recipes based on filters
-   * @param filters 
+   * @param filters
    * @returns an array of Recipe
    */
   async findAllFiltered(filters: any): Promise<Recipe[]> {
@@ -25,14 +25,14 @@ export class FindAllFilteredService {
               some: {
                 tag: {
                   name: filters.tag ? filters.tag : undefined,
-                }
-              }
-            }
+                },
+              },
+            },
           },
-          { 
+          {
             avgReview: filters.rating ? +filters.rating : undefined,
-          }
-        ]
+          },
+        ],
       },
       include: {
         author: true,
@@ -52,8 +52,8 @@ export class FindAllFilteredService {
         },
         recipeReviews: true,
         recipeFavorites: true,
-      }
-    })
+      },
+    });
 
     return recipes;
   }

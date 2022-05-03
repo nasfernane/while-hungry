@@ -16,7 +16,6 @@ $filters-height: 5rem;
     height: $filters-height;
   }
 
-
   ::ng-deep .mat-form-field-outline-end {
     border-top: 0.3rem solid $primary;
     border-right: 0.3rem solid $primary;
@@ -33,13 +32,11 @@ $filters-height: 5rem;
     width: 100%;
   }
 
- 
-
   .filterBtn {
     border: none;
     cursor: pointer;
     height: $filters-height;
-    margin-top: 3.0.5rem;
+    margin-top: 3.5rem;
     padding: 1rem 3rem;
     background-color: $primary;
     color: $grey-light;
@@ -48,6 +45,4 @@ $filters-height: 5rem;
       background-color: $primary-light;
     }
   }
-
- 
 }

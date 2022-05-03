@@ -8,9 +8,8 @@ describe('GlossarySectionDefinitionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlossarySectionDefinitionComponent ]
-    })
-    .compileComponents();
+      declarations: [GlossarySectionDefinitionComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

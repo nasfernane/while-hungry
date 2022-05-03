@@ -7,7 +7,7 @@ import { AppService } from '@wh/core-utils';
 @Component({
   selector: 'wh-shoppinglist',
   templateUrl: './shoppinglist.component.html',
-  styleUrls: ['./shoppinglist.component.scss']
+  styleUrls: ['./shoppinglist.component.scss'],
 })
 export class ShoppinglistComponent implements OnInit {
   shoppingLists: ShoppingList[];
@@ -15,11 +15,11 @@ export class ShoppinglistComponent implements OnInit {
   constructor(
     private appService: AppService,
     private service: ShoppingListService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.appService.breadcrumb = ['While Hungry', 'Shopping List']
-    this.getShoppingList()
+    this.appService.breadcrumb = ['While Hungry', 'Shopping List'];
+    this.getShoppingList();
   }
 
   getShoppingList() {
@@ -29,7 +29,6 @@ export class ShoppinglistComponent implements OnInit {
       } else {
         this.shoppingLists = [];
       }
-    })
+    });
   }
-
 }

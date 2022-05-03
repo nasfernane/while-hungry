@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 
 // services
 import { ShoppingListService } from '@wh/core-data';
@@ -8,7 +15,7 @@ import { UiService } from '@wh/ui';
 @Component({
   selector: 'wh-shoppinglist-global',
   templateUrl: './shoppinglist-global.component.html',
-  styleUrls: ['./shoppinglist-global.component.scss']
+  styleUrls: ['./shoppinglist-global.component.scss'],
 })
 export class ShoppinglistGlobalComponent implements OnInit, OnChanges {
   @Input() lists: any;
@@ -18,7 +25,7 @@ export class ShoppinglistGlobalComponent implements OnInit, OnChanges {
   constructor(
     private service: ShoppingListService,
     private appService: AppService,
-    private uiService: UiService,
+    private uiService: UiService
   ) {}
 
   ngOnInit() {
@@ -43,25 +50,32 @@ export class ShoppinglistGlobalComponent implements OnInit, OnChanges {
    * @param {any[]} lists - an array of shopping lists.
    */
   setTotal(lists: any[]) {
-    lists.forEach(list => {
+    lists.forEach((list) => {
       list.shoppingListItems.forEach((el: Record<string, unknown>) => {
         el['quantity'] = Number(el['quantity']);
-        const index = this.total.findIndex(line => line['name'] === el['name']);
+        const index = this.total.findIndex(
+          (line) => line['name'] === el['name']
+        );
 
         // if this type of food is not yet in total, we add it
-        if (index === -1 ) { 
-          this.total.push({ name: el['name'], quantity: el['quantity'], unit: el['unit'] });
+        if (index === -1) {
+          this.total.push({
+            name: el['name'],
+            quantity: el['quantity'],
+            unit: el['unit'],
+          });
 
-        // this type of food already in total, we add new quantities and check units
+          // this type of food already in total, we add new quantities and check units
         } else {
           if (el['unit'] === this.total[index]['unit']) {
-            this.total[index]['quantity'] = Number(this.total[index]['quantity']) + Number(el['quantity']);
+            this.total[index]['quantity'] =
+              Number(this.total[index]['quantity']) + Number(el['quantity']);
           } else {
             this.total[index]['quantity2'] = Number(el['quantity']);
-            this.total[index]['unit2'] = el['unit']
+            this.total[index]['unit2'] = el['unit'];
           }
         }
-      }); 
+      });
     });
   }
 
@@ -74,12 +88,14 @@ export class ShoppinglistGlobalComponent implements OnInit, OnChanges {
   }
 
   removeRecipes() {
-    this.service.removeAll(this.appService.getUserId()).subscribe((res: any) => {
-      if (res && res.res === 'success') {
-        this.uiService.openAlert('You wiped out your shopping lists')
+    this.service
+      .removeAll(this.appService.getUserId())
+      .subscribe((res: any) => {
+        if (res && res.res === 'success') {
+          this.uiService.openAlert('You wiped out your shopping lists');
 
-        this.resetEvent.emit(true);
-      }
-    })
+          this.resetEvent.emit(true);
+        }
+      });
   }
 }

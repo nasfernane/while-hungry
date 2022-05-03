@@ -1,15 +1,27 @@
-<div class="shoppingList" *ngIf="list" fxLayout="column" fxLayoutAlign="flex-start center">
-  <div class="shoppingList__header" fxLayout="row" fxLayoutAlign="center center">
+<div
+  class="shoppingList"
+  *ngIf="list"
+  fxLayout="column"
+  fxLayoutAlign="flex-start center"
+>
+  <div
+    class="shoppingList__header"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
     <span (click)="navRecipe(list.recipeId)">
       {{ list.recipe.name }}
     </span>
   </div>
   <div class="shoppingList__list">
-    <div *ngFor="let el of list.shoppingListItems" class="shoppingList__list__itemm">
-      <span class="shoppingList__label">
-        • {{ el['name'] }} : 
-      </span>
-      <span class="shoppingList__quantities"> {{ el['quantity'] }} {{ el['unit'] }}</span>
+    <div
+      *ngFor="let el of list.shoppingListItems"
+      class="shoppingList__list__itemm"
+    >
+      <span class="shoppingList__label"> • {{ el['name'] }} : </span>
+      <span class="shoppingList__quantities">
+        {{ el['quantity'] }} {{ el['unit'] }}</span
+      >
     </div>
   </div>
   <div class="shoppingList__footer">

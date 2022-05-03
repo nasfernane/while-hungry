@@ -1,10 +1,18 @@
 <div class="glossaryContainer globalContainer">
   <div class="glossaryContainer__link">
-    <span  *ngFor="let letter of alphabet; let last = last;" (click)="scroll('letter-' + letter)">
+    <span
+      *ngFor="let letter of alphabet; let last = last"
+      (click)="scroll('letter-' + letter)"
+    >
       <span class="glossaryContainer__link--letter">{{ letter }}</span>
       <span class="glossaryContainer__link--div" *ngIf="!last">-</span>
     </span>
   </div>
-  
-  <wh-glossary-section id="{{ 'letter-' + section.key }}" *ngFor="let section of definitions | keyvalue" [section]="section" #test></wh-glossary-section>
+
+  <wh-glossary-section
+    id="{{ 'letter-' + section.key }}"
+    *ngFor="let section of definitions | keyvalue"
+    [section]="section"
+    #test
+  ></wh-glossary-section>
 </div>

@@ -4,13 +4,13 @@
   </div>
   <div class="listGlobal__list">
     <div *ngFor="let el of total" class="listGlobal__list__item">
-      <span class="listGlobal__label">
-        • {{ el['name'] }} : 
-      </span>
+      <span class="listGlobal__label"> • {{ el['name'] }} : </span>
       <span class="listGlobal__quantities"> {{ formatQuantities(el) }}</span>
     </div>
   </div>
   <div class="listGlobal__footer">
-    <button class="mainButton" (click)="removeRecipes()">Remove all recipes</button>
+    <button class="mainButton" (click)="removeRecipes()">
+      Remove all recipes
+    </button>
   </div>
 </div>

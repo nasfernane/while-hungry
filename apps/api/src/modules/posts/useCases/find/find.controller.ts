@@ -7,12 +7,11 @@ export class FindController {
 
   /**
    * finds a recipe based on id
-   * @param id 
+   * @param id
    * @returns recipe
    */
   @Get(':id')
   find(@Param('id') id: string) {
     return this.service.find(+id);
   }
-
 }

@@ -9,7 +9,7 @@ import { RecipeReview } from '@prisma/client';
 @Component({
   selector: 'wh-recipe-add-review',
   templateUrl: './recipe-add-review.component.html',
-  styleUrls: ['./recipe-add-review.component.scss']
+  styleUrls: ['./recipe-add-review.component.scss'],
 })
 export class RecipeAddReviewComponent implements OnInit {
   @Input() recipeId: number;
@@ -25,8 +25,10 @@ export class RecipeAddReviewComponent implements OnInit {
     private uiService: UiService,
     private reviewService: ReviewService
   ) {
-    this.stars = Array(5).fill(1).map((x,i)=>i + 1); // fill the stars array with proper index
-   }
+    this.stars = Array(5)
+      .fill(1)
+      .map((x, i) => i + 1); // fill the stars array with proper index
+  }
 
   ngOnInit() {
     this.initReview();
@@ -35,14 +37,16 @@ export class RecipeAddReviewComponent implements OnInit {
   // setup component for adding or updating at initialisation
   initReview() {
     if (this.appService.userLogged) {
-      this.reviewService.checkIfReviewed(this.recipeId, this.appService.getUserId()).subscribe((review: RecipeReview) => {
-        if (review) {
-          this.updating = true;
-          this.userRating = review.review;
-          this.message = this.setMessage();
-          this.reviewId = review.id;
-        }
-      })
+      this.reviewService
+        .checkIfReviewed(this.recipeId, this.appService.getUserId())
+        .subscribe((review: RecipeReview) => {
+          if (review) {
+            this.updating = true;
+            this.userRating = review.review;
+            this.message = this.setMessage();
+            this.reviewId = review.id;
+          }
+        });
     }
   }
 
@@ -58,58 +62,64 @@ export class RecipeAddReviewComponent implements OnInit {
   }
 
   setMessage() {
-    switch(this.userRating) {
+    switch (this.userRating) {
       case 1:
-        return "This recipe killed half my family..."
-      case 2: 
-        return "That was pretty bad, mate."
-      case 3: 
-        return "Meh, can do better but it's all right"
-      case 4: 
-        return "Good recipe. Thanks !"
+        return 'This recipe killed half my family...';
+      case 2:
+        return 'That was pretty bad, mate.';
+      case 3:
+        return "Meh, can do better but it's all right";
+      case 4:
+        return 'Good recipe. Thanks !';
       case 5:
-        return "Omg omg, best recipe ever !"
-      default: 
-        return "No default"
+        return 'Omg omg, best recipe ever !';
+      default:
+        return 'No default';
     }
   }
 
   // add or update review depending if user already posted a review for this recipe
   async addOrUpdateReview() {
     if (this.appService.userLogged) {
-      if (!this.updating) { // creating the review
+      if (!this.updating) {
+        // creating the review
         const newReview = {
           recipeId: this.recipeId,
           authorId: this.appService.getUserId(),
           review: this.userRating,
-        }
+        };
 
-        this.reviewService.create(newReview).subscribe((review: RecipeReview) => {
-          if (review) {
-            this.afterUpdateData('Review sent !')
-          }
-        })
-      } else { // updating the review
+        this.reviewService
+          .create(newReview)
+          .subscribe((review: RecipeReview) => {
+            if (review) {
+              this.afterUpdateData('Review sent !');
+            }
+          });
+      } else {
+        // updating the review
         const updatedReview = {
           recipeId: this.recipeId,
           authorId: this.appService.getUserId(),
           review: this.userRating,
-        }
+        };
 
-        this.reviewService.update(this.reviewId, updatedReview).subscribe((review: RecipeReview) => {
-          if (review) {
-            this.afterUpdateData('Review updated !')
-          }
-        })
+        this.reviewService
+          .update(this.reviewId, updatedReview)
+          .subscribe((review: RecipeReview) => {
+            if (review) {
+              this.afterUpdateData('Review updated !');
+            }
+          });
       }
     } else {
-      this.uiService.openLoginAlert()
+      this.uiService.openLoginAlert();
     }
   }
 
   // refresh data after each creation or update
   afterUpdateData(message: string) {
-    this.uiService.openAlert(message)
+    this.uiService.openAlert(message);
     this.initReview();
     this.updateEvent.emit(true);
   }

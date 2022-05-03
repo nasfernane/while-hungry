@@ -4,7 +4,6 @@ import { UpdateController } from './update.controller';
 
 @Module({
   controllers: [UpdateController],
-  providers: [UpdateService]
+  providers: [UpdateService],
 })
 export class UpdateModule {}
-

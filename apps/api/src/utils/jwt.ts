@@ -1,18 +1,22 @@
-import  dotenv  from 'dotenv';
+import dotenv from 'dotenv';
 import * as jwt from 'jsonwebtoken';
-import  createError  from 'http-errors';
+import createError from 'http-errors';
 
 dotenv.config();
 export class Jwt {
   static signAccessToken(payload: Record<string, unknown>) {
     return new Promise((resolve, reject) => {
-      jwt.sign({ payload }, process.env['ACCESS_TOKEN_SECRET'] as string, {
-      }, (err, token) => {
+      jwt.sign(
+        { payload },
+        process.env['ACCESS_TOKEN_SECRET'] as string,
+        {},
+        (err, token) => {
           if (err) {
-              reject(createError['InternalServeurError'])
+            reject(createError['InternalServeurError']);
           }
-          resolve(token)
-      })
-    })
+          resolve(token);
+        }
+      );
+    });
   }
 }

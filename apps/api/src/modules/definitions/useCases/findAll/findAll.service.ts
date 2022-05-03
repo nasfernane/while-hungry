@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Definition } from '@prisma/client';
@@ -16,10 +16,9 @@ export class FindAllService {
     const definitions: Definition[] = await prisma.definition.findMany({
       orderBy: {
         label: 'asc',
-      }
-    })
+      },
+    });
 
     return definitions;
   }
- 
 }

@@ -22,15 +22,15 @@ export class FindAllFilteredService {
                 some: {
                   tag: {
                     name: filters.tag ? filters.tag : undefined,
-                  }
-                }
-              }
+                  },
+                },
+              },
             },
-            { 
+            {
               avgReview: filters.rating ? +filters.rating : undefined,
-            }
-          ]
-        }
+            },
+          ],
+        },
       },
       include: {
         recipe: {
@@ -43,7 +43,7 @@ export class FindAllFilteredService {
             recipeTags: {
               include: {
                 tag: true,
-              }
+              },
             },
             recipeComments: {
               include: {
@@ -52,10 +52,10 @@ export class FindAllFilteredService {
             },
             recipeReviews: true,
             recipeFavorites: true,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
     return favorites;
   }
 }

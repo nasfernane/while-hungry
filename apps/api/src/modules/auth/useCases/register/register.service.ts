@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { prisma  } from '@wh/prisma-client';
-import  createError   from 'http-errors';
+import { prisma } from '@wh/prisma-client';
+import createError from 'http-errors';
 import * as bcrypt from 'bcrypt';
 import { Jwt } from './../../../../utils/jwt';
 
@@ -12,26 +12,27 @@ import { HttpExceptionFilter } from './../../../../filters/http-exception.filter
 export class RegisterService {
   /**
    * registers users
-   * @param param 
+   * @param param
    * @returns created user
    */
   async register(param) {
     const { email, nickname, passwordConfirm } = param;
     let { password } = param;
-    
+
     if (password === passwordConfirm) {
-      password = bcrypt.hashSync(password, 8)
+      password = bcrypt.hashSync(password, 8);
       // create new user with a default avatar
       const user = await prisma.user.create({
-        data: { email, nickname, password, avatar: 'avatar9' }
-      })
+        data: { email, nickname, password, avatar: 'avatar9' },
+      });
 
-      const accessToken = await Jwt.signAccessToken(user)
+      const accessToken = await Jwt.signAccessToken(user);
 
       return { ...user, accessToken };
-
     } else {
-      throw new createError.NotFound('Password and confirmation are not identical');
+      throw new createError.NotFound(
+        'Password and confirmation are not identical'
+      );
     }
   }
 }

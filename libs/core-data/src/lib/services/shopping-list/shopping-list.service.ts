@@ -7,17 +7,18 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/shopping-list';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShoppingListService {
-
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   /* A function that creates a new shopping list. */
   create(userId: number, recipeId: number, ingredients: Array<any>) {
-    return this.http.post<ShoppingList>(ENDPOINT, {userId: userId, recipeId: recipeId, ingredients})
+    return this.http.post<ShoppingList>(ENDPOINT, {
+      userId: userId,
+      recipeId: recipeId,
+      ingredients,
+    });
   }
 
   /**
@@ -26,14 +27,14 @@ export class ShoppingListService {
    * @returns An Observable of type ShoppingList
    */
   findAll(id: number) {
-    return this.http.get<ShoppingList>(ENDPOINT+ `/${id}`)
+    return this.http.get<ShoppingList>(ENDPOINT + `/${id}`);
   }
 
   removeAll(id: number) {
-    return this.http.delete<ShoppingList>(ENDPOINT+ `/all/${id}`)
+    return this.http.delete<ShoppingList>(ENDPOINT + `/all/${id}`);
   }
 
   remove(id: string) {
-    return this.http.delete<ShoppingList>(ENDPOINT+ `/${id}`)
+    return this.http.delete<ShoppingList>(ENDPOINT + `/${id}`);
   }
 }

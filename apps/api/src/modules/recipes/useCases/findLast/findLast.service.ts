@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
@@ -16,7 +16,7 @@ export class FindLastService {
     const recipes = await prisma.recipe.findMany({
       orderBy: {
         createdAt: 'desc',
-      }, 
+      },
       take: 3,
       include: {
         author: true,
@@ -27,7 +27,7 @@ export class FindLastService {
         recipeTags: {
           include: {
             tag: true,
-          }
+          },
         },
         recipeComments: {
           include: {
@@ -35,14 +35,13 @@ export class FindLastService {
           },
           orderBy: {
             createdAt: 'desc',
-          }
+          },
         },
         recipeReviews: true,
         recipeFavorites: true,
-      }
-    })
+      },
+    });
 
     return recipes;
   }
-
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Post } from '@prisma/client';
@@ -18,11 +18,9 @@ export class FindLastService {
       },
       include: {
         author: true,
-      }
-    })
+      },
+    });
 
     return post;
   }
-
-
 }

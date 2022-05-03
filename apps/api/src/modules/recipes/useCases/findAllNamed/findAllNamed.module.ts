@@ -4,6 +4,6 @@ import { FindAllNamedController } from './findAllNamed.controller';
 
 @Module({
   controllers: [FindAllNamedController],
-  providers: [FindAllNamedService]
+  providers: [FindAllNamedService],
 })
 export class FindAllNamedModule {}

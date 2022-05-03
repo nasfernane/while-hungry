@@ -3,15 +3,14 @@ import { Controller, Get, Param } from '@nestjs/common';
 // service
 import { CheckService } from './check.service';
 
-
 @Controller('reviews')
 export class CheckController {
   constructor(private readonly service: CheckService) {}
 
   /**
    * check if user already reviewed a recipe
-   * @param recipeId 
-   * @param userId 
+   * @param recipeId
+   * @param userId
    * @returns review
    */
   @Get('/check/:recipeId/:userId')

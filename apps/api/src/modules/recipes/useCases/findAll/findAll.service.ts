@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
@@ -19,7 +19,7 @@ export class FindAllService {
         recipeTags: {
           include: {
             tag: true,
-          }
+          },
         },
         recipeComments: {
           include: {
@@ -28,8 +28,8 @@ export class FindAllService {
         },
         recipeReviews: true,
         recipeFavorites: true,
-      }
-    })
+      },
+    });
 
     return recipes;
   }

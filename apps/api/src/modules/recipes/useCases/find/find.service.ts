@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 // prisma schema
 import { Recipe } from '@prisma/client';
@@ -11,8 +11,8 @@ export class FindService {
   async find(id: number): Promise<Recipe> {
     const recipe: Recipe = await prisma.recipe.findUnique({
       where: {
-        id: id
-      }, 
+        id: id,
+      },
       include: {
         author: true,
         recipeInstructions: true,
@@ -22,7 +22,7 @@ export class FindService {
         recipeTags: {
           include: {
             tag: true,
-          }
+          },
         },
         recipeComments: {
           include: {
@@ -30,12 +30,12 @@ export class FindService {
           },
           orderBy: {
             createdAt: 'desc',
-          }
+          },
         },
         recipeReviews: true,
         recipeFavorites: true,
-      }
-    })
+      },
+    });
 
     return recipe;
   }

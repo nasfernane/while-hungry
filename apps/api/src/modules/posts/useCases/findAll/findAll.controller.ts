@@ -1,7 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { FindAllService } from './findAll.service';
 
-
 @Controller('posts')
 export class FindAllController {
   constructor(private readonly service: FindAllService) {}

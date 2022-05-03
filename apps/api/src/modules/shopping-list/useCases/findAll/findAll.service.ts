@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { ShoppingList } from '@prisma/client';
 
 // prisma client
-import  { prisma } from '@wh/prisma-client';
+import { prisma } from '@wh/prisma-client';
 
 @Injectable()
 export class FindAllService {
@@ -15,13 +15,13 @@ export class FindAllService {
   async findAll(userId: number): Promise<ShoppingList[]> {
     const shoppingLists = await prisma.shoppingList.findMany({
       where: {
-        userId: +userId
+        userId: +userId,
       },
       include: {
         recipe: true,
-        shoppingListItems: true
-      }
-    })
+        shoppingListItems: true,
+      },
+    });
 
     return shoppingLists;
   }

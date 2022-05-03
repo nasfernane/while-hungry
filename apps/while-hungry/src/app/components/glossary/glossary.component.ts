@@ -9,7 +9,7 @@ import { Definition } from '@prisma/client';
 @Component({
   selector: 'wh-glossary',
   templateUrl: './glossary.component.html',
-  styleUrls: ['./glossary.component.scss']
+  styleUrls: ['./glossary.component.scss'],
 })
 export class GlossaryComponent implements OnInit {
   glossary: Definition[];
@@ -18,22 +18,22 @@ export class GlossaryComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private glossaryService: GlossaryService,
-  ) { 
-    this.definitions = new Map()
+    private glossaryService: GlossaryService
+  ) {
+    this.definitions = new Map();
   }
 
   ngOnInit(): void {
-    this.appService.breadcrumb = ['While Hungry', 'Glossary']
+    this.appService.breadcrumb = ['While Hungry', 'Glossary'];
     this.glossaryService.getGlossary().subscribe((glossary: Definition[]) => {
       if (glossary) this.glossary = glossary;
       this.organizeGlossary(this.glossary);
-    })
+    });
   }
 
   /**
    *  organize all definitions by letter section
-   * @param glossary 
+   * @param glossary
    */
   organizeGlossary(glossary: Definition[]) {
     for (const letter of this.alphabet) {
@@ -43,20 +43,19 @@ export class GlossaryComponent implements OnInit {
           section.push(def);
         }
       }
-      this.definitions.set(letter, section)
+      this.definitions.set(letter, section);
     }
   }
 
   /**
    * scroll to the chosen letter section on click
-   * @param el 
+   * @param el
    */
   scroll(el: string) {
     const element = document.getElementById(el);
 
     if (element) {
-      element.scrollIntoView({behavior: 'smooth'});
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
 }

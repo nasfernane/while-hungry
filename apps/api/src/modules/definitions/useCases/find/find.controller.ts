@@ -11,12 +11,11 @@ export class FindController {
 
   /**
    * find a definition based on id
-   * @param id 
+   * @param id
    * @returns definition
    */
   @Get(':id')
   async find(@Param('id') id: string) {
     return this.service.find(+id);
   }
- 
 }

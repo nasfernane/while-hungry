@@ -3,7 +3,6 @@ import { Controller, Delete, Param } from '@nestjs/common';
 // service
 import { DeleteAllService } from './deleteAll.service';
 
-
 @Controller('shopping-list')
 export class DeleteAllController {
   constructor(private readonly service: DeleteAllService) {}

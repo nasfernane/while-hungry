@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -14,7 +19,7 @@ import { RecipeNote } from '@prisma/client';
 @Component({
   selector: 'wh-recipe-instructions',
   templateUrl: './recipe-instructions.component.html',
-  styleUrls: ['./recipe-instructions.component.scss']
+  styleUrls: ['./recipe-instructions.component.scss'],
 })
 export class RecipeInstructionsComponent implements OnInit {
   @Input() recipe: any;
@@ -30,11 +35,11 @@ export class RecipeInstructionsComponent implements OnInit {
     private favoritesService: FavoritesService,
     private recipeService: RecipeService,
     private recipeCommentsService: RecipeCommentService,
-    private uiService: UiService,
+    private uiService: UiService
   ) {
     this.commentForm = formBuilder.group({
-      comment: new FormControl('')
-    })
+      comment: new FormControl(''),
+    });
   }
 
   ngOnInit(): void {
@@ -45,19 +50,25 @@ export class RecipeInstructionsComponent implements OnInit {
 
   async addOrRemoveFavorite() {
     if (this.appService.userLogged) {
-      this.favoritesService.addOrRemoveFavorite(+this.recipe.id, this.appService.getUserId(), !this.recipeInFavorites).subscribe(res => {
-        if (res) {
-          this.recipeInFavorites = !this.recipeInFavorites;
+      this.favoritesService
+        .addOrRemoveFavorite(
+          +this.recipe.id,
+          this.appService.getUserId(),
+          !this.recipeInFavorites
+        )
+        .subscribe((res) => {
+          if (res) {
+            this.recipeInFavorites = !this.recipeInFavorites;
 
-          if (this.recipeInFavorites) {
-            this.uiService.openAlert('Recipe added to your favorites')
-          } else {
-            this.uiService.openAlert('Recipe removed from your favorites')
+            if (this.recipeInFavorites) {
+              this.uiService.openAlert('Recipe added to your favorites');
+            } else {
+              this.uiService.openAlert('Recipe removed from your favorites');
+            }
           }
-        }
-      });
+        });
     } else {
-      this.uiService.openLoginAlert()
+      this.uiService.openLoginAlert();
     }
   }
 
@@ -85,14 +96,16 @@ export class RecipeInstructionsComponent implements OnInit {
       const comment = this.commentForm.controls['comment'].value;
 
       if (comment) {
-        this.recipeCommentsService.create({
-          recipeId: this.recipe.id,
-          userId: this.appService.getUserId(),
-          comment: comment
-        }).subscribe((comment: RecipeComment) => {
-          this.uiService.openAlert('Comment posted !')
-          this.updateEvent.emit(true);
-        })
+        this.recipeCommentsService
+          .create({
+            recipeId: this.recipe.id,
+            userId: this.appService.getUserId(),
+            comment: comment,
+          })
+          .subscribe((comment: RecipeComment) => {
+            this.uiService.openAlert('Comment posted !');
+            this.updateEvent.emit(true);
+          });
       }
     } else {
       this.uiService.openLoginAlert();

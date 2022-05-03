@@ -1,80 +1,80 @@
-import { Prisma } from "@prisma/client"
+import { Prisma } from '@prisma/client';
 
 export const recipeTags: Prisma.RecipeTagCategoryCreateInput[] = [
-  { 
-    name: "Seasonal",
+  {
+    name: 'Seasonal',
     RecipeTagLabels: {
       create: [
         {
-          name: "Spring"
+          name: 'Spring',
         },
         {
-          name: "Summer"
+          name: 'Summer',
         },
         {
-          name: "Autumn"
+          name: 'Autumn',
         },
         {
-          name: "Winter"
-        }
-      ]
-    }
+          name: 'Winter',
+        },
+      ],
+    },
   },
   {
-    name: "Country",
+    name: 'Country',
     RecipeTagLabels: {
       create: [
         {
-          name: "French"
+          name: 'French',
         },
         {
-          name: "Italian"
+          name: 'Italian',
         },
         {
-          name: "Spanish"
+          name: 'Spanish',
         },
         {
-          name: "Japanese"
+          name: 'Japanese',
         },
         {
-          name: "American"
+          name: 'American',
         },
-      ]
-    }
+      ],
+    },
   },
   {
-    name: "Type",
+    name: 'Type',
     RecipeTagLabels: {
       create: [
         {
-          name: "Soup"
+          name: 'Soup',
         },
         {
-          name: "Salad"
+          name: 'Salad',
         },
         {
-          name: "Stew"
+          name: 'Stew',
         },
-      ]
-    }
+      ],
+    },
   },
   {
-    name: "Specs",
+    name: 'Specs',
     RecipeTagLabels: {
       create: [
         {
-          name: "Vegetarian"
+          name: 'Vegetarian',
         },
         {
-          name: "Healthy"
+          name: 'Healthy',
         },
         {
-          name: "Feel Good"
+          name: 'Feel Good',
         },
         {
-          name: "Cheap"
+          name: 'Cheap',
         },
-      ]
-    }
-  }
-]
+      ],
+    },
+  },
+];

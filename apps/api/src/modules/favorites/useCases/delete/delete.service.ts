@@ -11,9 +11,9 @@ export class DeleteService {
   async delete(id: number) {
     const deletedFavorite: RecipeFavorite = await prisma.recipeFavorite.delete({
       where: {
-        id
-      }
-    }) 
+        id,
+      },
+    });
 
     return deletedFavorite;
   }

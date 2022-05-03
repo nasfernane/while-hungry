@@ -1,16 +1,31 @@
-<div class="blogItem" fxLayout="column" fxLayoutAlign="start stretch" [routerLink]="['/blog/post/', post.id]">
+<div
+  class="blogItem"
+  fxLayout="column"
+  fxLayoutAlign="start stretch"
+  [routerLink]="['/blog/post/', post.id]"
+>
   <div class="blogItem__img">
-    <img [src]="'./assets/img' +post.picture" alt="Post">
+    <img [src]="'./assets/img' + post.picture" alt="Post" />
   </div>
   <div class="blogItem__infos" fxLayout="column" fxLayoutAlign="start center">
-      <mat-card-title class="blogItem__infos__title">{{ post.title }}</mat-card-title>
-      <span class="blogItem__infos__content">{{ post.content | truncate : truncate ? truncate : 100}}</span>
-      <div class="blogItem__infos__author" fxLayout="row" fxLayoutAlign="space-between center;">
-        <span>
-          Posted by
-          <span class="blogItem__infos__author--name">{{ post.author.nickname }}</span>
-        </span>
-        <span>{{ appService.formatDate(post.createdAt) }}</span>
-      </div>
+    <mat-card-title class="blogItem__infos__title">{{
+      post.title
+    }}</mat-card-title>
+    <span class="blogItem__infos__content">{{
+      post.content | truncate: (truncate ? truncate : 100)
+    }}</span>
+    <div
+      class="blogItem__infos__author"
+      fxLayout="row"
+      fxLayoutAlign="space-between center;"
+    >
+      <span>
+        Posted by
+        <span class="blogItem__infos__author--name">{{
+          post.author.nickname
+        }}</span>
+      </span>
+      <span>{{ appService.formatDate(post.createdAt) }}</span>
+    </div>
   </div>
 </div>

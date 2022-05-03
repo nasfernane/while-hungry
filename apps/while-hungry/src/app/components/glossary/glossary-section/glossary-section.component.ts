@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'wh-glossary-section',
   templateUrl: './glossary-section.component.html',
-  styleUrls: ['./glossary-section.component.scss']
+  styleUrls: ['./glossary-section.component.scss'],
 })
 export class GlossarySectionComponent implements OnInit {
   @Input() section: any;
@@ -18,5 +18,4 @@ export class GlossarySectionComponent implements OnInit {
       this.definitions = this.section.value;
     }
   }
-
 }

@@ -1,7 +1,15 @@
 <div class="recipesFiltersContainer">
-  <form fxLayout="row" fxLayoutAlign="space-between" [formGroup]="filtersForm"  #myFiltersForm="ngForm">
+  <form
+    fxLayout="row"
+    fxLayoutAlign="space-between"
+    [formGroup]="filtersForm"
+    #myFiltersForm="ngForm"
+  >
     <mat-form-field fxFlex="20">
-      <mat-select formControlName="difficulty" placeholder="Filter by difficulty">
+      <mat-select
+        formControlName="difficulty"
+        placeholder="Filter by difficulty"
+      >
         <!-- <mat-label>Filter by difficulty</mat-label> -->
         <mat-option value="Easy">Easy</mat-option>
         <mat-option value="Medium">Medium</mat-option>
@@ -10,7 +18,11 @@
     </mat-form-field>
 
     <mat-form-field fxFlex="20">
-      <mat-select formControlName="rating" placeholder="Filter by rating" #ratingSelect="matSelect">
+      <mat-select
+        formControlName="rating"
+        placeholder="Filter by rating"
+        #ratingSelect="matSelect"
+      >
         <mat-select-trigger>
           <wh-recipe-rating [rating]="rating" [small]="true"></wh-recipe-rating>
         </mat-select-trigger>
@@ -29,7 +41,6 @@
         <mat-option value="5">
           <wh-recipe-rating [rating]="5"></wh-recipe-rating>
         </mat-option>
-       
       </mat-select>
     </mat-form-field>
 
@@ -40,7 +51,10 @@
         <mat-option value="Italian">Italian</mat-option>
         <mat-option value="Vegetarian">Vegetarian</mat-option> -->
         <mat-option>-- None --</mat-option>
-        <mat-optgroup *ngFor="let category of tagCategories" [label]="category.name">
+        <mat-optgroup
+          *ngFor="let category of tagCategories"
+          [label]="category.name"
+        >
           <ng-container *ngFor="let label of category.RecipeTagLabels">
             <mat-option [value]="label.name">
               {{ label.name }}
@@ -50,8 +64,13 @@
       </mat-select>
     </mat-form-field>
 
-      <button fxFlex="15" class="filterBtn" (click)="myFiltersForm.resetForm(); resetData()">RESET</button>
-      <button fxFlex="15" class="filterBtn" (click)="filterData()">SEARCH</button>
-    
+    <button
+      fxFlex="15"
+      class="filterBtn"
+      (click)="myFiltersForm.resetForm(); resetData()"
+    >
+      RESET
+    </button>
+    <button fxFlex="15" class="filterBtn" (click)="filterData()">SEARCH</button>
   </form>
 </div>

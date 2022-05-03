@@ -1,22 +1,53 @@
 <div class="navWrapper" fxLayout="row" fxLayoutAlign="space-between center">
   <button class="navWrapper__button" mat-button routerLink="/home">Home</button>
-  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="eatMenu" routerLinkActive="active">Eat</button>
+  <button
+    class="navWrapper__button"
+    mat-button
+    [matMenuTriggerFor]="eatMenu"
+    routerLinkActive="active"
+  >
+    Eat
+  </button>
   <mat-menu #eatMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/recipes">Recipes</button>
-    <button mat-menu-item (click)="uiService.openAlert('Available soon')">Batch cooking</button>
+    <button mat-menu-item (click)="uiService.openAlert('Available soon')">
+      Batch cooking
+    </button>
   </mat-menu>
-  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="learnMenu">Read</button>
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="learnMenu">
+    Read
+  </button>
   <mat-menu #learnMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/blog">Blog</button>
     <button mat-menu-item routerLink="/glossary">Glossary</button>
   </mat-menu>
-  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="shareMenu">Share</button>
+  <button class="navWrapper__button" mat-button [matMenuTriggerFor]="shareMenu">
+    Share
+  </button>
   <mat-menu #shareMenu="matMenu" xPosition="after">
-    <button mat-menu-item (click)="uiService.openAlert('Available soon')">Live chat</button>
-    <button mat-menu-item (click)="uiService.openAlert('Available soon')">API</button>
+    <button mat-menu-item (click)="uiService.openAlert('Available soon')">
+      Live chat
+    </button>
+    <button mat-menu-item (click)="uiService.openAlert('Available soon')">
+      API
+    </button>
   </mat-menu>
-  <button *ngIf="!appService.userLogged" class="navWrapper__button" mat-button (click)="uiService.openLogin()">Login</button>
-  <wh-avatar [avatar]="appService.getUserAvatar()" avatarSize="4rem" *ngIf="appService.userLogged" class="navWrapper__button" mat-button [matMenuTriggerFor]="userMenu"></wh-avatar>
+  <button
+    *ngIf="!appService.userLogged"
+    class="navWrapper__button"
+    mat-button
+    (click)="uiService.openLogin()"
+  >
+    Login
+  </button>
+  <wh-avatar
+    [avatar]="appService.getUserAvatar()"
+    avatarSize="4rem"
+    *ngIf="appService.userLogged"
+    class="navWrapper__button"
+    mat-button
+    [matMenuTriggerFor]="userMenu"
+  ></wh-avatar>
   <mat-menu #userMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/profile">Profile</button>
     <button mat-menu-item routerLink="/favorites">Favorites</button>

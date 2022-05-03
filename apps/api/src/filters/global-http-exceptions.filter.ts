@@ -15,7 +15,7 @@ export class GLobalHttpExceptionsFilter implements ExceptionFilter {
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>()
+    const response = ctx.getResponse<Response>();
 
     const httpStatus =
       exception instanceof HttpException

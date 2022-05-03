@@ -13,7 +13,7 @@ export class FindAllService {
   async findAll(id: number) {
     const favorites: RecipeFavorite[] = await prisma.recipeFavorite.findMany({
       where: {
-        userId: id
+        userId: id,
       },
       include: {
         recipe: {
@@ -26,7 +26,7 @@ export class FindAllService {
             recipeTags: {
               include: {
                 tag: true,
-              }
+              },
             },
             recipeComments: {
               include: {
@@ -35,10 +35,10 @@ export class FindAllService {
             },
             recipeReviews: true,
             recipeFavorites: true,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
 
     return favorites;
   }

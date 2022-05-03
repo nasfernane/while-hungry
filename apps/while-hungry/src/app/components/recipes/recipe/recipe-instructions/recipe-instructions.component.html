@@ -1,66 +1,131 @@
 <div class="instructionsContainer">
-  <div class="instructionsContainer__header" fxLayout="row" fxLayoutAlign="center center">
+  <div
+    class="instructionsContainer__header"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
     <span>{{ recipe.name }}</span>
   </div>
-  <div class="instructionsContainer__actions" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="instructionsContainer__actions__action instructionsContainer__actions__action--print" fxLayout="row" fxLayoutAlign="center center" (click)="printRecipe()">
+  <div
+    class="instructionsContainer__actions"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+  >
+    <div
+      class="instructionsContainer__actions__action instructionsContainer__actions__action--print"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      (click)="printRecipe()"
+    >
       <mat-icon>print</mat-icon>
       <span>print recipe</span>
     </div>
-    <div class="instructionsContainer__actions__action instructionsContainer__actions__action--pin" fxLayout="row" fxLayoutAlign="center center" (click)="addOrRemoveFavorite()">
-      <mat-icon>{{ recipeInFavorites ? 'favorite' : 'favorite_border'}}</mat-icon>
-      <span>{{ recipeInFavorites ? 'remove' : 'add'}} favorite</span>
+    <div
+      class="instructionsContainer__actions__action instructionsContainer__actions__action--pin"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      (click)="addOrRemoveFavorite()"
+    >
+      <mat-icon>{{
+        recipeInFavorites ? 'favorite' : 'favorite_border'
+      }}</mat-icon>
+      <span>{{ recipeInFavorites ? 'remove' : 'add' }} favorite</span>
     </div>
   </div>
-  <div class="instructionsContainer__instructions" fxLayout="column" fxLayoutAlign="start flex-start">
+  <div
+    class="instructionsContainer__instructions"
+    fxLayout="column"
+    fxLayoutAlign="start flex-start"
+  >
     <h1 class="instructionsContainer__instructions__title">instructions</h1>
-    <div *ngFor="let instruction of instructions; let i = index"class="instructionsContainer__instructions__instruction" fxLayout="row" fxLayoutAlign="start start">
-      <div class="instructionsContainer__instructions__instruction__number" fxLayout="column" fxLayoutAlign="center center">
-        {{ i + 1 }}    
+    <div
+      *ngFor="let instruction of instructions; let i = index"
+      class="instructionsContainer__instructions__instruction"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+    >
+      <div
+        class="instructionsContainer__instructions__instruction__number"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        {{ i + 1 }}
       </div>
       <span class="instructionsContainer__instructions__instruction__data">
-        <span class="instructionsContainer__instructions__instruction__data--label">
+        <span
+          class="instructionsContainer__instructions__instruction__data--label"
+        >
           {{ instruction.label }}:
         </span>
-        <span class="instructionsContainer__instructions__instruction__data--detail">   
+        <span
+          class="instructionsContainer__instructions__instruction__data--detail"
+        >
           {{ instruction.instruction }}
         </span>
       </span>
     </div>
   </div>
-  <div class="instructionsContainer__notes" fxLayout="column" fxLayoutAlign="start stretch">
+  <div
+    class="instructionsContainer__notes"
+    fxLayout="column"
+    fxLayoutAlign="start stretch"
+  >
     <h1 class="instructionsTitle instructionsContainer__notes__title">notes</h1>
-    <div class="instructionsContainer__notes__note" *ngFor="let note of notes" fxLayout="row" fxLayoutAlign="start start">
-      <mat-icon  class="instructionsContainer__notes__note__icon">info</mat-icon>
+    <div
+      class="instructionsContainer__notes__note"
+      *ngFor="let note of notes"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+    >
+      <mat-icon class="instructionsContainer__notes__note__icon">info</mat-icon>
       <span class="instructionsContainer__notes__note__data">
         <span class="instructionsContainer__notes__note__data--label">
           {{ note.label }}:
         </span>
-        <span class="instructionsContainer__notes__note__data--detail">   
+        <span class="instructionsContainer__notes__note__data--detail">
           {{ note.note }}
         </span>
       </span>
     </div>
   </div>
-  <div class="instructionsContainer__comment" fxLayout="column" fxLayoutAlign="start flex-start">
-    <h1 class="instructionsTitle instructionsContainer__comment__title">comment</h1>
+  <div
+    class="instructionsContainer__comment"
+    fxLayout="column"
+    fxLayoutAlign="start flex-start"
+  >
+    <h1 class="instructionsTitle instructionsContainer__comment__title">
+      comment
+    </h1>
     <p class="instructionsContainer__comment__subtitle">
-      You can contribute to this recipe, add remarks or share your thoughts by leaving a comment. It's always appreciated !
+      You can contribute to this recipe, add remarks or share your thoughts by
+      leaving a comment. It's always appreciated !
     </p>
-    <form [formGroup]="commentForm" novalidate #myCommentForm="ngForm" 
-    fxLayout="column" fxLayoutAlign="start flex-end" class="instructionsContainer__comment__form">
+    <form
+      [formGroup]="commentForm"
+      novalidate
+      #myCommentForm="ngForm"
+      fxLayout="column"
+      fxLayoutAlign="start flex-end"
+      class="instructionsContainer__comment__form"
+    >
       <mat-form-field class="instructionsContainer__comment__input">
-        <textarea 
+        <textarea
           formControlName="comment"
-          matInput 
-          placeholder="Write your comment here. ex: As my great aunt Joséphine used to say..."qsf
+          matInput
+          placeholder="Write your comment here. ex: As my great aunt Joséphine used to say..."
+          qsf
           cdkTextareaAutosize
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           cdkAutosizeMaxRows="5"
         ></textarea>
       </mat-form-field>
-      <div class="instructionsContainer__comment__btn instructionsContainer__actions__action instructionsContainer__actions__action--comment" fxLayout="row" fxLayoutAlign="center center" (click)="postComment(); myCommentForm.resetForm()">
+      <div
+        class="instructionsContainer__comment__btn instructionsContainer__actions__action instructionsContainer__actions__action--comment"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        (click)="postComment(); myCommentForm.resetForm()"
+      >
         <mat-icon class="material-icons-outlined">insert_comment</mat-icon>
         <span>post comment</span>
       </div>

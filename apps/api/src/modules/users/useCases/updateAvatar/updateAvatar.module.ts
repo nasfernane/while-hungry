@@ -4,6 +4,6 @@ import { UpdateAvatarController } from './updateAvatar.controller';
 
 @Module({
   controllers: [UpdateAvatarController],
-  providers: [UpdateAvatarService]
+  providers: [UpdateAvatarService],
 })
 export class UpdateAvatarModule {}

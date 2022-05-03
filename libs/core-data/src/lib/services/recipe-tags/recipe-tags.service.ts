@@ -8,13 +8,10 @@ import { environment } from '@wh/environments';
 const ENDPOINT = environment.API_URL + '/tags';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipeTagsService {
-
-  constructor(
-    private http: HttpClient,
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getRecipeTags() {
     return this.http.get<RecipeTagCategory[]>(ENDPOINT);

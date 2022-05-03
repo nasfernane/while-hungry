@@ -5,11 +5,6 @@ import { DeleteAllModule } from './useCases/deleteAll/deleteAll.module';
 import { DeleteModule } from './useCases/delete/delete.module';
 
 @Module({
-  imports: [
-    CreateModule,
-    FindAllModule,
-    DeleteAllModule,
-    DeleteModule
-  ]
+  imports: [CreateModule, FindAllModule, DeleteAllModule, DeleteModule],
 })
 export class ShoppingListModule {}

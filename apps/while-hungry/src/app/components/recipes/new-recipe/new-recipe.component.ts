@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Router } from '@angular/router';
 
 // services
@@ -29,8 +29,8 @@ interface UnitGroup {
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { showError: true },
-    }
-  ]
+    },
+  ],
 })
 export class NewRecipeComponent implements OnInit {
   recipeNameGroup: FormGroup;
@@ -51,16 +51,13 @@ export class NewRecipeComponent implements OnInit {
   unitsGroupsMetrics: UnitGroup[] = [
     {
       name: 'General',
-      units: [
-        {value: 'piece', viewValue: 'piece(s)'},
-      ]
+      units: [{ value: 'piece', viewValue: 'piece(s)' }],
     },
     {
       name: 'Weight',
       units: [
         { value: 'g', viewValue: 'g (grams)' },
         { value: 'kg', viewValue: 'kg (kilograms)' },
-       
       ],
     },
     {
@@ -70,7 +67,7 @@ export class NewRecipeComponent implements OnInit {
         { value: 'cl', viewValue: 'cl (centiliters)' },
         { value: 'L', viewValue: 'L (liters)' },
         { value: 'pints', viewValue: 'pint(s)' },
-      ], 
+      ],
     },
   ];
 
@@ -78,15 +75,13 @@ export class NewRecipeComponent implements OnInit {
   unitsGroupsUS: UnitGroup[] = [
     {
       name: 'General',
-      units: [
-        {value: 'piece', viewValue: 'piece(s)'},
-      ]
+      units: [{ value: 'piece', viewValue: 'piece(s)' }],
     },
     {
       name: 'Weight',
       units: [
         { value: 'ounces', viewValue: 'ounces' },
-        {value: 'pounces', viewValue: 'pounces'},
+        { value: 'pounces', viewValue: 'pounces' },
       ],
     },
     {
@@ -95,8 +90,8 @@ export class NewRecipeComponent implements OnInit {
         { value: 'tsp', viewValue: 'tsp (teaspoon)' },
         { value: 'tbp', viewValue: 'tbp (tablespoon)' },
         { value: 'cup', viewValue: 'cup' },
-        { value: 'pint', viewValue:'pint' },
-        { value: 'quart', viewValue: 'quart'},
+        { value: 'pint', viewValue: 'pint' },
+        { value: 'quart', viewValue: 'quart' },
       ],
     },
   ];
@@ -110,49 +105,48 @@ export class NewRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private uiService: UiService,
     private router: Router,
-    private tagsService: RecipeTagsService,
-  ) { }
+    private tagsService: RecipeTagsService
+  ) {}
 
   ngOnInit(): void {
-    this.appService.breadcrumb = ["While Hungry", "Recipes", "New Recipe"];
+    this.appService.breadcrumb = ['While Hungry', 'Recipes', 'New Recipe'];
 
     this.recipeNameGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.min(3)]],
-      description: ['', [Validators.required, Validators.min(3)]]
-    })
+      description: ['', [Validators.required, Validators.min(3)]],
+    });
 
     this.informationGroup = this.formBuilder.group({
       tag: [''],
-      servings: ['', [Validators.required, Validators.min(1) ]], 
-      hours: ['', [Validators.required, Validators.min(1) ]], 
-      minutes: ['', [Validators.required, Validators.min(1) ]],
-      difficulty: ['', [Validators.required ]],
-      units: ['', [Validators.required ]],
-    })
+      servings: ['', [Validators.required, Validators.min(1)]],
+      hours: ['', [Validators.required, Validators.min(1)]],
+      minutes: ['', [Validators.required, Validators.min(1)]],
+      difficulty: ['', [Validators.required]],
+      units: ['', [Validators.required]],
+    });
 
     this.ingredientGroup = this.formBuilder.group({
-      quantity: [''], 
-      unit: [''], 
-      ingredient: [''], 
-    })
+      quantity: [''],
+      unit: [''],
+      ingredient: [''],
+    });
 
     this.instructionGroup = this.formBuilder.group({
-      instructionLabel: ['', [Validators.min(1) ]], 
-      instruction: ['', [Validators.required, Validators.min(1) ]],
-      noteLabel: ['', [Validators.min(1) ]], 
-      note: ['', [Validators.required, Validators.min(1) ]],
-      
-    })
+      instructionLabel: ['', [Validators.min(1)]],
+      instruction: ['', [Validators.required, Validators.min(1)]],
+      noteLabel: ['', [Validators.min(1)]],
+      note: ['', [Validators.required, Validators.min(1)]],
+    });
 
     // subscribe on recipe name to check if recipes already exist on the website
-    this.recipeNameGroup.controls['name'].valueChanges.subscribe(value => {
+    this.recipeNameGroup.controls['name'].valueChanges.subscribe((value) => {
       this.recipeName = value;
-    })
+    });
 
     // get all recipe tag options
     this.tagsService.getRecipeTags().subscribe((tags: RecipeTagCategory[]) => {
       this.tagCategories = tags;
-    })
+    });
   }
 
   /**
@@ -161,7 +155,7 @@ export class NewRecipeComponent implements OnInit {
   addTag() {
     const tag = this.informationGroup.controls['tag'].value;
 
-    if (tag && !(this.tags.includes(tag)) && (this.tags.length < 3)) {
+    if (tag && !this.tags.includes(tag) && this.tags.length < 3) {
       // use tag options to fill array
       this.tags.push(tag);
       this.informationGroup.controls['tag'].reset();
@@ -174,7 +168,7 @@ export class NewRecipeComponent implements OnInit {
    * @returns The return value is a boolean value.
    */
   checkTag(name: string) {
-    return this.tags.some(e => e.name === name)
+    return this.tags.some((e) => e.name === name);
   }
 
   removeTag(index: number) {
@@ -197,9 +191,9 @@ export class NewRecipeComponent implements OnInit {
       const newIngredient = {
         quantity,
         unit,
-        name
-      }
-  
+        name,
+      };
+
       this.ingredients.push(newIngredient);
       this.ingredientGroup.reset();
     }
@@ -209,15 +203,16 @@ export class NewRecipeComponent implements OnInit {
    * Add an instruction to the list of instructions
    */
   addInstruction() {
-    const label = this.instructionGroup.controls['instructionLabel'].value || '';
+    const label =
+      this.instructionGroup.controls['instructionLabel'].value || '';
     const instruction = this.instructionGroup.controls['instruction'].value;
 
     if (instruction) {
       this.instructions.push({
         categoryId: 4,
         label,
-        instruction
-      })
+        instruction,
+      });
 
       this.instructionGroup.reset();
     }
@@ -233,8 +228,8 @@ export class NewRecipeComponent implements OnInit {
     if (note) {
       this.notes.push({
         label,
-        note
-      })
+        note,
+      });
 
       this.instructionGroup.reset();
     }
@@ -248,19 +243,26 @@ export class NewRecipeComponent implements OnInit {
     const metrics = this.informationGroup.controls['units'].value;
 
     if (metrics) {
-      return metrics === 'metrics' ? this.unitsGroupsMetrics : this.unitsGroupsUS;
+      return metrics === 'metrics'
+        ? this.unitsGroupsMetrics
+        : this.unitsGroupsUS;
     } else {
       return null;
     }
   }
 
- 
   /**
    * If all of the form groups are valid, return true. Otherwise, return false
    * @returns A boolean value.
    */
   isValidRecipe() {
-    if (this.recipeNameGroup.valid && this.informationGroup.valid && this.ingredients.length > 0 && this.instructions.length > 0 && this.tags.length > 0) {
+    if (
+      this.recipeNameGroup.valid &&
+      this.informationGroup.valid &&
+      this.ingredients.length > 0 &&
+      this.instructions.length > 0 &&
+      this.tags.length > 0
+    ) {
       return true;
     } else {
       return false;
@@ -272,7 +274,10 @@ export class NewRecipeComponent implements OnInit {
    * @returns The number of minutes.
    */
   formatCookTime() {
-    return (this.informationGroup.controls['hours'].value * 60) + this.informationGroup.controls['minutes'].value
+    return (
+      this.informationGroup.controls['hours'].value * 60 +
+      this.informationGroup.controls['minutes'].value
+    );
   }
 
   /**
@@ -293,7 +298,7 @@ export class NewRecipeComponent implements OnInit {
       recipeTags: this.formatTags(),
       recipeNotes: this.notes || null,
       picture: this.pictureName || null,
-    }
+    };
 
     return this.recipe;
   }
@@ -304,10 +309,10 @@ export class NewRecipeComponent implements OnInit {
    */
   formatTags() {
     const formatedTags: Record<string, number>[] = [];
-    this.tags.forEach(tag => {
+    this.tags.forEach((tag) => {
       formatedTags.push({
         tagId: tag.id,
-      })
+      });
     });
 
     return formatedTags;
@@ -318,45 +323,48 @@ export class NewRecipeComponent implements OnInit {
    */
   createRecipe() {
     if (this.isValidRecipe() && this.recipe) {
-      this.recipeService.storePicture(this.formatPicture()).subscribe((picture: any) => {
-        if (picture) {
-          this.pictureName = picture.filename;
-          this.formatRecipe();
+      this.recipeService
+        .storePicture(this.formatPicture())
+        .subscribe((picture: any) => {
+          if (picture) {
+            this.pictureName = picture.filename;
+            this.formatRecipe();
 
-          this.recipeService.create(this.recipe).subscribe((res: any) => {
-            if (res) {
-              this.uiService.openAlert('Recipe successfully created')
-              this.router.navigate(['recipes', res.id])
-            }
-          })
-        }
-      })
+            this.recipeService.create(this.recipe).subscribe((res: any) => {
+              if (res) {
+                this.uiService.openAlert('Recipe successfully created');
+                this.router.navigate(['recipes', res.id]);
+              }
+            });
+          }
+        });
     } else {
-      this.uiService.openAlert('Your recipe is incomplete, please verify all steps')
+      this.uiService.openAlert(
+        'Your recipe is incomplete, please verify all steps'
+      );
     }
   }
 
- /**
-  * It sets the pictureFile property to the file selected by the user and setup file preview.
-  * @param {any} event - any
-  */
+  /**
+   * It sets the pictureFile property to the file selected by the user and setup file preview.
+   * @param {any} event - any
+   */
   setPicture(event: any) {
     this.pictureFile = event.target.files[0];
 
-  
     const reader = new FileReader();
     reader.onload = () => {
       this.previewPicturePath = reader.result as string;
-    }
+    };
 
     reader.readAsDataURL(this.pictureFile);
   }
 
   // on picture add
   formatPicture() {
-    const formData = new FormData(); 
-    formData.append("picture", this.pictureFile, this.pictureFile.name);
-  
+    const formData = new FormData();
+    formData.append('picture', this.pictureFile, this.pictureFile.name);
+
     return formData;
   }
 }

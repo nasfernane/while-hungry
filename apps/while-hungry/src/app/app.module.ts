@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from '@angular/material/icon';
 import { MatIconRegistry } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card'; 
+import {
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { RouterModule } from '@angular/router';
@@ -68,35 +71,55 @@ import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglis
 import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent, 
-    RecipesOverviewComponent, 
-    RecipesOverviewItemComponent, 
-    HeaderComponent, 
-    HeaderLogoComponent, 
-    HeaderNavComponent, 
-    BlogComponent, 
-    BlogNewPostComponent, 
-    BlogPostComponent, 
-    RecipeComponent, 
-    BreadcrumbComponent, 
-    RecipeIngredientsComponent, 
-    RecipeAuthorComponent, 
-    RecipeIngredientsOptionsComponent, 
-    RecipeRatingComponent, 
-    RecipeInstructionsComponent, 
-    RecipeAddReviewComponent, RecipeCommentsComponent, RecipesOverviewFiltersComponent, HomeRecipeComponent, HomeBlogComponent, HomeApiComponent, HomeChatComponent, BlogItemComponent, 
-    TruncatePipe, HomeHeaderComponent, AvatarComponent, ProfileComponent, ProfileAvatarsComponent, ProfileFormComponent, ProfilePasswordUpdateComponent, GlossaryComponent, GlossarySectionComponent, GlossarySectionDefinitionComponent, FavoritesComponent, ShoppinglistComponent, ShoppinglistGlobalComponent, ShoppinglistItemComponent, NewRecipeComponent
+    HomeComponent,
+    RecipesOverviewComponent,
+    RecipesOverviewItemComponent,
+    HeaderComponent,
+    HeaderLogoComponent,
+    HeaderNavComponent,
+    BlogComponent,
+    BlogNewPostComponent,
+    BlogPostComponent,
+    RecipeComponent,
+    BreadcrumbComponent,
+    RecipeIngredientsComponent,
+    RecipeAuthorComponent,
+    RecipeIngredientsOptionsComponent,
+    RecipeRatingComponent,
+    RecipeInstructionsComponent,
+    RecipeAddReviewComponent,
+    RecipeCommentsComponent,
+    RecipesOverviewFiltersComponent,
+    HomeRecipeComponent,
+    HomeBlogComponent,
+    HomeApiComponent,
+    HomeChatComponent,
+    BlogItemComponent,
+    TruncatePipe,
+    HomeHeaderComponent,
+    AvatarComponent,
+    ProfileComponent,
+    ProfileAvatarsComponent,
+    ProfileFormComponent,
+    ProfilePasswordUpdateComponent,
+    GlossaryComponent,
+    GlossarySectionComponent,
+    GlossarySectionDefinitionComponent,
+    FavoritesComponent,
+    ShoppinglistComponent,
+    ShoppinglistGlobalComponent,
+    ShoppinglistItemComponent,
+    NewRecipeComponent,
   ],
   imports: [
-    BrowserModule, 
-    HttpClientModule, 
-    BrowserAnimationsModule, 
-    StoreModule.forRoot({}, {}), 
-    AppRoutingModule, 
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    StoreModule.forRoot({}, {}),
+    AppRoutingModule,
     MaterialModule,
     CoreDataModule,
     CoreStateModule,
@@ -112,9 +135,12 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatPaginatorModule,
     RouterModule,
   ],
-    
+
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline', floatLabel: 'auto'}},
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline', floatLabel: 'auto' },
+    },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
@@ -125,18 +151,81 @@ export class AppModule {
     private sanitizer: DomSanitizer
   ) {
     iconRegistry
-    .addSvgIcon('avatar1', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female1.svg'))
-    .addSvgIcon('avatar2', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female2.svg'))
-    .addSvgIcon('avatar3', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female3.svg'))
-    .addSvgIcon('avatar4', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/female4.svg'))
-    .addSvgIcon('avatar5', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male1.svg'))
-    .addSvgIcon('avatar6', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male2.svg'))
-    .addSvgIcon('avatar7', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male3.svg'))
-    .addSvgIcon('avatar8', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/male4.svg'))
-    .addSvgIcon('avatar9', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network1.svg'))
-    .addSvgIcon('avatar10', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network2.svg'))
-    .addSvgIcon('avatar11', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network3.svg'))
-    .addSvgIcon('avatar12', sanitizer.bypassSecurityTrustResourceUrl('./../assets/img/avatars/network4.svg'))
-    .addSvgIcon('clap', sanitizer.bypassSecurityTrustResourceUrl('./../assets/icons/clap.svg'))
+      .addSvgIcon(
+        'avatar1',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/female1.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar2',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/female2.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar3',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/female3.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar4',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/female4.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar5',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/male1.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar6',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/male2.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar7',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/male3.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar8',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/male4.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar9',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/network1.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar10',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/network2.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar11',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/network3.svg'
+        )
+      )
+      .addSvgIcon(
+        'avatar12',
+        sanitizer.bypassSecurityTrustResourceUrl(
+          './../assets/img/avatars/network4.svg'
+        )
+      )
+      .addSvgIcon(
+        'clap',
+        sanitizer.bypassSecurityTrustResourceUrl('./../assets/icons/clap.svg')
+      );
   }
 }

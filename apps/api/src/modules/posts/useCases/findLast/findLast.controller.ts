@@ -15,5 +15,4 @@ export class FindLastController {
   findLast() {
     return this.service.findLast();
   }
-
 }

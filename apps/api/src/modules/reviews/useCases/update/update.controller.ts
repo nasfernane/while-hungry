@@ -13,12 +13,11 @@ export class UpdateController {
   @Patch(':id')
   /**
    * update a review based on id
-   * @param id 
-   * @param review 
+   * @param id
+   * @param review
    * @returns updated review
    */
   update(@Param('id') id: string, @Body() review: RecipeReview) {
     return this.service.update(+id, review);
   }
-
 }

@@ -15,5 +15,4 @@ export class FindAllController {
   findAll() {
     return this.service.findAll();
   }
- 
 }

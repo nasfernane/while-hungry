@@ -11,7 +11,6 @@ import { FindLastModule } from './useCases/findLast/findLast.module';
 import { UpdateModule } from './useCases/update/update.module';
 import { FindAllNamedModule } from './useCases/findAllNamed/findAllNamed.module';
 
-
 @Module({
   imports: [
     AuthorCountModule,
@@ -22,8 +21,7 @@ import { FindAllNamedModule } from './useCases/findAllNamed/findAllNamed.module'
     FindAllFilteredModule,
     UpdateModule,
     FindModule,
-    FindAllNamedModule
-  ]
-  
+    FindAllNamedModule,
+  ],
 })
 export class RecipesModule {}

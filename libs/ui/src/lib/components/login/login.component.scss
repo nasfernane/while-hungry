@@ -1,19 +1,19 @@
-
-
 .loginContainer {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  
+
   form {
     width: 100%;
 
-    section, section mat-form-field, section mat-form-field input {
+    section,
+    section mat-form-field,
+    section mat-form-field input {
       width: 100%;
     }
 
     .invalidLogin {
-      color: #64455A;
+      color: #64455a;
       align-self: start;
       margin-bottom: 1rem;
     }

@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -14,7 +20,7 @@ import { Post } from '@prisma/client';
 @Component({
   selector: 'wh-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit, OnDestroy {
   posts$: Observable<Post[]>;
@@ -24,19 +30,19 @@ export class BlogComponent implements OnInit, OnDestroy {
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     public blogService: BlogService,
-    public appService: AppService,
-  ) { }
+    public appService: AppService
+  ) {}
 
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
-    this.appService.breadcrumb = ['While Hungry', 'Blog', 'Overview']
+    this.appService.breadcrumb = ['While Hungry', 'Blog', 'Overview'];
     this.getData();
   }
 
   getData() {
     this.blogService.all().subscribe((posts: Post[]) => {
       if (posts) this.linkDataSource(posts);
-    })
+    });
   }
 
   linkDataSource(posts: Post[]) {
@@ -46,9 +52,8 @@ export class BlogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.dataSource) { 
-      this.dataSource.disconnect(); 
+    if (this.dataSource) {
+      this.dataSource.disconnect();
     }
   }
-
 }

@@ -1,6 +1,7 @@
 <div class="sectionContainer">
   <h1>{{ letter }}</h1>
-  <wh-glossary-section-definition *ngFor="let definition of definitions" [definition]="definition"></wh-glossary-section-definition>
+  <wh-glossary-section-definition
+    *ngFor="let definition of definitions"
+    [definition]="definition"
+  ></wh-glossary-section-definition>
 </div>
-
-

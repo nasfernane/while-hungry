@@ -3,9 +3,6 @@ import { UpdateAvatarModule } from './useCases/updateAvatar/updateAvatar.module'
 import { UpdateModule } from './useCases/update/update.module';
 
 @Module({
-  imports: [
-    UpdateModule,
-    UpdateAvatarModule
-  ]
+  imports: [UpdateModule, UpdateAvatarModule],
 })
 export class UsersModule {}

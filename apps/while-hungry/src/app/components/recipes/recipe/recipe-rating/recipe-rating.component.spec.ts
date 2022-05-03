@@ -8,9 +8,8 @@ describe('RecipeRatingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RecipeRatingComponent ]
-    })
-    .compileComponents();
+      declarations: [RecipeRatingComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

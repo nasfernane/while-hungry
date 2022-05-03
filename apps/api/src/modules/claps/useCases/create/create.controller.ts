@@ -10,8 +10,11 @@ import { ApiTags, ApiResponse } from '@nestjs/swagger';
 export class CreateController {
   constructor(private readonly service: CreateService) {}
 
-  @ApiResponse({ status: 201, description: 'The clap has been successfully created.'})
-  @ApiResponse({ status: 403, description: 'Forbidden.'})
+  @ApiResponse({
+    status: 201,
+    description: 'The clap has been successfully created.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @Post()
   create(@Body() clap: Clap) {
     return this.service.create(clap);

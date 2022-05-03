@@ -8,10 +8,10 @@ import { RecipeReview } from '@prisma/client';
 
 @Injectable()
 export class CheckService {
-/**
+  /**
    * check if user already reviewed a recipe
-   * @param recipeId 
-   * @param userId 
+   * @param recipeId
+   * @param userId
    * @returns review
    */
   async check(recipeId: number, userId: number): Promise<RecipeReview> {
@@ -19,8 +19,8 @@ export class CheckService {
       where: {
         recipeId: +recipeId,
         authorId: +userId,
-      }
-    })
+      },
+    });
 
     return review;
   }

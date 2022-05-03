@@ -7,11 +7,10 @@ import { AppService } from '@wh/core-utils';
 
 import { Clap } from '@prisma/client';
 
-
 @Component({
   selector: 'wh-recipe-author',
   templateUrl: './recipe-author.component.html',
-  styleUrls: ['./recipe-author.component.scss']
+  styleUrls: ['./recipe-author.component.scss'],
 })
 export class RecipeAuthorComponent implements OnInit {
   @Input() author: any;
@@ -23,51 +22,58 @@ export class RecipeAuthorComponent implements OnInit {
     private appService: AppService,
     private recipeService: RecipeService,
     private userService: UserService,
-    private uiService: UiService,
-  ) { }
+    private uiService: UiService
+  ) {}
 
   ngOnInit(): void {
-    this.recipeService.getAuthorRecipeCount(this.author.id).subscribe((count) => {
-      if (count && count !== 0) {
-        this.authorRecipesCount = +count;
-      }
-    });
+    this.recipeService
+      .getAuthorRecipeCount(this.author.id)
+      .subscribe((count) => {
+        if (count && count !== 0) {
+          this.authorRecipesCount = +count;
+        }
+      });
 
     if (this.appService.isLogged()) {
-      this.userService.checkIfClapped(this.appService.getUserId(), this.author.id).subscribe((alreadyClapped: boolean) => {
-        this.alreadyClapped = alreadyClapped;
-      });
+      this.userService
+        .checkIfClapped(this.appService.getUserId(), this.author.id)
+        .subscribe((alreadyClapped: boolean) => {
+          this.alreadyClapped = alreadyClapped;
+        });
     } else {
       this.alreadyClapped = false;
     }
 
-    
-
-   this.setUserClapsCount();
+    this.setUserClapsCount();
   }
 
   clapUser() {
     if (this.appService.userLogged) {
       if (!this.alreadyClapped) {
-        this.userService.clapUser(this.appService.getUserId(), this.author.id).subscribe((clap: Clap) => {
-          if (clap) {
-            this.alreadyClapped = true;
-            this.uiService.openAlert(`You clapped ${this.author.nickname}. Good job !`);
-            this.setUserClapsCount();
-          } 
-        })
+        this.userService
+          .clapUser(this.appService.getUserId(), this.author.id)
+          .subscribe((clap: Clap) => {
+            if (clap) {
+              this.alreadyClapped = true;
+              this.uiService.openAlert(
+                `You clapped ${this.author.nickname}. Good job !`
+              );
+              this.setUserClapsCount();
+            }
+          });
       } else {
-        this.uiService.openAlert('You already clapped this contributor')
+        this.uiService.openAlert('You already clapped this contributor');
       }
     } else {
-      this.uiService.openLoginAlert()
+      this.uiService.openLoginAlert();
     }
   }
 
   setUserClapsCount() {
-    this.userService.getUserClapsCount(this.author.id).subscribe((count: number) => {
-      this.authorClaps = count;
-    });
+    this.userService
+      .getUserClapsCount(this.author.id)
+      .subscribe((count: number) => {
+        this.authorClaps = count;
+      });
   }
-
 }
