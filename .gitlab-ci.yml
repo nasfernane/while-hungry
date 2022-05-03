@@ -93,6 +93,7 @@ deploy_main:
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
     # push back
     - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
+    - pm2 restart wh-api
   only:
     - main
     - merge_requests
