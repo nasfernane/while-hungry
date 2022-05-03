@@ -3,5 +3,9 @@
   "compilerOptions": {
     "declarationMap": false
   },
-  "angularCompilerOptions": {}
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }
