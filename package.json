@@ -9,18 +9,18 @@
     "start": "nx serve",
     "serve:api": "nx run api:serve",
     "serve:web": "ng serve",
-    "start:prod": "node dist/api/main",
+    "start:prod": "node dist/api/main --configuration=production",
     "generate-prisma-schema": "cat prisma/models/base/base.prisma prisma/models/*.prisma > prisma/schema.prisma",
     "serve:all": "concurrently \" npm run serve:api \" \" npm run serve:web \"",
     "cypress": "nx e2e while-hungry-e2e --watch",
     "seed": "npx node --loader ts-node/esm prisma/seed.ts",
     "reset": "prisma migrate reset --force && npm run seed",
     "build": "nx build",
-    "build:client": "ng build --prod",
+    "build:web": "ng build --configuration=production",
     "build:api": "nx build --project=api",
     "test": "nx test",
     "lint:api": "ng lint --project=api",
-    "lint:client": "ng lint --project=while-hungry"
+    "lint:web": "ng lint --project=while-hungry"
   },
   "private": true,
   "dependencies": {
