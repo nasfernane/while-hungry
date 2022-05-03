@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // libs
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 
 // schemas
 import { RecipeComment } from '@prisma/client';

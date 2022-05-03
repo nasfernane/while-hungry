@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '@prisma/client';
 
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 const ENDPOINT = environment.API_URL + '/recipes';
 
 @Injectable({

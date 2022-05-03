@@ -20,7 +20,7 @@
       "@wh/core-data": ["libs/core-data/src/index.ts"],
       "@wh/core-state": ["libs/core-state/src/index.ts"],
       "@wh/core-utils": ["libs/core-utils/src/index.ts"],
-      "@wh/environments": ["libs/environments/src/index.ts"],
+      "@wh/env": ["libs/env/src/index.ts"],
       "@wh/material": ["libs/material/src/index.ts"],
       "@wh/prisma-client": ["libs/prisma-client/src/index.ts"],
       "@wh/ui": ["libs/ui/src/index.ts"]

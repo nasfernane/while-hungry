@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '@prisma/client';
 import { Clap } from '@prisma/client';
 
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 
 const ENDPOINT = environment.API_URL + '/users';
 const CLAP_ENDPOINT = environment.API_URL + '/claps';

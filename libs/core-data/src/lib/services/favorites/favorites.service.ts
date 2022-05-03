@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // schema
 import { RecipeFavorite } from '@prisma/client';
 
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 const ENDPOINT = environment.API_URL + '/favorites';
 
 @Injectable({

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // utils
 import { RecipeTagCategory } from '@prisma/client';
 
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 const ENDPOINT = environment.API_URL + '/tags';
 
 @Injectable({

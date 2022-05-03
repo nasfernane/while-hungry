@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FavoritesService, RecipeService } from '@wh/core-data';
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 
 // services
 import { AppService } from '@wh/core-utils';

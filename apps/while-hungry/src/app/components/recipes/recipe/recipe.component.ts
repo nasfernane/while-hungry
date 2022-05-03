@@ -8,7 +8,7 @@ import { UiService } from '@wh/ui';
 import { Recipe } from '@prisma/client';
 
 // env file
-import { environment } from '@wh/environments';
+import { environment } from '@wh/env';
 
 @Component({
   selector: 'wh-recipe',
