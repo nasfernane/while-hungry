@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@wh/env';
 
 import { User } from '@prisma/client';
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
 
-
-const ENDPOINT = environment.API_URL + '/auth'
+const ENDPOINT = devenv.API_URL + '/auth'
 
 @Injectable({
   providedIn: 'root'

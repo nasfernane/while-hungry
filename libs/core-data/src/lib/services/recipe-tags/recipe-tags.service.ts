@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // utils
-import { environment } from '@wh/env';
-
 import { RecipeTagCategory } from '@prisma/client';
 
-const ENDPOINT = environment.API_URL + '/tags';
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
+
+const ENDPOINT = devenv.API_URL + '/tags';
 
 @Injectable({
   providedIn: 'root'

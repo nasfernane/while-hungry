@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@wh/env';
 
 // schema
 import { RecipeFavorite } from '@prisma/client';
 
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
 
-// endpoint
-const ENDPOINT = environment.API_URL + '/favorites'
+const ENDPOINT = devenv.API_URL + '/favorites'
 
 @Injectable({
   providedIn: 'root'

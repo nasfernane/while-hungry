@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '@prisma/client';
-import { environment } from '@wh/env';
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
 
-const ENDPOINT = environment.API_URL + '/recipes';
+const ENDPOINT = devenv.API_URL + '/recipes';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,8 @@ export class RecipeService {
   }
 
   findLast() {
+    console.log('process.env');
+    console.log(process.env);
     return this.http.get<Recipe>(ENDPOINT + `/last`);
   }
 

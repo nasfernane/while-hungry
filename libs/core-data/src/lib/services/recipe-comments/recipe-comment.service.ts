@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // utils
-import { environment } from '@wh/env';
 
 // schemas
 import { RecipeComment } from '@prisma/client';
 
-const ENDPOINT = environment.API_URL + '/recipes-comments';
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
+
+const ENDPOINT = devenv.API_URL + '/recipes-comments';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '@wh/env';
 
 import { User } from '@prisma/client';
 import { Clap } from '@prisma/client';
 
-const ENDPOINT = environment.API_URL + '/users';
-const CLAP_ENDPOINT = environment.API_URL + '/claps';
+import { environment as devenv } from './../../environments/environment';
+import { environment as prodenv } from './../../environments/environment.prod';
+
+const ENDPOINT = devenv.API_URL + '/users';
+const CLAP_ENDPOINT = devenv.API_URL + '/claps';
+
 
 @Injectable({
   providedIn: 'root'
