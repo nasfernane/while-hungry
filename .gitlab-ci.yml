@@ -59,7 +59,7 @@ lint api:
 build front:
   stage: build
   script:
-    - npm run build:client
+    - npm run build:web
   artifacts:
     paths:
       - ./dist/apps/while-hungry
@@ -84,11 +84,15 @@ deploy_main:
   stage: deploy
   variables:
     SERVER: "nasfernane@152.228.218.72"
-    CHEMIN: "/var/www/www.whilehungry.com/"
+    WEB_PATH: "/var/www/www.whilehungry.com/"
+    API_PATH: "/home/nasfernane/while-hungry/dist/apps/api/"
   script:
+    # check rsync install
     - which rsync || ( apt update -y && apt install rsync -y )
-    # - /sbin/ip route|awk '/default/ { print $3 }'
-    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${CHEMIN}. --exclude-from="exclude.build"
+    # push front
+    - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
+    # push back
+    - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
   only:
     - main
     - merge_requests
