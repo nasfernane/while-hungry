@@ -77,7 +77,7 @@ export class RecipeInstructionsComponent implements OnInit {
   }
 
   printRecipe() {
-    this.uiService.openAlert('Feature available soon');
+    this.uiService.openAlert('Available soon');
   }
 
   postComment() {

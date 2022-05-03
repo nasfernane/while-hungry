@@ -1,4 +1,4 @@
-<div class="definitionContainer" *ngIf="definition" fxLayout="row" fxLayoutAlign="start start">
-  <p class="definitionContainer--label">{{ definition.label }}:</p>
-  <p class="definitionContainer--definition">{{ definition.definition }}</p>
-</div>
+<p class="definitionContainer" *ngIf="definition">
+  <span class="definitionContainer--label">{{ definition.label }}:</span>
+  <span class="definitionContainer--definition">{{ definition.definition }}</span>
+</p>
