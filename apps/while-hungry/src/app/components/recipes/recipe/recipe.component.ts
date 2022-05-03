@@ -45,7 +45,7 @@ export class RecipeComponent implements OnInit {
   async getData(id: string) {
     this.recipeService.find(id).subscribe((recipe: Recipe) => {
       if (recipe) {
-        this.appService.breadcrumb = ['While Hungry', 'Recipe', recipe.name]
+        this.appService.breadcrumb = ['While Hungry', 'Recipes', recipe.name]
         this.recipe = recipe;
       } else {
         this.router.navigate(['/recipes']);

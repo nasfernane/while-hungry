@@ -11,6 +11,24 @@
     margin: 0 auto;
   }
 
+  @media (max-width: 959px) {
+    wh-recipes-overview-item {
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    &__recipes {
+      width: calc($container-width + 20vw);
+    }
+  }
+  
+  @media (max-width: 700px) {
+    &__recipes {
+      width: calc($container-width + 30vw);
+    }
+  }
+
   &__btn{
     margin-top: 2rem;
     width: 32%;

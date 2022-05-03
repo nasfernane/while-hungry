@@ -1,6 +1,6 @@
 <div class="homeRecipeContainer">
   <div class="homeRecipeContainer__recipes" *ngIf="recipes" fxLayout="row wrap" fxLayoutAlign="space-between" fxLayoutGap="grid">
-    <wh-recipes-overview-item fxFlex="32%" fxFlex.md="47.5%" fxFlex.lt-md="100%" *ngFor="let recipe of recipes" [recipe]="recipe"></wh-recipes-overview-item>
+    <wh-recipes-overview-item fxFlex="32%" fxFlex.md="47.5%" fxFlex.lt-md="62%" fxFlex.lt-sm="75%" *ngFor="let recipe of recipes" [recipe]="recipe"></wh-recipes-overview-item>
   <button class="btn btn--main homeRecipeContainer__btn" routerLink="/recipes">Check all recipes</button>
   </div>
 </div>

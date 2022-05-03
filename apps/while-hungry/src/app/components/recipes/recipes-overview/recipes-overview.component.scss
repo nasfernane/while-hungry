@@ -1,4 +1,5 @@
 @import './../../../../styles/base/colors';
+// @import './../../../../styles/main.scss';
 
 .recipeOverviewContainer {
   &__recipes {
@@ -11,6 +12,13 @@
   mat-paginator {
     align-self: center;
   }
+
+  @media (max-width: 959px) {
+    wh-recipes-overview-item {
+      margin: 0 auto;
+    }
+  }
+  
 
   wh-recipes-overview-filters {
     margin-bottom: 3rem;
