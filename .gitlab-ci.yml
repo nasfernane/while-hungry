@@ -97,8 +97,7 @@ deploy_main:
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
     # push and deploy back
     - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
-    - "pm2 kill"
-    - "pm2 start npm --name wh-api -- run serve:api"
+    - "pm2 start ecosystem.config.js"
   only:
     - main
     - merge_requests
