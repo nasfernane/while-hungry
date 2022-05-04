@@ -20,7 +20,8 @@
     "build:api": "nx build --project=api",
     "test": "nx test",
     "lint:api": "ng lint --project=api",
-    "lint:web": "ng lint --project=while-hungry"
+    "lint:web": "ng lint --project=while-hungry",
+    "deploy:api": "git fetch && git pull && npm run build:api && pm2 restart wh-api | pm2 start npm --name wh-api -- run serve:api"
   },
   "private": true,
   "dependencies": {

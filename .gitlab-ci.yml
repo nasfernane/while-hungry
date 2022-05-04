@@ -86,19 +86,16 @@ deploy_main:
     SERVER: 'nasfernane@152.228.218.72'
     WEB_PATH: '/var/www/www.whilehungry.com/'
     API_PATH: '/home/nasfernane/while-hungry/dist/apps/api/'
-  cache:
-    <<: *global_cache
-    policy: pull-push
   script:
     # check installs
     - which rsync || ( apt update -y && apt install rsync -y )
     # push front
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
     # push and deploy back
-    - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}.
+    # - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}.
     # - "pm2 start ecosystem.config.js"
-    - apt update -y && apt install sudo curl -y && curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | sudo -E bash 
-    - pm2 restart wh-api
+    # - apt update -y && apt install sudo curl -y && curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | sudo -E bash 
+    # - pm2 restart wh-api
   only:
     - main
     - merge_requests
