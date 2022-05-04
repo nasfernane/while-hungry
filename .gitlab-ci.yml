@@ -92,10 +92,10 @@ deploy_main:
     - which pm2 || ( apt update -y && apt install pm2 -y )
     # push front
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
-    # push back
+    # push and deploy back
     - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
-    - /usr/bin/pm2 kill
-    - /user/bin/pm2 start npm --name wh-api -- run serve:api
+    - "pm2 kill"
+    - "pm2 start npm --name wh-api -- run serve:api"
   only:
     - main
     - merge_requests
