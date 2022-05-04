@@ -86,6 +86,9 @@ deploy_main:
     SERVER: 'nasfernane@152.228.218.72'
     WEB_PATH: '/var/www/www.whilehungry.com/'
     API_PATH: '/home/nasfernane/while-hungry/dist/apps/api/'
+  cache:
+    <<: *global_cache
+    policy: pull-push
   script:
     # check installs
     - which rsync || ( apt update -y && apt install rsync -y )
