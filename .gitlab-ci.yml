@@ -97,8 +97,8 @@ deploy_main:
     # push and deploy back
     - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}.
     # - "pm2 start ecosystem.config.js"
-    - "pm2 restart wh-api"
-    # - "pm2 start npm --name wh-api --"
+    - apt update && apt install sudo curl && curl -sL https://raw.githubusercontent.com/Unitech/pm2/master/packager/setup.deb.sh | sudo -E bash -
+    - pm2 restart wh-api
   only:
     - main
     - merge_requests
