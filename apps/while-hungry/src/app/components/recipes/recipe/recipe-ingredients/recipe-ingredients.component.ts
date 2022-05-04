@@ -57,22 +57,28 @@ export class RecipeIngredientsComponent implements OnInit {
   }
 
   addShoppingList() {
-    const wishlist = [];
 
-    for (const ingredient of this.ingredients) {
-      wishlist.push({
-        name: ingredient.name,
-        quantity: this.getQuantity(ingredient),
-        unit: this.getUnit(ingredient),
-      });
-    }
+    if (this.appService.userLogged) {
+      const wishlist = [];
 
-    if (wishlist.length > 0) {
-      this.shoppingListService
-        .create(this.appService.getUserId(), this.recipe.id, wishlist)
-        .subscribe((res) => {
-          this.uiService.openAlert('Recipe added to your shopping list');
+      for (const ingredient of this.ingredients) {
+        wishlist.push({
+          name: ingredient.name,
+          quantity: this.getQuantity(ingredient),
+          unit: this.getUnit(ingredient),
         });
+      }
+
+      if (wishlist.length > 0) {
+        this.shoppingListService
+          .create(this.appService.getUserId(), this.recipe.id, wishlist)
+          .subscribe((res) => {
+            this.uiService.openAlert('Recipe added to your shopping list');
+          });
+      }
+    } else {
+      this.uiService.openLoginAlert();
     }
+    
   }
 }

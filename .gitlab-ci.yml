@@ -92,12 +92,13 @@ deploy_main:
   script:
     # check installs
     - which rsync || ( apt update -y && apt install rsync -y )
-    - which pm2 || ( apt update -y && apt install pm2 -y )
     # push front
     - /usr/bin/rsync -r ./dist/apps/while-hungry/ ${SERVER}:${WEB_PATH}. --exclude-from="exclude.build"
     # push and deploy back
-    - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}. --exclude-from="exclude.build"
-    - "pm2 start ecosystem.config.js"
+    - /usr/bin/rsync -r ./dist/apps/api/ ${SERVER}:${API_PATH}.
+    # - "pm2 start ecosystem.config.js"
+    - "pm2 restart wh-api"
+    # - "pm2 start npm --name wh-api --"
   only:
     - main
     - merge_requests
