@@ -69,6 +69,7 @@ import { ShoppinglistGlobalComponent } from './components/shoppinglist/shoppingl
 import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglist-item/shoppinglist-item.component';
 import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NewRecipePreviewIngredientsComponent } from './components/recipes/new-recipe/new-recipe-preview-ingredients/new-recipe-preview-ingredients.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ShoppinglistGlobalComponent,
     ShoppinglistItemComponent,
     NewRecipeComponent,
+    NewRecipePreviewIngredientsComponent,
   ],
   imports: [
     BrowserModule,

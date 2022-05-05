@@ -4,11 +4,11 @@
   mat-card {
     margin: 0 !important;
     padding: 0 !important;
-
   }
 
   .recipe {
     width: 100%;
+    margin: 0 auto;
 
     mat-card-header,
     mat-card-content,
@@ -22,6 +22,17 @@
       width: 100%;
       margin-bottom: 3rem !important;
       position: relative;
+
+      &__img {
+        width: 100%;
+        height: auto;
+        max-height: 80vh;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
       
       &__infos {
         position:absolute;

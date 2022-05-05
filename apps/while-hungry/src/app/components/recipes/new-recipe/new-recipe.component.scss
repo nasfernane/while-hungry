@@ -187,15 +187,28 @@ mat-icon.addIcon {
       }
     }
   }
+
+  &__preview {
+    &__image {
+      max-width: 100%;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
 }
 
-.recipeName {
+.stepTitle {
   width: 100%;
   margin-bottom: 2rem;
-
-  span {
-    font-size: 2rem;
+  font-size: 2rem;
+  font-style: italic;
+  
+  &--recipeName {
+    font-style: normal;
     font-weight: 500;
     text-transform: uppercase;
+    font-style: italic;
   }
 }

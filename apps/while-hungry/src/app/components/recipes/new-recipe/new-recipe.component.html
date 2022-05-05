@@ -10,10 +10,13 @@
     <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>New recipe</ng-template>
       <form [formGroup]="recipeNameGroup">
-        <h2>
-          Choose a title and a description for your recipe. Check if the recipe
-          already exists on the website
-        </h2>
+        <div
+          class="stepTitle stepTitle"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
+          <span>Choose a title and a description for your recipe. You can check if a similar recipe already exists on the website !</span>
+        </div>
         <div fxLayout="row" fxLayoutAlign="flex-start flex-start">
           <mat-form-field fxFlex="20" style="margin-right: 2rem">
             <mat-label>Recipe name</mat-label>
@@ -56,7 +59,7 @@
     <mat-step [stepControl]="informationGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>Informations</ng-template>
       <div
-        class="recipeName"
+        class="stepTitle stepTitle--recipeName"
         *ngIf="recipeName"
         fxLayout="row"
         fxLayoutAlign="center center"
@@ -221,7 +224,7 @@
     <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
       <ng-template matStepLabel>Ingredients</ng-template>
       <div
-        class="recipeName"
+        class="stepTitle stepTitle--recipeName"
         *ngIf="recipeName"
         fxLayout="row"
         fxLayoutAlign="center center"
@@ -297,18 +300,18 @@
           </div>
         </div>
         <!-- TODO delete when new recipe detail OK -->
-        <!-- <wh-recipe-ingredients
+        <wh-new-recipe-preview-ingredients
           [recipe]="formatRecipe()"
           [preview]="true"
           fxFlex="30"
           *ngIf="ingredients.length > 0"
-        ></wh-recipe-ingredients> -->
+        ></wh-new-recipe-preview-ingredients>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Instructions</ng-template>
       <div
-        class="recipeName"
+        class="stepTitle stepTitle--recipeName"
         *ngIf="recipeName"
         fxLayout="row"
         fxLayoutAlign="center center"
@@ -484,108 +487,39 @@
     <mat-step>
       <ng-template matStepLabel>Preview</ng-template>
       <div
-        class="recipeName"
-        *ngIf="recipeName"
+        class="stepTitle"
+        *ngIf="isValidRecipe()"
         fxLayout="row"
         fxLayoutAlign="center center"
       >
-        <span>{{ recipeName }}</span>
+        <span>Check your recipe before creating !</span>
       </div>
 
       <div
+        class="newRecipeForm__preview"
         fxLayout="row"
         fxLayoutAlign="space-between flex-start"
         *ngIf="isValidRecipe()"
       >
-        <div
-          class="newRecipeForm__instructions__recap"
-          *ngIf="instructions.length > 0 || notes.length > 0"
-          style="margin-bottom: 2rem"
-          fxFlex="65"
-        >
-          <div
-            class="newRecipeForm__instructions__recap__header"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-          >
-            <span>Instructions</span>
-          </div>
-          <div
-            class="newRecipeForm__instructions__recap__instructions"
-            *ngIf="instructions.length > 0; else noInstructions"
-          >
-            <div
-              *ngFor="let instruction of instructions; let i = index"
-              fxLayout="row"
-              fxLayoutAlign="start start"
-              class="newRecipeForm__instructions__recap__instructions__line"
-            >
-              <div
-                class="newRecipeForm__instructions__recap__instructions__line__number"
-                fxLayout="column"
-                fxLayoutAlign="center center"
-              >
-                {{ i + 1 }}
-              </div>
-              <span
-                *ngIf="instruction['label']"
-                class="newRecipeForm__instructions__recap__instructions__line__label"
-                >{{ instruction['label'] }}&nbsp;:</span
-              >
-              <span
-                class="newRecipeForm__instructions__recap__instructions__line__value"
-                >{{ instruction['instruction'] }}</span
-              >
-            </div>
-          </div>
-          <ng-template #noInstructions>
-            <div
-              fxLayout="column"
-              fxLayoutAlign="center center"
-              style="padding: 2rem"
-            >
-              <span
-                >You need to add atleast one instruction to your recipe</span
-              >
-            </div>
-          </ng-template>
-          <div
-            class="newRecipeForm__instructions__recap__notes"
-            *ngIf="notes.length > 0"
-            fxLayout="column"
-            fxLayoutAlign="flex-start flex-start"
-          >
-            <span>Notes</span>
-            <div
-              *ngFor="let note of notes"
-              class="newRecipeForm__instructions__recap__notes__line"
-              fxLayout="row"
-              fxLayoutAlign="flex-start center"
-            >
-              <div
-                fxLayout="column"
-                fxLayoutAlign="center center"
-                class="newRecipeForm__instructions__recap__notes__line__icon"
-              >
-                <mat-icon>info</mat-icon>
-              </div>
-              <span
-                class="newRecipeForm__instructions__recap__notes__line__label"
-                *ngIf="note['label']"
-                >{{ note['label'] }}:</span
-              >
-              <span class="newRecipeForm__instructions__recap__notes__value">{{
-                note['note']
-              }}</span>
-            </div>
-          </div>
-        </div>
-        <!-- TODO delete when new recipe detail OK -->
-        <!-- <wh-recipe-ingredients
+        <wh-recipe-instructions
           [recipe]="formatRecipe()"
           [preview]="true"
-          fxFlex="30"
-        ></wh-recipe-ingredients> -->
+          fxFlex="60"
+          ></wh-recipe-instructions> 
+        <div class="newRecipeForm__preview__image" fxFlex="30">
+          <img [src]="previewPicturePath" alt="Recipe Picture Preview" />
+        </div>
+      <!-- <ng-template #noInstructions>
+        <div
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          style="padding: 2rem"
+        >
+          <span
+            >You need to add atleast one instruction to your recipe</span
+          >
+        </div>
+      </ng-template> -->
       </div>
       <div class="step__footer">
         <button class="btn btn--secondary" (click)="stepper.previous()">

@@ -9,57 +9,59 @@
       fxLayout="column"
       fxLayoutAlign="flex-start flex-start"
     >
-      <img
-        class="recipe__header__img"
-        [src]="environment.API_URL + '/getpicture/' + recipe.picture"
-        alt="{{ recipe.name }}"
-      />
+      <div class="recipe__header__img" fxLayout="column" fxLayoutAlign="center center">
+        <img
+          [src]="environment.API_URL + '/getpicture/' + recipe.picture"
+          alt="{{ recipe.name }}"
+        />
+      </div>
+      
       <div
         class="recipe__header__infos"
         fxLayout="column"
         fxLayoutAlign="flex-start flex-start"
       >
-      <section fxLayout="row">
-        <span
-        class="recipe__header__name"
-        fxLayout="row"
-        fxLayoutAlign="start flex-start"
-        >
-          {{ recipe.name }}
-        </span>
-        <span
-          class="recipe__header__tags"
-          *ngFor="let tag of recipe.recipeTags"
-          matTooltip="{{
-            'Check all recipes related to the ' + tag.tag.name + ' tag'
-          }}"
-          routerLink="/recipes"
-          >{{ tag.tag.name }}
-        </span>
-        
-      </section>
-      <section
-        fxLayout="row"
-        fxLayoutAlign="start flex-end"
-        >
-          <wh-recipe-rating
-            *ngIf="recipe.avgReview"
-            [rating]="recipe.avgReview"
-          ></wh-recipe-rating>
+        <section fxLayout="row">
           <span
-            >{{ recipe.recipeReviews.length }}
-            {{ recipe.recipeReviews.length > 1 ? 'REVIEWS' : 'REVIEW' }}</span
+          class="recipe__header__name"
+          fxLayout="row"
+          fxLayoutAlign="start flex-start"
           >
+            {{ recipe.name }}
+          </span>
           <span
-            fxLayout="row"
-            fxLayoutAlign="start center"
-            *ngIf="recipe.avgReview"
-          >
-            &nbsp; / &nbsp;
-            {{ recipe.avgReview }} AVERAGE
+            class="recipe__header__tags"
+            *ngFor="let tag of recipe.recipeTags"
+            matTooltip="{{
+              'Check all recipes related to the ' + tag.tag.name + ' tag'
+            }}"
+            routerLink="/recipes"
+            fxHide.lt-sm
+            >{{ tag.tag.name }}
           </span>
         </section>
-        <p class="recipe__header__description">{{ recipe.description }}</p>
+        <section
+          fxLayout="row"
+          fxLayoutAlign="start flex-end"
+          >
+            <wh-recipe-rating
+              *ngIf="recipe.avgReview"
+              [rating]="recipe.avgReview"
+            ></wh-recipe-rating>
+            <span
+              >{{ recipe.recipeReviews.length }}
+              {{ recipe.recipeReviews.length > 1 ? 'REVIEWS' : 'REVIEW' }}</span
+            >
+            <span
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              *ngIf="recipe.avgReview"
+            >
+              &nbsp; / &nbsp;
+              {{ recipe.avgReview }} AVERAGE
+            </span>
+          </section>
+          <p class="recipe__header__description">{{ recipe.description }}</p>
       </div>
       
       
