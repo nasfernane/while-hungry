@@ -1,18 +1,41 @@
-<div class="instructionsContainer">
-  <div
-    class="instructionsContainer__header"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-  >
-    <span>{{ recipe.name }}</span>
+<div class="recipeContainer">
+  <div class="recipeContainer__header" fxLayout="column" fxLayoutAlign="center center">
+    <span class="recipeContainer__header__title">{{ recipe.name }}</span>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <!-- timer -->
+      <div class="recipeContainer__header__info" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="ingredientsContainer__header__info--icon">schedule</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--data">
+          {{ appService.formatTimer(recipe.cookTime) }}
+        </span>
+      </div>
+      <!-- servings -->
+      <div class="recipeContainer__header__info" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="ingredientsContainer__header__info--icon">restaurant_menu</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--data">
+          {{ recipe.serves }} Servings
+        </span>
+      </div>
+      <!-- difficulty -->
+      <div class="recipeContainer__header__info" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="ingredientsContainer__header__info--icon">outdoor_grill</mat-icon>
+        &nbsp;
+        <span class="ingredientsContainer__header__info--data">
+          {{ recipe.difficulty }}
+        </span>
+      </div>
+    </div>
   </div>
+  <!-- ! header end -->
   <div
-    class="instructionsContainer__actions"
+    class="recipeContainer__actions"
     fxLayout="row"
     fxLayoutAlign="space-between center"
   >
     <div
-      class="instructionsContainer__actions__action instructionsContainer__actions__action--print"
+      class="recipeContainer__actions__action recipeContainer__actions__action--print"
       fxLayout="row"
       fxLayoutAlign="center center"
       (click)="printRecipe()"
@@ -21,7 +44,7 @@
       <span>print recipe</span>
     </div>
     <div
-      class="instructionsContainer__actions__action instructionsContainer__actions__action--pin"
+      class="recipeContainer__actions__action recipeContainer__actions__action--pin"
       fxLayout="row"
       fxLayoutAlign="center center"
       (click)="addOrRemoveFavorite()"
@@ -32,71 +55,113 @@
       <span>{{ recipeInFavorites ? 'remove' : 'add' }} favorite</span>
     </div>
   </div>
-  <div
-    class="instructionsContainer__instructions"
-    fxLayout="column"
-    fxLayoutAlign="start flex-start"
-  >
-    <h1 class="instructionsContainer__instructions__title">instructions</h1>
+  <div class="recipeContainer__ingredients">
     <div
-      *ngFor="let instruction of instructions; let i = index"
-      class="instructionsContainer__instructions__instruction"
+      class="recipeContainer__ingredients__header"
       fxLayout="row"
-      fxLayoutAlign="start start"
+      fxLayoutAlign="space-between center"
     >
-      <div
-        class="instructionsContainer__instructions__instruction__number"
-        fxLayout="column"
-        fxLayoutAlign="center center"
+      <h1 class="recipeContainer__ingredients__title"
+        >ingredients</h1
       >
-        {{ i + 1 }}
+      <div fxLayout="row" *ngIf="!preview">
+        <wh-recipe-ingredients-options
+          [units]="recipe.unit"
+          (unitsEvent)="unitEvent($event)"
+          (scaleEvent)="scaleEvent($event)"
+          *ngIf="!preview"
+        ></wh-recipe-ingredients-options>
+        <div class="recipeContainer__ingredients__addShoppingList" fxLayout="column" fxLayoutAlign="center center" matTooltip="Add to your shopping list">
+          <mat-icon (click)="addShoppingList()">
+            add_shopping_cart
+          </mat-icon>
+        </div>
+        
       </div>
-      <span class="instructionsContainer__instructions__instruction__data">
-        <span
-          class="instructionsContainer__instructions__instruction__data--label"
-        >
-          {{ instruction.label }}:
-        </span>
-        <span
-          class="instructionsContainer__instructions__instruction__data--detail"
-        >
-          {{ instruction.instruction }}
-        </span>
+    </div>
+    <div class="recipeContainer__ingredients__ingredient"
+      *ngFor="let ingredient of ingredients"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <span class="recipeContainer__ingredients__ingredient--dot">&#9679;</span>
+      <span class="recipeContainer__ingredients__ingredient--quantity">
+        {{ getQuantity(ingredient) }}
+        {{ getUnit(ingredient) }}
+        &nbsp;
       </span>
+      <span class="recipeContainer__ingredients__ingredient--name">{{
+        ingredient.name
+      }}</span>
     </div>
   </div>
   <div
-    class="instructionsContainer__notes"
+    class="recipeContainer__notes"
     fxLayout="column"
     fxLayoutAlign="start stretch"
   >
-    <h1 class="instructionsTitle instructionsContainer__notes__title">notes</h1>
+    <h1 class="instructionsTitle recipeContainer__notes__title">notes</h1>
     <div
-      class="instructionsContainer__notes__note"
+      class="recipeContainer__notes__note"
       *ngFor="let note of notes"
       fxLayout="row"
       fxLayoutAlign="start start"
     >
-      <mat-icon class="instructionsContainer__notes__note__icon">info</mat-icon>
-      <span class="instructionsContainer__notes__note__data">
-        <span class="instructionsContainer__notes__note__data--label">
+      <mat-icon class="recipeContainer__notes__note__icon">info</mat-icon>
+      <span class="recipeContainer__notes__note__data">
+        <span class="recipeContainer__notes__note__data--label">
           {{ note.label }}:
         </span>
-        <span class="instructionsContainer__notes__note__data--detail">
+        <span class="recipeContainer__notes__note__data--detail">
           {{ note.note }}
         </span>
       </span>
     </div>
   </div>
   <div
-    class="instructionsContainer__comment"
+    class="recipeContainer__instructions"
     fxLayout="column"
     fxLayoutAlign="start flex-start"
   >
-    <h1 class="instructionsTitle instructionsContainer__comment__title">
+    <h1 class="recipeContainer__instructions__title">instructions</h1>
+    <div
+      *ngFor="let instruction of instructions; let i = index"
+      class="recipeContainer__instructions__instruction"
+      fxLayout="row"
+      fxLayoutAlign="start start"
+    >
+      <div
+        class="recipeContainer__instructions__instruction__number"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        {{ i + 1 }}
+      </div>
+      <span class="recipeContainer__instructions__instruction__data">
+        <span
+          class="recipeContainer__instructions__instruction__data--label"
+        >
+          {{ instruction.label }}:
+        </span>
+        <span
+          class="recipeContainer__instructions__instruction__data--detail"
+        >
+          {{ instruction.instruction }}
+        </span>
+      </span>
+    </div>
+  </div>
+  
+  <!-- TODO delete when new recipe detail OK -->
+  <!-- <div
+    class="recipeContainer__comment"
+    fxLayout="column"
+    fxLayoutAlign="start flex-start"
+  >
+    <h1 class="instructionsTitle recipeContainer__comment__title">
       comment
     </h1>
-    <p class="instructionsContainer__comment__subtitle">
+    <p class="recipeContainer__comment__subtitle">
       You can contribute to this recipe, add remarks or share your thoughts by
       leaving a comment. It's always appreciated !
     </p>
@@ -106,9 +171,9 @@
       #myCommentForm="ngForm"
       fxLayout="column"
       fxLayoutAlign="start flex-end"
-      class="instructionsContainer__comment__form"
+      class="recipeContainer__comment__form"
     >
-      <mat-form-field class="instructionsContainer__comment__input">
+      <mat-form-field class="recipeContainer__comment__input">
         <textarea
           formControlName="comment"
           matInput
@@ -121,7 +186,7 @@
         ></textarea>
       </mat-form-field>
       <div
-        class="instructionsContainer__comment__btn instructionsContainer__actions__action instructionsContainer__actions__action--comment"
+        class="recipeContainer__comment__btn recipeContainer__actions__action recipeContainer__actions__action--comment"
         fxLayout="row"
         fxLayoutAlign="center center"
         (click)="postComment(); myCommentForm.resetForm()"
@@ -130,5 +195,5 @@
         <span>post comment</span>
       </div>
     </form>
-  </div>
+  </div> -->
 </div>

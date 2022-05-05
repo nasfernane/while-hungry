@@ -1,80 +1,85 @@
 <div
   class="recipeContainer globalContainer"
-  fxLayout="row"
-  fxLayoutAlign="space-between start"
+  fxLayout="column"
+  fxLayoutAlign="flex-start stretch"
 >
-  <mat-card class="recipe noBox" *ngIf="recipe" fxFlex="60">
+  <mat-card class="recipe noBox" *ngIf="recipe">
     <mat-card-header
       class="recipe__header"
       fxLayout="column"
-      fxLayoutAlign="space-between start"
+      fxLayoutAlign="flex-start flex-start"
     >
-      <div
-        fxLayout="row"
-        fxLayoutAlign="space-between center"
-        style="width: 100%; margin-bottom: 2rem"
-      >
-        <span
-          class="recipe__header__name"
-          fxLayout="row"
-          fxLayoutAlign="start flex-start"
-        >
-          {{ recipe.name }}
-          <span
-            class="recipe__header__tags"
-            *ngFor="let tag of recipe.recipeTags"
-            matTooltip="{{
-              'Check all recipes related to the ' + tag.tag.name + ' tag'
-            }}"
-            routerLink="/recipes"
-            >{{ tag.tag.name }}</span
-          >
-        </span>
-      </div>
-      <div
-        class="recipe__header__infos"
-        fxLayout="row"
-        fxLayoutAlign="start flex-end"
-      >
-        <wh-recipe-rating
-          *ngIf="recipe.avgReview"
-          [rating]="recipe.avgReview"
-        ></wh-recipe-rating>
-        <span
-          >{{ recipe.recipeReviews.length }}
-          {{ recipe.recipeReviews.length > 1 ? 'REVIEWS' : 'REVIEW' }}</span
-        >
-        <span
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          *ngIf="recipe.avgReview"
-        >
-          &nbsp; / &nbsp;
-          {{ recipe.avgReview }} AVERAGE
-        </span>
-      </div>
-      <p class="recipe__header__description">{{ recipe.description }}</p>
       <img
         class="recipe__header__img"
         [src]="environment.API_URL + '/getpicture/' + recipe.picture"
         alt="{{ recipe.name }}"
       />
+      <div
+        class="recipe__header__infos"
+        fxLayout="column"
+        fxLayoutAlign="flex-start flex-start"
+      >
+      <section fxLayout="row">
+        <span
+        class="recipe__header__name"
+        fxLayout="row"
+        fxLayoutAlign="start flex-start"
+        >
+          {{ recipe.name }}
+        </span>
+        <span
+          class="recipe__header__tags"
+          *ngFor="let tag of recipe.recipeTags"
+          matTooltip="{{
+            'Check all recipes related to the ' + tag.tag.name + ' tag'
+          }}"
+          routerLink="/recipes"
+          >{{ tag.tag.name }}
+        </span>
+        
+      </section>
+      <section
+        fxLayout="row"
+        fxLayoutAlign="start flex-end"
+        >
+          <wh-recipe-rating
+            *ngIf="recipe.avgReview"
+            [rating]="recipe.avgReview"
+          ></wh-recipe-rating>
+          <span
+            >{{ recipe.recipeReviews.length }}
+            {{ recipe.recipeReviews.length > 1 ? 'REVIEWS' : 'REVIEW' }}</span
+          >
+          <span
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            *ngIf="recipe.avgReview"
+          >
+            &nbsp; / &nbsp;
+            {{ recipe.avgReview }} AVERAGE
+          </span>
+        </section>
+        <p class="recipe__header__description">{{ recipe.description }}</p>
+      </div>
+      
+      
     </mat-card-header>
-    <mat-card-content>
-      <wh-recipe-instructions
-        [recipe]="recipe"
-        (updateEvent)="getData(recipeId)"
-      ></wh-recipe-instructions>
+    <mat-card-content *ngIf="recipe" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between flex-start">
+      <section fxFlex="60">
+        <wh-recipe-instructions
+          [recipe]="recipe"
+        ></wh-recipe-instructions>
+      </section>
+      <section fxFlex="30">
+        <wh-recipe-add-review
+          [recipeId]="recipe.id"
+          (updateEvent)="getData(recipeId)"
+        ></wh-recipe-add-review>
+        <wh-recipe-author [author]="recipe.author"></wh-recipe-author>
+        <wh-recipe-comments [recipe]="recipe" (updateEvent)="getData(recipeId)"></wh-recipe-comments>
+      </section>
+      
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="about noBox" fxFlex="30" *ngIf="recipe">
-    <wh-recipe-ingredients [recipe]="recipe"></wh-recipe-ingredients>
-    <wh-recipe-add-review
-      [recipeId]="recipe.id"
-      (updateEvent)="getData(recipeId)"
-    ></wh-recipe-add-review>
-    <wh-recipe-author [author]="recipe.author"></wh-recipe-author>
-    <wh-recipe-comments [recipe]="recipe"></wh-recipe-comments>
-  </mat-card>
 </div>

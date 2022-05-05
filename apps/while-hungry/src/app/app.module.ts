@@ -41,9 +41,8 @@ import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-p
 import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
 import { RecipeComponent } from './components/recipes/recipe/recipe.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { RecipeIngredientsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients.component';
 import { RecipeAuthorComponent } from './components/recipes/recipe/recipe-author/recipe-author.component';
-import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/recipe-ingredients/recipe-ingredients-options/recipe-ingredients-options.component';
+import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/recipe-ingredients-options/recipe-ingredients-options.component';
 import { RecipeRatingComponent } from './components/recipes/recipe/recipe-rating/recipe-rating.component';
 import { RecipeInstructionsComponent } from './components/recipes/recipe/recipe-instructions/recipe-instructions.component';
 import { RecipeAddReviewComponent } from './components/recipes/recipe/recipe-add-review/recipe-add-review.component';
@@ -85,7 +84,6 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     BlogPostComponent,
     RecipeComponent,
     BreadcrumbComponent,
-    RecipeIngredientsComponent,
     RecipeAuthorComponent,
     RecipeIngredientsOptionsComponent,
     RecipeRatingComponent,

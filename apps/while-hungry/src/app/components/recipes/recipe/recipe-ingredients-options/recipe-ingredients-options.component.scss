@@ -1,4 +1,4 @@
-@import './../../../../../../styles/base/colors';
+@import './../../../../../styles/base/colors';
 
 .optionsContainer {
   &__units {
@@ -6,8 +6,8 @@
   }
 
   button {
-    height: 2.6rem;
-    width: 2.6rem;
+    height: 3rem;
+    width: 3rem;
     background-color: white;
     border: 0.1rem solid $grey-dark;
     color: $grey-dark;

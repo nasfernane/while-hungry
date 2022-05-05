@@ -1,19 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
 
 // services
 import { AppService } from '@wh/core-utils';
-import { FavoritesService, RecipeService } from '@wh/core-data';
+import { FavoritesService, ShoppingListService } from '@wh/core-data';
 import { UiService } from '@wh/ui';
-import { RecipeCommentService } from '@wh/core-data';
 
 // prisma schemas
-import { RecipeComment, RecipeInstruction } from '@prisma/client';
+import { RecipeInstruction } from '@prisma/client';
 import { RecipeNote } from '@prisma/client';
 
 @Component({
@@ -23,28 +16,27 @@ import { RecipeNote } from '@prisma/client';
 })
 export class RecipeInstructionsComponent implements OnInit {
   @Input() recipe: any;
-  @Output() updateEvent = new EventEmitter<boolean>();
+  @Input() preview = false;
   instructions: RecipeInstruction[];
   notes: RecipeNote[];
   recipeInFavorites: boolean;
-  commentForm: FormGroup;
+
+  ingredients: any[];
+  recipeUnit: string;
+  scale = 1;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private appService: AppService,
+    public appService: AppService,
     private favoritesService: FavoritesService,
-    private recipeService: RecipeService,
-    private recipeCommentsService: RecipeCommentService,
-    private uiService: UiService
-  ) {
-    this.commentForm = formBuilder.group({
-      comment: new FormControl(''),
-    });
-  }
+    private uiService: UiService,
+    private shoppingListService: ShoppingListService
+  ) {}
 
   ngOnInit(): void {
     this.instructions = this.recipe.recipeInstructions;
     this.notes = this.recipe.recipeNotes;
+    this.ingredients = this.recipe.requiredIngredients;
+    this.recipeUnit = this.recipe.unit;
     this.checkFavorite();
   }
 
@@ -91,20 +83,52 @@ export class RecipeInstructionsComponent implements OnInit {
     this.uiService.openAlert('Available soon');
   }
 
-  postComment() {
-    if (this.appService.userLogged) {
-      const comment = this.commentForm.controls['comment'].value;
 
-      if (comment) {
-        this.recipeCommentsService
-          .create({
-            recipeId: this.recipe.id,
-            userId: this.appService.getUserId(),
-            comment: comment,
-          })
-          .subscribe((comment: RecipeComment) => {
-            this.uiService.openAlert('Comment posted !');
-            this.updateEvent.emit(true);
+  unitEvent(event: string) {
+    if (this.recipeUnit !== event) {
+      this.recipeUnit = event;
+    }
+  }
+
+  scaleEvent(event: number) {
+    if (this.scale !== event) {
+      this.scale = event;
+    }
+  }
+
+  getQuantity(ingredient: any) {
+    return this.appService.round2decimals(
+      ingredient.quantity *
+        this.scale *
+        (this.recipe.unit !== this.recipeUnit
+          ? +this.appService.convertUnitAmount(ingredient.unit)
+          : 1)
+    );
+  }
+
+  getUnit(ingredient: any) {
+    return this.recipe.unit === this.recipeUnit
+      ? ingredient.unit
+      : this.appService.convertUnitLabel(this.recipeUnit, ingredient.unit);
+  }
+
+  addShoppingList() {
+    if (this.appService.userLogged) {
+      const wishlist = [];
+
+      for (const ingredient of this.ingredients) {
+        wishlist.push({
+          name: ingredient.name,
+          quantity: this.getQuantity(ingredient),
+          unit: this.getUnit(ingredient),
+        });
+      }
+
+      if (wishlist.length > 0) {
+        this.shoppingListService
+          .create(this.appService.getUserId(), this.recipe.id, wishlist)
+          .subscribe((res) => {
+            this.uiService.openAlert('Recipe added to your shopping list');
           });
       }
     } else {

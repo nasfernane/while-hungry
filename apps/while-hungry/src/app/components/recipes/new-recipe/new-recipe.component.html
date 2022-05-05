@@ -296,12 +296,13 @@
             </button>
           </div>
         </div>
-        <wh-recipe-ingredients
+        <!-- TODO delete when new recipe detail OK -->
+        <!-- <wh-recipe-ingredients
           [recipe]="formatRecipe()"
           [preview]="true"
           fxFlex="30"
           *ngIf="ingredients.length > 0"
-        ></wh-recipe-ingredients>
+        ></wh-recipe-ingredients> -->
       </div>
     </mat-step>
     <mat-step>
@@ -579,11 +580,12 @@
             </div>
           </div>
         </div>
-        <wh-recipe-ingredients
+        <!-- TODO delete when new recipe detail OK -->
+        <!-- <wh-recipe-ingredients
           [recipe]="formatRecipe()"
           [preview]="true"
           fxFlex="30"
-        ></wh-recipe-ingredients>
+        ></wh-recipe-ingredients> -->
       </div>
       <div class="step__footer">
         <button class="btn btn--secondary" (click)="stepper.previous()">

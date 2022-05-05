@@ -1,11 +1,52 @@
 <div class="commentsContainer" fxLayout="column" fxLayoutAlign="start start">
+  <div
+    class="commentsContainer__new"
+    fxLayout="column"
+    fxLayoutAlign="start flex-start"
+  >
+    <p class="commentsContainer__new__subtitle">
+      You can contribute to this recipe, add remarks or share your thoughts by
+      leaving a comment. It's always appreciated !
+    </p>
+    <form
+      [formGroup]="commentForm"
+      novalidate
+      #myCommentForm="ngForm"
+      fxLayout="column"
+      fxLayoutAlign="start flex-end"
+      class="commentsContainer__new__form"
+    >
+      <mat-form-field class="commentsContainer__new__input">
+        <textarea
+          formControlName="comment"
+          matInput
+          placeholder="Write your comment here. ex: As my great aunt Joséphine used to say..."
+          qsf
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          (keyup.enter)="postComment(); myCommentForm.resetForm()"
+        ></textarea>
+      </mat-form-field>
+      <!-- <div
+        class="commentsContainer__new__btn"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+        (click)="postComment(); myCommentForm.resetForm()"
+      >
+        <mat-icon class="material-icons-outlined">insert_comment</mat-icon>
+        <span>post comment</span>
+      </div> -->
+    </form>
+  </div>
   <div class="commentsContainer__header">
     <span>{{ comments.length }} comments</span>
-    <mat-divider></mat-divider>
+    <mat-divider [inset]="true"></mat-divider>
   </div>
   <div
     class="commentsContainer__comment"
-    fxLayout=" reverse column"
+    fxLayout="column"
     fxLayoutAlign="start stretch"
     *ngFor="let comment of comments; let last = last"
   >
@@ -32,6 +73,6 @@
         }}</span>
       </div>
     </div>
-    <mat-divider *ngIf="!last"></mat-divider>
+    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
   </div>
 </div>

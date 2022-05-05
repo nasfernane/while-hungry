@@ -4,6 +4,7 @@
   mat-card {
     margin: 0 !important;
     padding: 0 !important;
+
   }
 
   .recipe {
@@ -19,10 +20,22 @@
 
     &__header {
       width: 100%;
-      padding-bottom: 3rem;
+      margin-bottom: 3rem !important;
+      position: relative;
+      
+      &__infos {
+        position:absolute;
+        padding: 2rem;
+        top: 0;
+        background-color: rgba($grey-light, 0.6);
+
+        section {
+          margin-bottom: 1rem;
+        }
+      }
 
       &__name {
-        font-size: 3.6rem;
+        font-size: 3.6rem !important;
         margin: 0;
         padding: 0;
         display: inline-box;
@@ -48,9 +61,7 @@
         transition: 0.3s ease;
 
         &:hover {
-          // color: #fff;
-          border: 0.1rem solid $grey-light;
-          background-color: $grey-light;
+          transform: scale(1.1);
         }
       }
 
@@ -87,9 +98,6 @@
           margin-right: 0.5rem;
         }
       }
-    }
-
-    &__footer {
     }
 
     mat-divider {
