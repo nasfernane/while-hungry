@@ -2,23 +2,32 @@
   <div
     class="homeRecipeContainer__recipes"
     *ngIf="recipes"
-    fxLayout="row wrap"
-    fxLayoutAlign="space-between"
-    fxLayoutGap="grid"
+    fxLayout="column"
+    fxLayoutAlign="flex-start center"
   >
-    <wh-recipes-overview-item
+    <div fxLayout="row wrap"
+    fxLayoutAlign="space-between"
+    fxLayoutGap="grid">
+      <wh-recipes-overview-item
+        fxFlex="32%"
+        fxFlex.md="47.5%"
+        fxFlex.sm="62%"
+        fxFlex.xs="90%"
+        *ngFor="let recipe of recipes"
+        [recipe]="recipe"
+      ></wh-recipes-overview-item>
+    </div>
+    <div style="width: 100%">
+      <button
       fxFlex="32%"
       fxFlex.md="47.5%"
-      fxFlex.lt-md="62%"
-      fxFlex.lt-sm="75%"
-      *ngFor="let recipe of recipes"
-      [recipe]="recipe"
-    ></wh-recipes-overview-item>
-    <button
-      class="btn btn--main homeRecipeContainer__btn"
+      fxFlex.sm="62%"
+      fxFlex.xs="90%"
+      class="btn btn--main"
       routerLink="/recipes"
-    >
-      Check all recipes
-    </button>
+      >
+        Check all recipes
+      </button>
+    </div>
   </div>
 </div>
