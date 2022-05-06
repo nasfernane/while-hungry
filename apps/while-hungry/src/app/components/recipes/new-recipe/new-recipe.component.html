@@ -153,6 +153,7 @@
                 matInput
                 type="number"
                 min="0"
+                default="0"
                 formControlName="servings"
                 required
                 number
@@ -273,6 +274,7 @@
                 matInput
                 type="text"
                 minlength="0"
+                value="4"
                 formControlName="ingredient"
                 required
                 number
@@ -354,6 +356,10 @@
             >add_circle</mat-icon
           >
         </div>
+        <span
+        *ngIf="instructions.length < 1"
+          >You need to add atleast one instruction to your recipe</span
+        >
         <h2>Add a note</h2>
         <div
           fxLayout="row"
@@ -385,7 +391,7 @@
         </div>
         <div
           class="newRecipeForm__instructions__recap"
-          *ngIf="instructions.length > 0 || notes.length > 0"
+          *ngIf="instructions.length > 0 || notes.length > 0;"
           style="width: 80%; margin-bottom: 2rem"
         >
           <div
@@ -397,7 +403,7 @@
           </div>
           <div
             class="newRecipeForm__instructions__recap__instructions"
-            *ngIf="instructions.length > 0; else noInstructions"
+            *ngIf="instructions.length > 0"
           >
             <div
               *ngFor="let instruction of instructions; let i = index"
@@ -423,17 +429,6 @@
               >
             </div>
           </div>
-          <ng-template #noInstructions>
-            <div
-              fxLayout="column"
-              fxLayoutAlign="center center"
-              style="padding: 2rem"
-            >
-              <span
-                >You need to add atleast one instruction to your recipe</span
-              >
-            </div>
-          </ng-template>
           <div
             class="newRecipeForm__instructions__recap__notes"
             *ngIf="notes.length > 0"
@@ -509,17 +504,6 @@
         <div class="newRecipeForm__preview__image" fxFlex="30">
           <img [src]="previewPicturePath" alt="Recipe Picture Preview" />
         </div>
-      <!-- <ng-template #noInstructions>
-        <div
-          fxLayout="column"
-          fxLayoutAlign="center center"
-          style="padding: 2rem"
-        >
-          <span
-            >You need to add atleast one instruction to your recipe</span
-          >
-        </div>
-      </ng-template> -->
       </div>
       <div class="step__footer">
         <button class="btn btn--secondary" (click)="stepper.previous()">

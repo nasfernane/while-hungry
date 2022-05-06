@@ -118,12 +118,13 @@ export class NewRecipeComponent implements OnInit {
 
     this.informationGroup = this.formBuilder.group({
       tag: [''],
-      servings: ['', [Validators.required, Validators.min(1)]],
-      hours: ['', [Validators.required, Validators.min(1)]],
-      minutes: ['', [Validators.required, Validators.min(1)]],
-      difficulty: ['', [Validators.required]],
-      units: ['', [Validators.required]],
-    });
+      servings: [4, [Validators.required, Validators.min(1)]],
+      hours: [0, [Validators.required, Validators.min(0)]],
+      minutes: [0, [Validators.required, Validators.min(0)]],
+      difficulty: ['Easy', [Validators.required]],
+      units: ['metrics', [Validators.required]],
+    }, { validator: this.cookTimeValidator });
+
 
     this.ingredientGroup = this.formBuilder.group({
       quantity: [''],
@@ -138,6 +139,7 @@ export class NewRecipeComponent implements OnInit {
       note: ['', [Validators.required, Validators.min(1)]],
     });
 
+
     // subscribe on recipe name to check if recipes already exist on the website
     this.recipeNameGroup.controls['name'].valueChanges.subscribe((value) => {
       this.recipeName = value;
@@ -147,6 +149,12 @@ export class NewRecipeComponent implements OnInit {
     this.tagsService.getRecipeTags().subscribe((tags: RecipeTagCategory[]) => {
       this.tagCategories = tags;
     });
+
+  }
+
+  cookTimeValidator(group: FormGroup) {
+    const sum = group.controls['hours'].value + group.controls['minutes'].value;
+    return sum > 0 ? true : false;
   }
 
   /**
@@ -214,7 +222,8 @@ export class NewRecipeComponent implements OnInit {
         instruction,
       });
 
-      this.instructionGroup.reset();
+      this.instructionGroup.controls['instruction'].reset();
+      this.instructionGroup.controls['instructionLabel'].reset();
     }
   }
 
@@ -231,7 +240,8 @@ export class NewRecipeComponent implements OnInit {
         note,
       });
 
-      this.instructionGroup.reset();
+      this.instructionGroup.controls['note'].reset();
+      this.instructionGroup.controls['noteLabel'].reset();
     }
   }
 

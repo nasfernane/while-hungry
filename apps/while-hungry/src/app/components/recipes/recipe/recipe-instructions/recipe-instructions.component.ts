@@ -37,7 +37,10 @@ export class RecipeInstructionsComponent implements OnInit {
     this.notes = this.recipe.recipeNotes;
     this.ingredients = this.recipe.requiredIngredients;
     this.recipeUnit = this.recipe.unit;
-    this.checkFavorite();
+
+    if (!this.preview) {
+      this.checkFavorite();
+    }
   }
 
   async addOrRemoveFavorite() {
