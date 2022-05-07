@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Router } from '@angular/router';
 
@@ -36,6 +36,7 @@ export class NewRecipeComponent implements OnInit {
   recipeNameGroup: FormGroup;
   informationGroup: FormGroup;
   ingredientGroup: FormGroup;
+  editIngredientGroup: FormGroup;
   instructionGroup: FormGroup;
   recipeName = '';
   tags: RecipeTagLabel[] = [];
@@ -46,6 +47,8 @@ export class NewRecipeComponent implements OnInit {
   pictureFile: File;
   pictureName: string;
   previewPicturePath: string;
+
+  editingIngredientIndex: number | null = null;
 
   // unit options if user chooses "Metrics"
   unitsGroupsMetrics: UnitGroup[] = [
@@ -112,13 +115,13 @@ export class NewRecipeComponent implements OnInit {
     this.appService.breadcrumb = ['While Hungry', 'Recipes', 'New Recipe'];
 
     this.recipeNameGroup = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.min(3)]],
-      description: ['', [Validators.required, Validators.min(3)]],
+      name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
+      description: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(150)]],
     });
 
     this.informationGroup = this.formBuilder.group({
-      tag: [''],
-      servings: [4, [Validators.required, Validators.min(1)]],
+      tag: ['',],
+      servings: [4, [Validators.required, Validators.min(1), Validators.required, Validators.max(12)]],
       hours: [0, [Validators.required, Validators.min(0)]],
       minutes: [0, [Validators.required, Validators.min(0)]],
       difficulty: ['Easy', [Validators.required]],
@@ -127,6 +130,12 @@ export class NewRecipeComponent implements OnInit {
 
 
     this.ingredientGroup = this.formBuilder.group({
+      quantity: [''],
+      unit: [''],
+      ingredient: [''],
+    });
+
+    this.editIngredientGroup = this.formBuilder.group({
       quantity: [''],
       unit: [''],
       ingredient: [''],
@@ -153,9 +162,15 @@ export class NewRecipeComponent implements OnInit {
   }
 
   cookTimeValidator(group: FormGroup) {
-    const sum = group.controls['hours'].value + group.controls['minutes'].value;
-    return sum > 0 ? true : false;
+    // get input values
+    const hours = group.controls['hours'].value
+    const minutes = group.controls['minutes'].value;
+    // get sum in minutes
+    const sum = (hours * 60) + minutes;
+    // validates if cooktime is superior to 5 mins and inferior to 48h
+    return (sum > 5 && sum < 2880) ? true : false;
   }
+
 
   /**
    * Add a tag to the tags array if it's not already in there and the array is less than 3
@@ -205,6 +220,53 @@ export class NewRecipeComponent implements OnInit {
       this.ingredients.push(newIngredient);
       this.ingredientGroup.reset();
     }
+  }
+
+  /**
+   * update ingredients from the ingredients preview event
+   * @param {any[]} ingredients - any[]
+   */
+  updateIngredients(ingredients: any[]) {
+    this.ingredients = ingredients;
+  }
+
+  // get ingredient index from ingredients preview
+  editingIngredient(index: number) {
+    this.editingIngredientIndex = index;
+    // set form values from ingredient index
+    this.editIngredientGroup.controls['quantity'].setValue(this.ingredients[index]['quantity'])
+    this.editIngredientGroup.controls['unit'].setValue(this.ingredients[index]['unit'])
+    this.editIngredientGroup.controls['ingredient'].setValue(this.ingredients[index]['name'])
+    console.log(this.ingredients[index])
+
+    this.ingredientGroup.disable();
+  }
+
+  // validate the ingredient edition
+  editIngredient() {
+    const quantity = this.editIngredientGroup.controls['quantity'].value;
+    const unit = this.editIngredientGroup.controls['unit'].value;
+    const name = this.editIngredientGroup.controls['ingredient'].value;
+
+    if (quantity && unit && name && (this.editingIngredientIndex !== null)) {
+      const newIngredient = {
+        quantity,
+        unit,
+        name,
+      };
+
+      this.ingredients[this.editingIngredientIndex] = newIngredient;
+      this.editIngredientGroup.reset();
+      this.editingIngredientIndex = null;
+      this.ingredientGroup.enable();
+    }
+  }
+
+  // cancel ingredient editing 
+  cancelEditIngredient() {
+    this.editIngredientGroup.reset();
+    this.editingIngredientIndex = null;
+    this.ingredientGroup.enable();
   }
 
   /**

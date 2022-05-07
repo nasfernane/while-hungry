@@ -67,6 +67,7 @@
 }
 
 .step__footer {
+  margin: 2rem 0;
   .btn {
     width: 10rem;
 
@@ -76,15 +77,29 @@
   }
 }
 
-mat-icon.addIcon {
+mat-icon.formIcon {
   width: 4rem;
   height: 4rem;
   font-size: 4rem;
   transform: translateY(1.2rem);
   cursor: pointer;
 
-  &:hover {
+  &--add:hover {
     color: $primary-light;
+  }
+
+  &--check {
+    color: $check;
+    &:hover {
+      color: $check-light;
+    }
+  }
+
+  &--cancel {
+    color: $warning;
+    &:hover {
+      color: $warning-light;
+    }
   }
 }
 

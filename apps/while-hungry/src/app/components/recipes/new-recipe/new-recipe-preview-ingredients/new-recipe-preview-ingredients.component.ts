@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 // services
 import { ShoppingListService } from '@wh/core-data';
@@ -12,8 +12,11 @@ import { UiService } from '@wh/ui';
   styleUrls: ['./new-recipe-preview-ingredients.component.scss']
 })
 export class NewRecipePreviewIngredientsComponent implements OnInit {
+  @Output() updateIngredientsEvent = new EventEmitter<any[]>()
+  @Output() editIngredientsEvent = new EventEmitter<number>()
   @Input() recipe: any;
   @Input() preview = false;
+  @Input() editingIngredientIndex: number | null = null;
   ingredients: any[];
   recipeUnit: string;
   scale = 1;
@@ -80,8 +83,20 @@ export class NewRecipePreviewIngredientsComponent implements OnInit {
     } else {
       this.uiService.openLoginAlert();
     }
-    
   }
 
+  editIngredient(index: number) {
+    this.editingIngredientIndex = index;
+    this.editIngredientsEvent.emit(index);
+  }
+
+  removeIngredient(index: number) {
+    this.ingredients.splice(index, 1)
+    this.updateIngredients();
+  }
+
+  updateIngredients() {
+    this.updateIngredientsEvent.emit(this.ingredients);
+  }
 
 }

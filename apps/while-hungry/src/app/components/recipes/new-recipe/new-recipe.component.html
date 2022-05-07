@@ -17,27 +17,66 @@
         >
           <span>Choose a title and a description for your recipe. You can check if a similar recipe already exists on the website !</span>
         </div>
-        <div fxLayout="row" fxLayoutAlign="flex-start flex-start">
-          <mat-form-field fxFlex="20" style="margin-right: 2rem">
-            <mat-label>Recipe name</mat-label>
-            <input
-              matInput
-              type="text"
-              min="0"
-              formControlName="name"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="40">
-            <mat-label>Description</mat-label>
-            <input
-              matInput
-              type="text"
-              min="0"
-              formControlName="description"
-              required
-            />
-          </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between flex-start">
+          <section  fxFlex="30" fxLayout="column" fxLayoutAlign="flex-start flex-start" style="margin-right: 2rem;">
+            <mat-form-field style="width: 100%;">
+              <mat-label>Recipe name</mat-label>
+              <input
+                matInput
+                type="text"
+                min="0"
+                formControlName="name"
+                required
+                fxFlex="100"
+              />
+            </mat-form-field>
+            <div *ngIf="recipeNameGroup.controls['name'].invalid && 
+            recipeNameGroup.controls['name'].errors && 
+            (recipeNameGroup.controls['name'].dirty || recipeNameGroup.controls['name'].touched)">
+              <small class="warning"
+                *ngIf="recipeNameGroup.controls['name'].hasError('required')">
+                This field is required.
+              </small>
+              <small class="warning"
+                  *ngIf="recipeNameGroup.controls['name'].hasError('minlength')">
+                  The recipe's name must contain atleast {{ recipeNameGroup.controls['name'].errors['minlength'].requiredLength }} characters.
+              </small>
+              <small class="warning"
+                  *ngIf="recipeNameGroup.controls['name'].hasError('maxlength')">
+                  The recipe's name cant exceed {{ recipeNameGroup.controls['name'].errors['maxlength'].requiredLength}} characters.
+              </small>
+            </div>
+          </section>
+          
+          <section fxFlex="68" fxLayout="column" fxLayout="flex-start flex-start">
+            <mat-form-field fxFlex="100">
+              <mat-label>Description</mat-label>
+              <input
+                matInput
+                type="text"
+                min="0"
+                formControlName="description"
+                required
+              />
+            </mat-form-field>
+            <div *ngIf="recipeNameGroup.controls['description'].invalid && 
+            recipeNameGroup.controls['description'].errors && 
+            (recipeNameGroup.controls['description'].dirty || recipeNameGroup.controls['description'].touched)">
+              <small class="warning"
+                *ngIf="recipeNameGroup.controls['description'].hasError('required')">
+                This field is required.
+              </small>
+              <small class="warning"
+                  *ngIf="recipeNameGroup.controls['description'].hasError('minlength')">
+                  The minimum length for this field is {{ recipeNameGroup.controls['description'].errors['minlength'].requiredLength }} characters.
+              </small>
+              <small class="warning"
+                  *ngIf="recipeNameGroup.controls['description'].hasError('maxlength')">
+                  The maximum length for this field is {{ recipeNameGroup.controls['description'].errors['maxlength'].requiredLength}} characters.
+              </small>
+            </div>
+          </section>
+          
         </div>
       </form>
       <div class="step__footer">
@@ -102,27 +141,37 @@
           <section>
             <h2>Add recipe tags (max 3)</h2>
             <div fxLayout="row" fxLayoutAlign="flex-start">
-              <mat-form-field style="margin-right: 2rem">
-                <mat-label>Tag</mat-label>
-                <mat-select formControlName="tag">
-                  <mat-option>-- None --</mat-option>
-                  <mat-optgroup
-                    *ngFor="let category of tagCategories"
-                    [label]="category.name"
-                  >
-                    <ng-container
-                      *ngFor="let label of category.RecipeTagLabels"
+              <section>
+                <!-- tag input -->
+                <mat-form-field style="margin-right: 2rem">
+                  <mat-label>Tag</mat-label>
+                  <mat-select formControlName="tag">
+                    <mat-option>-- None --</mat-option>
+                    <mat-optgroup
+                      *ngFor="let category of tagCategories"
+                      [label]="category.name"
                     >
-                      <mat-option [value]="label" *ngIf="!checkTag(label.name)">
-                        {{ label.name }}
-                      </mat-option>
-                    </ng-container>
-                  </mat-optgroup>
-                </mat-select>
-              </mat-form-field>
+                      <ng-container
+                        *ngFor="let label of category.RecipeTagLabels"
+                      >
+                        <mat-option [value]="label" *ngIf="!checkTag(label.name)">
+                          {{ label.name }}
+                        </mat-option>
+                      </ng-container>
+                    </mat-optgroup>
+                  </mat-select>
+                </mat-form-field>
+                <!-- tag validation errors -->
+                <div *ngIf=" 
+                (informationGroup.controls['tag'].dirty || informationGroup.controls['tag'].touched) && tags.length < 1">
+                  <small class="warning">
+                    You must add atleast one tag to your recipe.
+                  </small>
+                </div>
+              </section>
               <mat-icon
                 (click)="addTag()"
-                class="addIcon"
+                class="formIcon formIcon--add"
                 style="margin-right: 2rem"
                 >add_circle</mat-icon
               >
@@ -152,39 +201,62 @@
               <input
                 matInput
                 type="number"
-                min="0"
+                min="1"
+                max="12"
                 default="0"
                 formControlName="servings"
                 required
                 number
               />
             </mat-form-field>
+            <div *ngIf=" 
+              (informationGroup.controls['servings'].dirty || informationGroup.controls['servings'].touched)">
+              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('min')">
+                Your recipe must serves atleast one person.
+              </small>
+              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('max')">
+                Servings can't exceed 12 persons.
+              </small>
+            </div>
           </section>
           <section>
             <h2>Cook time</h2>
-            <mat-form-field>
-              <mat-label>hours</mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="hours"
-                required
-                number
-              />
-            </mat-form-field>
-            <span>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
-            <mat-form-field>
-              <mat-label>minutes</mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="minutes"
-                required
-                number
-              />
-            </mat-form-field>
+            <div>
+              <mat-form-field>
+                <mat-label>hours</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  max="48"
+                  formControlName="hours"
+                  required
+                  number
+                />
+              </mat-form-field>
+              <span>&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span>
+              <mat-form-field>
+                <mat-label>minutes</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  max="59"
+                  formControlName="minutes"
+                  required
+                  number
+                />
+              </mat-form-field>
+            </div>
+            <div *ngIf=" 
+              ((informationGroup.controls['hours'].dirty || informationGroup.controls['hours'].touched) || (informationGroup.controls['minutes'].dirty || informationGroup.controls['minutes'].touched)) && !cookTimeValidator(informationGroup)">
+              <small class="warning" *ngIf="formatCookTime() < 5">
+                Cooktime must be atleast 5 mins.
+              </small>
+              <small class="warning" *ngIf="formatCookTime() > 2880">
+                Cooktime can't exceed 48h.
+              </small>
+            </div>
           </section>
           <section style="margin-bottom: 2rem">
             <h2>Difficulty</h2>
@@ -232,9 +304,10 @@
       >
         <span>{{ recipeName }}</span>
       </div>
-      <h2>Add an ingredient</h2>
       <div fxLayout="row" fxLayoutAlign="space-between flex-start">
         <div fxLayout="column" fxLayoutAlign="flex-start flex-start">
+          <h2>Add an ingredient</h2>
+          <!-- new ingredient form -->
           <form
             [formGroup]="ingredientGroup"
             class="newRecipeForm__ingredients"
@@ -277,12 +350,64 @@
                 value="4"
                 formControlName="ingredient"
                 required
+              />
+            </mat-form-field>
+            <mat-icon (click)="addIngredient()" class="formIcon formIcon--add" *ngIf="editingIngredientIndex === null"
+              >add_circle</mat-icon
+            >
+          </form>
+          <!-- edit ingredient form -->
+          <h2 *ngIf="editingIngredientIndex !== null">Edit ingredient</h2>
+          <form
+            *ngIf="editingIngredientIndex !== null"
+            [formGroup]="editIngredientGroup"
+            class="newRecipeForm__ingredients"
+            fxFlex="70"
+          >
+            <mat-form-field>
+              <mat-label>Quantity</mat-label>
+              <input
+                matInput
+                type="number"
+                min="0"
+                formControlName="quantity"
+                required
                 number
               />
             </mat-form-field>
-            <mat-icon (click)="addIngredient()" class="addIcon"
-              >add_circle</mat-icon
-            >
+            <mat-form-field>
+              <mat-label>Unit</mat-label>
+              <mat-select formControlName="unit">
+                <mat-option>-- None --</mat-option>
+                <mat-optgroup
+                  *ngFor="let group of getUnitsOptions()"
+                  [label]="group.name"
+                >
+                  <mat-option
+                    *ngFor="let unit of group.units"
+                    [value]="unit.value"
+                  >
+                    {{ unit.viewValue }}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Ingredient</mat-label>
+              <input
+                matInput
+                type="text"
+                minlength="0"
+                value="4"
+                formControlName="ingredient"
+                required
+              />
+            </mat-form-field>
+            <mat-icon (click)="editIngredient()" class="formIcon formIcon--check" matTooltip="edit ingredient">check_circle
+              </mat-icon>
+            <mat-icon (click)="cancelEditIngredient()" class="formIcon formIcon--cancel" matTooltip="cancel edit">
+              cancel
+            </mat-icon>
           </form>
           <div class="step__footer">
             <button class="btn btn--secondary" (click)="stepper.previous()">
@@ -301,12 +426,14 @@
             </button>
           </div>
         </div>
-        <!-- TODO delete when new recipe detail OK -->
         <wh-new-recipe-preview-ingredients
           [recipe]="formatRecipe()"
           [preview]="true"
+          [editingIngredientIndex]="editingIngredientIndex"
           fxFlex="30"
           *ngIf="ingredients.length > 0"
+          (updateIngredientsEvent)="updateIngredients($event)"
+          (editIngredientsEvent)="editingIngredient($event)"
         ></wh-new-recipe-preview-ingredients>
       </div>
     </mat-step>
@@ -352,7 +479,7 @@
               number
             />
           </mat-form-field>
-          <mat-icon (click)="addInstruction()" class="addIcon"
+          <mat-icon (click)="addInstruction()" class="formIcon formIcon--add"
             >add_circle</mat-icon
           >
         </div>
@@ -387,7 +514,7 @@
               number
             />
           </mat-form-field>
-          <mat-icon (click)="addNote()" class="addIcon">add_circle</mat-icon>
+          <mat-icon (click)="addNote()" class="formIcon formIcon--add">add_circle</mat-icon>
         </div>
         <div
           class="newRecipeForm__instructions__recap"

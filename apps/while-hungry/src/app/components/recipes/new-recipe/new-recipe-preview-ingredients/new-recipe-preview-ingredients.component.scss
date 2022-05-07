@@ -47,10 +47,9 @@
   }
 
   &__ingredients {
-    width: 90%;
+    width: 100%;
+    padding: 5% 2rem;
     margin: 0 auto;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
 
     &__header {
       margin-bottom: 2rem;
@@ -75,10 +74,29 @@
       font-weight: bold;
       cursor: pointer;
     }
+
+    &__actions {
+      mat-icon {
+        cursor: pointer;
+      }
+
+      span {
+        line-height: 18px;
+        text-transform:uppercase !important;
+      }
+    }
   }
 
   &__shoppingBtn {
     width: 90%;
     margin-bottom: 1rem;
   }
+}
+
+.editing {
+  width: calc(100% + 1rem);
+  transform: translateX(-0.5rem);
+  border: 1px dashed $primary;
+  padding: .5rem;
+  margin: .5rem 0;
 }
