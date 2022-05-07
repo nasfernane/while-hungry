@@ -237,7 +237,6 @@ export class NewRecipeComponent implements OnInit {
     this.editIngredientGroup.controls['quantity'].setValue(this.ingredients[index]['quantity'])
     this.editIngredientGroup.controls['unit'].setValue(this.ingredients[index]['unit'])
     this.editIngredientGroup.controls['ingredient'].setValue(this.ingredients[index]['name'])
-    console.log(this.ingredients[index])
 
     this.ingredientGroup.disable();
   }
