@@ -1,0 +1,27 @@
+@import './../../../styles/base/colors';
+
+mat-form-field {
+  margin-right: 2rem;
+}
+
+mat-icon.formIcon {
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  cursor: pointer;
+
+
+  &--check {
+    color: $check;
+    &:hover {
+      color: $check-light;
+    }
+  }
+
+  &--cancel {
+    color: $warning;
+    &:hover {
+      color: $warning-light;
+    }
+  }
+}

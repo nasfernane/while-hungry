@@ -140,14 +140,15 @@ mat-icon.formIcon {
       &__instructions {
         &__line {
           margin-bottom: 1rem;
+          padding-right: 1rem;
 
           &__number {
             margin-right: 1rem;
             text-align: center;
-            min-height: 1.8rem !important;
-            min-width: 1.8rem !important;
-            max-height: 1.8rem !important;
-            max-width: 1.8rem !important;
+            min-height: 2.4rem !important;
+            min-width: 2.4rem !important;
+            max-height: 2.4rem !important;
+            max-width: 2.4rem !important;
             font-size: 1.4rem;
             border-radius: 50%;
             background-color: $primary;
@@ -171,17 +172,17 @@ mat-icon.formIcon {
           margin-bottom: 2rem;
 
           &__icon {
-            height: 2.2rem;
-            width: 2.2rem;
+            height: 2.4rem;
+            width: 2.4rem;
 
             mat-icon {
               color: $primary;
               margin-right: 1rem;
-              height: 2.2rem;
-              width: 2.2rem;
-              font-size: 2.2rem;
+              height: 2.4rem;
+              width: 2.4rem;
+              font-size: 2.4rem;
               align-self: center;
-              line-height: 2.2rem;
+              line-height: 2.4rem;
               padding: 0;
             }
           }
@@ -225,5 +226,11 @@ mat-icon.formIcon {
     font-weight: 500;
     text-transform: uppercase;
     font-style: italic;
+  }
+}
+
+.recapActions {
+  mat-icon {
+    cursor: pointer;
   }
 }

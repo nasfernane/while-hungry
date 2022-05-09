@@ -12,11 +12,11 @@ import { UiService } from '@wh/ui';
   styleUrls: ['./new-recipe-preview-ingredients.component.scss']
 })
 export class NewRecipePreviewIngredientsComponent implements OnInit {
-  @Output() updateIngredientsEvent = new EventEmitter<any[]>()
-  @Output() editIngredientsEvent = new EventEmitter<number>()
+  @Output() editIngredientEvent = new EventEmitter<number>()
+  @Output() removeIngredientEvent = new EventEmitter<number>()
   @Input() recipe: any;
   @Input() preview = false;
-  @Input() editingIngredientIndex: number | null = null;
+  @Input() editingIndex: number | null = null;
   ingredients: any[];
   recipeUnit: string;
   scale = 1;
@@ -86,17 +86,10 @@ export class NewRecipePreviewIngredientsComponent implements OnInit {
   }
 
   editIngredient(index: number) {
-    this.editingIngredientIndex = index;
-    this.editIngredientsEvent.emit(index);
+    this.editIngredientEvent.emit(index);
   }
 
   removeIngredient(index: number) {
-    this.ingredients.splice(index, 1)
-    this.updateIngredients();
+    this.removeIngredientEvent.emit(index);
   }
-
-  updateIngredients() {
-    this.updateIngredientsEvent.emit(this.ingredients);
-  }
-
 }

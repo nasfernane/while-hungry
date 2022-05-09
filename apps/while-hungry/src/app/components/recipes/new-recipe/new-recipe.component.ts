@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 // services
 import { AppService } from '@wh/core-utils';
@@ -10,6 +11,7 @@ import { UiService } from '@wh/ui';
 
 // prisma schema
 import { RecipeTagCategory, RecipeTagLabel } from '@prisma/client';
+import { EditFormModaleComponent } from '../../edit-form-modale/edit-form-modale.component';
 
 interface Unit {
   value: string;
@@ -38,6 +40,7 @@ export class NewRecipeComponent implements OnInit {
   ingredientGroup: FormGroup;
   editIngredientGroup: FormGroup;
   instructionGroup: FormGroup;
+  noteGroup: FormGroup;
   recipeName = '';
   tags: RecipeTagLabel[] = [];
   ingredients: Record<string, unknown>[] = [];
@@ -48,7 +51,10 @@ export class NewRecipeComponent implements OnInit {
   pictureName: string;
   previewPicturePath: string;
 
-  editingIngredientIndex: number | null = null;
+  editingIndex: number | null = null;
+  editingType: string | null = null;
+
+  editDialogRef: any;
 
   // unit options if user chooses "Metrics"
   unitsGroupsMetrics: UnitGroup[] = [
@@ -108,7 +114,8 @@ export class NewRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private uiService: UiService,
     private router: Router,
-    private tagsService: RecipeTagsService
+    private tagsService: RecipeTagsService,
+    private matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -132,19 +139,18 @@ export class NewRecipeComponent implements OnInit {
     this.ingredientGroup = this.formBuilder.group({
       quantity: [''],
       unit: [''],
-      ingredient: [''],
-    });
-
-    this.editIngredientGroup = this.formBuilder.group({
-      quantity: [''],
-      unit: [''],
-      ingredient: [''],
+      name: [''],
     });
 
     this.instructionGroup = this.formBuilder.group({
-      instructionLabel: ['', [Validators.min(1)]],
+      label: ['', [Validators.min(1)]],
       instruction: ['', [Validators.required, Validators.min(1)]],
       noteLabel: ['', [Validators.min(1)]],
+      note: ['', [Validators.required, Validators.min(1)]],
+    });
+
+    this.noteGroup = this.formBuilder.group({
+      label: ['', [Validators.min(1)]],
       note: ['', [Validators.required, Validators.min(1)]],
     });
 
@@ -208,7 +214,7 @@ export class NewRecipeComponent implements OnInit {
   addIngredient() {
     const quantity = this.ingredientGroup.controls['quantity'].value;
     const unit = this.ingredientGroup.controls['unit'].value;
-    const name = this.ingredientGroup.controls['ingredient'].value;
+    const name = this.ingredientGroup.controls['name'].value;
 
     if (quantity && unit && name) {
       const newIngredient = {
@@ -230,42 +236,52 @@ export class NewRecipeComponent implements OnInit {
     this.ingredients = ingredients;
   }
 
-  // get ingredient index from ingredients preview
-  editingIngredient(index: number) {
-    this.editingIngredientIndex = index;
-    // set form values from ingredient index
-    this.editIngredientGroup.controls['quantity'].setValue(this.ingredients[index]['quantity'])
-    this.editIngredientGroup.controls['unit'].setValue(this.ingredients[index]['unit'])
-    this.editIngredientGroup.controls['ingredient'].setValue(this.ingredients[index]['name'])
+  // generic function to edit any kind of value
+  editValue(index: number, type: string) {
+    this.editingIndex = index;
+    this.editingType = type;
+    let updatingValue;
+    let formGroup;
 
-    this.ingredientGroup.disable();
-  }
+    if (type === 'ingredient') {
+      updatingValue = this.ingredients[index];
+      formGroup = this.ingredientGroup;
+    } else if (type === 'instruction') {
+      updatingValue = this.instructions[index];
+      formGroup = this.instructionGroup;
+    } else if (type === 'note') {
+      updatingValue = this.notes[index];
+      formGroup = this.noteGroup;
+    }
 
-  // validate the ingredient edition
-  editIngredient() {
-    const quantity = this.editIngredientGroup.controls['quantity'].value;
-    const unit = this.editIngredientGroup.controls['unit'].value;
-    const name = this.editIngredientGroup.controls['ingredient'].value;
+    if (this.editingIndex !== null) {
+      this.editDialogRef = this.matDialog.open(EditFormModaleComponent, {
+        panelClass: 'form80',
+        data: {
+          type,
+          updatingValue,
+          formGroup,
+        }
+      });
 
-    if (quantity && unit && name && (this.editingIngredientIndex !== null)) {
-      const newIngredient = {
-        quantity,
-        unit,
-        name,
-      };
+      this.editDialogRef.disableClose = true;
 
-      this.ingredients[this.editingIngredientIndex] = newIngredient;
-      this.editIngredientGroup.reset();
-      this.editingIngredientIndex = null;
-      this.ingredientGroup.enable();
+      this.editDialogRef.afterClosed().subscribe(() => {
+        this.editingIndex = null;
+        this.editingType = null;
+      })
     }
   }
 
-  // cancel ingredient editing 
-  cancelEditIngredient() {
-    this.editIngredientGroup.reset();
-    this.editingIngredientIndex = null;
-    this.ingredientGroup.enable();
+  // generic function to remove any kind of value
+  removeValue(index: number, type: string) {
+    if (type === 'ingredient') {
+      this.ingredients.splice(index, 1);
+    } else if (type === 'instruction') {
+      this.instructions.splice(index, 1);
+    } else if (type === 'note') {
+      this.notes.splice(index, 1);
+    }
   }
 
   /**
@@ -273,18 +289,17 @@ export class NewRecipeComponent implements OnInit {
    */
   addInstruction() {
     const label =
-      this.instructionGroup.controls['instructionLabel'].value || '';
+      this.instructionGroup.controls['label'].value || '';
     const instruction = this.instructionGroup.controls['instruction'].value;
 
     if (instruction) {
       this.instructions.push({
-        categoryId: 4,
         label,
         instruction,
       });
 
       this.instructionGroup.controls['instruction'].reset();
-      this.instructionGroup.controls['instructionLabel'].reset();
+      this.instructionGroup.controls['label'].reset();
     }
   }
 
@@ -292,8 +307,8 @@ export class NewRecipeComponent implements OnInit {
    * Add a note to the list of notes
    */
   addNote() {
-    const label = this.instructionGroup.controls['noteLabel'].value || '';
-    const note = this.instructionGroup.controls['note'].value;
+    const label = this.noteGroup.controls['label'].value || '';
+    const note = this.noteGroup.controls['note'].value;
 
     if (note) {
       this.notes.push({
@@ -301,8 +316,8 @@ export class NewRecipeComponent implements OnInit {
         note,
       });
 
-      this.instructionGroup.controls['note'].reset();
-      this.instructionGroup.controls['noteLabel'].reset();
+      this.noteGroup.controls['note'].reset();
+      this.noteGroup.controls['label'].reset();
     }
   }
 

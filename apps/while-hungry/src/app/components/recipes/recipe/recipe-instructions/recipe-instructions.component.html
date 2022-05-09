@@ -152,49 +152,4 @@
       </span>
     </div>
   </div>
-  
-  <!-- TODO delete when new recipe detail OK -->
-  <!-- <div
-    class="recipeContainer__comment"
-    fxLayout="column"
-    fxLayoutAlign="start flex-start"
-  >
-    <h1 class="instructionsTitle recipeContainer__comment__title">
-      comment
-    </h1>
-    <p class="recipeContainer__comment__subtitle">
-      You can contribute to this recipe, add remarks or share your thoughts by
-      leaving a comment. It's always appreciated !
-    </p>
-    <form
-      [formGroup]="commentForm"
-      novalidate
-      #myCommentForm="ngForm"
-      fxLayout="column"
-      fxLayoutAlign="start flex-end"
-      class="recipeContainer__comment__form"
-    >
-      <mat-form-field class="recipeContainer__comment__input">
-        <textarea
-          formControlName="comment"
-          matInput
-          placeholder="Write your comment here. ex: As my great aunt Joséphine used to say..."
-          qsf
-          cdkTextareaAutosize
-          #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="5"
-        ></textarea>
-      </mat-form-field>
-      <div
-        class="recipeContainer__comment__btn recipeContainer__actions__action recipeContainer__actions__action--comment"
-        fxLayout="row"
-        fxLayoutAlign="center center"
-        (click)="postComment(); myCommentForm.resetForm()"
-      >
-        <mat-icon class="material-icons-outlined">insert_comment</mat-icon>
-        <span>post comment</span>
-      </div>
-    </form>
-  </div> -->
 </div>

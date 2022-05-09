@@ -84,7 +84,7 @@
       *ngFor="let ingredient of ingredients; let i = index;"
       fxLayout="row"
       fxLayoutAlign="space-between center"
-      [ngClass]="{editing: i === editingIngredientIndex}"
+      [ngClass]="{editing: i === editingIndex}"
     >
       <section fxLayout="row"
       fxLayoutAlign="start center">
@@ -98,11 +98,11 @@
           ingredient.name
         }}</span>
       </section>
-      <section class="ingredientsContainer__ingredients__actions" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="(editingIngredientIndex === null) || (editingIngredientIndex === i)">
-        <mat-icon matTooltip="Edit ingredient" (click)="editIngredient(i)" *ngIf="i !== editingIngredientIndex">edit</mat-icon>
-        <mat-icon matTooltip="Remove ingredient" (click)="removeIngredient(i)" *ngIf="i !== editingIngredientIndex">delete</mat-icon>
-        <mat-icon matTooltip="Edit ingredient" *ngIf="i === editingIngredientIndex">draw</mat-icon>
-        <span *ngIf="i === editingIngredientIndex">editing</span>
+      <section class="ingredientsContainer__ingredients__actions" fxLayout="row" fxLayoutAlign="flex-end center" *ngIf="(editingIndex === null) || (editingIndex === i)">
+        <mat-icon matTooltip="edit ingredient" (click)="editIngredient(i)" *ngIf="i !== editingIndex">edit</mat-icon>
+        <mat-icon matTooltip="remove ingredient" (click)="removeIngredient(i)" *ngIf="i !== editingIndex">delete</mat-icon>
+        <mat-icon matTooltip="Edit ingredient" *ngIf="i === editingIndex">draw</mat-icon>
+        <span *ngIf="i === editingIndex">editing</span>
       </section>
       
     </div>

@@ -348,66 +348,13 @@
                 type="text"
                 minlength="0"
                 value="4"
-                formControlName="ingredient"
+                formControlName="name"
                 required
               />
             </mat-form-field>
-            <mat-icon (click)="addIngredient()" class="formIcon formIcon--add" *ngIf="editingIngredientIndex === null"
+            <mat-icon (click)="addIngredient()" class="formIcon formIcon--add"
               >add_circle</mat-icon
             >
-          </form>
-          <!-- edit ingredient form -->
-          <h2 *ngIf="editingIngredientIndex !== null">Edit ingredient</h2>
-          <form
-            *ngIf="editingIngredientIndex !== null"
-            [formGroup]="editIngredientGroup"
-            class="newRecipeForm__ingredients"
-            fxFlex="70"
-          >
-            <mat-form-field>
-              <mat-label>Quantity</mat-label>
-              <input
-                matInput
-                type="number"
-                min="0"
-                formControlName="quantity"
-                required
-                number
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Unit</mat-label>
-              <mat-select formControlName="unit">
-                <mat-option>-- None --</mat-option>
-                <mat-optgroup
-                  *ngFor="let group of getUnitsOptions()"
-                  [label]="group.name"
-                >
-                  <mat-option
-                    *ngFor="let unit of group.units"
-                    [value]="unit.value"
-                  >
-                    {{ unit.viewValue }}
-                  </mat-option>
-                </mat-optgroup>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Ingredient</mat-label>
-              <input
-                matInput
-                type="text"
-                minlength="0"
-                value="4"
-                formControlName="ingredient"
-                required
-              />
-            </mat-form-field>
-            <mat-icon (click)="editIngredient()" class="formIcon formIcon--check" matTooltip="edit ingredient">check_circle
-              </mat-icon>
-            <mat-icon (click)="cancelEditIngredient()" class="formIcon formIcon--cancel" matTooltip="cancel edit">
-              cancel
-            </mat-icon>
           </form>
           <div class="step__footer">
             <button class="btn btn--secondary" (click)="stepper.previous()">
@@ -429,97 +376,119 @@
         <wh-new-recipe-preview-ingredients
           [recipe]="formatRecipe()"
           [preview]="true"
-          [editingIngredientIndex]="editingIngredientIndex"
+          [editingIndex]="editingIndex"
           fxFlex="30"
           *ngIf="ingredients.length > 0"
-          (updateIngredientsEvent)="updateIngredients($event)"
-          (editIngredientsEvent)="editingIngredient($event)"
+          (removeIngredientEvent)="removeValue($event, 'ingredient')"
+          (editIngredientEvent)="editValue($event, 'ingredient')"
         ></wh-new-recipe-preview-ingredients>
       </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Instructions</ng-template>
-      <div
-        class="stepTitle stepTitle--recipeName"
-        *ngIf="recipeName"
-        fxLayout="row"
-        fxLayoutAlign="center center"
-      >
-        <span>{{ recipeName }}</span>
-      </div>
-      <form
-        [formGroup]="instructionGroup"
-        class="newRecipeForm__instructions"
-        style="width: 80%"
-      >
-        <h2>Add an instruction</h2>
-        <div
+      <div fxLayout="row" fxLayoutAlign="space-between flex-start" >
+        <section fxFlex="55">
+          <div
+          class="stepTitle stepTitle--recipeName"
+          *ngIf="recipeName"
           fxLayout="row"
-          fxLayoutAlign="flex-start flex-start"
-          style="width: 80%"
-        >
-          <mat-form-field fxFlex="20">
-            <mat-label>Label</mat-label>
-            <input
-              matInput
-              type="text"
-              min="0"
-              formControlName="instructionLabel"
-              number
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="75">
-            <mat-label>Instruction</mat-label>
-            <input
-              matInput
-              type="text"
-              minlength="0"
-              formControlName="instruction"
-              required
-              number
-            />
-          </mat-form-field>
-          <mat-icon (click)="addInstruction()" class="formIcon formIcon--add"
-            >add_circle</mat-icon
+          fxLayoutAlign="center center"
           >
-        </div>
-        <span
-        *ngIf="instructions.length < 1"
-          >You need to add atleast one instruction to your recipe</span
-        >
-        <h2>Add a note</h2>
+            <span>{{ recipeName }}</span>
+          </div>
+          <form
+            [formGroup]="instructionGroup"
+            class="newRecipeForm__instructions"
+          >
+            <h2>Add an instruction</h2>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="flex-start flex-start"
+            >
+              <mat-form-field fxFlex="20">
+                <mat-label>Label</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  min="0"
+                  formControlName="label"
+                  number
+                />
+              </mat-form-field>
+              <mat-form-field fxFlex="80">
+                <mat-label>Instruction</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  minlength="0"
+                  formControlName="instruction"
+                  required
+                  number
+                />
+              </mat-form-field>
+              <mat-icon (click)="addInstruction()" class="formIcon formIcon--add"
+                >add_circle</mat-icon
+              >
+            </div>
+            <span
+            *ngIf="instructions.length < 1"
+              >You need to add atleast one instruction to your recipe</span>
+          </form>
+          <form 
+            [formGroup]="noteGroup"
+            class="newRecipeForm__instructions">
+            <h2>Add a note</h2>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="flex-start flex-start"
+            >
+              <mat-form-field fxFlex="20">
+                <mat-label>Label</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  min="0"
+                  formControlName="label"
+                  number
+                />
+              </mat-form-field>
+              <mat-form-field fxFlex="80">
+                <mat-label>Note</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  minlength="0"
+                  formControlName="note"
+                  required
+                  number
+                />
+              </mat-form-field>
+              <mat-icon (click)="addNote()" class="formIcon formIcon--add">add_circle</mat-icon>
+            </div>
+          </form>
+          <div class="step__footer">
+            <button class="btn btn--secondary" (click)="stepper.previous()">
+              Previous
+            </button>
+            <button
+              class="btn btn--main"
+              [disabled]="
+                instructions.length <= 0 ||
+                ingredients.length <= 0 ||
+                recipeNameGroup.invalid ||
+                informationGroup.invalid
+              "
+              (click)="stepper.next()"
+            >
+              Next
+            </button>
+          </div>
+        </section>
+        <!-- ! instructions recap -->
         <div
-          fxLayout="row"
-          fxLayoutAlign="flex-start flex-start"
-          style="width: 80%"
-        >
-          <mat-form-field fxFlex="20">
-            <mat-label>Label</mat-label>
-            <input
-              matInput
-              type="text"
-              min="0"
-              formControlName="noteLabel"
-              number
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="75">
-            <mat-label>Note</mat-label>
-            <input
-              matInput
-              type="text"
-              minlength="0"
-              formControlName="note"
-              required
-              number
-            />
-          </mat-form-field>
-          <mat-icon (click)="addNote()" class="formIcon formIcon--add">add_circle</mat-icon>
-        </div>
-        <div
+          fxFlex="40"
           class="newRecipeForm__instructions__recap"
           *ngIf="instructions.length > 0 || notes.length > 0;"
-          style="width: 80%; margin-bottom: 2rem"
         >
           <div
             class="newRecipeForm__instructions__recap__header"
@@ -530,30 +499,41 @@
           </div>
           <div
             class="newRecipeForm__instructions__recap__instructions"
-            *ngIf="instructions.length > 0"
+            *ngIf="instructions.length > 0" 
           >
+            
             <div
               *ngFor="let instruction of instructions; let i = index"
               fxLayout="row"
-              fxLayoutAlign="start start"
+              fxLayoutAlign="space-between flex-start"
               class="newRecipeForm__instructions__recap__instructions__line"
             >
-              <div
+              <section fxLayout="row"
+              fxLayoutAlign="flex-start flex-start">
+                <div
                 class="newRecipeForm__instructions__recap__instructions__line__number"
                 fxLayout="column"
                 fxLayoutAlign="center center"
-              >
-                {{ i + 1 }}
-              </div>
-              <span
-                *ngIf="instruction['label']"
-                class="newRecipeForm__instructions__recap__instructions__line__label"
-                >{{ instruction['label'] }}&nbsp;:</span
-              >
-              <span
-                class="newRecipeForm__instructions__recap__instructions__line__value"
-                >{{ instruction['instruction'] }}</span
-              >
+                >
+                  {{ i + 1 }}
+                </div>
+                <span
+                  *ngIf="instruction['label']"
+                  class="newRecipeForm__instructions__recap__instructions__line__label"
+                  >{{ instruction['label'] }}&nbsp;:</span
+                >
+                <span
+                  class="newRecipeForm__instructions__recap__instructions__line__value"
+                  >{{ instruction['instruction'] }}</span
+                >
+              </section>
+              <section class="recapActions"
+                fxLayout="row" fxLayoutAlign="flex-end center">
+                <mat-icon matTooltip="edit instruction" (click)="editValue(i, 'instruction')" *ngIf="(i !== editingIndex) || (editingType !== 'instruction')">edit</mat-icon>
+                <mat-icon matTooltip="remove instruction" (click)="removeValue(i, 'instruction')" *ngIf="(i !== editingIndex) || (editingType !== 'instruction')">delete</mat-icon>
+                <mat-icon *ngIf="editingIndex === i && editingType === 'instruction'">draw</mat-icon>
+                <span *ngIf="editingIndex === i && editingType === 'instruction'">editing</span>
+              </section>
             </div>
           </div>
           <div
@@ -564,47 +544,40 @@
           >
             <span>Notes</span>
             <div
-              *ngFor="let note of notes"
+              *ngFor="let note of notes; let i = index;"
               class="newRecipeForm__instructions__recap__notes__line"
               fxLayout="row"
-              fxLayoutAlign="flex-start center"
-            >
-              <div
+              fxLayoutAlign="space-between flex-start"
+            > 
+              <section fxLayout="row"
+              fxLayoutAlign="flex-start flex-start">
+                <div
                 fxLayout="column"
                 fxLayoutAlign="center center"
                 class="newRecipeForm__instructions__recap__notes__line__icon"
-              >
-                <mat-icon>info</mat-icon>
-              </div>
-              <span
-                class="newRecipeForm__instructions__recap__notes__line__label"
-                *ngIf="note['label']"
-                >{{ note['label'] }}:</span
-              >
-              <span class="newRecipeForm__instructions__recap__notes__value">{{
-                note['note']
-              }}</span>
+                >
+                  <mat-icon>info</mat-icon>
+                </div>
+                <span
+                  class="newRecipeForm__instructions__recap__notes__line__label"
+                  *ngIf="note['label']"
+                  >{{ note['label'] }}:</span
+                >
+                <span class="newRecipeForm__instructions__recap__notes__value">{{
+                  note['note']
+                }}</span>
+              </section>
+              <section class="recapActions"
+                fxLayout="row" fxLayoutAlign="flex-end center">
+                <mat-icon matTooltip="edit note" (click)="editValue(i, 'note')" *ngIf="(i !== editingIndex) || (editingType !== 'note')">edit</mat-icon>
+                <mat-icon matTooltip="remove note" (click)="removeValue(i, 'note')" *ngIf="(i !== editingIndex) || (editingType !== 'note')">delete</mat-icon>
+                <mat-icon *ngIf="editingIndex === i && editingType === 'note'">draw</mat-icon>
+                <span *ngIf="editingIndex === i && editingType === 'note'">editing</span>
+              </section>
             </div>
           </div>
         </div>
-        <div class="step__footer">
-          <button class="btn btn--secondary" (click)="stepper.previous()">
-            Previous
-          </button>
-          <button
-            class="btn btn--main"
-            [disabled]="
-              instructions.length <= 0 ||
-              ingredients.length <= 0 ||
-              recipeNameGroup.invalid ||
-              informationGroup.invalid
-            "
-            (click)="stepper.next()"
-          >
-            Next
-          </button>
-        </div>
-      </form>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Preview</ng-template>

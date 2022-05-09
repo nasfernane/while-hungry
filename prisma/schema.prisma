@@ -81,19 +81,10 @@ model Recipe {
 model RecipeInstruction {
   id          Int     @id @default(autoincrement())
   recipeId    Int
-  categoryId  Int
   label       String?
   instruction String
 
   recipe   Recipe                    @relation(fields: [recipeId], references: [id])
-  category RecipeInstructionCategory @relation(fields: [categoryId], references: [id])
-}
-
-model RecipeInstructionCategory {
-  id   Int    @id @default(autoincrement())
-  name String
-
-  recipeInstructions RecipeInstruction[]
 }
 
 model RecipeNote {

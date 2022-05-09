@@ -14,19 +14,16 @@ export const recipes: Prisma.RecipeCreateInput[] = [
     recipeInstructions: {
       create: [
         {
-          categoryId: 4, // if
           label: 'Prepare the fish',
           instruction:
             "Get the fish out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes.",
         },
         {
-          categoryId: 1,
           label: 'Prepare the garnish',
           instruction:
             'Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs.',
         },
         {
-          categoryId: 2,
           label: 'Finish and season',
           instruction:
             'Mix the fish and the garnish together, season with a splah of olive oil and a pinch of sea salt.',
@@ -136,19 +133,16 @@ export const recipes: Prisma.RecipeCreateInput[] = [
     recipeInstructions: {
       create: [
         {
-          categoryId: 4, // if
           label: 'Prepare the tuna',
           instruction:
             "Get the tuna out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes.",
         },
         {
-          categoryId: 1,
           label: 'Prepare the garnish',
           instruction:
             'Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs.',
         },
         {
-          categoryId: 2,
           label: 'Finish and season',
           instruction:
             'Mix the tuna and the garnish together, season with a splah of olive oil and a pinch of sea salt.',
@@ -258,19 +252,16 @@ export const recipes: Prisma.RecipeCreateInput[] = [
     recipeInstructions: {
       create: [
         {
-          categoryId: 4, // if
           label: 'Prepare the swordfish',
           instruction:
             "Get the swordfish out of the fridge (that's a good start). Skin and bone the filets. Dice in small regular cubes.",
         },
         {
-          categoryId: 1,
           label: 'Prepare the garnish',
           instruction:
             'Finely chop the shallots and dried tomatoes. Pick the dill into smalls sprigs.',
         },
         {
-          categoryId: 2,
           label: 'Finish and season',
           instruction:
             'Mix the swordfish and the garnish together, season with a splah of olive oil and a pinch of sea salt.',

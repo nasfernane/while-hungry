@@ -70,6 +70,7 @@ import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglis
 import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NewRecipePreviewIngredientsComponent } from './components/recipes/new-recipe/new-recipe-preview-ingredients/new-recipe-preview-ingredients.component';
+import { EditFormModaleComponent } from './components/edit-form-modale/edit-form-modale.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { NewRecipePreviewIngredientsComponent } from './components/recipes/new-r
     ShoppinglistItemComponent,
     NewRecipeComponent,
     NewRecipePreviewIngredientsComponent,
+    EditFormModaleComponent,
   ],
   imports: [
     BrowserModule,

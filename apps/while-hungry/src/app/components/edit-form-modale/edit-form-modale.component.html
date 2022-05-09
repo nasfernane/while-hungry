@@ -1,0 +1,105 @@
+
+<h2>{{ 'Edit ' + type}}</h2>
+<form
+  [formGroup]="editGroup"
+  fxLayout="row" fxLayoutAlign="flex-start center"
+>
+  <!-- * edit ingredient * -->
+  <section *ngIf="type === 'ingredient'" fxLayout="row" fxLayoutAlign="flex-start center">
+    <mat-form-field>
+      <mat-label>Quantity</mat-label>
+      <input
+        matInput
+        type="number"
+        min="0"
+        formControlName="quantity"
+        required
+        number
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Unit</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option>-- None --</mat-option>
+        <mat-optgroup
+          *ngFor="let group of getUnitsOptions()"
+          [label]="group.name"
+        >
+          <mat-option
+            *ngFor="let unit of group.units"
+            [value]="unit.value"
+          >
+            {{ unit.viewValue }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ingredient</mat-label>
+      <input
+        matInput
+        type="text"
+        minlength="0"
+        formControlName="name"
+        required
+      />
+    </mat-form-field>
+  </section>
+    
+  <!-- * edit instruction, etc * -->
+  <section *ngIf="type === 'instruction'">
+    <mat-form-field fxFlex="20">
+      <mat-label>Label</mat-label>
+      <input
+        matInput
+        type="text"
+        min="0"
+        formControlName="label"
+        number
+      />
+    </mat-form-field>
+    <mat-form-field fxFlex="75">
+      <mat-label>Instruction</mat-label>
+      <input
+        matInput
+        type="text"
+        minlength="0"
+        formControlName="instruction"
+        required
+        number
+      />
+    </mat-form-field>
+  </section>
+  <section *ngIf="type === 'note'">
+    <mat-form-field fxFlex="20">
+      <mat-label>Label</mat-label>
+      <input
+        matInput
+        type="text"
+        min="0"
+        formControlName="label"
+        number
+      />
+    </mat-form-field>
+    <mat-form-field fxFlex="75">
+      <mat-label>Note</mat-label>
+      <input
+        matInput
+        type="text"
+        minlength="0"
+        formControlName="note"
+        required
+        number
+      />
+    </mat-form-field>
+  </section>
+
+  <section fxLayout="row" fxLayoutAlign="flex-start center">
+    <mat-icon (click)="validateEdit()" class="formIcon formIcon--check" [matTooltip]="'edit ' + type">check_circle
+    </mat-icon>
+    <mat-icon (click)="cancelEdit()" class="formIcon formIcon--cancel" matTooltip="cancel edit">
+      cancel
+    </mat-icon>
+  </section>
+  
+</form>

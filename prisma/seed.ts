@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 import { users } from './seeds/users';
 import { recipes } from './seeds/recipes';
-import { recipeInstructionCategories } from './seeds/recipeInstructionCategories';
 import { recipeTags } from './seeds/recipeTags';
 import { ingredients } from './seeds/ingredients';
 import { ustensils } from './seeds/ustensils';
@@ -23,10 +22,6 @@ async function main() {
   console.log('Seeding recipe tags...');
   for (const rt of recipeTags)
     await prisma.recipeTagCategory.create({ data: rt });
-
-  console.log('Seeding instruction categories...');
-  for (const ic of recipeInstructionCategories)
-    await prisma.recipeInstructionCategory.create({ data: ic });
 
   console.log('Seeding recipes...');
   for (const r of recipes) await prisma.recipe.create({ data: r });
