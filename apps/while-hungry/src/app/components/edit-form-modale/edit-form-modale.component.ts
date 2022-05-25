@@ -68,9 +68,7 @@ export class EditFormModaleComponent implements OnInit {
 
     // set editGroup with former values
     for (const [key, value] of Object.entries(this.updatingValue)) {
-      if (key !== 'categoryId') {
-        this.editGroup.controls[key].setValue(value)
-      }
+      this.editGroup.controls[key].setValue(value)
     }
   }
 
