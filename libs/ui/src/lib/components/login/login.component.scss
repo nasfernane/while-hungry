@@ -3,6 +3,11 @@
   height: 100%;
   margin: 0 auto;
 
+  mat-tab-group {
+    width: 80%;
+    max-width: 50rem;
+  }
+
   form {
     width: 100%;
 
@@ -19,3 +24,9 @@
     }
   }
 }
+
+// .signinOptions {
+//   border: 1px solid black !important;
+//   border-radius: 4px;
+//   padding: 10px;
+// }

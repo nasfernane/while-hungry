@@ -78,6 +78,7 @@
     "eslint-plugin-ngrx": "^2.0.4",
     "express-session": "^1.17.2",
     "fs-extra": "^10.0.1",
+    "google-auth-library": "^8.0.2",
     "helmet": "^5.0.2",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",

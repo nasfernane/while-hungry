@@ -27,6 +27,7 @@ export class AppService {
    */
   public setUserData(user: any) {
     if (user) {
+      localStorage.removeItem('googleToken');
       this.setUser(user);
       this.setUserToLocalStorage(JSON.stringify(this.getUser()));
     }

@@ -16,6 +16,7 @@ export class UiService {
   public openLogin() {
     this.loginDialogRef = this.matDialog.open(LoginComponent, {
       panelClass: 'form80',
+      width: '50%',
     });
   }
 

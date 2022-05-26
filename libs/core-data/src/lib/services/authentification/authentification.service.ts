@@ -36,4 +36,10 @@ export class AuthentificationService {
   public updatePassword(id: number, passwords: object) {
     return this.http.post<User>(ENDPOINT + `/pwupdate/${id}`, passwords);
   }
+
+  public loginGoogle(googleToken: any) {
+    return this.http.post(ENDPOINT + '/loginGoogle', {
+      googleToken
+    });
+  }
 }

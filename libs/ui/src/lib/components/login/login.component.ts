@@ -12,6 +12,7 @@ import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from './../../services/ui.service';
 
+
 @Component({
   selector: 'wh-login',
   templateUrl: './login.component.html',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthentificationService,
     private appService: AppService,
-    private uiService: UiService
+    private uiService: UiService,
   ) {
     this.loginForm = formBuilder.group({
       email: new FormControl('', [
@@ -58,7 +59,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.appService.userLogged) this.uiService.closeLogin();
+    this.loadGoogleScripts();
+    this.checkGoogleAuth();
   }
+
+  loadGoogleScripts() {
+    const node = document.createElement('script');
+    const node2 = document.createElement('script');
+
+    node.src = "https://accounts.google.com/gsi/client";
+    node.type = 'text/javascript';
+    node.async = true;
+    node.defer = true;
+
+    node2.innerHTML = `
+      function handleCredentialResponse(response) {
+        if (response) {
+          localStorage.setItem("googleToken", response.credential)
+        }
+      }
+      `
+
+    document.getElementsByTagName('body')[0].prepend(node2);
+    document.getElementsByTagName('body')[0].prepend(node);
+  }
+
 
   async login() {
     const email = this.loginForm.controls['email'].value;
@@ -80,6 +105,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
 
   register() {
     const email = this.registerForm.controls['email'].value;
@@ -105,5 +131,31 @@ export class LoginComponent implements OnInit {
           }
         }
       });
+  }
+
+  checkGoogleAuth() {
+    const googleToken = localStorage.getItem('googleToken');
+
+    if (googleToken) {
+      this.authService.loginGoogle(googleToken).subscribe((res: any) => {
+        if (res && res.accessToken) {
+          this.appService.setUserData(res);
+          this.uiService.closeLogin();
+          this.uiService.openAlert('Login successful');
+          this.invalidLogin = false;
+  
+          if (this.route.snapshot.queryParams['returnUrl']) {
+            // if user logged for a specific page
+            this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
+          }
+        } else {
+          this.invalidLogin = true;
+        }
+      });
+    } else {
+      setTimeout(() => {
+        this.checkGoogleAuth();
+      }, 100);
+    }
   }
 }

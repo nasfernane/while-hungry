@@ -50,12 +50,31 @@
             >Your credentials are invalid, please try again.</span
           >
           <button
-            mat-raised-button
-            (click)="login()"
-            [disabled]="!loginForm.valid"
+          mat-raised-button
+          (click)="login()"
+          [disabled]="!loginForm.valid"
           >
             Login
           </button>
+          
+          <section class="signinOptions">
+            <p>Sign in with :</p>
+            <div>
+              <div id="g_id_onload"
+                data-client_id="1049656311631-hrvup39kcdqu3ng2js7ce6r9g9skuopq.apps.googleusercontent.com"
+                data-auto_prompt="false"
+                data-callback="handleCredentialResponse">
+              </div>
+              <div class="g_id_signin"
+                data-type="standard"
+                data-size="medium"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
+              </div>
+            </div>
+          </section>
         </form>
       </mat-card-content>
     </mat-tab>
