@@ -1,0 +1,43 @@
+@import './../../../../../styles/base/colors';
+// @import './../../../../styles/main.scss';
+
+.recipeOverviewContainer {
+  &__recipes {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  mat-paginator {
+    align-self: center;
+  }
+
+  @media (max-width: 959px) {
+    wh-recipes-overview-item {
+      margin: 0 auto;
+    }
+  }
+
+  wh-recipes-overview-filters {
+    margin-bottom: 3rem;
+  }
+
+  .addRecipe {
+    height: 5rem;
+    position: fixed;
+    top: calc(50% - 2.5rem);
+    right: 5rem;
+    cursor: pointer;
+
+    mat-icon {
+      height: 5rem;
+      width: 5rem;
+      font-size: 5rem;
+
+      &:hover {
+        color: $primary-light;
+      }
+    }
+  }
+}

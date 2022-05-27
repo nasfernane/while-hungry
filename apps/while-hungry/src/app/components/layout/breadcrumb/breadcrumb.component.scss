@@ -1,0 +1,30 @@
+@import './../../../../styles/abstract/variables';
+@import './../../../../styles/base/colors';
+
+.breadcrumbContainer {
+  width: 100%;
+  height: $breadcrumb-height;
+  background-color: $grey-light;
+
+  .breadcrumb {
+    width: $container-width;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100%;
+
+    &__chunk {
+      font-size: 1.4rem;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-light;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .breadcrumb {
+      width: calc($container-width + 20vw);
+    }
+  }
+}

@@ -1,0 +1,190 @@
+@import './../../../../../../styles/base/colors';
+
+.recipeContainer {
+  border: 0.5rem solid $primary;
+  margin-bottom: 3rem;
+
+  .recipeTitle {
+    font-variant: small-caps;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  &__header {
+    width: 100%;
+    background-color: $primary;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    &__title {
+      color: $grey-light;
+      text-transform: uppercase;
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    &__info {
+
+      &:first-child, :nth-child(2) {
+        padding-right: 2rem;
+      }
+
+      mat-icon, span {
+        color: $grey-light;
+      }
+      
+      mat-icon {
+        font-size: 2.6rem;
+        margin-right: 0.5rem;
+      }
+
+      span {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  &__actions {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+
+    &__action {
+      padding: 1rem;
+      text-align: center;
+      width: 45%;
+      background: $grey-light;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+
+      mat-icon {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  &__ingredients, &__instructions, &__notes {
+    padding: 2rem 0;
+  }
+
+  &__ingredients, &__instructions {
+    width: 90%;
+    margin: 0 auto;
+
+    &__title {
+      font-variant: small-caps;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+  }
+
+  &__ingredients {
+    // margin-bottom: 2rem;
+
+    &__title {
+      margin: 0;
+    }
+
+    &__header {
+      margin-bottom: 2rem;
+    }
+  
+    &__addShoppingList {
+      cursor: pointer;
+      margin-left: 0.5rem;
+      width: 3rem;
+      height: 3rem;
+      border: 0.1rem solid $primary-dark;
+
+      mat-icon {
+        font-size: 2rem;
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+
+    &__ingredient {
+      margin-bottom: 0.5rem;
+      &--dot {
+        color: $primary-dark;
+        margin-right: 1rem;
+      }
+
+      &--quantity,
+      &--name {
+        font-size: 1.6rem;
+      }
+
+      &--name {
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  &__instructions {
+    &__instruction {
+      width: 100%;
+      margin-bottom: 1rem;
+
+      &__number {
+        margin-right: 1rem;
+        text-align: center;
+        min-height: 1.8rem !important;
+        min-width: 1.8rem !important;
+        max-height: 1.8rem !important;
+        max-width: 1.8rem !important;
+        font-size: 1.4rem;
+        border-radius: 50%;
+        background-color: $primary;
+        color: $grey-light;
+      }
+
+      &__data {
+        &--label {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  &__notes {
+    background-color: $grey-light;
+
+    &__title,
+    &__note {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-variant: small-caps;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    &__note {
+      background-color: #ffffff;
+      padding: 1rem;
+      margin-bottom: 2rem;
+
+      &__icon {
+        margin-right: 1rem;
+        color: $primary;
+      }
+
+      &__data {
+        padding-top: 0.3rem;
+        &--label {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+ 
+}

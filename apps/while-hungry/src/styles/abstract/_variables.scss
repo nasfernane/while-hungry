@@ -1,7 +1,8 @@
 $header-height: 7rem;
+$footer-height: 5rem;
 $breadcrumb-height: 4rem;
 
-$container-min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height});
+$container-min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - #{$footer-height});
 $container-width: 60vw;
 
 // media queries used by fx-layout ::after

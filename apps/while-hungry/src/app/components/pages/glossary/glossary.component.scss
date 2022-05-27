@@ -1,0 +1,22 @@
+@import './../../../../styles/base/colors';
+
+.glossaryContainer {
+  &__link {
+    padding: 2rem;
+    font-size: 2rem;
+    border: 0.3rem solid $primary;
+
+    &--letter {
+      text-transform: uppercase;
+
+      &:hover {
+        color: $primary-light;
+        cursor: pointer;
+      }
+    }
+
+    &--div {
+      margin: 0rem 1rem;
+    }
+  }
+}

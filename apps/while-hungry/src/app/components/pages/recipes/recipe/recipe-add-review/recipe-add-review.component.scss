@@ -1,0 +1,35 @@
+@import './../../../../../../styles/base/colors';
+
+.addRateContainer {
+  
+  width: 100%;
+  background-color: $grey-light;
+
+  &__title {
+    margin-top: 1rem;
+  }
+
+  &__stars {
+    cursor: pointer;
+  }
+
+  &__message {
+    font-style: italic;
+  }
+
+  &__button {
+    border: 0.1rem solid $primary-light;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    text-align: center;
+
+    width: 90%;
+    padding: 1rem;
+    text-transform: uppercase;
+    // background-color: $primary-light;
+    border: none;
+    // color: $grey-light !important;
+    cursor: pointer;
+  }
+}
+

@@ -1,0 +1,35 @@
+@import './../../../../styles/main.scss';
+
+.footerWrapper {
+  width: 100%;
+  height: $footer-height;
+  border-top: 0.1rem solid $grey-dark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  wh-footer-nav {
+    margin: 0 auto;
+    width: $container-width;
+  }
+
+  @media (max-width: 1200px) {
+    wh-footer-nav {
+      width: calc($container-width + 20vw);
+    }
+  }
+
+  @media (max-width: 800px) {
+    wh-footer-nav {
+      width: calc($container-width + 30vw);
+    }
+  }
+
+  @media (max-width: 500px) {
+    wh-footer-nav {
+      width: calc($container-width + 40vw);
+    }
+  }
+  
+}

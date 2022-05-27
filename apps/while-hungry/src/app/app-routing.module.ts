@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 // components
-import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
-import { HomeComponent } from './components/home/home.component';
-import { BlogComponent } from './components/blog/blog.component';
-import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
-import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
-import { RecipeComponent } from './components/recipes/recipe/recipe.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { GlossaryComponent } from './components/glossary/glossary.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
-import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
+import { RecipesOverviewComponent } from './components/pages/recipes/recipes-overview/recipes-overview.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { BlogComponent } from './components/pages/blog/blog.component';
+import { BlogNewPostComponent } from './components/pages/blog/blog-new-post/blog-new-post.component';
+import { BlogPostComponent } from './components/pages/blog/blog-post/blog-post.component';
+import { RecipeComponent } from './components/pages/recipes/recipe/recipe.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
+import { GlossaryComponent } from './components/pages/glossary/glossary.component';
+import { FavoritesComponent } from './components/pages/favorites/favorites.component';
+import { ShoppinglistComponent } from './components/pages/shoppinglist/shoppinglist.component';
+import { NewRecipeComponent } from './components/pages/recipes/new-recipe/new-recipe.component';
+import { TermsServiceComponent } from './components/pages/terms-service/terms-service.component';
+import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
 
 // guards
 import { AdminGuard } from './guards/admin.guard';
@@ -50,6 +52,8 @@ const routes: Routes = [
   },
   { path: 'glossary', component: GlossaryComponent },
   { path: 'shopping', component: ShoppinglistComponent },
+  { path: 'terms-service', component: TermsServiceComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];
 @NgModule({
   declarations: [],

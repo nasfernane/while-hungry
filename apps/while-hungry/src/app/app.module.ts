@@ -30,47 +30,51 @@ import { CoreStateModule } from '@wh/core-state';
 
 // wh components
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { RecipesOverviewComponent } from './components/recipes/recipes-overview/recipes-overview.component';
-import { RecipesOverviewItemComponent } from './components/recipes/recipes-overview/recipes-overview-item/recipes-overview-item.component';
-import { HeaderComponent } from './components/header/header.component';
-import { HeaderLogoComponent } from './components/header/header-logo/header-logo.component';
-import { HeaderNavComponent } from './components/header/header-nav/header-nav.component';
-import { BlogComponent } from './components/blog/blog.component';
-import { BlogNewPostComponent } from './components/blog/blog-new-post/blog-new-post.component';
-import { BlogPostComponent } from './components/blog/blog-post/blog-post.component';
-import { RecipeComponent } from './components/recipes/recipe/recipe.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { RecipeAuthorComponent } from './components/recipes/recipe/recipe-author/recipe-author.component';
-import { RecipeIngredientsOptionsComponent } from './components/recipes/recipe/recipe-ingredients-options/recipe-ingredients-options.component';
-import { RecipeRatingComponent } from './components/recipes/recipe/recipe-rating/recipe-rating.component';
-import { RecipeInstructionsComponent } from './components/recipes/recipe/recipe-instructions/recipe-instructions.component';
-import { RecipeAddReviewComponent } from './components/recipes/recipe/recipe-add-review/recipe-add-review.component';
-import { RecipeCommentsComponent } from './components/recipes/recipe/recipe-comments/recipe-comments.component';
-import { RecipesOverviewFiltersComponent } from './components/recipes/recipes-overview/recipes-overview-filters/recipes-overview-filters.component';
-import { HomeRecipeComponent } from './components/home/home-recipe/home-recipe.component';
-import { HomeBlogComponent } from './components/home/home-blog/home-blog.component';
-import { HomeApiComponent } from './components/home/home-api/home-api.component';
-import { HomeChatComponent } from './components/home/home-chat/home-chat.component';
-import { BlogItemComponent } from './components/blog/blog-item/blog-item.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { RecipesOverviewComponent } from './components/pages/recipes/recipes-overview/recipes-overview.component';
+import { RecipesOverviewItemComponent } from './components/pages/recipes/recipes-overview/recipes-overview-item/recipes-overview-item.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { HeaderLogoComponent } from './components/layout/header/header-logo/header-logo.component';
+import { HeaderNavComponent } from './components/layout/header/header-nav/header-nav.component';
+import { BlogComponent } from './components/pages/blog/blog.component';
+import { BlogNewPostComponent } from './components/pages/blog/blog-new-post/blog-new-post.component';
+import { BlogPostComponent } from './components/pages/blog/blog-post/blog-post.component';
+import { RecipeComponent } from './components/pages/recipes/recipe/recipe.component';
+import { BreadcrumbComponent } from './components/layout/breadcrumb/breadcrumb.component';
+import { RecipeAuthorComponent } from './components/pages/recipes/recipe/recipe-author/recipe-author.component';
+import { RecipeIngredientsOptionsComponent } from './components/pages/recipes/recipe/recipe-ingredients-options/recipe-ingredients-options.component';
+import { RecipeRatingComponent } from './components/pages/recipes/recipe/recipe-rating/recipe-rating.component';
+import { RecipeInstructionsComponent } from './components/pages/recipes/recipe/recipe-instructions/recipe-instructions.component';
+import { RecipeAddReviewComponent } from './components/pages/recipes/recipe/recipe-add-review/recipe-add-review.component';
+import { RecipeCommentsComponent } from './components/pages/recipes/recipe/recipe-comments/recipe-comments.component';
+import { RecipesOverviewFiltersComponent } from './components/pages/recipes/recipes-overview/recipes-overview-filters/recipes-overview-filters.component';
+import { HomeRecipeComponent } from './components/pages/home/home-recipe/home-recipe.component';
+import { HomeBlogComponent } from './components/pages/home/home-blog/home-blog.component';
+import { HomeApiComponent } from './components/pages/home/home-api/home-api.component';
+import { HomeChatComponent } from './components/pages/home/home-chat/home-chat.component';
+import { BlogItemComponent } from './components/pages/blog/blog-item/blog-item.component';
 import { TruncatePipe } from '@wh/core-utils';
-import { HomeHeaderComponent } from './components/home/home-header/home-header.component';
+import { HomeHeaderComponent } from './components/pages/home/home-header/home-header.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ProfileAvatarsComponent } from './components/profile/profile-avatars/profile-avatars.component';
-import { ProfileFormComponent } from './components/profile/profile-form/profile-form.component';
-import { ProfilePasswordUpdateComponent } from './components/profile/profile-password-update/profile-password-update.component';
-import { GlossaryComponent } from './components/glossary/glossary.component';
-import { GlossarySectionComponent } from './components/glossary/glossary-section/glossary-section.component';
-import { GlossarySectionDefinitionComponent } from './components/glossary/glossary-section/glossary-section-definition/glossary-section-definition.component';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { ShoppinglistComponent } from './components/shoppinglist/shoppinglist.component';
-import { ShoppinglistGlobalComponent } from './components/shoppinglist/shoppinglist-global/shoppinglist-global.component';
-import { ShoppinglistItemComponent } from './components/shoppinglist/shoppinglist-item/shoppinglist-item.component';
-import { NewRecipeComponent } from './components/recipes/new-recipe/new-recipe.component';
+import { ProfileComponent } from './components/pages/profile/profile.component';
+import { ProfileAvatarsComponent } from './components/pages/profile/profile-avatars/profile-avatars.component';
+import { ProfileFormComponent } from './components/pages/profile/profile-form/profile-form.component';
+import { ProfilePasswordUpdateComponent } from './components/pages/profile/profile-password-update/profile-password-update.component';
+import { GlossaryComponent } from './components/pages/glossary/glossary.component';
+import { GlossarySectionComponent } from './components/pages/glossary/glossary-section/glossary-section.component';
+import { GlossarySectionDefinitionComponent } from './components/pages/glossary/glossary-section/glossary-section-definition/glossary-section-definition.component';
+import { FavoritesComponent } from './components/pages/favorites/favorites.component';
+import { ShoppinglistComponent } from './components/pages/shoppinglist/shoppinglist.component';
+import { ShoppinglistGlobalComponent } from './components/pages/shoppinglist/shoppinglist-global/shoppinglist-global.component';
+import { ShoppinglistItemComponent } from './components/pages/shoppinglist/shoppinglist-item/shoppinglist-item.component';
+import { NewRecipeComponent } from './components/pages/recipes/new-recipe/new-recipe.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { NewRecipePreviewIngredientsComponent } from './components/recipes/new-recipe/new-recipe-preview-ingredients/new-recipe-preview-ingredients.component';
+import { NewRecipePreviewIngredientsComponent } from './components/pages/recipes/new-recipe/new-recipe-preview-ingredients/new-recipe-preview-ingredients.component';
 import { EditFormModaleComponent } from './components/edit-form-modale/edit-form-modale.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { FooterNavComponent } from './components/layout/footer/footer-nav/footer-nav.component';
+import { TermsServiceComponent } from './components/pages/terms-service/terms-service.component';
+import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -115,6 +119,10 @@ import { EditFormModaleComponent } from './components/edit-form-modale/edit-form
     NewRecipeComponent,
     NewRecipePreviewIngredientsComponent,
     EditFormModaleComponent,
+    FooterComponent,
+    FooterNavComponent,
+    TermsServiceComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserModule,

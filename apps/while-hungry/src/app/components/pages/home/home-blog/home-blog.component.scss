@@ -1,0 +1,29 @@
+@import './../../../../../styles/base/colors';
+@import './../../../../../styles/abstract/variables';
+
+.homeBlogContainer {
+  padding: 5rem 0;
+  width: $container-width;
+  margin: 0 auto;
+
+  &__btn {
+    width: 32%;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .homeBlogContainer {
+    width: calc($container-width + 20vw);
+  }
+}
+
+@media (max-width: 700px) {
+  .homeBlogContainer {
+    width: calc($container-width + 30vw);
+
+    wh-blog-item {
+      width: 90%;
+    }
+  }
+}

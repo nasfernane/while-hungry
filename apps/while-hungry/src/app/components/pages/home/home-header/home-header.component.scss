@@ -1,0 +1,60 @@
+@import './../../../../../styles/base/colors';
+@import './../../../../../styles/abstract/variables';
+
+.homeHeaderContainer {
+  width: 100%;
+  padding: 50px 0;
+
+  &__loop {
+    max-width: $container-width;
+    font-family: rubik;
+    margin: 0 auto;
+    font-size: 2.4rem;
+    letter-spacing: 0.2rem;
+    font-variant: small-caps;
+
+    span {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .loop {
+    &--bold {
+      font-weight: 500;
+      font-size: 2.8rem;
+    }
+    &--red {
+      color: red;
+    }
+
+    &--blue {
+      color: $primary-light;
+    }
+
+    &--green {
+      color: $green-light;
+    }
+
+    &--last {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 20vw);
+  }
+}
+
+@media (max-width: 700px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 30vw);
+  }
+}
+
+@media (max-width: 500px) {
+  .homeHeaderContainer__loop {
+    max-width: calc($container-width + 40vw);
+  }
+}

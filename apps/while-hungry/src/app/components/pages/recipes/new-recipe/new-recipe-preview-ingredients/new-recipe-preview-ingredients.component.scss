@@ -1,0 +1,102 @@
+@import './../../../../../../styles/base/colors';
+
+.ingredientsContainer {
+  border: 0.5rem solid $primary;
+  background-color: white;
+
+  &__header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: $primary;
+    border: 0.3rem solid $primary;
+
+    &__info {
+      width: 70%;
+      margin: 0 auto;
+      color: white;
+
+      &--label {
+        font-variant: small-caps;
+        color: $grey-dark;
+        font-size: 1.8rem;
+      }
+
+      mat-icon {
+        color: $grey-light;
+        font-size: 2.4rem;
+      }
+
+      &--data {
+        font-size: 1.6rem;
+        color: $grey-light;
+      }
+    }
+
+    span mat-icon {
+      font-size: 2.4rem;
+      margin-right: 0.5rem;
+    }
+
+    mat-divider {
+      border-top: 0.1rem solid $grey-dark;
+      margin: 0 auto;
+      width: 70%;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__ingredients {
+    width: 100%;
+    padding: 5% 2rem;
+    margin: 0 auto;
+
+    &__header {
+      margin-bottom: 2rem;
+
+      &--title {
+        font-weight: bold;
+        color: $primary;
+      }
+    }
+
+    &--dot {
+      color: $primary-dark;
+      margin-right: 1rem;
+    }
+
+    &--quantity,
+    &--name {
+      font-size: 1.6rem;
+    }
+
+    &--name {
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    &__actions {
+      mat-icon {
+        cursor: pointer;
+      }
+
+      span {
+        line-height: 18px;
+        text-transform:uppercase !important;
+      }
+    }
+  }
+
+  &__shoppingBtn {
+    width: 90%;
+    margin-bottom: 1rem;
+  }
+}
+
+.editing {
+  width: calc(100% + 1rem);
+  transform: translateX(-0.5rem);
+  border: 1px dashed $primary;
+  padding: .5rem;
+  margin: .5rem 0;
+}
