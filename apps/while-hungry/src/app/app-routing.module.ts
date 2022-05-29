@@ -16,6 +16,7 @@ import { ShoppinglistComponent } from './components/pages/shoppinglist/shoppingl
 import { NewRecipeComponent } from './components/pages/recipes/new-recipe/new-recipe.component';
 import { TermsServiceComponent } from './components/pages/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
 
 // guards
 import { AdminGuard } from './guards/admin.guard';
@@ -52,6 +53,7 @@ const routes: Routes = [
   },
   { path: 'glossary', component: GlossaryComponent },
   { path: 'shopping', component: ShoppinglistComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'terms-service', component: TermsServiceComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
 ];

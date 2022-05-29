@@ -1,0 +1,61 @@
+<div class="globalContainer contactContainer">
+  <form [formGroup]="contactGroup" fxLayout="row" fxLayoutAlign="space-between flex-start">
+    <section fxFlex="48">
+      <img src="./../../../../assets/img/illustrations/contact.png" alt="Contact">
+    </section>
+    <section fxFlex="48" fxLayout="column" fxLayoutAlign="flex-start flex-start" class="contactSection">
+      <p>
+        If you wish to contact us for any reason, you can either use this form or send your heptapod semasiograms by email at
+        <span class="contactSection__email">
+          contact@whilehungry.com
+        </span> 
+      </p>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Nickname</mat-label>
+        <input
+          matInput
+          type="text"
+          min="0"
+          formControlName="nickname"
+          required
+          fxFlex="100"
+        />
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          min="0"
+          formControlName="email"
+          required
+          fxFlex="100"
+        />
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Reason</mat-label>
+        <mat-select formControlName="subject">
+          <mat-option>-- None --</mat-option>
+          <mat-option [value]="subject" *ngFor="let subject of subjects">
+            {{ subject }} 
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field mat-form-field style="width: 100%;">
+        <mat-label>Your message</mat-label>
+        <textarea
+          formControlName="message"
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="5"
+          cdkAutosizeMaxRows="5"
+          maxlength="255"
+          fxFlex="100"
+        ></textarea>
+      </mat-form-field>
+      <button class="btn btn--main" (click)="sendMessage()" fxFlexAlign="end" fxFlex="30" [disabled]="!contactGroup.valid">Send message</button>
+    </section>
+    
+  </form>
+</div>

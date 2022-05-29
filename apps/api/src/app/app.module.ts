@@ -21,6 +21,7 @@ import { FavoritesModule } from '../modules/favorites/favorites.module';
 import { ShoppingListModule } from '../modules/shopping-list/shopping-list.module';
 import { FilesModule } from '../modules/files/files.module';
 import { RecipesTagsModule } from '../modules/recipes-tags/recipes-tags.module';
+import { ContactModule } from '../modules/contact/contact.module';
 
 // app controller & service
 import { AppController } from './app.controller';
@@ -48,6 +49,7 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
     ShoppingListModule,
     FilesModule,
     RecipesTagsModule,
+    ContactModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],

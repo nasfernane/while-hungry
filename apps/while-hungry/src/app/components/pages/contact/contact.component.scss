@@ -1,0 +1,24 @@
+@import './../../../../styles/base/colors';
+
+.contactContainer {
+  .contactSection {
+    padding-top: 10rem;
+
+    &__email {
+      color: $primary-light;
+      font-weight: 500;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    margin-bottom: 1rem;
+  }
+  button {
+    margin: 0 0;
+  }
+}
+

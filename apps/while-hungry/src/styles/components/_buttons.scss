@@ -3,7 +3,7 @@
   text-transform: uppercase;
   border-radius: 0 !important;
   border: none;
-  padding: 1rem;
+  padding: 1rem 2rem;
   margin: 0 auto;
 
   &--main {
@@ -24,17 +24,3 @@
   }
 }
 
-.mainButton {
-  cursor: pointer;
-  text-transform: uppercase;
-  color: #fff !important;
-  border-radius: 0 !important;
-  background-color: $primary;
-  border: none;
-  padding: 1rem;
-  margin: 0 auto;
-
-  &:hover {
-    background-color: $primary-light;
-  }
-}

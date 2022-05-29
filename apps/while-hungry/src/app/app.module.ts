@@ -75,6 +75,7 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { FooterNavComponent } from './components/layout/footer/footer-nav/footer-nav.component';
 import { TermsServiceComponent } from './components/pages/terms-service/terms-service.component';
 import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privac
     FooterNavComponent,
     TermsServiceComponent,
     PrivacyPolicyComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
