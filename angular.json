@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "projects": {
     "api": "apps/api",
     "core-data": "libs/core-data",

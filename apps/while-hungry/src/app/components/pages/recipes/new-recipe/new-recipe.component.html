@@ -29,8 +29,20 @@
                 required
                 fxFlex="100"
               />
+              <mat-error
+                *ngIf="recipeNameGroup.controls['name'].hasError('required')">
+                This field is required.
+              </mat-error>
+              <mat-error
+                  *ngIf="recipeNameGroup.controls['name'].hasError('minlength')">
+                  The recipe's name must contain atleast 5 characters.
+              </mat-error>
+              <mat-error
+                  *ngIf="recipeNameGroup.controls['name'].hasError('maxlength')">
+                  The recipe's name cant exceed {{ recipeNameGroup.controls['name'].errors['maxlength'].requiredLength}} characters.
+              </mat-error>
             </mat-form-field>
-            <div *ngIf="recipeNameGroup.controls['name'].invalid && 
+            <!-- <div *ngIf="recipeNameGroup.controls['name'].invalid && 
             recipeNameGroup.controls['name'].errors && 
             (recipeNameGroup.controls['name'].dirty || recipeNameGroup.controls['name'].touched)">
               <small class="warning"
@@ -45,7 +57,7 @@
                   *ngIf="recipeNameGroup.controls['name'].hasError('maxlength')">
                   The recipe's name cant exceed {{ recipeNameGroup.controls['name'].errors['maxlength'].requiredLength}} characters.
               </small>
-            </div>
+            </div> -->
           </section>
           
           <section fxFlex="68" fxLayout="column" fxLayout="flex-start flex-start">

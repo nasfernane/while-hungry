@@ -14,15 +14,11 @@
             <mat-form-field>
               <mat-label>Email</mat-label>
               <input matInput placeholder="Email" formControlName="email" />
-              <mat-error
-                *ngIf="loginForm.controls['email'].hasError('required')"
-              >
-                Incorrect email adress
+              <mat-error class="warning" *ngIf="(loginForm.controls['email'].dirty || loginForm.controls['email'].touched) && loginForm.controls['email'].hasError('pattern')">
+                Invalid email adress
               </mat-error>
-              <mat-error
-                *ngIf="loginForm.controls['email'].hasError('pattern')"
-              >
-                Incorrect email adress
+              <mat-error class="warning" *ngIf="(loginForm.controls['email'].dirty || loginForm.controls['email'].touched) && loginForm.controls['email'].hasError('required')">
+                Email is required
               </mat-error>
             </mat-form-field>
           </section>
@@ -43,7 +39,9 @@
                 (click)="hidePassword = !hidePassword"
                 >{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon
               >
-              <mat-error> Password is mandatory </mat-error>
+              <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                Password is required
+              </mat-error>
             </mat-form-field>
           </section>
           <span class="invalidLogin" *ngIf="invalidLogin"
@@ -92,10 +90,10 @@
             <mat-error
               *ngIf="registerForm.controls['email'].hasError('required')"
             >
-              Incorrect email adress
+              Email is required
             </mat-error>
-            <mat-error *ngIf="loginForm.controls['email'].hasError('pattern')">
-              Incorrect email adress
+            <mat-error *ngIf="registerForm.controls['email'].hasError('pattern')">
+              Invalid email adress
             </mat-error>
           </mat-form-field>
         </section>
@@ -110,7 +108,7 @@
               placeholder="Nickname"
               formControlName="nickname"
             />
-            <mat-error> Nickname is mandatory </mat-error>
+            <mat-error>Nickname is required</mat-error>
           </mat-form-field>
         </section>
 
@@ -132,7 +130,7 @@
                 hideRegisterPassword ? 'visibility_off' : 'visibility'
               }}</mat-icon
             >
-            <mat-error> Password is mandatory </mat-error>
+            <mat-error>Password is required</mat-error>
           </mat-form-field>
         </section>
 
@@ -156,7 +154,7 @@
                 hideRegisterPasswordConfirm ? 'visibility_off' : 'visibility'
               }}</mat-icon
             >
-            <mat-error> You must confirm your password </mat-error>
+            <mat-error>You must confirm your password</mat-error>
           </mat-form-field>
         </section>
 

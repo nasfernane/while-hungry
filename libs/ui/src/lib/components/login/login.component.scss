@@ -8,14 +8,17 @@
     max-width: 50rem;
   }
 
+
   form {
     width: 100%;
+    padding-top: 1rem;
 
     section,
     section mat-form-field,
     section mat-form-field input {
       width: 100%;
     }
+   
 
     .invalidLogin {
       color: #64455a;
@@ -25,8 +28,3 @@
   }
 }
 
-// .signinOptions {
-//   border: 1px solid black !important;
-//   border-radius: 4px;
-//   padding: 10px;
-// }
