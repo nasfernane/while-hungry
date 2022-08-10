@@ -39,7 +39,7 @@
               </mat-error>
               <mat-error
                   *ngIf="recipeNameGroup.controls['name'].hasError('maxlength')">
-                  The recipe's name cant exceed {{ recipeNameGroup.controls['name'].errors['maxlength'].requiredLength}} characters.
+                  The recipe's name cant exceed 30 characters.
               </mat-error>
             </mat-form-field>
             <!-- <div *ngIf="recipeNameGroup.controls['name'].invalid && 
