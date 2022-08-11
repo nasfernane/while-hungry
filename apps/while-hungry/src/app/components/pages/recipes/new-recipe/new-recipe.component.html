@@ -306,7 +306,8 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
+    <!-- step 3 : ingredients -->
+    <mat-step [completed]="ingredients.length > 0">
       <ng-template matStepLabel>Ingredients</ng-template>
       <div
         class="stepTitle stepTitle--recipeName"
@@ -396,7 +397,8 @@
         ></wh-new-recipe-preview-ingredients>
       </div>
     </mat-step>
-    <mat-step>
+    <!-- step4: instructions -->
+    <mat-step [completed]="instructions.length > 0">
       <ng-template matStepLabel>Instructions</ng-template>
       <div fxLayout="row" fxLayoutAlign="space-between flex-start" >
         <section fxFlex="55">
