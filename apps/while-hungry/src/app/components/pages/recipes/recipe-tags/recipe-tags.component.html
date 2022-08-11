@@ -1,0 +1,8 @@
+<div *ngIf="tagCategories" class="tagsContainer">
+  <section *ngFor="let category of tagCategories" fxFlex="{{ 100 / tagCategories.length }}" fxLayout="column" fxLayoutAlign="flex-start center">
+    <p class="tagsCategory">{{ category.name }}</p>
+    <span class="tag" *ngFor="let tag of category.RecipeTagLabels" (click)="switchTag(tag.id)" [ngClass]="{'tag--active': activeTags.includes(tag.id)}">
+      {{ tag.name }}
+    </span>
+  </section>
+</div>
