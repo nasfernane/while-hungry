@@ -9,7 +9,11 @@
     Eat
   </button>
   <mat-menu #eatMenu="matMenu" xPosition="after">
-    <button mat-menu-item routerLink="/recipes">Recipes</button>
+    <button mat-menu-item [matMenuTriggerFor]="recipeMenu">Recipes</button>
+    <mat-menu #recipeMenu="matMenu">
+      <button mat-menu-item routerLink="/recipes">All recipes</button>
+      <button mat-menu-item routerLink="/recipes/add">Add recipe</button>
+    </mat-menu>
     <button mat-menu-item (click)="uiService.openAlert('Available soon')">
       Batch cooking
     </button>

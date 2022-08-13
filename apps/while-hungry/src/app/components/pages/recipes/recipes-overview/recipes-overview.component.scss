@@ -22,22 +22,4 @@
   wh-recipes-overview-filters {
     margin-bottom: 3rem;
   }
-
-  .addRecipe {
-    height: 5rem;
-    position: fixed;
-    top: calc(50% - 2.5rem);
-    right: 5rem;
-    cursor: pointer;
-
-    mat-icon {
-      height: 5rem;
-      width: 5rem;
-      font-size: 5rem;
-
-      &:hover {
-        color: $primary-light;
-      }
-    }
-  }
 }
