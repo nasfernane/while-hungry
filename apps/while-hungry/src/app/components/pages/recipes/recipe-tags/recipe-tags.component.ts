@@ -1,9 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RecipeTagCategoryWithLabels, RecipeTagLabel } from '@prisma/client';
 
-
-
-
 @Component({
   selector: 'wh-recipe-tags',
   templateUrl: './recipe-tags.component.html',
