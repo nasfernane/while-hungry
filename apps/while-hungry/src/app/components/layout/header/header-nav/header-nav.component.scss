@@ -1,11 +1,15 @@
 .navWrapper {
   &__button {
     font-size: 2rem;
-    font-weight: 80rem;
-  }
-
-  wh-avatar {
-    margin-left: 2rem;
     cursor: pointer;
+
+    &__nickname {
+      font-size: 1.7rem;
+      font-weight: 500;
+    }
+
+    wh-avatar {
+      margin: 0 1rem;
+    }
   }
 }

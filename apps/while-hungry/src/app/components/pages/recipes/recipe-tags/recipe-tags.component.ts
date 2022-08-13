@@ -1,5 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { RecipeTagCategoryWithLabels, RecipeTagLabel } from '@prisma/client';
+import { RecipeTagLabel } from '@prisma/client';
+
+type RecipeTagCategoryWithLabels = {
+  id: number
+  name: string
+  maxActiveTags: number
+  RecipeTagLabels: RecipeTagLabel[],
+  createdAt: Date
+  updatedAt: Date
+}
 
 @Component({
   selector: 'wh-recipe-tags',

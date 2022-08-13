@@ -44,14 +44,23 @@
   >
     Login
   </button>
-  <wh-avatar
-    [avatar]="appService.getUserAvatar()"
-    avatarSize="4rem"
+  <div 
+    fxLayout="row" fxLayoutAlign="flex-start center"
     *ngIf="appService.userLogged"
     class="navWrapper__button"
+    [matMenuTriggerFor]="userMenu">
+    <wh-avatar
+    [avatar]="appService.getUserAvatar()"
+    avatarSize="4rem"
     mat-button
-    [matMenuTriggerFor]="userMenu"
-  ></wh-avatar>
+    ></wh-avatar>
+    <span 
+      *ngIf="appService.userLogged"
+      class="navWrapper__button__nickname">
+      {{ appService.getUserNickname() }}
+    </span>
+  </div>
+  
   <mat-menu #userMenu="matMenu" xPosition="after">
     <button mat-menu-item routerLink="/profile">Profile</button>
     <button mat-menu-item routerLink="/favorites">Favorites</button>
