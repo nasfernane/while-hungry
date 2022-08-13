@@ -14,6 +14,7 @@ import { Clap } from '@prisma/client';
 })
 export class RecipeAuthorComponent implements OnInit {
   @Input() author: any;
+  isAuthor: boolean;
   authorRecipesCount: number;
   authorClaps: number;
   alreadyClapped: boolean;
@@ -29,12 +30,12 @@ export class RecipeAuthorComponent implements OnInit {
     this.recipeService
       .getAuthorRecipeCount(this.author.id)
       .subscribe((count) => {
-        if (count && count !== 0) {
-          this.authorRecipesCount = +count;
-        }
+        if (count && count !== 0) this.authorRecipesCount = +count;
+        else this.authorRecipesCount = 0;
       });
 
     if (this.appService.isLogged()) {
+      this.isAuthor = this.appService.getUserId() === this.author.id;
       this.userService
         .checkIfClapped(this.appService.getUserId(), this.author.id)
         .subscribe((alreadyClapped: boolean) => {

@@ -42,6 +42,7 @@
     </p>
   </div>
   <button
+    *ngIf="!this.isAuthor"
     class="btn btn--main recipeAuthorContainer__infos__clapBtn"
     (click)="clapUser()"
   >
