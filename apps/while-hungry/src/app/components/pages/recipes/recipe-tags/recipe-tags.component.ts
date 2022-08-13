@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { RecipeTagCategoryWithLabels, RecipeTagLabel } from '@prisma/client';
+
+
+
 
 @Component({
   selector: 'wh-recipe-tags',
@@ -6,13 +10,19 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./recipe-tags.component.scss']
 })
 export class RecipeTagsComponent {
-  @Input() tagCategories: any[];
+  @Input() tagCategories: RecipeTagCategoryWithLabels[];
+  @Output() activeTagsEvent = new EventEmitter<RecipeTagLabel[]>()
 
-  activeTags: number[] = [];
+  activeTags: RecipeTagLabel[] = [];
 
-  switchTag(tagId: number) {
-    if (this.activeTags.includes(tagId)) this.activeTags.splice(this.activeTags.indexOf(tagId), 1);
-    else if (!this.activeTags.includes(tagId) && this.activeTags.length < 3) this.activeTags.push(tagId);
+  switchTag(tag: RecipeTagLabel) {
+    if (this.activeTags.includes(tag)) this.activeTags.splice(this.activeTags.indexOf(tag), 1);
+    else if (!this.activeTags.includes(tag) && this.activeTags.length < 3) {
+      const categoryActiveTags = this.activeTags.filter(obj => obj.categoryId === tag.categoryId)
+
+      if (categoryActiveTags && (categoryActiveTags.length == this.tagCategories[tag.categoryId - 1].maxActiveTags)) return;
+      else this.activeTags.push(tag);
+    }
+    this.activeTagsEvent.emit(this.activeTags);
   }
-
 }

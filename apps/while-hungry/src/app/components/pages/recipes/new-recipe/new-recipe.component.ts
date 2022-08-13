@@ -237,6 +237,10 @@ export class NewRecipeComponent implements OnInit {
     this.ingredients = ingredients;
   }
 
+  updateTags($event: RecipeTagLabel[]) {
+    this.tags = $event;
+  }
+
   // generic function to edit any kind of value
   editValue(index: number, type: string) {
     this.editingIndex = index;

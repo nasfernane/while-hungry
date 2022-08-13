@@ -156,6 +156,7 @@ model RecipeTagLabel {
 model RecipeTagCategory {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(25)
+  maxActiveTags Int  @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

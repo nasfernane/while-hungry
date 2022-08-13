@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 export const recipeTags: Prisma.RecipeTagCategoryCreateInput[] = [
   {
     name: 'Seasonal',
+    maxActiveTags: 1,
     RecipeTagLabels: {
       create: [
         {
@@ -22,6 +23,7 @@ export const recipeTags: Prisma.RecipeTagCategoryCreateInput[] = [
   },
   {
     name: 'Country',
+    maxActiveTags: 1,
     RecipeTagLabels: {
       create: [
         {
@@ -44,6 +46,7 @@ export const recipeTags: Prisma.RecipeTagCategoryCreateInput[] = [
   },
   {
     name: 'Type',
+    maxActiveTags: 2,
     RecipeTagLabels: {
       create: [
         {
@@ -60,6 +63,7 @@ export const recipeTags: Prisma.RecipeTagCategoryCreateInput[] = [
   },
   {
     name: 'Specs',
+    maxActiveTags: 2,
     RecipeTagLabels: {
       create: [
         {

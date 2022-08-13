@@ -152,85 +152,17 @@
           </section>
           <section>
             <h2>Add recipe tags (max 3)</h2>
-            <wh-recipe-tags [tagCategories]="tagCategories"></wh-recipe-tags>
-            <div fxLayout="row" fxLayoutAlign="flex-start">
-              <section>
-                <!-- tag input -->
-                <mat-form-field style="margin-right: 2rem">
-                  <mat-label>Tag</mat-label>
-                  <mat-select formControlName="tag">
-                    <mat-option>-- None --</mat-option>
-                    <mat-optgroup
-                      *ngFor="let category of tagCategories"
-                      [label]="category.name"
-                    >
-                      <ng-container
-                        *ngFor="let label of category.RecipeTagLabels"
-                      >
-                        <mat-option [value]="label" *ngIf="!checkTag(label.name)">
-                          {{ label.name }}
-                        </mat-option>
-                      </ng-container>
-                    </mat-optgroup>
-                  </mat-select>
-                </mat-form-field>
-                <!-- tag validation errors -->
-                <div *ngIf=" 
+            <wh-recipe-tags 
+            [tagCategories]="tagCategories"
+            (activeTagsEvent)="updateTags($event)">
+            </wh-recipe-tags>
+           
+            <!-- <div *ngIf=" 
                 (informationGroup.controls['tag'].dirty || informationGroup.controls['tag'].touched) && tags.length < 1">
                   <small class="warning">
                     You must add atleast one tag to your recipe.
                   </small>
-                </div>
-              </section>
-              <mat-icon
-                (click)="addTag()"
-                class="formIcon formIcon--add"
-                style="margin-right: 2rem"
-                >add_circle</mat-icon
-              >
-              <div
-                class="tagsContainer"
-                *ngIf="tags.length > 0"
-                fxLayout="row"
-                fxLayoutAlign="flex-start center"
-              >
-                <div
-                  class="tagsContainer__tag"
-                  fxLayout="row"
-                  fxLayoutAlign="center center"
-                  *ngFor="let tag of tags; let i = index"
-                  (click)="removeTag(i)"
-                >
-                  <mat-icon>delete</mat-icon>
-                  <span>{{ tag.name }}</span>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section>
-            <h2>Servings</h2>
-            <mat-form-field>
-              <mat-label>people</mat-label>
-              <input
-                matInput
-                type="number"
-                min="1"
-                max="12"
-                default="0"
-                formControlName="servings"
-                required
-                number
-              />
-            </mat-form-field>
-            <div *ngIf=" 
-              (informationGroup.controls['servings'].dirty || informationGroup.controls['servings'].touched)">
-              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('min')">
-                Your recipe must serves atleast one person.
-              </small>
-              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('max')">
-                Servings can't exceed 12 persons.
-              </small>
-            </div>
+                </div> -->
           </section>
           <section>
             <h2>Cook time</h2>
