@@ -28,6 +28,7 @@ export class AppService {
   public setUserData(user: any) {
     if (user) {
       localStorage.removeItem('googleToken');
+      user['expiresAt'] = String(moment().add(12, 'hours'))
       this.setUser(user);
       this.setUserToLocalStorage(JSON.stringify(this.getUser()));
     }
@@ -47,6 +48,7 @@ export class AppService {
    * @param user
    */
   private setUserToLocalStorage(user: any) {
+    
     if (user === null) {
       localStorage.removeItem('currentUser');
     } else {
@@ -132,11 +134,18 @@ export class AppService {
   }
 
   /**
-   * check if user data available in local storage. If so, load data in service
+   * check if not expired (12 hours) user data available in local storage. If so, load data in service
    */
   public loadUserFromLocalStorage() {
     const currentUser = localStorage.getItem('currentUser');
-    if (currentUser) this.setUser(JSON.parse(currentUser));
+    if (currentUser) {
+      const parsedCurrentUser = JSON.parse(currentUser);
+      if (parsedCurrentUser && parsedCurrentUser['expiresAt'] && moment(parsedCurrentUser.expiresAt).isBefore(moment())) {
+        localStorage.removeItem('currentUser');
+      } else {
+        if (parsedCurrentUser) this.setUser(parsedCurrentUser);
+      }
+    }
   }
 
   public getBreadcrumb(): string[] {
