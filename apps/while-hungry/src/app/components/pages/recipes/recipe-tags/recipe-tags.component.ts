@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { RecipeTagLabel } from '@prisma/client';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { RecipeTagLabel, RecipeTag } from '@prisma/client';
 
 type RecipeTagCategoryWithLabels = {
   id: number
@@ -15,11 +15,22 @@ type RecipeTagCategoryWithLabels = {
   templateUrl: './recipe-tags.component.html',
   styleUrls: ['./recipe-tags.component.scss']
 })
-export class RecipeTagsComponent {
+export class RecipeTagsComponent implements OnChanges {
   @Input() tagCategories: RecipeTagCategoryWithLabels[];
+  @Input() oldTags: any[] = [];
   @Output() activeTagsEvent = new EventEmitter<RecipeTagLabel[]>()
-
   activeTags: RecipeTagLabel[] = [];
+
+  ngOnChanges() {
+    if (this.oldTags && this.tagCategories) {
+      for (const category of this.tagCategories) {
+        for (const tag of category.RecipeTagLabels) {
+          for (const oldTag of this.oldTags) if (tag.id === oldTag.tagId) this.activeTags.push(tag);
+        }
+      }
+    }
+  }
+
 
   switchTag(tag: RecipeTagLabel) {
     if (this.activeTags.includes(tag)) this.activeTags.splice(this.activeTags.indexOf(tag), 1);

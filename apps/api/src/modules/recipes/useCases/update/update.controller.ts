@@ -1,4 +1,4 @@
-import { Controller, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Body, Put, Param } from '@nestjs/common';
 import { UpdateService } from './update.service';
 
 import { Recipe } from '@prisma/client';
@@ -13,7 +13,7 @@ export class UpdateController {
    * @param recipe
    * @returns updated recipe
    */
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() recipe: Recipe) {
     return this.service.update(+id, recipe);
   }

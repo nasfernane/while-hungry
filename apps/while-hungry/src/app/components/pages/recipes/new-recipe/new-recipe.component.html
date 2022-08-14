@@ -1,14 +1,18 @@
 <div class="globalContainer">
-  <h1>Add new recipe</h1>
-  <span
+  <h1>{{ editMode ? 'Edit your recipe' : 'Add new recipe' }}</h1>
+  <span *ngIf="!editMode"
     >Welcome to the recipe addition form. Follow the different steps, enter the
-    necessary information for your recipe and share it with the community.</span
+    necessary informations for your recipe and share it with the community.</span
+  >
+  <span *ngIf="editMode"
+    >Welcome to the recipe edition form. Follow the different steps, enter the
+    necessary informations for your recipe and share it with the community.</span
   >
   <mat-stepper #stepper>
     <!-- <mat-stepper [linear]="true" #stepper> -->
     <!-- first step: recipe name and check recipes -->
     <mat-step [stepControl]="recipeNameGroup" errorMessage="Step incomplete">
-      <ng-template matStepLabel>New recipe</ng-template>
+      <ng-template matStepLabel>{{ editMode ? 'Edit recipe' : 'New recipe' }}</ng-template>
       <form [formGroup]="recipeNameGroup">
         <div
           class="stepTitle stepTitle"
@@ -42,22 +46,6 @@
                   The recipe's name cant exceed 30 characters.
               </mat-error>
             </mat-form-field>
-            <!-- <div *ngIf="recipeNameGroup.controls['name'].invalid && 
-            recipeNameGroup.controls['name'].errors && 
-            (recipeNameGroup.controls['name'].dirty || recipeNameGroup.controls['name'].touched)">
-              <small class="warning"
-                *ngIf="recipeNameGroup.controls['name'].hasError('required')">
-                This field is required.
-              </small>
-              <small class="warning"
-                  *ngIf="recipeNameGroup.controls['name'].hasError('minlength')">
-                  The recipe's name must contain atleast {{ recipeNameGroup.controls['name'].errors['minlength'].requiredLength }} characters.
-              </small>
-              <small class="warning"
-                  *ngIf="recipeNameGroup.controls['name'].hasError('maxlength')">
-                  The recipe's name cant exceed {{ recipeNameGroup.controls['name'].errors['maxlength'].requiredLength}} characters.
-              </small>
-            </div> -->
           </section>
           
           <section fxFlex="68" fxLayout="column" fxLayout="flex-start flex-start">
@@ -88,7 +76,6 @@
               </small>
             </div>
           </section>
-          
         </div>
       </form>
       <div class="step__footer">
@@ -124,15 +111,15 @@
             <h2>Add a picture</h2>
             <div class="uploadFile">
               <div
-                *ngIf="pictureFile"
+                *ngIf="pictureFile || oldPicturePath"
                 class="uploadFile__preview"
                 fxLayout="row"
                 fxLayoutAlign="flex-start center"
               >
                 <div class="uploadFile__preview__image">
-                  <img [src]="previewPicturePath" alt="File Uploading" />
+                  <img [src]="!editMode ? previewPicturePath : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
                 </div>
-                <span>{{ pictureFile.name }}</span>
+                <span>{{ !editMode ? pictureFile.name : '' }}</span>
               </div>
               <button
                 type="button"
@@ -154,6 +141,7 @@
             <h2>Add recipe tags (max 3)</h2>
             <wh-recipe-tags 
             [tagCategories]="tagCategories"
+            [oldTags]="tags"
             (activeTagsEvent)="updateTags($event)">
             </wh-recipe-tags>
            
@@ -163,6 +151,31 @@
                     You must add atleast one tag to your recipe.
                   </small>
                 </div> -->
+          </section>
+          <section>
+            <h2>Servings</h2>
+            <mat-form-field>
+              <mat-label>people</mat-label>
+              <input
+                matInput
+                type="number"
+                min="1"
+                max="12"
+                default="0"
+                formControlName="servings"
+                required
+                number
+              />
+            </mat-form-field>
+            <div *ngIf=" 
+              (informationGroup.controls['servings'].dirty || informationGroup.controls['servings'].touched)">
+              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('min')">
+                Your recipe must serves atleast one person.
+              </small>
+              <small class="warning" *ngIf="informationGroup.controls['servings'].hasError('max')">
+                Servings can't exceed 12 persons.
+              </small>
+            </div>
           </section>
           <section>
             <h2>Cook time</h2>
@@ -211,7 +224,7 @@
             >
               <mat-radio-button value="Easy">Easy</mat-radio-button>
               <mat-radio-button value="Medium">Medium</mat-radio-button>
-              <mat-radio-button value="Difficult">Difficult</mat-radio-button>
+              <mat-radio-button value="Hard">Hard</mat-radio-button>
             </mat-radio-group>
           </section>
           <section style="margin-bottom: 2rem">
@@ -549,7 +562,7 @@
           fxFlex="60"
           ></wh-recipe-instructions> 
         <div class="newRecipeForm__preview__image" fxFlex="30">
-          <img [src]="previewPicturePath" alt="Recipe Picture Preview" />
+          <img [src]="previewPicturePath ? previewPicturePath : (oldPicturePath ? environment.API_URL + '/getpicture/' + oldPicturePath : '')" alt="Recipe Picture Preview" />
         </div>
       </div>
       <div class="step__footer">
@@ -559,9 +572,9 @@
         <button
           class="btn btn--main"
           [disabled]="!isValidRecipe()"
-          (click)="createRecipe()"
+          (click)="createOrUpdateRecipe()"
         >
-          Create
+          {{ editMode ? 'Update' : 'Create '}}
         </button>
       </div>
     </mat-step>

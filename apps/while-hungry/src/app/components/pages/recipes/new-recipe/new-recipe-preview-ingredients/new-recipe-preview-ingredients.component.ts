@@ -61,7 +61,6 @@ export class NewRecipePreviewIngredientsComponent implements OnInit {
   }
 
   addShoppingList() {
-
     if (this.appService.userLogged) {
       const wishlist = [];
 

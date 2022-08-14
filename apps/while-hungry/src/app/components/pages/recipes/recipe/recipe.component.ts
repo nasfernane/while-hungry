@@ -37,7 +37,7 @@ export class RecipeComponent implements OnInit {
 
     if (!this.recipe) {
       if (this.recipeId) {
-        this.getData(this.recipeId);
+        await this.getData(this.recipeId);
       } else {
         this.router.navigate(['/recipes']);
       }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 // services
@@ -12,6 +12,9 @@ import { UiService } from '@wh/ui';
 // prisma schema
 import { RecipeTagCategory, RecipeTagLabel } from '@prisma/client';
 import { EditFormModaleComponent } from '../../../edit-form-modale/edit-form-modale.component';
+
+// env file
+import { environment } from '@wh/env';
 
 interface Unit {
   value: string;
@@ -35,6 +38,9 @@ interface UnitGroup {
   ],
 })
 export class NewRecipeComponent implements OnInit {
+  environment = environment; // get env file pour picture requests
+  editMode = false;
+  editRecipeId: number;
   recipeNameGroup: FormGroup;
   informationGroup: FormGroup;
   ingredientGroup: FormGroup;
@@ -50,6 +56,7 @@ export class NewRecipeComponent implements OnInit {
   pictureFile: File;
   pictureName: string;
   previewPicturePath: string;
+  oldPicturePath: string;
 
   editingIndex: number | null = null;
   editingType: string | null = null;
@@ -114,20 +121,41 @@ export class NewRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private uiService: UiService,
     private router: Router,
+    private route: ActivatedRoute,
     private tagsService: RecipeTagsService,
     private matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.appService.breadcrumb = ['While Hungry', 'Recipes', 'New Recipe'];
+    this.setFormGroups();
 
+    if (this.route?.snapshot?.url[0]?.path === 'edit' && this.route?.snapshot?.params['id']) {
+      this.editMode = true;
+      this.recipeService.find(this.route?.snapshot?.params['id']).subscribe((res) => {
+        // check if we found the correct recipe
+        if (res && res.id == this.route?.snapshot?.params['id']) {
+          if (this.appService.getUserId() === res.authorId) {
+            this.editRecipeId = res.id;
+            this.setRecipeOldValues(res);
+          } else {
+            this.router.navigate(['home'])
+          }
+        } else {
+          this.router.navigate(['home'])
+        }
+      })
+    }
+
+    this.appService.breadcrumb = ['While Hungry', 'Recipes', this.editMode ? 'Edit' : 'New Recipe'];
+  }
+
+  setFormGroups() {
     this.recipeNameGroup = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       description: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(150)]],
     });
 
     this.informationGroup = this.formBuilder.group({
-      tag: ['',],
       servings: [4, [Validators.required, Validators.min(1), Validators.required, Validators.max(12)]],
       hours: [0, [Validators.required, Validators.min(0)]],
       minutes: [0, [Validators.required, Validators.min(0)]],
@@ -154,7 +182,6 @@ export class NewRecipeComponent implements OnInit {
       note: ['', [Validators.required, Validators.min(1)]],
     });
 
-
     // subscribe on recipe name to check if recipes already exist on the website
     this.recipeNameGroup.controls['name'].valueChanges.subscribe((value) => {
       this.recipeName = value;
@@ -163,9 +190,27 @@ export class NewRecipeComponent implements OnInit {
     // get all recipe tag options
     this.tagsService.getRecipeTags().subscribe((tags: RecipeTagCategory[]) => {
       this.tagCategories = tags;
-      console.log(this.tagCategories);
     });
+  }
 
+  setRecipeOldValues(recipe: any) {
+    for (const section of [recipe.requiredIngredients, recipe.recipeInstructions, recipe.recipeNotes]) 
+      for (const el of section) 
+        for (const property of ['id', 'recipeId','createdAt', 'updatedAt']) 
+          if (el[property]) delete el[property];
+          
+    this.recipeNameGroup.controls['name'].setValue(recipe.name);
+    this.recipeNameGroup.controls['description'].setValue(recipe.description);
+    this.tags = recipe.recipeTags;
+    this.informationGroup.controls['servings'].setValue(recipe.serves);
+    this.informationGroup.controls['hours'].setValue(Math.floor(recipe.cookTime / 60));
+    this.informationGroup.controls['minutes'].setValue(Math.floor(recipe.cookTime % 60));
+    this.informationGroup.controls['difficulty'].setValue(recipe.difficulty);
+    this.informationGroup.controls['units'].setValue(recipe.unit);
+    this.ingredients = recipe.requiredIngredients;
+    this.instructions = recipe.recipeInstructions;
+    this.notes = recipe.recipeNotes;
+    this.oldPicturePath = recipe.picture;
   }
 
   cookTimeValidator(group: FormGroup) {
@@ -177,7 +222,6 @@ export class NewRecipeComponent implements OnInit {
     // validates if cooktime is superior to 5 mins and inferior to 48h
     return (sum > 5 && sum < 2880) ? true : false;
   }
-
 
   /**
    * Add a tag to the tags array if it's not already in there and the array is less than 3
@@ -237,6 +281,7 @@ export class NewRecipeComponent implements OnInit {
     this.ingredients = ingredients;
   }
 
+  // update tags from event sent within child component wh-recipe-tags 
   updateTags($event: RecipeTagLabel[]) {
     this.tags = $event;
   }
@@ -412,23 +457,44 @@ export class NewRecipeComponent implements OnInit {
   /**
    * Create a recipe and store the picture in the back-end system file
    */
-  createRecipe() {
+  createOrUpdateRecipe(editMode = this.editMode) {
     if (this.isValidRecipe() && this.recipe) {
-      this.recipeService
+      if (this.previewPicturePath) {
+        this.recipeService
         .storePicture(this.formatPicture())
         .subscribe((picture: any) => {
           if (picture) {
             this.pictureName = picture.filename;
             this.formatRecipe();
 
-            this.recipeService.create(this.recipe).subscribe((res: any) => {
-              if (res) {
-                this.uiService.openAlert('Recipe successfully created');
-                this.router.navigate(['recipes', res.id]);
-              }
-            });
+            if (editMode) {
+              this.recipeService.update(this.recipe, this.editRecipeId).subscribe((res: any) => {
+                if (res) {
+                  this.uiService.openAlert('Recipe successfully updated');
+                  this.router.navigate(['recipes', res.id]);
+                }
+              });
+            } else {
+              this.recipeService.create(this.recipe).subscribe((res: any) => {
+                if (res) {
+                  this.uiService.openAlert('Recipe successfully created');
+                  this.router.navigate(['recipes', res.id]);
+                }
+              });
+            }
+            
           }
         });
+      } else {
+        this.recipe['picture'] = this.oldPicturePath;
+        this.recipeService.update(this.recipe, this.editRecipeId).subscribe((res: any) => {
+          if (res) {
+            this.uiService.openAlert('Recipe successfully updated');
+            this.router.navigate(['recipes', res.id]);
+          }
+        });
+      }
+      
     } else {
       this.uiService.openAlert(
         'Your recipe is incomplete, please verify all steps'

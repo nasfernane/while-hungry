@@ -45,7 +45,7 @@ import { RecipeAuthorComponent } from './components/pages/recipes/recipe/recipe-
 import { RecipeIngredientsOptionsComponent } from './components/pages/recipes/recipe/recipe-ingredients-options/recipe-ingredients-options.component';
 import { RecipeRatingComponent } from './components/pages/recipes/recipe/recipe-rating/recipe-rating.component';
 import { RecipeInstructionsComponent } from './components/pages/recipes/recipe/recipe-instructions/recipe-instructions.component';
-import { RecipeAddReviewComponent } from './components/pages/recipes/recipe/recipe-add-review/recipe-add-review.component';
+import { RecipeReviewOrEditComponent } from './components/pages/recipes/recipe/recipe-review-or-edit/recipe-review-or-edit.component';
 import { RecipeCommentsComponent } from './components/pages/recipes/recipe/recipe-comments/recipe-comments.component';
 import { RecipesOverviewFiltersComponent } from './components/pages/recipes/recipes-overview/recipes-overview-filters/recipes-overview-filters.component';
 import { HomeRecipeComponent } from './components/pages/home/home-recipe/home-recipe.component';
@@ -96,7 +96,7 @@ import { RecipeTagsComponent } from './components/pages/recipes/recipe-tags/reci
     RecipeIngredientsOptionsComponent,
     RecipeRatingComponent,
     RecipeInstructionsComponent,
-    RecipeAddReviewComponent,
+    RecipeReviewOrEditComponent,
     RecipeCommentsComponent,
     RecipesOverviewFiltersComponent,
     HomeRecipeComponent,

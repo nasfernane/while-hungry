@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts", "webpack.config.js"],
+  "include": ["**/*.ts", "webpack.config.js", "src/app/components/pages/recipes/recipe/recipe-review-or-edit/recipe-review-or-edit.component;ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

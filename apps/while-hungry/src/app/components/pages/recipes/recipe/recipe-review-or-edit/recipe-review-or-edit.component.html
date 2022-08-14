@@ -1,4 +1,4 @@
-<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center">
+<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center" *ngIf="!isAuthor">
   <h1 class="addRateContainer__title">
     {{ updating ? 'Update your review' : 'Review this recipe' }}
   </h1>
@@ -14,5 +14,16 @@
     class="addRateContainer__button"
   >
     {{ updating ? 'update review' : 'add review' }}
+  </button>
+</div>
+
+<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center">
+  <span class="addRateContainer__message--date">{{ getEditRecipeSentence() }}</span>
+  <span class="addRateContainer__message--date">{{ getEditRecipeDate() }}</span>
+  <button
+    (click)="editRecipe()"
+    class="addRateContainer__button"
+  >
+    Edit recipe
   </button>
 </div>

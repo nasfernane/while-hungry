@@ -31,12 +31,12 @@ export class RecipeService {
     return this.http.post(ENDPOINT, recipe);
   }
 
-  storePicture(picture: FormData) {
-    return this.http.post(ENDPOINT + '/picture', picture);
+  update(recipe: Record<string, unknown>, recipeId: number) {
+    return this.http.put(ENDPOINT + `/${recipeId}`, recipe);
   }
 
-  update(recipe: Recipe) {
-    return this.http.put(ENDPOINT + `/${recipe.id}`, recipe);
+  storePicture(picture: FormData) {
+    return this.http.post(ENDPOINT + '/picture', picture);
   }
 
   delete(recipe: Recipe) {

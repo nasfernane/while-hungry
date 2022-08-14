@@ -63,8 +63,6 @@
           </section>
           <p class="recipe__header__description">{{ recipe.description }}</p>
       </div>
-      
-      
     </mat-card-header>
     <mat-card-content *ngIf="recipe" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between flex-start">
       <section fxFlex="60">
@@ -73,14 +71,13 @@
         ></wh-recipe-instructions>
       </section>
       <section fxFlex="30">
-        <wh-recipe-add-review
-          [recipeId]="recipe.id"
+        <wh-recipe-review-or-edit
+          [recipe]="recipe"
           (updateEvent)="getData(recipeId)"
-        ></wh-recipe-add-review>
+        ></wh-recipe-review-or-edit>
         <wh-recipe-author [author]="recipe.author"></wh-recipe-author>
         <wh-recipe-comments [recipe]="recipe" (updateEvent)="getData(recipeId)"></wh-recipe-comments>
       </section>
-      
     </mat-card-content>
   </mat-card>
 

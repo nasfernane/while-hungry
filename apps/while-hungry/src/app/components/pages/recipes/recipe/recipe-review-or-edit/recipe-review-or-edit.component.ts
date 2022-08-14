@@ -5,15 +5,18 @@ import { AppService } from '@wh/core-utils';
 import { UiService } from '@wh/ui';
 import { ReviewService } from '@wh/core-data';
 import { RecipeReview } from '@prisma/client';
+import moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'wh-recipe-add-review',
-  templateUrl: './recipe-add-review.component.html',
-  styleUrls: ['./recipe-add-review.component.scss'],
+  selector: 'wh-recipe-review-or-edit',
+  templateUrl: './recipe-review-or-edit.component.html',
+  styleUrls: ['./recipe-review-or-edit.component.scss'],
 })
-export class RecipeAddReviewComponent implements OnInit {
-  @Input() recipeId: number;
+export class RecipeReviewOrEditComponent implements OnInit {
+  @Input() recipe: any;
   @Output() updateEvent = new EventEmitter<boolean>();
+  isAuthor = false;
   updating = false;
   reviewId: number;
   stars: Array<number>;
@@ -23,7 +26,8 @@ export class RecipeAddReviewComponent implements OnInit {
   constructor(
     private appService: AppService,
     private uiService: UiService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private router: Router,
   ) {
     this.stars = Array(5)
       .fill(1)
@@ -31,14 +35,19 @@ export class RecipeAddReviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initReview();
+    if (this.appService.userLogged) {
+      this.isAuthor = this.appService.getUserId() === this.recipe.authorId;
+      if (!this.isAuthor) this.initReview();
+    } else {
+      this.initReview();
+    }
   }
 
   // setup component for adding or updating at initialisation
   initReview() {
     if (this.appService.userLogged) {
       this.reviewService
-        .checkIfReviewed(this.recipeId, this.appService.getUserId())
+        .checkIfReviewed(this.recipe.id, this.appService.getUserId())
         .subscribe((review: RecipeReview) => {
           if (review) {
             this.updating = true;
@@ -84,7 +93,7 @@ export class RecipeAddReviewComponent implements OnInit {
       if (!this.updating) {
         // creating the review
         const newReview = {
-          recipeId: this.recipeId,
+          recipeId: this.recipe.id,
           authorId: this.appService.getUserId(),
           review: this.userRating,
         };
@@ -99,7 +108,7 @@ export class RecipeAddReviewComponent implements OnInit {
       } else {
         // updating the review
         const updatedReview = {
-          recipeId: this.recipeId,
+          recipeId: this.recipe.id,
           authorId: this.appService.getUserId(),
           review: this.userRating,
         };
@@ -122,5 +131,21 @@ export class RecipeAddReviewComponent implements OnInit {
     this.uiService.openAlert(message);
     this.initReview();
     this.updateEvent.emit(true);
+  }
+
+  editRecipe() {
+    if (this.isAuthor) this.router.navigate(['/recipes/edit/', this.recipe.id])
+  }
+
+  getEditRecipeSentence() {
+    return moment(this.recipe.updatedAt).isAfter(moment(this.recipe.createdAt))
+      ? 'You last edited this recipe on'
+      : 'You created this recipe on'
+  }
+
+  getEditRecipeDate() {
+    return moment(this.recipe.updatedAt).isAfter(moment(this.recipe.createdAt))
+      ? moment(this.recipe.updatedAt).format('MM/DD/YYYY @ hh:mm A')
+      : moment(this.recipe.createdAt).format('MM/DD/YYYY @ hh:mm A')
   }
 }

@@ -31,6 +31,7 @@ const routes: Routes = [
       { path: '', component: RecipesOverviewComponent },
       { path: 'add', component: NewRecipeComponent, canActivate: [AuthGuard] },
       { path: ':id', component: RecipeComponent },
+      { path: 'edit/:id', component: NewRecipeComponent, canActivate: [AuthGuard] }
     ],
   },
   {
