@@ -21,7 +21,7 @@ export class BlogService {
     return this.http.get<Post>(ENDPOINT + `/${id}`);
   }
 
-  create(post: Post) {
+  create(post: any) {
     return this.http.post(ENDPOINT, post);
   }
 

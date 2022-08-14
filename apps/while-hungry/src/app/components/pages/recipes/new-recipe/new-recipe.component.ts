@@ -482,7 +482,6 @@ export class NewRecipeComponent implements OnInit {
                 }
               });
             }
-            
           }
         });
       } else {

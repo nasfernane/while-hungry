@@ -22,14 +22,14 @@ export class GetPictureController {
     @Response({ passthrough: true }) res
   ): StreamableFile {
     // return this.service.find(name);
-    const fileExists = existsSync(join(__dirname, 'public/' + name));
+    const fileExists = existsSync(join(__dirname, 'assets/public/' + name));
     let file;
 
     // const file = createReadStream(join(__dirname, 'public/' + name));
     if (fileExists) {
-      file = createReadStream(join(__dirname, 'public/' + name));
+      file = createReadStream(join(__dirname, 'assets/public/' + name));
     } else {
-      file = createReadStream(join(__dirname, 'public/nopicture.jpg'));
+      file = createReadStream(join(__dirname, 'assets/public/nopicture.jpg'));
     }
 
     res.set({

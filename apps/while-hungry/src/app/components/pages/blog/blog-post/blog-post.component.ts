@@ -6,12 +6,15 @@ import { Router } from '@angular/router';
 import { BlogService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 
+import { environment } from '@wh/env';
+
 @Component({
   selector: 'wh-blog-post',
   templateUrl: './blog-post.component.html',
   styleUrls: ['./blog-post.component.scss'],
 })
 export class BlogPostComponent implements OnInit {
+  environment = environment; // get env file pour picture requests
   post: any;
 
   constructor(

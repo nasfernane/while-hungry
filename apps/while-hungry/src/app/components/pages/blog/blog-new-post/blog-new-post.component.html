@@ -2,5 +2,90 @@
   class="newPost globalContainer"
   fxLayout="column"
 >
-<p>coucou</p>
+  <form [formGroup]="postGroup" fxLayout="column" fxLayoutAlign="flex-start flex-start">
+    <h2>Add a picture</h2>
+    <div class="uploadFile">
+      <div
+        *ngIf="pictureFile || oldPicturePath"
+        class="uploadFile__preview"
+        fxLayout="row"
+        fxLayoutAlign="flex-start center"
+      >
+        <div class="uploadFile__preview__image">
+          <img [src]="!editMode ? previewPicturePath : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
+        </div>
+        <span>{{ !editMode ? pictureFile.name : '' }}</span>
+      </div>
+      <button
+        type="button"
+        mat-raised-button
+        (click)="fileInput.click()"
+      >
+        {{ pictureFile ? 'Change File' : 'Choose File' }}
+      </button>
+      <input
+        hidden
+        (change)="setPicture($event)"
+        #fileInput
+        type="file"
+        accept="image/*"
+      />
+    </div>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        type="text"
+        min="0"
+        formControlName="title"
+        required
+      />
+      <mat-error
+        *ngIf="postGroup.controls['title'].hasError('required')">
+        This field is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        type="text"
+        min="0"
+        formControlName="description"
+        required
+      />
+      <mat-error
+        *ngIf="postGroup.controls['description'].hasError('required')">
+        This field is required.
+      </mat-error>
+    </mat-form-field>
+    <div class="markdownContainer" fxLayout="row" fxLayoutAlign="space-between flex-start">
+      <mat-form-field fxFlex="48">
+        <mat-label>Your article</mat-label>
+        <textarea
+          matInput
+          rows="20"
+          formControlName="content"
+          required
+        >
+        </textarea>
+        <mat-error
+          *ngIf="postGroup.controls['content'].hasError('required')">
+          This field is required.
+        </mat-error>
+      </mat-form-field>
+      <div fxFlex="48" fxLayout="column" fxLayoutAlign="space-between flex-end">
+        <div markdown
+          fxFlex="100"
+          style="width: 100%; margin-bottom: 2rem"
+          *ngIf="markdown"
+          [data]="markdown"
+          class="markdownContainer__preview">
+        </div>
+        <div *ngIf="markdown">
+          <button class="btn btn--main" [disabled]="postGroup.invalid" (click)="createOrUpdatePost()">Post</button>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>

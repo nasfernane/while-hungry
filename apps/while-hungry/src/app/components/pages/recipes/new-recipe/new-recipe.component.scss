@@ -1,31 +1,6 @@
 @import './../../../../../styles/base/colors';
 
-.uploadFile {
-  margin-bottom: 2rem;
 
-  button {
-    margin-right: 1rem;
-  }
-
-  span {
-    font-style: italic;
-    color: $primary-light;
-  }
-
-  &__preview {
-    &__image {
-      margin-bottom: 2rem;
-      margin-right: 2rem;
-      height: 15vh;
-      width: auto;
-
-      img {
-        height: 15vh;
-        min-height: 15vh;
-      }
-    }
-  }
-}
 
 .tagsContainer {
   height: 5rem;

@@ -1,0 +1,14 @@
+@import './../../../../../styles/base/colors';
+
+.newPost {
+  form {
+    .markdownContainer {
+      width: 100%;
+
+      &__preview {
+        padding: 2rem;
+        background-color: $grey-light;
+      }
+    }
+  }
+}

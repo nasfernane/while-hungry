@@ -27,7 +27,7 @@ export class CreateController {
   @UseInterceptors(
     FileInterceptor('picture', {
       storage: diskStorage({
-        destination: __dirname + '/public',
+        destination: __dirname + '/assets/public',
         filename: (req, file, cb) => {
           const randomName = Array(32)
             .fill(null)

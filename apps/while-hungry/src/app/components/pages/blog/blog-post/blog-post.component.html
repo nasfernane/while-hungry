@@ -11,14 +11,14 @@
     *ngIf="post"
   >
     <div class="blogPost__img" fxLayout="column" fxLayoutAlign="center center">
-      <img [src]="'./assets/img' + post.picture" alt="Post" />
+      <img [src]="environment.API_URL + '/getpicture/' + post.picture" alt="Post" />
     </div>
 
     <div class="blogPost__infos" fxLayout="column" fxLayoutAlign="start center">
       <mat-card-title class="blogPost__infos__title">{{
         post.title
       }}</mat-card-title>
-      <span class="blogPost__infos__content">{{ post.content }}</span>
+      <span class="blogPost__infos__content" markdown>{{ post.content }}</span>
       <div
         class="blogPost__infos__author"
         fxLayout="row"

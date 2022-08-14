@@ -5,6 +5,7 @@ import { prisma } from '@wh/prisma-client';
 @Injectable()
 export class CreateService {
   async create(post: Post) {
+    console.log('new post')
     const newPost = await prisma.post.create({
       data: {
         title: post.title,

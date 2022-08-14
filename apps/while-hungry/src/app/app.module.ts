@@ -78,6 +78,8 @@ import { PrivacyPolicyComponent } from './components/pages/privacy-policy/privac
 import { ContactComponent } from './components/pages/contact/contact.component';
 import { RecipeTagsComponent } from './components/pages/recipes/recipe-tags/recipe-tags.component';
 
+import { MarkdownModule } from 'ngx-markdown';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -132,6 +134,7 @@ import { RecipeTagsComponent } from './components/pages/recipes/recipe-tags/reci
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MarkdownModule.forRoot(),
     StoreModule.forRoot({}, {}),
     AppRoutingModule,
     MaterialModule,
