@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'recipes',
     children: [
       { path: '', component: RecipesOverviewComponent },
-      { path: 'add', component: NewRecipeComponent, canActivate: [AuthGuard] },
+      { path: 'new-recipe', component: NewRecipeComponent, canActivate: [AuthGuard] },
       { path: ':id', component: RecipeComponent },
       { path: 'edit/:id', component: NewRecipeComponent, canActivate: [AuthGuard] }
     ],
@@ -39,7 +39,7 @@ const routes: Routes = [
     children: [
       { path: '', component: BlogComponent },
       {
-        path: 'post/new',
+        path: 'new-post',
         component: BlogNewPostComponent,
         canActivate: [AuthGuard],
       },

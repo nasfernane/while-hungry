@@ -12,7 +12,7 @@
     <button mat-menu-item [matMenuTriggerFor]="recipeMenu">Recipes</button>
     <mat-menu #recipeMenu="matMenu">
       <button mat-menu-item routerLink="/recipes">All recipes</button>
-      <button mat-menu-item routerLink="/recipes/add">Add recipe</button>
+      <button mat-menu-item routerLink="/recipes/new-recipe">Add recipe</button>
     </mat-menu>
     <button mat-menu-item (click)="uiService.openAlert('Available soon')">
       Batch cooking
@@ -22,7 +22,11 @@
     Read
   </button>
   <mat-menu #learnMenu="matMenu" xPosition="after">
-    <button mat-menu-item routerLink="/blog">Blog</button>
+    <button mat-menu-item [matMenuTriggerFor]="blogMenu">Blog</button>
+    <mat-menu #blogMenu="matMenu">
+      <button mat-menu-item routerLink="/blog">All posts</button>
+      <button mat-menu-item routerLink="/blog/new-post">Add post</button>
+    </mat-menu>
     <button mat-menu-item routerLink="/glossary">Glossary</button>
   </mat-menu>
   <button class="navWrapper__button" mat-button [matMenuTriggerFor]="shareMenu">
