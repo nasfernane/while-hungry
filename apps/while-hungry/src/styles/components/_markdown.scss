@@ -1,0 +1,10 @@
+ngx-markdown-editor {
+  width: 100%;
+}
+
+::ng-deep .ngx-markdown-editor-preview {
+  padding: 1rem;
+  ol, ul {
+    transform: translateX(1rem);
+  }
+}

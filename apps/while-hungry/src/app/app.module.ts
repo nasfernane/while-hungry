@@ -79,6 +79,7 @@ import { ContactComponent } from './components/pages/contact/contact.component';
 import { RecipeTagsComponent } from './components/pages/recipes/recipe-tags/recipe-tags.component';
 
 import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownEditorModule } from '@mdefy/ngx-markdown-editor';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,9 @@ import { MarkdownModule } from 'ngx-markdown';
     HttpClientModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot(),
+    MarkdownModule.forChild(),
+    MarkdownEditorModule.forRoot(),
+    MarkdownEditorModule.forChild(),
     StoreModule.forRoot({}, {}),
     AppRoutingModule,
     MaterialModule,

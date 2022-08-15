@@ -1,14 +1,34 @@
 @import './../../../../../styles/base/colors';
 
-.newPost {
-  form {
-    .markdownContainer {
-      width: 100%;
+// .newPost {
+//   form {
+//     .markdownContainer {
+//       width: 100%;
 
-      &__preview {
-        padding: 2rem;
-        background-color: $grey-light;
-      }
-    }
-  }
-}
+//       &__preview {
+//         padding: 2rem;
+//         background-color: $grey-light;
+
+//         &__title {
+//           font-size: 2rem;
+//           color: rgba($primary-dark, 0.5);
+//           font-style: italic;
+//         }
+//       }
+//     }
+
+//     .markdownTips {
+//       &__tips, &__preview {
+//         padding: 2rem;
+//       }
+
+//       &__tips {
+//         border: .1rem dashed $primary-dark;
+//       }
+
+//       &__preview {
+//         background-color: $grey-light;
+//       }
+//     }
+//   }
+// }

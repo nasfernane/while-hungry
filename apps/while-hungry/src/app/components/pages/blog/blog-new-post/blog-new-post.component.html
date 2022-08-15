@@ -3,7 +3,6 @@
   fxLayout="column"
 >
   <form [formGroup]="postGroup" fxLayout="column" fxLayoutAlign="flex-start flex-start">
-    <h2>Add a picture</h2>
     <div class="uploadFile">
       <div
         *ngIf="pictureFile || oldPicturePath"
@@ -14,14 +13,23 @@
         <div class="uploadFile__preview__image">
           <img [src]="!editMode ? previewPicturePath : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
         </div>
-        <span>{{ !editMode ? pictureFile.name : '' }}</span>
+        <div fxLayout="column" fxLayoutAlign="space-around flex-start">
+          <span style="margin-bottom: 2rem;">{{ !editMode ? pictureFile.name : '' }}</span>
+          <button
+            type="button"
+            mat-raised-button
+            (click)="fileInput.click()"
+          >
+            Change picture
+          </button>
+        </div>
       </div>
-      <button
+      <button *ngIf="!pictureFile"
         type="button"
         mat-raised-button
         (click)="fileInput.click()"
       >
-        {{ pictureFile ? 'Change File' : 'Choose File' }}
+        Choose picture
       </button>
       <input
         hidden
@@ -31,61 +39,99 @@
         accept="image/*"
       />
     </div>
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input
-        matInput
-        type="text"
-        min="0"
-        formControlName="title"
-        required
-      />
-      <mat-error
-        *ngIf="postGroup.controls['title'].hasError('required')">
-        This field is required.
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <input
-        matInput
-        type="text"
-        min="0"
-        formControlName="description"
-        required
-      />
-      <mat-error
-        *ngIf="postGroup.controls['description'].hasError('required')">
-        This field is required.
-      </mat-error>
-    </mat-form-field>
-    <div class="markdownContainer" fxLayout="row" fxLayoutAlign="space-between flex-start">
-      <mat-form-field fxFlex="48">
-        <mat-label>Your article</mat-label>
-        <textarea
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;">
+      <mat-form-field fxFlex="25">
+        <mat-label>Title</mat-label>
+        <input
           matInput
-          rows="20"
-          formControlName="content"
+          type="text"
+          min="0"
+          formControlName="title"
           required
-        >
-        </textarea>
+        />
         <mat-error
-          *ngIf="postGroup.controls['content'].hasError('required')">
+          *ngIf="postGroup.controls['title'].hasError('required')">
           This field is required.
         </mat-error>
       </mat-form-field>
-      <div fxFlex="48" fxLayout="column" fxLayoutAlign="space-between flex-end">
-        <div markdown
-          fxFlex="100"
-          style="width: 100%; margin-bottom: 2rem"
-          *ngIf="markdown"
-          [data]="markdown"
-          class="markdownContainer__preview">
-        </div>
-        <div *ngIf="markdown">
-          <button class="btn btn--main" [disabled]="postGroup.invalid" (click)="createOrUpdatePost()">Post</button>
-        </div>
-      </div>
+      <mat-form-field fxFlex="70">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          type="text"
+          min="0"
+          formControlName="description"
+          required
+        />
+        <mat-error
+          *ngIf="postGroup.controls['description'].hasError('required')">
+          This field is required.
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <!-- TODO nassim to move into a documentation page ? -->
+    <!-- <mat-expansion-panel style="width: 100%; margin-bottom: 2rem" class="markdownTips">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Markdown tips
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-description>
+              Headers
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="row" fxLayoutAlign="space-around flex-start">
+            <div class="markdownTips__tips" fxFlex="40">
+              <p># Header 1</p>
+              <p>## Header 2</p>
+              <p>### Header 3</p>
+              <p>#### Header 4</p>
+              <p>##### Header 5</p>
+              <p>###### Header 6</p>
+            </div>
+            <div class="markdownTips__preview" fxFlex="40">
+              <p markdown># Header 1</p>
+              <p markdown>## Header 2</p>
+              <p markdown>### Header 3</p>
+              <p markdown>#### Header 4</p>
+              <p markdown>##### Header 5</p>
+              <p markdown>###### Header 6</p>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-description>
+              Links
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayout="row" fxLayoutAlign="space-around flex-start">
+            <div class="markdownTips__tips" fxFlex="40">
+              <p># Header 1</p>
+              <p>## Header 2</p>
+              <p>### Header 3</p>
+              <p>#### Header 4</p>
+              <p>##### Header 5</p>
+              <p>###### Header 6</p>
+            </div>
+            <div class="markdownTips__preview" fxFlex="40">
+              <p markdown># Header 1</p>
+              <p markdown>## Header 2</p>
+              <p markdown>### Header 3</p>
+              <p markdown>#### Header 4</p>
+              <p markdown>##### Header 5</p>
+              <p markdown>###### Header 6</p>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-expansion-panel> -->
+    <ngx-markdown-editor [data]="markdown" [toolbar]="toolbar" #MarkdownEditorComponent></ngx-markdown-editor>
+    <div>
+      <button class="btn btn--main" [disabled]="postGroup.invalid" (click)="createOrUpdatePost()">Post</button>
     </div>
   </form>
 </div>

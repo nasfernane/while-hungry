@@ -45,6 +45,8 @@
     "@angular/platform-browser-dynamic": "14.1.2",
     "@angular/router": "14.1.2",
     "@babel/runtime": "^7.17.9",
+    "@mdefy/markdown-editor-core": "^1.0.1",
+    "@mdefy/ngx-markdown-editor": "^11.1.0",
     "@nestjs/common": "9.0.0",
     "@nestjs/core": "9.0.0",
     "@nestjs/mapped-types": "^1.0.1",
