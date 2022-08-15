@@ -308,6 +308,7 @@
                 minlength="0"
                 value="4"
                 formControlName="name"
+                (keydown.enter)="addIngredient()"
                 required
               />
             </mat-form-field>
@@ -372,10 +373,11 @@
                   type="text"
                   min="0"
                   formControlName="label"
+                  (keydown.enter)="addInstruction()"
                   number
                 />
               </mat-form-field>
-              <mat-form-field fxFlex="80">
+              <mat-form-field fxFlex="65">
                 <mat-label>Instruction</mat-label>
                 <input
                   matInput
@@ -383,6 +385,7 @@
                   minlength="0"
                   formControlName="instruction"
                   required
+                  (keydown.enter)="addInstruction()"
                   number
                 />
               </mat-form-field>
@@ -409,16 +412,18 @@
                   type="text"
                   min="0"
                   formControlName="label"
+                  (keydown.enter)="addNote()"
                   number
                 />
               </mat-form-field>
-              <mat-form-field fxFlex="80">
+              <mat-form-field fxFlex="65">
                 <mat-label>Note</mat-label>
                 <input
                   matInput
                   type="text"
                   minlength="0"
                   formControlName="note"
+                  (keydown.enter)="addNote()"
                   required
                   number
                 />
