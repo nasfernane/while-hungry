@@ -17,7 +17,7 @@
   </button>
 </div>
 
-<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center">
+<div class="addRateContainer" fxLayout="column" fxLayoutAlign="start center" *ngIf="isAuthor">
   <span class="addRateContainer__message--date">{{ getEditRecipeSentence() }}</span>
   <span class="addRateContainer__message--date">{{ getEditRecipeDate() }}</span>
   <button

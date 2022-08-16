@@ -12,7 +12,6 @@ import { AuthentificationService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 import { UiService } from './../../services/ui.service';
 
-
 @Component({
   selector: 'wh-login',
   templateUrl: './login.component.html',
@@ -84,7 +83,6 @@ export class LoginComponent implements OnInit {
     document.getElementsByTagName('body')[0].prepend(node);
   }
 
-
   async login() {
     const email = this.loginForm.controls['email'].value;
     const password = this.loginForm.controls['password'].value;
@@ -95,17 +93,11 @@ export class LoginComponent implements OnInit {
         this.uiService.closeLogin();
         this.uiService.openAlert('Login successful');
         this.invalidLogin = false;
-
-        if (this.route.snapshot.queryParams['returnUrl']) {
-          // if user logged for a specific page
-          this.router.navigate([this.route.snapshot.queryParams['returnUrl']]);
-        }
       } else {
         this.invalidLogin = true;
       }
     });
   }
-
 
   register() {
     const email = this.registerForm.controls['email'].value;

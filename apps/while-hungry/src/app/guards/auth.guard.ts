@@ -8,12 +8,17 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppService } from '@wh/core-utils';
+import { UiService } from '@wh/ui';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(public appService: AppService, public router: Router) {}
+  constructor(
+    public appService: AppService,
+    public router: Router,
+    private uiService: UiService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,9 +31,12 @@ export class AuthGuard implements CanActivate {
     if (this.appService.userLogged) {
       return true;
     } else {
-      this.router.navigate(['/login'], {
-        queryParams: { returnUrl: state.url },
-      });
+      console.log('state.url')
+      console.log(state.url)
+      this.uiService.openLoginAlert(state.url);
+      // this.router.navigate(['/login'], {
+      //   queryParams: { returnUrl: state.url },
+      // });
       return false;
     }
   }
