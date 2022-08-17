@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService, RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
 
@@ -23,6 +23,7 @@ export class BlogNewPostComponent implements OnInit {
   post: Record<string, unknown> = {};
   postGroup: FormGroup;
   editMode = false;
+  editPostId: number;
 
   pictureFile: File;
   pictureName: string;
@@ -37,8 +38,10 @@ export class BlogNewPostComponent implements OnInit {
     private appService: AppService,
     private blogService: BlogService,
     private recipeService: RecipeService,
+    private postService: BlogService,
     private uiService: UiService,
     private router: Router,
+    private route: ActivatedRoute
   ) {
     this.postGroup = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
@@ -47,7 +50,32 @@ export class BlogNewPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.route?.snapshot?.url[1]?.path === 'edit' && this.route?.snapshot?.params['id']) {
+      this.editMode = true;
+      this.blogService.find(this.route?.snapshot?.params['id']).subscribe((res) => {
+        // check if we found the correct post
+        if (res && res.id == this.route?.snapshot?.params['id']) {
+          if (this.appService.getUserId() === res.authorId) {
+            this.editPostId = res.id;
+            this.setPostOldValues(res);
+          } else {
+            this.router.navigate(['blog'])
+          }
+        } else {
+          this.router.navigate(['blog'])
+        }
+      })
+    }
+
     this.appService.breadcrumb = ['While Hungry', 'Blog', 'New Post']
+  }
+
+  setPostOldValues(post: any) {
+    this.postGroup.controls['title'].setValue(post.title);
+    this.postGroup.controls['description'].setValue(post.description);
+    this.markdown = post.content;
+   
+    this.oldPicturePath = post.picture;
   }
 
   /**
@@ -62,6 +90,7 @@ export class BlogNewPostComponent implements OnInit {
       this.previewPicturePath = reader.result as string;
     };
 
+    
     reader.readAsDataURL(this.pictureFile);
   }
 
@@ -74,8 +103,8 @@ export class BlogNewPostComponent implements OnInit {
   }
 
   /**
-   * This function formats the recipe object to be sent to the server
-   * @returns The recipe object.
+   * This function formats the post object to be sent to the server
+   * @returns The post object.
    */
    formatPost(markdown: string) {
     if (markdown) {
@@ -101,14 +130,34 @@ export class BlogNewPostComponent implements OnInit {
           if (picture) {
             this.pictureName = picture.filename;
             this.formatPost(markdown);
-            this.blogService.create(this.post).subscribe((res: any) => {
-              if (res) {
-                this.uiService.openAlert('Post successfully updated');
+
+            if (editMode) {
+              this.blogService.update(this.post, this.editPostId).subscribe((res: any) => {
+                if (res) {
+                  this.uiService.openAlert('Post successfully updated');
                   this.router.navigate(['blog/post', res.id]);
-              }
-            })
+                }
+              });
+            } else {
+              this.blogService.create(this.post).subscribe((res: any) => {
+                if (res) {
+                  this.uiService.openAlert('Post successfully updated');
+                    this.router.navigate(['blog/post', res.id]);
+                }
+              })
+            }
+            
           }
         })
+      } else if (!this.previewPicturePath && editMode) {
+        this.pictureName = this.oldPicturePath;
+        this.formatPost(markdown);
+        this.blogService.update(this.post, this.editPostId).subscribe((res: any) => {
+          if (res) {
+            this.uiService.openAlert('Post successfully updated');
+            this.router.navigate(['blog/post', res.id]);
+          }
+        });
       }
     }
   }

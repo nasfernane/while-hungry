@@ -212,6 +212,7 @@ model Post {
   id        Int      @id @default(autoincrement())
   authorId  Int
   title     String   @db.VarChar(255)
+  description     String?   @db.VarChar(150)
   content   String   @db.LongText
   published Boolean  @default(false)
   picture   String   @db.VarChar(255)

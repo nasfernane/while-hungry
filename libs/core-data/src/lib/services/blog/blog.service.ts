@@ -25,8 +25,8 @@ export class BlogService {
     return this.http.post(ENDPOINT, post);
   }
 
-  update(post: Post) {
-    return this.http.put(ENDPOINT + `/${post.id}`, post);
+  update(post: Record<string, unknown>, postId: number) {
+    return this.http.put(ENDPOINT + `/${postId}`, post);
   }
 
   delete(post: Post) {

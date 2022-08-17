@@ -117,7 +117,12 @@
                 fxLayoutAlign="flex-start center"
               >
                 <div class="uploadFile__preview__image">
-                  <img [src]="!editMode ? previewPicturePath : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
+                  <img 
+                    [src]="!editMode 
+                      ? previewPicturePath 
+                      : previewPicturePath 
+                        ? previewPicturePath 
+                        : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
                 </div>
                 <span>{{ !editMode ? pictureFile.name : '' }}</span>
               </div>

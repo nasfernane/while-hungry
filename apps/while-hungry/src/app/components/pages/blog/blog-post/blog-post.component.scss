@@ -29,13 +29,32 @@
 
       &__title {
         text-align: center;
-        color: $green-light;
         width: 90%;
         margin-bottom: 2rem;
         font-weight: bold;
         transition: color 0.3s;
         text-transform: capitalize;
         margin: 5rem 2rem;
+
+        span {
+          font-size: 3rem;
+          margin-right: 2rem;
+          // border: .1rem solid $primary-dark;
+        }
+        
+        mat-icon {
+          cursor: pointer;
+          border-radius: .4rem;
+          height: 3rem;
+          width: 3rem;
+          border: .1rem solid $primary-dark;
+          padding: .2rem;
+
+          &:hover {
+            color: white;
+            background-color: $primary-dark;
+          }
+        }
       }
 
       &__content,

@@ -16,6 +16,7 @@ import { environment } from '@wh/env';
 export class BlogPostComponent implements OnInit {
   environment = environment; // get env file pour picture requests
   post: any;
+  isAuthor = false;
 
   constructor(
     public appService: AppService,
@@ -36,6 +37,8 @@ export class BlogPostComponent implements OnInit {
             'Blog',
             this.post.title,
           ];
+
+          if (this.post.authorId === this.appService.getUserId()) this.isAuthor = true;
         } else {
           this.router.navigate(['/blog']);
         }
@@ -44,4 +47,9 @@ export class BlogPostComponent implements OnInit {
       this.router.navigate(['/blog']);
     }
   }
+
+  editRecipe() {
+    if (this.isAuthor) this.router.navigate(['/blog/post/edit/' + this.post.id]);
+  }
 }
+

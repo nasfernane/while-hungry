@@ -11,7 +11,12 @@
         fxLayoutAlign="flex-start center"
       >
         <div class="uploadFile__preview__image">
-          <img [src]="!editMode ? previewPicturePath : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
+          <img 
+            [src]="!editMode 
+              ? previewPicturePath 
+              : previewPicturePath 
+                ? previewPicturePath
+                : environment.API_URL + '/getpicture/' + oldPicturePath" alt="File Uploading" />
         </div>
         <div fxLayout="column" fxLayoutAlign="space-around flex-start">
           <span style="margin-bottom: 2rem;">{{ !editMode ? pictureFile.name : '' }}</span>
@@ -24,7 +29,7 @@
           </button>
         </div>
       </div>
-      <button *ngIf="!pictureFile"
+      <button *ngIf="!pictureFile && !oldPicturePath"
         type="button"
         mat-raised-button
         (click)="fileInput.click()"
@@ -131,7 +136,7 @@
     </mat-expansion-panel> -->
     <ngx-markdown-editor [data]="markdown" [toolbar]="toolbar" #MarkdownEditorComponent></ngx-markdown-editor>
     <div>
-      <button class="btn btn--main" [disabled]="postGroup.invalid" (click)="createOrUpdatePost()">Post</button>
+      <button class="btn btn--main" [disabled]="postGroup.invalid" (click)="createOrUpdatePost()">{{ editMode ? 'Edit post' : 'Create post' }}</button>
     </div>
   </form>
 </div>

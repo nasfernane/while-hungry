@@ -15,9 +15,10 @@
     </div>
 
     <div class="blogPost__infos" fxLayout="column" fxLayoutAlign="start center">
-      <mat-card-title class="blogPost__infos__title">{{
-        post.title
-      }}</mat-card-title>
+      <mat-card-title class="blogPost__infos__title" fxLayout="row" fxLayoutAlign="center center">
+        <span>{{ post.title}}</span>
+        <mat-icon *ngIf="isAuthor" (click)="editRecipe()">edit</mat-icon>
+      </mat-card-title>
       <span class="blogPost__infos__content" markdown>{{ post.content }}</span>
       <div
         class="blogPost__infos__author"

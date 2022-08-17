@@ -484,7 +484,7 @@ export class NewRecipeComponent implements OnInit {
             }
           }
         });
-      } else {
+      } else if (!this.previewPicturePath && editMode) {
         this.recipe['picture'] = this.oldPicturePath;
         this.recipeService.update(this.recipe, this.editRecipeId).subscribe((res: any) => {
           if (res) {

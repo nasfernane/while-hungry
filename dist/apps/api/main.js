@@ -2669,7 +2669,7 @@ let UpdateController = class UpdateController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Put)(':id'),
     tslib_1.__param(0, (0, common_1.Param)('id')),
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),

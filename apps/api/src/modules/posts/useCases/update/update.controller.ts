@@ -1,4 +1,4 @@
-import { Controller, Body, Patch, Param } from '@nestjs/common';
+import { Controller, Body, Put, Param } from '@nestjs/common';
 import { UpdateService } from './update.service';
 
 import { Post as postModel } from '@prisma/client';
@@ -12,7 +12,7 @@ export class UpdateController {
    * @param post
    * @returns updated post
    */
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() post: postModel) {
     return this.service.update(+id, post);
   }
