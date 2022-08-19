@@ -11,10 +11,12 @@
     *ngIf="avatar"
     [ngStyle]="{ 'font-size': avatarSize }"
   ></mat-icon>
-  <mat-icon
-    class="avatar__edit material-icons-outlined"
-    *ngIf="edit"
+  <div class="avatar__edit" *ngIf="edit" [ngStyle]="{ 'width': editSize, 'height': editSize }">
+    <mat-icon
     [ngStyle]="{ 'font-size': editSize }"
+    class=" material-icons-outlined"
     >create</mat-icon
   >
+  </div>
+  
 </div>

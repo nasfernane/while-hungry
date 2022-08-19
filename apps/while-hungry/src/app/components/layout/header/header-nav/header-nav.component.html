@@ -59,6 +59,7 @@
     mat-button
     ></wh-avatar>
     <span 
+      fxHide.xs
       *ngIf="appService.userLogged"
       class="navWrapper__button__nickname">
       {{ appService.getUserNickname() }}
