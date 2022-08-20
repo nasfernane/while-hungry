@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Recipe } from '@prisma/client';
 
 import { environment } from '@wh/env';
+
+import { RecipeFull } from '../../types';
 const ENDPOINT = environment.API_URL + '/recipes';
 
 @Injectable({
@@ -12,19 +14,19 @@ export class RecipeService {
   constructor(public http: HttpClient) {}
 
   all() {
-    return this.http.get<Recipe[]>(ENDPOINT);
+    return this.http.get<RecipeFull[]>(ENDPOINT);
   }
 
   allWithFilters(filters: object) {
-    return this.http.post<Recipe[]>(ENDPOINT + '/filters', filters);
+    return this.http.post<RecipeFull[]>(ENDPOINT + '/filters', filters);
   }
 
   allWithName(name: string) {
-    return this.http.get<Recipe[]>(ENDPOINT + '/name/' + name);
+    return this.http.get<RecipeFull[]>(ENDPOINT + '/name/' + name);
   }
 
   find(id: string) {
-    return this.http.get<Recipe>(ENDPOINT + `/${id}`);
+    return this.http.get<RecipeFull>(ENDPOINT + `/${id}`);
   }
 
   create(recipe: Record<string, unknown>) {

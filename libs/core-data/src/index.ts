@@ -10,3 +10,5 @@ export { FavoritesService } from './lib/services/favorites/favorites.service';
 export { ShoppingListService } from './lib/services/shopping-list/shopping-list.service';
 export { RecipeTagsService } from './lib/services/recipe-tags/recipe-tags.service';
 export { ContactService } from './lib/services/contact/contact.service';
+
+export * from './lib/types/index';

@@ -1,8 +1,39 @@
-<button class="btn btn--main" fxLayout="row" fxLayoutAlign="space-between center">
-  <span>
-    filters
-  </span>
-  <mat-icon>
-    filter_list
-  </mat-icon>
-</button>
+<div 
+  class="filtersContainer"
+  fxLayout="row" 
+  fxLayoutAlign="space-between flex-start">
+  <form 
+    [formGroup]="searchGroup"
+    class="filtersContainer__quicksearch">
+    <mat-form-field>
+      <input
+        placeholder="Enter a key word to quick search for recipes, tags or authors"
+        matInput
+        formControlName="search"
+        string
+      />
+    </mat-form-field>
+  </form>
+  <div 
+    class="filtersContainer__filters" 
+    fxLayout="row" 
+    fxLayoutAlign="space-between center">
+    <button 
+      class="btn btn--filters" 
+      fxLayout="column" 
+      fxLayoutAlign="center center">
+      <mat-icon>
+        filter_list
+      </mat-icon>
+    </button>
+    <button 
+      class="btn btn--filters" 
+      fxLayout="column" 
+      fxLayoutAlign="center center">
+      <mat-icon>
+        tune
+      </mat-icon>
+    </button>
+  </div>
+  
+</div>

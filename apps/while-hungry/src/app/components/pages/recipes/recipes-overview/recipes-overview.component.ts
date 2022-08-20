@@ -1,21 +1,15 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  OnChanges,
-  Input,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, OnChanges, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Observable } from 'rxjs';
 import { RecipeService } from '@wh/core-data';
 import { AppService } from '@wh/core-utils';
-import { Recipe } from '@prisma/client';
 import { Router } from '@angular/router';
 import { UiService } from '@wh/ui';
+
+import { RecipeFull } from '@wh/core-data';
+
 
 @Component({
   selector: 'wh-recipes-overview',
@@ -24,9 +18,9 @@ import { UiService } from '@wh/ui';
 })
 export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   @Input() recipeName = '';
-  recipes$: Observable<any[]>;
+  recipes$: Observable<RecipeFull[]>;
   @ViewChild(MatPaginator) 'paginator': MatPaginator;
-  dataSource: MatTableDataSource<Recipe> = new MatTableDataSource<Recipe>();
+  dataSource: MatTableDataSource<RecipeFull> = new MatTableDataSource<RecipeFull>();
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -34,7 +28,9 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
     private router: Router,
     private uiService: UiService,
     public appService: AppService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {
     this.changeDetectorRef.detectChanges();
@@ -68,13 +64,11 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
     if (filters) {
       this.recipeService
         .allWithFilters(filters)
-        .subscribe((recipes: Recipe[]) => {
+        .subscribe((recipes: RecipeFull[]) => {
           if (recipes) this.linkDataSource(recipes);
         });
     } else {
-      this.recipeService.all().subscribe((recipes: Recipe[]) => {
-        console.log('recipes')
-        console.log(recipes)
+      this.recipeService.all().subscribe((recipes: RecipeFull[]) => {
         if (recipes) this.linkDataSource(recipes);
       });
     }
@@ -83,29 +77,33 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   getDataWithName() {
     this.recipeService
       .allWithName(this.recipeName)
-      .subscribe((recipes: Recipe[]) => {
+      .subscribe((recipes: RecipeFull[]) => {
         if (recipes) this.linkDataSource(recipes);
       });
   }
 
-  linkDataSource(recipes: Recipe[]) {
-    this.dataSource = new MatTableDataSource<Recipe>(recipes);
+  linkDataSource(recipes: RecipeFull[]) {
+    this.dataSource = new MatTableDataSource<RecipeFull>(recipes);
+    this.dataSource.filterPredicate = function customFilter(data , filter:string ): boolean {
+      let tags = '';
+      
+      for (const el of data.recipeTags) tags += el.tag.name;
+    
+      return (
+        data.name.toLowerCase().includes(filter)
+        || data.description.toLowerCase().includes(filter)
+        || data.author.nickname.toLowerCase().includes(filter)
+        || tags.toLowerCase().includes(filter)
+      );
+      
+  }
     this.dataSource.paginator = this.paginator;
     this.recipes$ = this.dataSource.connect();
   }
 
-  applyFilter(filterValue: string = 'Winter') {
-    console.log('this.recipes$')
-    console.log(this.recipes$)
-    // filterValue = filterValue.trim(); // Remove whitespace
-    // filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    // this.dataSource.filter = filterValue;
+  applyQuicksearch(filterValue: string = '') {
+    this.dataSource.filter = filterValue;
   }
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  //   this.dataSource.filter = filterValue;
-  // }
 
   favoriteEvent(event: boolean) {
     if (event) this.getData();

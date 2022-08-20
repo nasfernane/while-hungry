@@ -8,20 +8,7 @@
     (resetEvent)="getData()"
     *ngIf="!recipeName"
   ></wh-recipes-overview-filters>
-  <!-- <wh-filters></wh-filters> -->
-  <button 
-    class="btn btn--main" 
-    fxLayout="row" 
-    fxLayoutAlign="space-between center"
-    (click)="applyFilter()">
-    <span>
-      filters
-    </span>
-    <mat-icon>
-      filter_list
-    </mat-icon>
-  </button>
-  
+  <wh-filters (applyQuicksearchEvent)="applyQuicksearch($event)"></wh-filters>
   <div
     class="recipeOverviewContainer__recipes"
     fxLayout="row wrap"

@@ -10,16 +10,6 @@
     color: #fff !important;
     background-color: $primary !important;
 
-    span {
-      color: inherit;
-    }
-
-    mat-icon {
-      color: inherit;
-      font-size: 2rem;
-      margin-left: 1rem;
-    }
-
     &:hover {
       background-color: $primary-light !important;
     }
