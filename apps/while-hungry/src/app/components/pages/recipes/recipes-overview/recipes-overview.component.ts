@@ -73,6 +73,8 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
         });
     } else {
       this.recipeService.all().subscribe((recipes: Recipe[]) => {
+        console.log('recipes')
+        console.log(recipes)
         if (recipes) this.linkDataSource(recipes);
       });
     }
@@ -91,6 +93,19 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
     this.dataSource.paginator = this.paginator;
     this.recipes$ = this.dataSource.connect();
   }
+
+  applyFilter(filterValue: string = 'Winter') {
+    console.log('this.recipes$')
+    console.log(this.recipes$)
+    // filterValue = filterValue.trim(); // Remove whitespace
+    // filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    // this.dataSource.filter = filterValue;
+  }
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   this.dataSource.filter = filterValue;
+  // }
 
   favoriteEvent(event: boolean) {
     if (event) this.getData();
