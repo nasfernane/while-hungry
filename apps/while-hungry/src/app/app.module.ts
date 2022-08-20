@@ -80,6 +80,7 @@ import { RecipeTagsComponent } from './components/pages/recipes/recipe-tags/reci
 
 import { MarkdownModule } from 'ngx-markdown';
 import { MarkdownEditorModule } from '@mdefy/ngx-markdown-editor';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { MarkdownEditorModule } from '@mdefy/ngx-markdown-editor';
     PrivacyPolicyComponent,
     ContactComponent,
     RecipeTagsComponent,
+    FiltersComponent,
   ],
   imports: [
     BrowserModule,
