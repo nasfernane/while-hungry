@@ -21,6 +21,7 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   recipes$: Observable<RecipeFull[]>;
   @ViewChild(MatPaginator) 'paginator': MatPaginator;
   dataSource: MatTableDataSource<RecipeFull> = new MatTableDataSource<RecipeFull>();
+  activeFilters: any;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -46,9 +47,7 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnDestroy() {
-    if (this.dataSource) {
-      this.dataSource.disconnect();
-    }
+    if (this.dataSource) this.dataSource.disconnect();
   }
 
   fetchData() {
@@ -60,13 +59,16 @@ export class RecipesOverviewComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  updateFilters(filters: any) {
+    this.activeFilters = filters;
+    this.getData(this.activeFilters);
+  }
+
   getData(filters?: any) {
-    if (filters) {
-      this.recipeService
-        .allWithFilters(filters)
-        .subscribe((recipes: RecipeFull[]) => {
-          if (recipes) this.linkDataSource(recipes);
-        });
+    if (filters && Object.keys(filters).length > 0) {
+      this.recipeService.allWithFilters(filters).subscribe((recipes: RecipeFull[]) => {
+        if (recipes) this.linkDataSource(recipes);
+      });
     } else {
       this.recipeService.all().subscribe((recipes: RecipeFull[]) => {
         if (recipes) this.linkDataSource(recipes);

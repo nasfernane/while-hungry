@@ -2,6 +2,7 @@
 $filters-height: 5rem;
 
 .filtersContainer {
+
   &__quicksearch {
     width: 50%;
 
@@ -40,4 +41,16 @@ $filters-height: 5rem;
       }
     }
   }
+}
+
+.filtersModale {
+  min-width: 60rem;
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
 }

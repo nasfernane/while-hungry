@@ -1957,6 +1957,8 @@ const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts")
 let FindAllFilteredService = class FindAllFilteredService {
     findAllFiltered(id, filters) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            console.log('filters');
+            console.log(filters);
             const favorites = yield prisma_client_1.prisma.recipeFavorite.findMany({
                 where: {
                     userId: id,
@@ -2334,7 +2336,6 @@ const prisma_client_1 = __webpack_require__("./libs/prisma-client/src/index.ts")
 let CreateService = class CreateService {
     create(post) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            console.log('new post');
             const newPost = yield prisma_client_1.prisma.post.create({
                 data: {
                     title: post.title,
@@ -3425,20 +3426,38 @@ let FindAllFilteredService = class FindAllFilteredService {
      * @returns an array of Recipe
      */
     findAllFiltered(filters) {
+        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const tags = [];
+            if (filters.tags && filters.tags.length > 0) {
+                for (const tag of filters.tags)
+                    tags.push(tag.id);
+            }
             const recipes = yield prisma_client_1.prisma.recipe.findMany({
                 where: {
                     AND: [
+                        {
+                            author: {
+                                nickname: {
+                                    contains: (_a = filters.authorName) !== null && _a !== void 0 ? _a : undefined,
+                                }
+                            }
+                        },
+                        {
+                            name: {
+                                contains: (_b = filters.recipeName) !== null && _b !== void 0 ? _b : undefined,
+                            }
+                        },
                         {
                             difficulty: filters.difficulty ? filters.difficulty : undefined,
                         },
                         {
                             recipeTags: {
                                 some: {
-                                    tag: {
-                                        name: filters.tag ? filters.tag : undefined,
-                                    },
-                                },
+                                    tagId: {
+                                        in: tags.length > 0 ? tags : undefined,
+                                    }
+                                }
                             },
                         },
                         {

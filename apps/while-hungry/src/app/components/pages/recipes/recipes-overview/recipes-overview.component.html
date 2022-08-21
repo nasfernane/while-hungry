@@ -8,7 +8,11 @@
     (resetEvent)="getData()"
     *ngIf="!recipeName"
   ></wh-recipes-overview-filters>
-  <wh-filters (applyQuicksearchEvent)="applyQuicksearch($event)"></wh-filters>
+  <wh-filters
+    [activeFilters]="activeFilters"
+    (updateFiltersEvent)="updateFilters($event)"
+    (applyQuicksearchEvent)="applyQuicksearch($event)">
+  </wh-filters>
   <div
     class="recipeOverviewContainer__recipes"
     fxLayout="row wrap"

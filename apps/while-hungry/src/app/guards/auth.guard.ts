@@ -31,12 +31,7 @@ export class AuthGuard implements CanActivate {
     if (this.appService.userLogged) {
       return true;
     } else {
-      console.log('state.url')
-      console.log(state.url)
       this.uiService.openLoginAlert(state.url);
-      // this.router.navigate(['/login'], {
-      //   queryParams: { returnUrl: state.url },
-      // });
       return false;
     }
   }

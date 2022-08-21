@@ -25,12 +25,11 @@ export class RecipeTagsComponent implements OnChanges {
     if (this.oldTags && this.tagCategories) {
       for (const category of this.tagCategories) {
         for (const tag of category.RecipeTagLabels) {
-          for (const oldTag of this.oldTags) if (tag.id === oldTag.tagId) this.activeTags.push(tag);
+          for (const oldTag of this.oldTags) if (tag.id === oldTag.id) this.activeTags.push(tag);
         }
       }
     }
   }
-
 
   switchTag(tag: RecipeTagLabel) {
     if (this.activeTags.includes(tag)) this.activeTags.splice(this.activeTags.indexOf(tag), 1);

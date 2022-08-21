@@ -14,19 +14,36 @@ export class FindAllFilteredService {
    * @returns an array of Recipe
    */
   async findAllFiltered(filters: any): Promise<Recipe[]> {
+    const tags = []
+    if (filters.tags && filters.tags.length > 0) {
+      for (const tag of filters.tags) tags.push(tag.id)
+    }
+    
     const recipes = await prisma.recipe.findMany({
       where: {
         AND: [
+          {
+            author: {
+              nickname: {
+                contains: filters.authorName ?? undefined,
+              }
+            }
+          },
+          {
+            name: {
+              contains: filters.recipeName ?? undefined,
+            }
+          },
           {
             difficulty: filters.difficulty ? filters.difficulty : undefined,
           },
           {
             recipeTags: {
               some: {
-                tag: {
-                  name: filters.tag ? filters.tag : undefined,
-                },
-              },
+                tagId: {
+                  in: tags.length > 0 ? tags : undefined,
+                }
+              } 
             },
           },
           {

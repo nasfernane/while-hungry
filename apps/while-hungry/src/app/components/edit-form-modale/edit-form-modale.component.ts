@@ -22,7 +22,6 @@ export class EditFormModaleComponent implements OnInit {
   editGroup: FormGroup;
   updatingValue: any;
 
-
   unitsGroupsMetrics: UnitGroup[] = [
     {
       name: 'General',

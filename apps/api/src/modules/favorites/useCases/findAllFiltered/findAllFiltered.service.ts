@@ -9,6 +9,8 @@ import { RecipeFavorite } from '@prisma/client';
 @Injectable()
 export class FindAllFilteredService {
   async findAllFiltered(id: number, filters) {
+    console.log('filters');
+    console.log(filters);
     const favorites: RecipeFavorite[] = await prisma.recipeFavorite.findMany({
       where: {
         userId: id,
